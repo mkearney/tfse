@@ -1,7 +1,7 @@
 #' get_lookup
 #'
 #' @param users User ids of target user.
-#' @param tokens OAuth tokens (1.0 or 2.0)
+#' @param token OAuth tokens (1.0 or 2.0)
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export

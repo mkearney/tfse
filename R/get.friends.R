@@ -24,9 +24,10 @@ get_friends <- function(user, token, page = "-1") {
 
 #' get_friends_max
 #'
-#' @param followers Data frame with column name "screen_name"
+#' @param ids Data frame with column name "screen_name"
 #' @param tokens OAuth tokens (1.0 or 2.0)
 #' @param group Source used to identify users (groups are liberal, conservative, realDonaldTrump, HillaryClinton, and celebrity)
+#' @param start Starting value (nth user id)
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return friends List of user ids each user follows.
 #' @export
