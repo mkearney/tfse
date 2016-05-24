@@ -209,12 +209,17 @@ check_rate_limit <- function(type, token){
 #' @export
 get_lookup <- function(users, token){
 
+  if (length(users) > 100){
+    users <- users[1:100]
+  }
+
   out <- TWIT(query = "users/lookup",
               parameters = paste0("user_id=",
                                   paste(users, collapse = ","),
                                   "&include_entities=false"
                                   ),
               token = token)
+
   return(out)
 }
 
