@@ -9,8 +9,7 @@ TWIT(query, parameters, token)
 \arguments{
 \item{query}{Twitter API request type string. e.g, \code{"friends/ids"} calls Twitter API to return information about a user's friend network (i.e., accounts followed by a user).}
 
-\item{parameters}{Additional parameters passed along to API call
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.}
+\item{parameters}{Additional parameters passed along to API call}
 
 \item{token}{An OAuth token (1.0 or 2.0)}
 
@@ -21,5 +20,8 @@ json response object as nested list
 }
 \description{
 TWIT
+}
+\seealso{
+See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 }
 

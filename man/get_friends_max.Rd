@@ -9,6 +9,8 @@ get_friends_max(ids, tokens, group, start)
 \arguments{
 \item{tokens}{OAuth tokens (1.0 or 2.0)}
 
+\item{group}{Source used to identify users (groups are liberal, conservative, realDonaldTrump, HillaryClinton, and celebrity)}
+
 \item{followers}{Data frame with column name "screen_name"}
 }
 \value{
@@ -16,5 +18,8 @@ friends List of user ids each user follows.
 }
 \description{
 get_friends_max
+}
+\seealso{
+See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 }
 

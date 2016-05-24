@@ -3,7 +3,7 @@
 #' @param type If not missing, which returns entire rate limit request object, type returns specific values; e.g., \code{type = "lookup"} returns remaining limit for user lookup requests; \code{type = "followers"} returns remaining limit for follower id requests; \code{type = "friends"} returns remaining limit for friend id requests.
 #' @param query Twitter API request type string. e.g, \code{"friends/ids"} calls Twitter API to return information about a user's friend network (i.e., accounts followed by a user).
 #' @param parameters Additional parameters passed along to API call
-#' See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @param token An OAuth token (1.0 or 2.0)
 #' @return json response object as nested list
 #' @import httr
@@ -43,7 +43,7 @@ load_tokens <- function(){
 #' @param screen_name Screen name of target user.
 #' @param token OAuth token (1.0 or 2.0)
 #' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
-#' See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return friends User ids for everyone a user follows.
 #' @export
 get_friends <- function(user, token, page = "-1"){
@@ -72,8 +72,8 @@ is_screen_name <- function(x) return(suppressWarnings(is.na(as.integer(x))))
 #'
 #' @param followers Data frame with column name "screen_name"
 #' @param tokens OAuth tokens (1.0 or 2.0)
-#' @param group Source used to identify users (groups are \code{%in% c("liberal", "conservative", "realDonaldTrump", "HillaryClinton", "celebrity")})
-#' See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @param group Source used to identify users (groups are liberal, conservative, realDonaldTrump, HillaryClinton, and celebrity)
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return friends List of user ids each user follows.
 #' @export
 get_friends_max <- function(ids, tokens, group, start){
@@ -123,7 +123,7 @@ get_friends_max <- function(ids, tokens, group, start){
 #'
 #' @param screen_name Screen name of target user.
 #' @param token OAuth token (1.0 or 2.0)
-#' See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
 #' @return user ids
 #' @export
@@ -146,7 +146,7 @@ get_followers <- function(user, token, page = "-1"){
 #'
 #' @param user Screen name or user id of target user
 #' @param tokens OAuth tokens (1.0 or 2.0)
-#' See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return user ids
 #' @export
 get_followers_max <- function(user, tokens){
@@ -178,7 +178,7 @@ get_followers_max <- function(user, tokens){
 #'
 #' @param type If not missing, which returns entire rate limit request object, type returns specific values; e.g., \code{type = "lookup"} returns remaining limit for user lookup requests; \code{type = "followers"} returns remaining limit for follower id requests; \code{type = "friends"} returns remaining limit for friend id requests.
 #' @param token An OAuth token (1.0 or 2.0)
-#' See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response Rate limit response object or specific value of remaining requests
 #' @export
 check_rate_limit <- function(type, token){
@@ -204,7 +204,7 @@ check_rate_limit <- function(type, token){
 #'
 #' @param users User ids of target user.
 #' @param tokens OAuth tokens (1.0 or 2.0)
-#' See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export
 get_lookup <- function(users, token){
@@ -227,7 +227,7 @@ get_lookup <- function(users, token){
 #'
 #' @param ids User ids of target user.
 #' @param tokens OAuth tokens (1.0 or 2.0)
-#' See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export
 get_lookup_max <- function(ids, tokens){
@@ -282,9 +282,9 @@ get_lookup_max <- function(ids, tokens){
 #'
 #' @param followers Data frame with user ids in column one
 #' @param tokens OAuth tokens (1.0 or 2.0)
-#' @parem screen_name Origin twitter account followed
-#' @N minimum number of friends to return
-#' See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @param screen_name Origin twitter account followed
+#' @param N minimum number of friends to return
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export
 get_friends_timepoint <- function(followers, tokens, screen_name, N = 600){

@@ -10,11 +10,18 @@ get_friends_timepoint(followers, tokens, screen_name, N = 600)
 \item{followers}{Data frame with user ids in column one}
 
 \item{tokens}{OAuth tokens (1.0 or 2.0)}
+
+\item{screen_name}{Origin twitter account followed}
+
+\item{N}{minimum number of friends to return}
 }
 \value{
 response object
 }
 \description{
 get_friends_timepoint
+}
+\seealso{
+See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 }
 

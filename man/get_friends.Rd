@@ -9,8 +9,7 @@ get_friends(user, token, page = "-1")
 \arguments{
 \item{token}{OAuth token (1.0 or 2.0)}
 
-\item{page}{Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.}
+\item{page}{Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.}
 
 \item{screen_name}{Screen name of target user.}
 }
@@ -19,5 +18,8 @@ friends User ids for everyone a user follows.
 }
 \description{
 get_friends
+}
+\seealso{
+See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 }
 

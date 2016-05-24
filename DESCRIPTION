@@ -1,10 +1,13 @@
 Package: tfse
 Type: Package
-Title: What the Package Does (Title Case)
+Title: twitter follows & selective exposure
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Michael W. Kearney
+Maintainer: Michael W. Kearney <mkearney@ku.edu>
+Description: this package contains R code used in my dissertation research most of the functions are designed to interact with twitter's API. this repository will one day be organized into more useful replication materials. until then, it's is a work in progress.
+License: MIT
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Imports:
+    httr,
+    jsonlite

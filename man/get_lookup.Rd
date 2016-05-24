@@ -9,13 +9,15 @@ get_lookup(users, token)
 \arguments{
 \item{users}{User ids of target user.}
 
-\item{tokens}{OAuth tokens (1.0 or 2.0)
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.}
+\item{tokens}{OAuth tokens (1.0 or 2.0)}
 }
 \value{
 response object
 }
 \description{
 get_lookup
+}
+\seealso{
+See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 }
 

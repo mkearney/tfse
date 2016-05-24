@@ -7,8 +7,7 @@
 get_followers(user, token, page = "-1")
 }
 \arguments{
-\item{token}{OAuth token (1.0 or 2.0)
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.}
+\item{token}{OAuth token (1.0 or 2.0)}
 
 \item{page}{Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.}
 
@@ -19,5 +18,8 @@ user ids
 }
 \description{
 get_followers
+}
+\seealso{
+See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 }
 

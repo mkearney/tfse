@@ -9,13 +9,15 @@ get_followers_max(user, tokens)
 \arguments{
 \item{user}{Screen name or user id of target user}
 
-\item{tokens}{OAuth tokens (1.0 or 2.0)
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.}
+\item{tokens}{OAuth tokens (1.0 or 2.0)}
 }
 \value{
 user ids
 }
 \description{
 get_followers_max
+}
+\seealso{
+See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 }
 
