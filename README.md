@@ -3,7 +3,7 @@ tfse = **t**witter **f**ollows & **s**elective **e**xposure
 
 ## about me
 - i'm a phd candidate in political communication at the university of kansas
-- my dissertation examines selective exposure and polarization on twitter
+- my dissertation examines selective exposure and political polarization on twitter
 
 ## about tfse
 - this package contains R code used in my dissertation research
