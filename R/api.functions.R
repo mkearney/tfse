@@ -9,8 +9,8 @@
 #' @import httr
 #' @import jsonlite
 #' @export
-TWIT <- function(query, parameters, token){
-  if (is.null(parameters)){
+TWIT <- function(query, parameters, token) {
+  if (is.null(parameters)) {
     req <- GET(paste0("https://api.twitter.com/1.1/",
                       query,
                       ".json"),
@@ -22,7 +22,7 @@ TWIT <- function(query, parameters, token){
                       parameters),
                config(token = token))
   }
-  if (http_error(req)){
+  if (http_error(req)) {
     return(NULL)
   }
   out <- fromJSON(content(req, as = "text"))
@@ -34,7 +34,7 @@ TWIT <- function(query, parameters, token){
 #' @return twitter oauth 1.0 tokens
 #' @import httr
 #' @export
-load_tokens <- function(){
+load_tokens <- function() {
   source("/Users/mwk/r/tfse/twitter_tokens/create_twitter_tokens.R")
 }
 
@@ -46,10 +46,10 @@ load_tokens <- function(){
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return friends User ids for everyone a user follows.
 #' @export
-get_friends <- function(user, token, page = "-1"){
-  if (is_screen_name(user)){
+get_friends <- function(user, token, page = "-1") {
+  if (is_screen_name(user)) {
     id_type <- "user_id"
-  } else{
+  } else {
     id_type <- "screen_name"
   }
 
@@ -76,11 +76,11 @@ is_screen_name <- function(x) return(suppressWarnings(is.na(as.integer(x))))
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return friends List of user ids each user follows.
 #' @export
-get_friends_max <- function(ids, tokens, group, start){
-  if (missing(start)){
+get_friends_max <- function(ids, tokens, group, start) {
+  if (missing(start)) {
     start <- 1
   }
-  if (missing(group)){
+  if (missing(group)) {
     group <- NA
   }
 
@@ -95,7 +95,7 @@ get_friends_max <- function(ids, tokens, group, start){
   names(user_ids) <- as.character(ids)
   first <- 1
 
-  for(i in tokens){
+  for(i in tokens) {
     remaining <- check_rate_limit(type = "friends", i)
     last <- first + remaining - 1
     user_sub <- user_ids[first:last]
@@ -108,9 +108,9 @@ get_friends_max <- function(ids, tokens, group, start){
                     row.names = NULL,
                     stringsAsFactors = FALSE)
 
-    if (exists("out")){
+    if (exists("out")) {
       out <- rbind(out, o)
-    } else{
+    } else {
       out <- o
     }
     first <- last + 1
@@ -127,10 +127,10 @@ get_friends_max <- function(ids, tokens, group, start){
 #' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
 #' @return user ids
 #' @export
-get_followers <- function(user, token, page = "-1"){
-  if (is_screen_name(user)){
+get_followers <- function(user, token, page = "-1") {
+  if (is_screen_name(user)) {
     id_type <- "user_id"
-  } else{
+  } else {
     id_type <- "screen_name"
   }
 
@@ -149,22 +149,22 @@ get_followers <- function(user, token, page = "-1"){
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return user ids
 #' @export
-get_followers_max <- function(user, tokens){
+get_followers_max <- function(user, tokens) {
   rate_limits <- sapply(tokens, function(x) check_rate_limit(type = "followers", token = x))
   tokens <- tokens[rate_limits > 0]
   followers <- get_followers(user, tokens[[1]])
   page <- followers$next_cursor
   ids <- followers$ids
 
-  for(i in tokens){
+  for(i in tokens) {
     followerid_limit <- check_rate_limit(type = "followers", token = i)
 
-    while (followerid_limit > 0){
+    while (followerid_limit > 0) {
       followers <- get_followers(user, i, page)
       ids <- c(ids, followers$ids)
       page <- followers$next_cursor
 
-      if ( page == 0){
+      if ( page == 0) {
         break
       }
 
@@ -181,20 +181,20 @@ get_followers_max <- function(user, tokens){
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response Rate limit response object or specific value of remaining requests
 #' @export
-check_rate_limit <- function(type, token){
+check_rate_limit <- function(type, token) {
   rate_limit_status <- TWIT("application/rate_limit_status", parameters = NULL, token = token)
-  if ( missing(token)){
+  if ( missing(token)) {
     return(rate_limit_status)
   }
-  if ("lookup" %in% tolower(type)){
+  if ("lookup" %in% tolower(type)) {
     out <- rate_limit_status$resources$users$`/users/lookup`$remaining
     return(out)
   }
-  if ("followers" %in% tolower(type)){
+  if ("followers" %in% tolower(type)) {
     out <- rate_limit_status$resources$followers$`/followers/ids`$remaining
     return(out)
   }
-  if ("friends" %in% tolower(type)){
+  if ("friends" %in% tolower(type)) {
     out <- rate_limit_status$resources$friends$`/friends/ids`$remaining
     return(out)
   }
@@ -207,9 +207,9 @@ check_rate_limit <- function(type, token){
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export
-get_lookup <- function(users, token){
+get_lookup <- function(users, token) {
 
-  if (length(users) > 100){
+  if (length(users) > 100) {
     users <- users[1:100]
   }
 
@@ -230,7 +230,7 @@ get_lookup <- function(users, token){
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export
-get_lookup_max <- function(ids, tokens){
+get_lookup_max <- function(ids, tokens) {
   ids <- unique(ids)
   rate_limits <- sapply(tokens, function(x) check_rate_limit(type = "lookup", x))
   N <- sum(rate_limits * 100)
@@ -249,22 +249,22 @@ get_lookup_max <- function(ids, tokens){
                 "created_at","favourites_count","verified",
                 "statuses_count", "lang")
 
-  for(i in tokens){
+  for(i in tokens) {
     remaining <- check_rate_limit(type = "lookup", i)
     last <- first + remaining - 1
     sets_sub <- sets[first:last]
     o <- sapply(sets_sub, function(x) get_lookup(ids[x], i))
-    o <- lapply(o, function(x){
-      if (sum(c(colnames) %in% names(x)) == 11){
+    o <- lapply(o, function(x) {
+      if (sum(c(colnames) %in% names(x)) == 11) {
         return(x[names(x) %in% colnames])
       }
       })
 
     o <- do.call(rbind, o)
 
-    if (exists("out")){
+    if (exists("out")) {
       out <- rbind(out, o)
-    } else{
+    } else {
       out <- o
     }
     first <- last + 1
@@ -287,18 +287,18 @@ get_lookup_max <- function(ids, tokens){
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export
-get_friends_timepoint <- function(followers, tokens, screen_name, N = 600){
+get_friends_timepoint <- function(followers, tokens, screen_name, N = 600) {
   while (nrow(out) > N) {
-    if (!exists("out")){
+    if (!exists("out")) {
       out <- get_friends_max(followers$id, tokens, screen_name, 1)
-    } else{
+    } else {
       new <- get_friends_max(followers$id, tokens, screen_name, nrow(out) + 1)
       out <- rbind(out, new)
     }
-    if(nrow(out) > N){
+    if (nrow(out) > N) {
       break
     } else {
-      Sys.sleep(15*60)
+      Sys.sleep(15 * 60)
     }
   }
 }
