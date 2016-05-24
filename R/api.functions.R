@@ -32,6 +32,7 @@ TWIT <- function(query, parameters, token){
 #' load_tokens
 #'
 #' @return twitter oauth 1.0 tokens
+#' @import httr
 #' @export
 load_tokens <- function(){
   source("/Users/mwk/r/tfse/twitter_tokens/create_twitter_tokens.R")
