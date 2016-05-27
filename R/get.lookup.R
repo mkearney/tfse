@@ -28,11 +28,14 @@ get_lookup <- function(users, token) {
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export
-get_lookup_max <- function(ids, tokens) {
-  ids <- unique(ids)
+get_lookup_max <- function(ids, tokens, start = 1, sample = TRUE) {
   rate_limits <- sapply(tokens, function(x) check_rate_limit(type = "lookup", x))
-  N <- sum(rate_limits * 100)
-  ids <- sample(ids, N)
+  N <- sum(rate_limits * 100) + start - 1
+  if (sample){
+    ids <- sample(ids, N)
+  } else {
+    ids <- ids[start:N]
+  }
   tokens <- tokens[rate_limits > 0]
   hundos <- floor(length(ids)/100)
   remainder <- length(ids)/100 - floor(length(ids)/100)

@@ -4,7 +4,7 @@
 \alias{get_lookup_max}
 \title{get_lookup_max}
 \usage{
-get_lookup_max(ids, tokens)
+get_lookup_max(ids, tokens, start = 1, sample = TRUE)
 }
 \arguments{
 \item{ids}{User ids of target user.}
