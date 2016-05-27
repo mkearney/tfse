@@ -37,9 +37,6 @@ get_lookup <- function(users, token, df = TRUE) {
 #' @return data frame
 #' @export
 data_frame_lookup <- function(x) {
-  if (sum(dim(x$status)) > 0){
-    out <- cbind(x[, c(1:7, 9:20)], x$status[, c(1:4, 8:15, 17:21, 23, 26:27)])
-  }
   out <- cbind(x[, c(1:7, 9:20)])
   return(out)
 }
