@@ -4,14 +4,16 @@
 \alias{get_friends_max}
 \title{get_friends_max}
 \usage{
-get_friends_max(ids, tokens, group, start)
+get_friends_max(ids, tokens, start = 1)
 }
 \arguments{
+\item{ids}{Data frame with column name "screen_name"}
+
 \item{tokens}{OAuth tokens (1.0 or 2.0)}
 
-\item{group}{Source used to identify users (groups are liberal, conservative, realDonaldTrump, HillaryClinton, and celebrity)}
+\item{start}{Starting value (nth user id)}
 
-\item{followers}{Data frame with column name "screen_name"}
+\item{group}{Source used to identify users (groups are liberal, conservative, realDonaldTrump, HillaryClinton, and celebrity)}
 }
 \value{
 friends List of user ids each user follows.

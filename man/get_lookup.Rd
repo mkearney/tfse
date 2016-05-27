@@ -9,7 +9,7 @@ get_lookup(users, token)
 \arguments{
 \item{users}{User ids of target user.}
 
-\item{tokens}{OAuth tokens (1.0 or 2.0)}
+\item{token}{OAuth tokens (1.0 or 2.0)}
 }
 \value{
 response object
