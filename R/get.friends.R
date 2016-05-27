@@ -8,9 +8,9 @@
 #' @export
 get_friends <- function(user, token, page = "-1") {
   if (is_screen_name(user)) {
-    id_type <- "user_id"
-  } else {
     id_type <- "screen_name"
+  } else {
+    id_type <- "user_id"
   }
 
   out <- TWIT(query = "friends/ids",
@@ -31,33 +31,21 @@ get_friends <- function(user, token, page = "-1") {
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return friends List of user ids each user follows.
 #' @export
-get_friends_max <- function(ids, tokens, group, start) {
-  if (missing(start)) {
-    start <- 1
-  }
-  if (missing(group)) {
-    group <- NA
-  }
-
-  rate_limits <- sapply(tokens, function(x) check_rate_limit(type = "friends", x))
-  N <- sum(rate_limits, na.rm = TRUE)
-
-  if (N == 0) stop("I saw this wino, he was eating grapes. It's like, 'dude, you have to wait.' ~ Mitch Hedberg")
-
-  ids <- ids[start:(start + N - 1)]
-  tokens <- tokens[rate_limits > 0]
+get_friends_max <- function(ids, tokens, start = 1) {
   user_ids <- sapply(ids, function(x) as.list(x))
-  names(user_ids) <- as.character(ids)
-  first <- 1
+  first <- start
 
   for(i in tokens) {
     remaining <- check_rate_limit(type = "friends", i)
     last <- first + remaining - 1
-    user_sub <- user_ids[first:last]
-    o <- lapply(user_sub, function(x) get_friends(x, i))
-    #o <- o[! sapply(o, is.null) ]
+
+    if (last > length(ids)) {
+      last <- length(ids)
+    }
+
+    o <- lapply(user_ids[first:last], function(x) get_friends(x, i))
+
     o <- data.frame(id = names(o),
-                    group = group,
                     date = Sys.Date(),
                     friends = I(o),
                     row.names = NULL,
@@ -69,33 +57,40 @@ get_friends_max <- function(ids, tokens, group, start) {
       out <- o
     }
     first <- last + 1
+
+    if (first > length(ids)) break
   }
 
   return(out)
 }
 
-
-#' get_friends_timepoint
+#' get_wave_data
 #'
-#' @param followers Data frame with user ids in column one
-#' @param tokens OAuth tokens (1.0 or 2.0)
-#' @param screen_name Origin twitter account followed
-#' @param N minimum number of friends to return
+#' @param ids Vector of user ids
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
-#' @return response object
+#' @return friends List of user ids each user follows.
 #' @export
-get_friends_timepoint <- function(followers, tokens, screen_name, N = 600) {
-  while (nrow(out) > N) {
-    if (!exists("out")) {
-      out <- get_friends_max(followers$id, tokens, screen_name, 1)
+get_wave_data <- function(ids, tokens){
+  start <- 1
+
+  while (start < 2881){
+    o <- get_friends_max(ids, tokens, start)
+
+    if (exists("out")) {
+      out <- rbind(out, o)
     } else {
-      new <- get_friends_max(followers$id, tokens, screen_name, nrow(out) + 1)
-      out <- rbind(out, new)
+      out <- o
     }
-    if (nrow(out) > N) {
-      break
+
+    start <- nrow(out) + 1
+
+    if (start < 2881) {
+      Sys.sleep(15*60)
     } else {
-      Sys.sleep(15 * 60)
+      break
     }
   }
+  return(out)
 }
+
+

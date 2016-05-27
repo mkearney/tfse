@@ -42,7 +42,7 @@ load_tokens <- function() {
 #'
 #' @param x Twitter user id or screen name
 #' @return logical value indicating whether object is screen name [or user ID]
-is_screen_name <- function(x) return(suppressWarnings(is.na(as.integer(x))))
+is_screen_name <- function(x) return(suppressWarnings(is.na(as.numeric(x))))
 
 #' check_rate_limit
 #'
