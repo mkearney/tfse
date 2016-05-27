@@ -64,33 +64,5 @@ get_friends_max <- function(ids, tokens, start = 1) {
   return(out)
 }
 
-#' get_wave_data
-#'
-#' @param ids Vector of user ids
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
-#' @return friends List of user ids each user follows.
-#' @export
-get_wave_data <- function(ids, tokens){
-  start <- 1
-
-  while (start < 2881){
-    o <- get_friends_max(ids, tokens, start)
-
-    if (exists("out")) {
-      out <- rbind(out, o)
-    } else {
-      out <- o
-    }
-
-    start <- nrow(out) + 1
-
-    if (start < 2881) {
-      Sys.sleep(15*60)
-    } else {
-      break
-    }
-  }
-  return(out)
-}
 
 

@@ -6,14 +6,14 @@
 #' @export
 get_package_pdf <- function(package, update = FALSE, open = TRUE) {
   if (paste0(package, ".pdf") %in% list.files()) {
-    if (update){
+    if (update) {
       file.remove(paste0(package, ".pdf"))
     } else {
       stop("pdf already exists. use 'update = TRUE' to replace old manual.")
     }
   }
 
-  if (open){
+  if (open) {
     preview <- NULL
   } else{
     preview <- "--no-preview"
