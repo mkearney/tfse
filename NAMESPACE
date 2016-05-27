@@ -2,6 +2,7 @@
 
 export(TWIT)
 export(check_rate_limit)
+export(data_frame_lookup)
 export(get_followers)
 export(get_followers_max)
 export(get_friends)

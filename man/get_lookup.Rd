@@ -4,12 +4,14 @@
 \alias{get_lookup}
 \title{get_lookup}
 \usage{
-get_lookup(users, token)
+get_lookup(users, token, df = TRUE)
 }
 \arguments{
 \item{users}{User ids of target user.}
 
 \item{token}{OAuth tokens (1.0 or 2.0)}
+
+\item{df}{logical, indicating whether to format response as data frame}
 }
 \value{
 response object

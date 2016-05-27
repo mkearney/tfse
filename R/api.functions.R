@@ -51,21 +51,26 @@ is_screen_name <- function(x) return(suppressWarnings(is.na(as.numeric(x))))
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response Rate limit response object or specific value of remaining requests
 #' @export
-check_rate_limit <- function(type, token) {
+check_rate_limit <- function(type, token, seconds = FALSE) {
   rate_limit_status <- TWIT("application/rate_limit_status", parameters = NULL, token = token)
+  if ( seconds){
+    response_type <- "reset"
+  } else {
+    response_type <- "remaining"
+  }
   if ( missing(token)) {
     return(rate_limit_status)
   }
   if ("lookup" %in% tolower(type)) {
-    out <- rate_limit_status$resources$users$`/users/lookup`$remaining
+    out <- rate_limit_status$resources$users$`/users/lookup`[[response_type]]
     return(out)
   }
   if ("followers" %in% tolower(type)) {
-    out <- rate_limit_status$resources$followers$`/followers/ids`$remaining
+    out <- rate_limit_status$resources$followers$`/followers/ids`[[response_type]]
     return(out)
   }
   if ("friends" %in% tolower(type)) {
-    out <- rate_limit_status$resources$friends$`/friends/ids`$remaining
+    out <- rate_limit_status$resources$friends$`/friends/ids`[[response_type]]
     return(out)
   }
 }

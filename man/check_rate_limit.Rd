@@ -4,7 +4,7 @@
 \alias{check_rate_limit}
 \title{check_rate_limit}
 \usage{
-check_rate_limit(type, token)
+check_rate_limit(type, token, seconds = FALSE)
 }
 \arguments{
 \item{type}{If not missing, which returns entire rate limit request object, type returns specific values; e.g., \code{type = "lookup"} returns remaining limit for user lookup requests; \code{type = "followers"} returns remaining limit for follower id requests; \code{type = "friends"} returns remaining limit for friend id requests.}

@@ -2,22 +2,45 @@
 #'
 #' @param users User ids of target user.
 #' @param token OAuth tokens (1.0 or 2.0)
+#' @param df logical, indicating whether to format response as data frame
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export
-get_lookup <- function(users, token) {
-
+get_lookup <- function(users, token, df = TRUE) {
   if (length(users) > 100) {
     users <- users[1:100]
   }
 
+  if (sum(sapply(users, is_screen_name)) == 0) {
+    id_type <- "user_id"
+  } else {
+    id_type <- "screen_name"
+  }
+
   out <- TWIT(query = "users/lookup",
-              parameters = paste0("user_id=",
-                                  paste(users, collapse = ","),
-                                  "&include_entities=false"
+              parameters = paste0(id_type, "=",
+                                  paste(users, collapse = ",")
               ),
               token = token)
 
+  if (df) {
+    out <- data_frame_lookup(out)
+  }
+
+  return(out)
+}
+
+#' data_frame_lookup
+#'
+#' @param x json resposne object from user lookup Twitter API call.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @return data frame
+#' @export
+data_frame_lookup <- function(x) {
+  if (sum(dim(x$status)) > 0){
+    out <- cbind(x[, c(1:7, 9:20)], x$status[, c(1:4, 8:15, 17:21, 23, 26:27)])
+  }
+  out <- cbind(x[, c(1:7, 9:20)])
   return(out)
 }
 
@@ -25,43 +48,22 @@ get_lookup <- function(users, token) {
 #'
 #' @param ids User ids of target user.
 #' @param tokens OAuth tokens (1.0 or 2.0)
+#' @param start First (nth) id
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response object
 #' @export
-get_lookup_max <- function(ids, tokens, start = 1, sample = TRUE) {
-  rate_limits <- sapply(tokens, function(x) check_rate_limit(type = "lookup", x))
-  N <- sum(rate_limits * 100) + start - 1
-  if (sample){
-    ids <- sample(ids, N)
-  } else {
-    ids <- ids[start:N]
-  }
-  tokens <- tokens[rate_limits > 0]
-  hundos <- floor(length(ids)/100)
-  remainder <- length(ids)/100 - floor(length(ids)/100)
-  start_ids <- (0:hundos*100)+1
-  end_ids <- 1:hundos*100
-  end_ids <- c(end_ids, max(end_ids) + remainder*100)
-  sets <- lapply(1:(hundos+1), function(x) start_ids[x]:end_ids[x])
-  first <- 1
-
-  colnames <- c("id", "screen_name", "location",
-                "protected", "followers_count", "friends_count",
-                "created_at","favourites_count","verified",
-                "statuses_count", "lang")
+get_lookup_max <- function(ids, tokens, start = 1) {
+  first <- start
 
   for(i in tokens) {
     remaining <- check_rate_limit(type = "lookup", i)
-    last <- first + remaining - 1
-    sets_sub <- sets[first:last]
-    o <- sapply(sets_sub, function(x) get_lookup(ids[x], i))
-    o <- lapply(o, function(x) {
-      if (sum(c(colnames) %in% names(x)) == 11) {
-        return(x[names(x) %in% colnames])
-      }
-    })
+    last <- (first + remaining - 1) * 100
 
-    o <- do.call(rbind, o)
+    if (last > length(ids)) {
+      last <- length(ids)
+    }
+
+    o <- get_lookup(user_ids[first:last], i)
 
     if (exists("out")) {
       out <- rbind(out, o)
@@ -69,12 +71,9 @@ get_lookup_max <- function(ids, tokens, start = 1, sample = TRUE) {
       out <- o
     }
     first <- last + 1
+
+    if (first > length(ids)) break
   }
 
-  out$created_at <- as.Date(out$created_at, format = "%a %b %d %H:%M:%S %z %Y")
-  out$tweets_per_day <- out$statuses_count / as.numeric(Sys.Date() - out$created_at + 1)
-  out <- subset(out, protected == FALSE & followers_count > 100 & followers_count < 500 &
-                  friends_count > 100 & friends_count < 500 & verified == FALSE &
-                  statuses_count > 1000 & lang == "en" & tweets_per_day > .09)
   return(out)
 }
