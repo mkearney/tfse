@@ -12,6 +12,7 @@ data("d2")
 data("d1")
 data("ids")
 
+load_tokens()
 gfm_rest <- get_friends_max(ids, tokens, start = (nrow(gfm) + 1))
 gfm <- rbind(gfm, gfm_rest)
 

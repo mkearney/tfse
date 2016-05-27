@@ -35,7 +35,7 @@ TWIT <- function(query, parameters, token) {
 #' @import httr
 #' @export
 load_tokens <- function() {
-  source("/Users/mwk/r/tfse/create_twitter_tokens.R")
+  source("/Users/mwk/r/tfse/create.twitter.tokens.R")
 }
 
 #' is_screen_name
