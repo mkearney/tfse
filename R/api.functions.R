@@ -10,6 +10,13 @@
 #' @import jsonlite
 #' @export
 TWIT <- function(query, parameters, token) {
+  if (query == "lists/members") {
+    req <- POST(paste0("https://api.twitter.com/1.1/",
+                       query,
+                       ".json?",
+                       parameters),
+                config(token = token))
+  }
   if (is.null(parameters)) {
     req <- GET(paste0("https://api.twitter.com/1.1/",
                       query,
@@ -28,6 +35,7 @@ TWIT <- function(query, parameters, token) {
   out <- fromJSON(content(req, as = "text"))
   return(out)
 }
+
 
 #' load_tokens
 #'
