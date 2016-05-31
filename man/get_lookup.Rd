@@ -7,7 +7,7 @@
 get_lookup(users, token, df = TRUE)
 }
 \arguments{
-\item{users}{User ids of target user.}
+\item{users}{Screen name or user id of target users.}
 
 \item{token}{OAuth tokens (1.0 or 2.0)}
 

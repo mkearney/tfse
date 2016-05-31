@@ -10,4 +10,5 @@ LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
     httr,
-    jsonlite
+    jsonlite,
+    rvest

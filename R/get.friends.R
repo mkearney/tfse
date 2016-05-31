@@ -1,6 +1,6 @@
 #' get_friends
 #'
-#' @param screen_name Screen name of target user.
+#' @param user Screen name or user id of target user.
 #' @param token OAuth token (1.0 or 2.0)
 #' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
@@ -26,7 +26,6 @@ get_friends <- function(user, token, page = "-1") {
 #'
 #' @param ids Data frame with column name "screen_name"
 #' @param tokens OAuth tokens (1.0 or 2.0)
-#' @param group Source used to identify users (groups are liberal, conservative, realDonaldTrump, HillaryClinton, and celebrity)
 #' @param start Starting value (nth user id)
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return friends List of user ids each user follows.

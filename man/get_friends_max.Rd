@@ -12,8 +12,6 @@ get_friends_max(ids, tokens, start = 1)
 \item{tokens}{OAuth tokens (1.0 or 2.0)}
 
 \item{start}{Starting value (nth user id)}
-
-\item{group}{Source used to identify users (groups are liberal, conservative, realDonaldTrump, HillaryClinton, and celebrity)}
 }
 \value{
 friends List of user ids each user follows.

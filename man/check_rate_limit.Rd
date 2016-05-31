@@ -10,6 +10,8 @@ check_rate_limit(type, token, seconds = FALSE)
 \item{type}{If not missing, which returns entire rate limit request object, type returns specific values; e.g., \code{type = "lookup"} returns remaining limit for user lookup requests; \code{type = "followers"} returns remaining limit for follower id requests; \code{type = "friends"} returns remaining limit for friend id requests.}
 
 \item{token}{An OAuth token (1.0 or 2.0)}
+
+\item{seconds}{logical, indicating whether to return unix seconds}
 }
 \value{
 response Rate limit response object or specific value of remaining requests

@@ -7,7 +7,7 @@
 get_lookup_max(ids, tokens, start = 1)
 }
 \arguments{
-\item{ids}{User ids of target user.}
+\item{ids}{User id or screen name of target user.}
 
 \item{tokens}{OAuth tokens (1.0 or 2.0)}
 

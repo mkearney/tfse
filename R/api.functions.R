@@ -1,10 +1,9 @@
 #' TWIT
 #'
-#' @param type If not missing, which returns entire rate limit request object, type returns specific values; e.g., \code{type = "lookup"} returns remaining limit for user lookup requests; \code{type = "followers"} returns remaining limit for follower id requests; \code{type = "friends"} returns remaining limit for friend id requests.
 #' @param query Twitter API request type string. e.g, \code{"friends/ids"} calls Twitter API to return information about a user's friend network (i.e., accounts followed by a user).
 #' @param parameters Additional parameters passed along to API call
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @param token An OAuth token (1.0 or 2.0)
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return json response object as nested list
 #' @import httr
 #' @import jsonlite
@@ -56,6 +55,7 @@ is_screen_name <- function(x) return(suppressWarnings(is.na(as.numeric(x))))
 #'
 #' @param type If not missing, which returns entire rate limit request object, type returns specific values; e.g., \code{type = "lookup"} returns remaining limit for user lookup requests; \code{type = "followers"} returns remaining limit for follower id requests; \code{type = "friends"} returns remaining limit for friend id requests.
 #' @param token An OAuth token (1.0 or 2.0)
+#' @param seconds logical, indicating whether to return unix seconds
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response Rate limit response object or specific value of remaining requests
 #' @export
@@ -83,4 +83,15 @@ check_rate_limit <- function(type, token, seconds = FALSE) {
   }
 }
 
-
+#' sn2id
+#'
+#' @param screen_name Twitter handle
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @return response Twitter account user id
+#' @import rvest
+#' @export
+sn2id <- function(screen_name) {
+  out <- read_html(paste0("http://twitter.com/", screen_name))
+  out <- out %>% html_nodes(".ProfileNav") %>% html_attr("data-user-id")
+  return(out)
+}

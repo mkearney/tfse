@@ -1,7 +1,7 @@
 
 #' get_followers
 #'
-#' @param screen_name Screen name of target user.
+#' @param user Screen name or user id of target user.
 #' @param token OAuth token (1.0 or 2.0)
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
