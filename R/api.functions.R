@@ -35,11 +35,50 @@ TWIT <- function(query, parameters, token) {
   return(out)
 }
 
+#' get_api
+#'
+#' @param url API url address.
+#' @return Response formatted as nested list.
+#' Assumes response object is json object.
+#' @import httr
+#' @import jsonlite
+#' @export
+get_api <- function(url, token = NULL) {
+  if (is.null(token)) {
+    req <- GET(url)
+  } else {
+    req <- GET(url, config(token = as.character(token)))
+  }
+
+  if (http_error(req)) {
+    return(NULL)
+  }
+
+  out <- fromJSON(content(req, as = "text"))
+  return(out)
+}
+
+#' get_token
+#'
+#' @param app Name of user created Twitter application
+#' @param consumer_key Application API key
+#' @param consumer_secret Application API secret
+#' User-owned app must have \code{Read and write} access level and \code{Callback URL} of \code{http://127.0.0.1:1410}.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @return twitter oauth 1.0 token
+#' @import httr
+#' @export
+get_token <- function(app, consumer_key, consumer_secret) {
+  out <- oauth_app(appname = app,
+                   key = consumer_key,
+                   secret = consumer_secret)
+  out <- oauth1.0_token(oauth_endpoints("twitter"), out)
+  return(out)
+}
 
 #' load_tokens
 #'
 #' @return twitter oauth 1.0 tokens
-#' @import httr
 #' @export
 load_tokens <- function() {
   source("/Users/mwk/r/tfse/create.twitter.tokens.R")
