@@ -7,7 +7,7 @@
 get_wave <- function(ids, tokens) {
   start <- 1
 
-  while (start < 2881) {
+  while (start < length(ids)) {
     o <- get_friends_max(ids, tokens, start)
 
     if (exists("out")) {
