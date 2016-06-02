@@ -4,7 +4,7 @@
 \alias{TWIT}
 \title{TWIT}
 \usage{
-TWIT(query, parameters, token)
+TWIT(query, parameters, token, version = "1.1")
 }
 \arguments{
 \item{query}{Twitter API request type string. e.g, \code{"friends/ids"} calls Twitter API to return information about a user's friend network (i.e., accounts followed by a user).}

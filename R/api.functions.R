@@ -8,21 +8,24 @@
 #' @import httr
 #' @import jsonlite
 #' @export
-TWIT <- function(query, parameters, token) {
+TWIT <- function(query, parameters, token, version = "1.1") {
   if (query == "lists/members") {
-    req <- POST(paste0("https://api.twitter.com/1.1/",
+    req <- POST(paste0("https://api.twitter.com/",
+                       version, "/",
                        query,
                        ".json?",
                        parameters),
                 config(token = token))
   }
   if (is.null(parameters)) {
-    req <- GET(paste0("https://api.twitter.com/1.1/",
+    req <- GET(paste0("https://api.twitter.com/",
+                      version, "/",
                       query,
                       ".json"),
                config(token = token))
   } else {
-    req <- GET(paste0("https://api.twitter.com/1.1/",
+    req <- GET(paste0("https://api.twitter.com/",
+                      version, "/",
                       query,
                       ".json?",
                       parameters),
@@ -100,25 +103,28 @@ is_screen_name <- function(x) return(suppressWarnings(is.na(as.numeric(x))))
 #' @export
 check_rate_limit <- function(type, token, seconds = FALSE) {
   rate_limit_status <- TWIT("application/rate_limit_status", parameters = NULL, token = token)
-  if ( seconds){
+  if (seconds) {
     response_type <- "reset"
   } else {
     response_type <- "remaining"
   }
-  if ( missing(token)) {
+  if (missing(token)) {
     return(rate_limit_status)
   }
   if ("lookup" %in% tolower(type)) {
     out <- rate_limit_status$resources$users$`/users/lookup`[[response_type]]
-    return(out)
   }
   if ("followers" %in% tolower(type)) {
     out <- rate_limit_status$resources$followers$`/followers/ids`[[response_type]]
-    return(out)
   }
   if ("friends" %in% tolower(type)) {
     out <- rate_limit_status$resources$friends$`/friends/ids`[[response_type]]
-    return(out)
+  }
+  if (seconds) {
+    out <- as.POSIXct(out, origin = "1970-01-01")
+    cat(" (Reset ", strftime(out, "%H:%M:%S"), ")\n", sep = "")
+  } else {
+    out
   }
 }
 
