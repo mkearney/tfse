@@ -64,4 +64,52 @@ get_friends_max <- function(ids, tokens, start = 1) {
 }
 
 
+#' get_friendslist
+#'
+#' Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their “friends”).
+#' @param user Screen name or user id of target user.
+#' @param token OAuth token (1.0 or 2.0)
+#' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
+#' @seealso See \url{https://api.twitter.com/1.1/friends/list.json}.
+#' @return json user object (nested list)
+#' @export
+get_friendslist <- function(user, token, page = "-1") {
+  if (is_screen_name(user)) {
+    id_type <- "screen_name"
+  } else {
+    id_type <- "id"
+  }
 
+  out <- TWIT(query = "friends/list",
+              parameters = paste0("count=200&cursor=",
+                                  page, "&",
+                                  id_type, "=", user,
+                                  "&skip_status=true&include_user_entities=false"),
+              token = token)
+
+  return(out)
+}
+
+#' get_friendships
+#'
+#' Returns detailed information about the relationship between two arbitrary users.
+#' @param source Screen name or user id of source user.
+#' @param target Screen name or user id of target user.
+#' @param token OAuth token (1.0 or 2.0)
+#' @seealso See \url{https://api.twitter.com/1.1/friendships/show.json}.
+#' @return json object (nested list)
+#' @export
+get_friendships <- function(source, target, token) {
+  if (is_screen_name(user)) {
+    id_type <- "screen_name"
+  } else {
+    id_type <- "id"
+  }
+
+  out <- TWIT(query = "friendships/show",
+              parameters = paste0("source_", id_type, "=", source,
+                                  "target_", id_type, "=", target),
+              token = token)
+
+  return(out)
+}
