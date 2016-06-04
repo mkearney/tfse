@@ -64,3 +64,27 @@ get_friendships <- function(user, since_id = NULL, count = NULL, max_id = NULL,
 
   return(out)
 }
+
+#' get_statuses_retweets
+#'
+#' Returns a collection of the 100 most recent retweets of the tweet specified by the id parameter.
+#' @param tweet_id required, The numerical ID of the desired status
+#' @param count optional, Specifies the number of records to retrieve. Must be less than or equal to 100.
+#' @param trim_user optional, When set to TRUE each tweet returned in a timeline will include a user object including only the status authors numerical ID. Omit this parameter to receive the complete user object.
+#' @param token OAuth token (1.0 or 2.0)
+#' @seealso \url{https://api.twitter.com/1.1/statuses/retweets/:id.json}
+#' @return json object
+get_statuses_retweets <- function(tweet_id, count = 100, trim_user = TRUE, token) {
+
+  if (trim_user) {
+    params <- paste0("count=", count, "&trim_user=true")
+  } else {
+    params <- paste0("count=", count)
+  }
+
+  out <- TWIT(query = "statuses/retweets",
+              parameters = paste0("id=", tweet_id, "&", params),
+              token = token)
+
+  return(out)
+}
