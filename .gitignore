@@ -4,11 +4,11 @@
 .rda
 .Ruserdata
 .httr-oauth
-twitter_tokens
-tokens
 tfse.Rproj
 congress.R
 data
 create.twitter.tokens.R
+wave.data.script.R
 get.wave.R
 get.package.pdf.R
+R/utility.functions.R
