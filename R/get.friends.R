@@ -100,7 +100,7 @@ get_friendslist <- function(user, token, page = "-1") {
 #' @return json object (nested list)
 #' @export
 get_friendships <- function(source, target, token) {
-  if (is_screen_name(user)) {
+  if (is_screen_name(source)) {
     id_type <- "screen_name"
   } else {
     id_type <- "id"

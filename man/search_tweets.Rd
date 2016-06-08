@@ -4,13 +4,11 @@
 \alias{search_tweets}
 \title{search_tweets}
 \usage{
-search_tweets(tweet_id, count = 100, trim_user = TRUE, token)
+search_tweets(q, geocode = NULL, lang = NULL, locale = NULL,
+  result_type = "mixed", count = 100, until = NULL, since_id = NULL,
+  max_id = NULL, include_entities = TRUE, token)
 }
 \arguments{
-\item{count}{optional, The number of tweets to return per page, up to a maximum of 100. Defaults to 15. This was formerly the “rpp” parameter in the old Search API.}
-
-\item{token}{OAuth token (1.0 or 2.0)}
-
 \item{q}{required, A UTF-8, URL-encoded search query of 500 characters maximum, including operators. Queries may additionally be limited by complexity.}
 
 \item{geocode}{optional, Returns tweets by users located within a given radius of the given latitude/longitude. The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by “latitude,longitude,radius”, where radius units must be specified as either “mi” (miles) or “km” (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly. A maximum of 1,000 distinct “sub-regions” will be considered when using the radius modifier.}
@@ -19,7 +17,9 @@ search_tweets(tweet_id, count = 100, trim_user = TRUE, token)
 
 \item{locale}{optional, Specify the language of the query you are sending (only ja is currently effective). This is intended for language-specific consumers and the default should work in the majority of cases.}
 
-\item{result_type}{optional, Specifies what type of search results you would prefer to receive. The current default is “mixed.” Valid values include \code{"mixed"} to nclude both popular and real time results in the response, \code{"recent"} to return only the most recent results in the response, and\code{"popular"} to return only the most popular results in the response.}
+\item{result_type}{optional, Specifies what type of search results you would prefer to receive. The current default is “mixed.” Valid values include \code{"mixed"} to include both popular and real time results in the response, \code{"recent"} to return only the most recent results in the response, and\code{"popular"} to return only the most popular results in the response.}
+
+\item{count}{optional, The number of tweets to return per page, up to a maximum of 100. Defaults to 15. This was formerly the “rpp” parameter in the old Search API.}
 
 \item{until}{optional, Returns tweets created before the given date. Date should be formatted as YYYY-MM-DD. Keep in mind that the search index has a 7-day limit. In other words, no tweets will be found for a date older than one week. Example Values: \code{"2015-07-19"}.}
 
@@ -28,6 +28,8 @@ search_tweets(tweet_id, count = 100, trim_user = TRUE, token)
 \item{max_id}{optional, Returns results with an ID less than (that is, older than) or equal to the specified ID.}
 
 \item{include_entities}{optional, The entities node will be disincluded when set to false.}
+
+\item{token}{OAuth token (1.0 or 2.0)}
 
 \item{callback}{optional, If supplied, the response will use the JSONP format with a callback of the given name. The usefulness of this parameter is somewhat diminished by the requirement of authentication for requests to this endpoint. Example Values: \code{"processTweets"}}
 }

@@ -9,7 +9,7 @@
 #' @param geocode optional, Returns tweets by users located within a given radius of the given latitude/longitude. The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by “latitude,longitude,radius”, where radius units must be specified as either “mi” (miles) or “km” (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly. A maximum of 1,000 distinct “sub-regions” will be considered when using the radius modifier.
 #' @param lang optional, Restricts tweets to the given language, given by an ISO 639-1 code. Language detection is best-effort.
 #' @param locale optional, Specify the language of the query you are sending (only ja is currently effective). This is intended for language-specific consumers and the default should work in the majority of cases.
-#' @param result_type optional, Specifies what type of search results you would prefer to receive. The current default is “mixed.” Valid values include \code{"mixed"} to nclude both popular and real time results in the response, \code{"recent"} to return only the most recent results in the response, and\code{"popular"} to return only the most popular results in the response.
+#' @param result_type optional, Specifies what type of search results you would prefer to receive. The current default is “mixed.” Valid values include \code{"mixed"} to include both popular and real time results in the response, \code{"recent"} to return only the most recent results in the response, and\code{"popular"} to return only the most popular results in the response.
 #' @param count optional, The number of tweets to return per page, up to a maximum of 100. Defaults to 15. This was formerly the “rpp” parameter in the old Search API.
 #' @param until optional, Returns tweets created before the given date. Date should be formatted as YYYY-MM-DD. Keep in mind that the search index has a 7-day limit. In other words, no tweets will be found for a date older than one week. Example Values: \code{"2015-07-19"}.
 #' @param since_id optional, Returns results with an ID greater than (that is, more recent than) the specified ID. There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the since_id, the since_id will be forced to the oldest ID available.
@@ -19,13 +19,18 @@
 #' @param token OAuth token (1.0 or 2.0)
 #' @seealso \url{https://api.twitter.com/1.1/search/tweets.json}
 #' @return json object
-search_tweets <- function(tweet_id, count = 100, trim_user = TRUE, token) {
+search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL, result_type = "mixed", count = 100, until = NULL, since_id = NULL, max_id = NULL, include_entities = TRUE, token) {
 
-  if (trim_user) {
-    params <- paste0("count=", count, "&trim_user=true")
-  } else {
-    params <- paste0("count=", count)
-  }
+    params <- paste0("result_type=", result_type, "&count=", count,
+         if (!is.null(geocode)) paste0("&geocode=", geocode),
+         if (!is.null(lang)) paste0("&lang=", lang),
+         if (!is.null(locale)) paste0("&locale=", locale),
+         if (!is.null(until)) paste0("&until=", until),
+         if (!is.null(since_id)) paste0("&since_id=", since_id),
+         if (!is.null(max_id)) paste0("&max_id=", max_id),
+         if (trim_user) paste0("&trim_user=true") else paste0("&trim_user=false"),
+         if (include_entities) paste0("&include_entities=true") else paste0("&include_entities=false")
+  )
 
   out <- TWIT(query = "search/tweets",
               parameters = paste0("id=", tweet_id, "&", params),
