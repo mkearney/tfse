@@ -4,6 +4,7 @@
 .rda
 .Ruserdata
 .httr-oauth
+.Rbuildignore
 tfse.Rproj
 congress.R
 data
