@@ -1,4 +1,4 @@
-#' get_search_tweets
+#' search_tweets
 #'
 #' Returns a collection of relevant Tweets matching a specified query.
 #' Please note that Twitter’s search service and, by extension, the Search API is not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed or made available via the search interface.
@@ -19,7 +19,7 @@
 #' @param token OAuth token (1.0 or 2.0)
 #' @seealso \url{https://api.twitter.com/1.1/search/tweets.json}
 #' @return json object
-get_search_tweets <- function(tweet_id, count = 100, trim_user = TRUE, token) {
+search_tweets <- function(tweet_id, count = 100, trim_user = TRUE, token) {
 
   if (trim_user) {
     params <- paste0("count=", count, "&trim_user=true")

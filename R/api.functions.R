@@ -79,14 +79,6 @@ get_token <- function(app, consumer_key, consumer_secret) {
   return(out)
 }
 
-#' load_tokens
-#'
-#' @return twitter oauth 1.0 tokens
-#' @export
-load_tokens <- function() {
-  source("/Users/mwk/r/tfse/create.twitter.tokens.R")
-}
-
 #' is_screen_name
 #'
 #' @param x Twitter user id or screen name
@@ -128,15 +120,3 @@ check_rate_limit <- function(type, token, seconds = FALSE) {
   }
 }
 
-#' sn2id
-#'
-#' @param screen_name Twitter handle
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
-#' @return response Twitter account user id
-#' @import rvest
-#' @export
-sn2id <- function(screen_name) {
-  out <- read_html(paste0("http://twitter.com/", screen_name))
-  out <- out %>% html_nodes(".ProfileNav") %>% html_attr("data-user-id")
-  return(out)
-}
