@@ -4,7 +4,7 @@
 \alias{get_wave_data}
 \title{get_wave_data}
 \usage{
-get_wave_data(wave)
+get_wave_data(wave, ids, tokens)
 }
 \arguments{
 \item{wave}{Wave number}
