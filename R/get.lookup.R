@@ -51,26 +51,41 @@ data_frame_lookup <- function(x) {
 #' @export
 get_lookup_max <- function(ids, tokens, start = 1) {
   first <- start
+  total <- length(ids)
 
   for(i in tokens) {
     remaining <- check_rate_limit(type = "lookup", i)
-    last <- (first + remaining - 1) * 100
+    while (remaining > 0) {
+      last <- first + 99
 
-    if (last > length(ids)) {
-      last <- length(ids)
+      if (last > total) {
+        last <- total
+      }
+
+      o <- get_lookup(ids[first:last], i)
+
+      if (exists("out")) {
+        out <- rbind(out, o)
+      } else {
+        out <- o
+      }
+
+      first <- last + 1
+
+
+      if (first > total) {
+        return(out)
+      }
+
+      remainder <- check_rate_limit(type = "lookup", i)
+
+      if (!length(remainder) == 1) {
+        break
+      } else {
+        remaining <- remainder
+      }
+
     }
-
-    o <- get_lookup(ids[first:last], i)
-
-    if (exists("out")) {
-      out <- rbind(out, o)
-    } else {
-      out <- o
-    }
-    first <- last + 1
-
-    if (first > length(ids)) break
   }
-
-  return(out)
+  out
 }

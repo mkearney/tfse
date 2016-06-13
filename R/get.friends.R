@@ -36,28 +36,32 @@ get_friends_max <- function(ids, tokens, start = 1) {
 
   for(i in tokens) {
     remaining <- check_rate_limit(type = "friends", i)
-    last <- first + remaining - 1
 
-    if (last > length(ids)) {
-      last <- length(ids)
+    if (remaining > 0) {
+      last <- first + remaining - 1
+
+      if (last > length(ids)) {
+        last <- length(ids)
+      }
+
+      o <- lapply(user_ids[first:last], function(x) get_friends(x, i))
+
+      o <- data.frame(id = unlist(user_ids[first:last]),
+                      date = Sys.Date(),
+                      friends = I(o),
+                      row.names = NULL,
+                      stringsAsFactors = FALSE)
+
+      if (exists("out")) {
+        out <- rbind(out, o)
+      } else {
+        out <- o
+      }
+
+      first <- last + 1
+
+      if (first > length(ids)) break
     }
-
-    o <- lapply(user_ids[first:last], function(x) get_friends(x, i))
-
-    o <- data.frame(id = names(o),
-                    date = Sys.Date(),
-                    friends = I(o),
-                    row.names = NULL,
-                    stringsAsFactors = FALSE)
-
-    if (exists("out")) {
-      out <- rbind(out, o)
-    } else {
-      out <- o
-    }
-    first <- last + 1
-
-    if (first > length(ids)) break
   }
 
   return(out)

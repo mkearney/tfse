@@ -1,4 +1,3 @@
-
 #' get_followers
 #'
 #' @param user Screen name or user id of target user.
@@ -8,16 +7,11 @@
 #' @return user ids
 #' @export
 get_followers <- function(user, token, page = "-1") {
-  if (is_screen_name(user)) {
-    id_type <- "user_id"
-  } else {
-    id_type <- "screen_name"
-  }
-
   out <- TWIT(query = "followers/ids",
-              parameters = paste0("count=5000&cursor=",
+              parameters = paste0("cursor=",
                                   page, "&",
-                                  id_type, "=", user),
+                                  "screen_name=", user,
+                                  "&count=5000&stringify_ids=true"),
               token = token)
   return(out)
 }
@@ -30,28 +24,34 @@ get_followers <- function(user, token, page = "-1") {
 #' @return user ids
 #' @export
 get_followers_max <- function(user, tokens) {
-  rate_limits <- sapply(tokens, function(x) check_rate_limit(type = "followers", token = x))
-  tokens <- tokens[rate_limits > 0]
-  followers <- get_followers(user, tokens[[1]])
-  page <- followers$next_cursor
-  ids <- followers$ids
+  page <- "-1"
 
   for(i in tokens) {
     followerid_limit <- check_rate_limit(type = "followers", token = i)
 
     while (followerid_limit > 0) {
-      followers <- get_followers(user, i, page)
-      ids <- c(ids, followers$ids)
-      page <- followers$next_cursor
+      f <- get_followers(user, i, page)
 
-      if ( page == 0) {
-        break
+      if (exists("out")) {
+        out <- c(out, f$ids)
+      } else {
+        out <- f$ids
+      }
+
+      page <- as.character(f$next_cursor)
+
+      if (!length(page) == 1) {
+        return(out)
+      }
+
+      if (page == "0") {
+        return(out)
       }
 
       followerid_limit <- check_rate_limit(type = "followers", token = i)
     }
   }
-  return(ids)
+  out
 }
 
 
