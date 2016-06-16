@@ -14,5 +14,4 @@ get.wave.R
 get.package.pdf.R
 R/utility.functions.R
 subset.filters.R
-study_data
 study
