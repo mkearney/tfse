@@ -4,16 +4,24 @@
 #' @param token OAuth token (1.0 or 2.0)
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
+#' @param stringify logical, indicating whether to return user ids as strings (some ids are too long to be read as numeric). Defaults to \code{TRUE}
 #' @return user ids
 #' @export
-get_followers <- function(user, token, page = "-1") {
+get_followers <- function(user, token, page = "-1", stringify = TRUE) {
+
+  parameters <- paste0("count=5000&cursor=", page,
+                       "&screen_name=", user)
+
+  if (stringify) parameters <- paste0(parameters, "&stringify_ids=true")
+
   out <- TWIT(query = "followers/ids",
               parameters = paste0("cursor=",
                                   page, "&",
                                   "screen_name=", user,
-                                  "&count=5000&stringify_ids=true"),
+                                  "&count=5000"),
               token = token)
-  return(out)
+
+  out
 }
 
 #' get_followers_max

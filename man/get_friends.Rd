@@ -4,7 +4,7 @@
 \alias{get_friends}
 \title{get_friends}
 \usage{
-get_friends(user, token, page = "-1")
+get_friends(user, token, page = "-1", stringify = TRUE)
 }
 \arguments{
 \item{user}{Screen name or user id of target user.}
@@ -12,6 +12,8 @@ get_friends(user, token, page = "-1")
 \item{token}{OAuth token (1.0 or 2.0)}
 
 \item{page}{Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.}
+
+\item{stringify}{logical, indicating whether to return user ids as strings (some ids are too long to be read as numeric). Defaults to \code{TRUE}}
 }
 \value{
 friends User ids for everyone a user follows.

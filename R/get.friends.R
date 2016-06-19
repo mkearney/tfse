@@ -3,23 +3,28 @@
 #' @param user Screen name or user id of target user.
 #' @param token OAuth token (1.0 or 2.0)
 #' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
+#' @param stringify logical, indicating whether to return user ids as strings (some ids are too long to be read as numeric). Defaults to \code{TRUE}
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return friends User ids for everyone a user follows.
 #' @export
-get_friends <- function(user, token, page = "-1") {
-  if (is_screen_name(user)) {
-    id_type <- "screen_name"
-  } else {
+get_friends <- function(user, token, page = "-1", stringify = TRUE) {
+  #if (is_screen_name(user)) {
+  #  id_type <- "screen_name"
+  #} else {
     id_type <- "user_id"
-  }
+  #}
+
+  parameters <- paste0("cursor=",
+                       page, "&",
+                       id_type, "=", user)
+
+  if (stringify) parameters <- paste0(parameters, "&stringify_ids=true")
 
   out <- TWIT(query = "friends/ids",
-              parameters = paste0("count=5000&cursor=",
-                                  page, "&",
-                                  id_type, "=", user),
+              parameters = parameters,
               token = token)
 
-  return(out$id)
+  out$id
 }
 
 #' get_friends_max
@@ -27,10 +32,11 @@ get_friends <- function(user, token, page = "-1") {
 #' @param ids Data frame with column name "screen_name"
 #' @param tokens OAuth tokens (1.0 or 2.0)
 #' @param start Starting value (nth user id)
+#' @param stringify logical, indicating whether to return user ids as strings (some ids are too long to be read as numeric). Defaults to \code{TRUE}.
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return friends List of user ids each user follows.
 #' @export
-get_friends_max <- function(ids, tokens, start = 1) {
+get_friends_max <- function(ids, tokens, start = 1, stringify = TRUE) {
   user_ids <- sapply(ids, function(x) as.list(x))
   first <- start
 
@@ -42,6 +48,10 @@ get_friends_max <- function(ids, tokens, start = 1) {
 
       if (last > length(ids)) {
         last <- length(ids)
+      }
+
+      if (!stringify) {
+        o <- lapply(user_ids[first:last], function(x) get_friends(x, i, stringify = FALSE))
       }
 
       o <- lapply(user_ids[first:last], function(x) get_friends(x, i))
@@ -64,7 +74,7 @@ get_friends_max <- function(ids, tokens, start = 1) {
     }
   }
 
-  return(out)
+  out
 }
 
 
@@ -91,7 +101,7 @@ get_friendslist <- function(user, token, page = "-1") {
                                   "&skip_status=true&include_user_entities=false"),
               token = token)
 
-  return(out)
+  out
 }
 
 #' get_friendships
@@ -115,5 +125,5 @@ get_friendships <- function(source, target, token) {
                                   "target_", id_type, "=", target),
               token = token)
 
-  return(out)
+  out
 }

@@ -31,11 +31,15 @@ TWIT <- function(query, parameters, token, version = "1.1") {
                       parameters),
                config(token = token))
   }
+  #stop_for_status(req, task = NULL)
+
+  #if (!req$status_code < 400) return(invisible())
+
   if (http_error(req)) {
-    return(NULL)
+    return(invisible())
   }
   out <- fromJSON(content(req, as = "text"))
-  return(out)
+  out
 }
 
 #' get_api
@@ -58,7 +62,7 @@ get_api <- function(url, token = NULL) {
   }
 
   out <- fromJSON(content(req, as = "text"))
-  return(out)
+  out
 }
 
 #' get_token
@@ -76,14 +80,14 @@ get_token <- function(app, consumer_key, consumer_secret) {
                    key = consumer_key,
                    secret = consumer_secret)
   out <- oauth1.0_token(oauth_endpoints("twitter"), out)
-  return(out)
+  out
 }
 
 #' is_screen_name
 #'
 #' @param x Twitter user id or screen name
 #' @return logical value indicating whether object is screen name [or user ID]
-is_screen_name <- function(x) return(suppressWarnings(is.na(as.numeric(x))))
+is_screen_name <- function(x) suppressWarnings(is.na(as.numeric(x)))
 
 #' check_rate_limit
 #'
@@ -114,7 +118,7 @@ check_rate_limit <- function(type, token, seconds = FALSE) {
   }
   if (seconds) {
     out <- as.POSIXct(out, origin = "1970-01-01")
-    cat(" (Reset ", strftime(out, "%H:%M:%S"), ")\n", sep = "")
+    return(strftime(out, "%H:%M:%S"))
   } else {
     out
   }
