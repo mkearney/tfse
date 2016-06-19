@@ -3,7 +3,8 @@
 #' @param users Screen name or user id of target users.
 #' @param token OAuth tokens (1.0 or 2.0)
 #' @param df logical, indicating whether to format response as data frame
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
 #' @return response object
 #' @export
 get_lookup <- function(users, token, df = TRUE) {
@@ -46,7 +47,8 @@ data_frame_lookup <- function(x) {
 #' @param ids User id or screen name of target user.
 #' @param tokens OAuth tokens (1.0 or 2.0)
 #' @param start First (nth) id
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
 #' @return response object
 #' @export
 get_lookup_max <- function(ids, tokens, start = 1) {

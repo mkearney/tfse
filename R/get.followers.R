@@ -2,9 +2,13 @@
 #'
 #' @param user Screen name or user id of target user.
 #' @param token OAuth token (1.0 or 2.0)
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
-#' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
-#' @param stringify logical, indicating whether to return user ids as strings (some ids are too long to be read as numeric). Defaults to \code{TRUE}
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
+#' @param page Default \code{page = -1} specifies first page of json results.
+#'   Other pages specified via cursor values supplied by Twitter API response
+#'   object.
+#' @param stringify logical, indicating whether to return user ids as strings
+#'   (some ids are too long to be read as numeric). Defaults to \code{TRUE}
 #' @return user ids
 #' @export
 get_followers <- function(user, token, page = "-1", stringify = TRUE) {
@@ -28,7 +32,8 @@ get_followers <- function(user, token, page = "-1", stringify = TRUE) {
 #'
 #' @param user Screen name or user id of target user
 #' @param tokens OAuth tokens (1.0 or 2.0)
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
 #' @return user ids
 #' @export
 get_followers_max <- function(user, tokens) {
@@ -65,10 +70,13 @@ get_followers_max <- function(user, tokens) {
 
 #' get_followerslist
 #'
-#' Returns a cursored collection of user objects for users following the specified user.
+#' Returns a cursored collection of user objects for users following the
+#' specified user.
 #' @param user Screen name or user id of target user.
 #' @param token OAuth token (1.0 or 2.0)
-#' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
+#' @param page Default \code{page = -1} specifies first page of json results.
+#'   Other pages specified via cursor values supplied by Twitter API response
+#'   object.
 #' @seealso See \url{https://api.twitter.com/1.1/followers/list.json}.
 #' @return json user object (nested list)
 #' @export

@@ -1,9 +1,12 @@
 #' TWIT
 #'
-#' @param query Twitter API request type string. e.g, \code{"friends/ids"} calls Twitter API to return information about a user's friend network (i.e., accounts followed by a user).
+#' @param query Twitter API request type string. e.g, \code{"friends/ids"} calls
+#'   Twitter API to return information about a user's friend network (i.e.,
+#'   accounts followed by a user).
 #' @param parameters Additional parameters passed along to API call
 #' @param token An OAuth token (1.0 or 2.0)
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
 #' @return json response object as nested list
 #' @import httr
 #' @import jsonlite
@@ -69,9 +72,11 @@ get_api <- function(url, token = NULL) {
 #'
 #' @param app Name of user created Twitter application
 #' @param consumer_key Application API key
-#' @param consumer_secret Application API secret
-#' User-owned app must have \code{Read and write} access level and \code{Callback URL} of \code{http://127.0.0.1:1410}.
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @param consumer_secret Application API secret User-owned app must have
+#'   \code{Read and write} access level and \code{Callback URL} of
+#'   \code{http://127.0.0.1:1410}.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
 #' @return twitter oauth 1.0 token
 #' @import httr
 #' @export
@@ -91,11 +96,17 @@ is_screen_name <- function(x) suppressWarnings(is.na(as.numeric(x)))
 
 #' check_rate_limit
 #'
-#' @param type If not missing, which returns entire rate limit request object, type returns specific values; e.g., \code{type = "lookup"} returns remaining limit for user lookup requests; \code{type = "followers"} returns remaining limit for follower id requests; \code{type = "friends"} returns remaining limit for friend id requests.
+#' @param type If not missing, which returns entire rate limit request object,
+#'   type returns specific values; e.g., \code{type = "lookup"} returns
+#'   remaining limit for user lookup requests; \code{type = "followers"} returns
+#'   remaining limit for follower id requests; \code{type = "friends"} returns
+#'   remaining limit for friend id requests.
 #' @param token An OAuth token (1.0 or 2.0)
 #' @param seconds logical, indicating whether to return unix seconds
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
-#' @return response Rate limit response object or specific value of remaining requests
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
+#' @return response Rate limit response object or specific value of remaining
+#'   requests
 #' @export
 check_rate_limit <- function(type, token, seconds = FALSE) {
   rate_limit_status <- TWIT("application/rate_limit_status", parameters = NULL, token = token)

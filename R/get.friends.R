@@ -2,9 +2,13 @@
 #'
 #' @param user Screen name or user id of target user.
 #' @param token OAuth token (1.0 or 2.0)
-#' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
-#' @param stringify logical, indicating whether to return user ids as strings (some ids are too long to be read as numeric). Defaults to \code{TRUE}
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @param page Default \code{page = -1} specifies first page of json results.
+#'   Other pages specified via cursor values supplied by Twitter API response
+#'   object.
+#' @param stringify logical, indicating whether to return user ids as strings
+#'   (some ids are too long to be read as numeric). Defaults to \code{TRUE}
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
 #' @return friends User ids for everyone a user follows.
 #' @export
 get_friends <- function(user, token, page = "-1", stringify = TRUE) {
@@ -32,8 +36,10 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 #' @param ids Data frame with column name "screen_name"
 #' @param tokens OAuth tokens (1.0 or 2.0)
 #' @param start Starting value (nth user id)
-#' @param stringify logical, indicating whether to return user ids as strings (some ids are too long to be read as numeric). Defaults to \code{TRUE}.
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @param stringify logical, indicating whether to return user ids as strings
+#'   (some ids are too long to be read as numeric). Defaults to \code{TRUE}.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
 #' @return friends List of user ids each user follows.
 #' @export
 get_friends_max <- function(ids, tokens, start = 1, stringify = TRUE) {
@@ -80,10 +86,13 @@ get_friends_max <- function(ids, tokens, start = 1, stringify = TRUE) {
 
 #' get_friendslist
 #'
-#' Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their “friends”).
+#' Returns a cursored collection of user objects for every user the specified
+#' user is following (otherwise known as their “friends”).
 #' @param user Screen name or user id of target user.
 #' @param token OAuth token (1.0 or 2.0)
-#' @param page Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.
+#' @param page Default \code{page = -1} specifies first page of json results.
+#'   Other pages specified via cursor values supplied by Twitter API response
+#'   object.
 #' @seealso See \url{https://api.twitter.com/1.1/friends/list.json}.
 #' @return json user object (nested list)
 #' @export
@@ -106,7 +115,8 @@ get_friendslist <- function(user, token, page = "-1") {
 
 #' get_friendships
 #'
-#' Returns detailed information about the relationship between two arbitrary users.
+#' Returns detailed information about the relationship between two arbitrary
+#' users.
 #' @param source Screen name or user id of source user.
 #' @param target Screen name or user id of target user.
 #' @param token OAuth token (1.0 or 2.0)
