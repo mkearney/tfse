@@ -11,9 +11,12 @@ get_followers(user, token, page = "-1", stringify = TRUE)
 
 \item{token}{OAuth token (1.0 or 2.0)}
 
-\item{page}{Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.}
+\item{page}{Default \code{page = -1} specifies first page of json results.
+Other pages specified via cursor values supplied by Twitter API response
+object.}
 
-\item{stringify}{logical, indicating whether to return user ids as strings (some ids are too long to be read as numeric). Defaults to \code{TRUE}}
+\item{stringify}{logical, indicating whether to return user ids as strings
+(some ids are too long to be read as numeric). Defaults to \code{TRUE}}
 }
 \value{
 user ids
@@ -22,6 +25,7 @@ user ids
 get_followers
 }
 \seealso{
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+See \url{https://dev.twitter.com/overview/documentation} for more
+  information on using Twitter's API.
 }
 

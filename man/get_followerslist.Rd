@@ -11,13 +11,16 @@ get_followerslist(user, token, page = "-1")
 
 \item{token}{OAuth token (1.0 or 2.0)}
 
-\item{page}{Default \code{page = -1} specifies first page of json results. Other pages specified via cursor values supplied by Twitter API response object.}
+\item{page}{Default \code{page = -1} specifies first page of json results.
+Other pages specified via cursor values supplied by Twitter API response
+object.}
 }
 \value{
 json user object (nested list)
 }
 \description{
-Returns a cursored collection of user objects for users following the specified user.
+Returns a cursored collection of user objects for users following the
+specified user.
 }
 \seealso{
 See \url{https://api.twitter.com/1.1/followers/list.json}.

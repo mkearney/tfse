@@ -15,7 +15,8 @@ get_list(slug, owner, token, count = 5000, cursor = "-1")
 
 \item{count}{Maximum number of users to return (cannot be higher than 5000).}
 
-\item{cursor}{Select next or previous page or results using cursor value from returned json object}
+\item{cursor}{Select next or previous page or results using cursor value from
+returned json object}
 }
 \value{
 json response object as nested list
@@ -24,6 +25,7 @@ json response object as nested list
 get_list
 }
 \seealso{
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+See \url{https://dev.twitter.com/overview/documentation} for more
+  information on using Twitter's API.
 }
 

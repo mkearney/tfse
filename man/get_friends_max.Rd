@@ -4,7 +4,7 @@
 \alias{get_friends_max}
 \title{get_friends_max}
 \usage{
-get_friends_max(ids, tokens, start = 1)
+get_friends_max(ids, tokens, start = 1, stringify = TRUE)
 }
 \arguments{
 \item{ids}{Data frame with column name "screen_name"}
@@ -12,6 +12,9 @@ get_friends_max(ids, tokens, start = 1)
 \item{tokens}{OAuth tokens (1.0 or 2.0)}
 
 \item{start}{Starting value (nth user id)}
+
+\item{stringify}{logical, indicating whether to return user ids as strings
+(some ids are too long to be read as numeric). Defaults to \code{TRUE}.}
 }
 \value{
 friends List of user ids each user follows.
@@ -20,6 +23,7 @@ friends List of user ids each user follows.
 get_friends_max
 }
 \seealso{
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+See \url{https://dev.twitter.com/overview/documentation} for more
+  information on using Twitter's API.
 }
 

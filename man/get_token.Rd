@@ -11,8 +11,9 @@ get_token(app, consumer_key, consumer_secret)
 
 \item{consumer_key}{Application API key}
 
-\item{consumer_secret}{Application API secret
-User-owned app must have \code{Read and write} access level and \code{Callback URL} of \code{http://127.0.0.1:1410}.}
+\item{consumer_secret}{Application API secret User-owned app must have
+\code{Read and write} access level and \code{Callback URL} of
+\code{http://127.0.0.1:1410}.}
 }
 \value{
 twitter oauth 1.0 token
@@ -21,6 +22,7 @@ twitter oauth 1.0 token
 get_token
 }
 \seealso{
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+See \url{https://dev.twitter.com/overview/documentation} for more
+  information on using Twitter's API.
 }
 

@@ -9,9 +9,12 @@ get_statuses_retweets(tweet_id, count = 100, trim_user = TRUE, token)
 \arguments{
 \item{tweet_id}{required, The numerical ID of the desired status}
 
-\item{count}{optional, Specifies the number of records to retrieve. Must be less than or equal to 100.}
+\item{count}{optional, Specifies the number of records to retrieve. Must be
+less than or equal to 100.}
 
-\item{trim_user}{optional, When set to TRUE each tweet returned in a timeline will include a user object including only the status authors numerical ID. Omit this parameter to receive the complete user object.}
+\item{trim_user}{optional, When set to TRUE each tweet returned in a timeline
+will include a user object including only the status authors numerical ID.
+Omit this parameter to receive the complete user object.}
 
 \item{token}{OAuth token (1.0 or 2.0)}
 }
@@ -19,7 +22,8 @@ get_statuses_retweets(tweet_id, count = 100, trim_user = TRUE, token)
 json object
 }
 \description{
-Returns a collection of the 100 most recent retweets of the tweet specified by the id parameter.
+Returns a collection of the 100 most recent retweets of the tweet specified
+by the id parameter.
 }
 \seealso{
 \url{https://api.twitter.com/1.1/statuses/retweets/:id.json}

@@ -7,19 +7,25 @@
 check_rate_limit(type, token, seconds = FALSE)
 }
 \arguments{
-\item{type}{If not missing, which returns entire rate limit request object, type returns specific values; e.g., \code{type = "lookup"} returns remaining limit for user lookup requests; \code{type = "followers"} returns remaining limit for follower id requests; \code{type = "friends"} returns remaining limit for friend id requests.}
+\item{type}{If not missing, which returns entire rate limit request object,
+type returns specific values; e.g., \code{type = "lookup"} returns
+remaining limit for user lookup requests; \code{type = "followers"} returns
+remaining limit for follower id requests; \code{type = "friends"} returns
+remaining limit for friend id requests.}
 
 \item{token}{An OAuth token (1.0 or 2.0)}
 
 \item{seconds}{logical, indicating whether to return unix seconds}
 }
 \value{
-response Rate limit response object or specific value of remaining requests
+response Rate limit response object or specific value of remaining
+  requests
 }
 \description{
 check_rate_limit
 }
 \seealso{
-See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+See \url{https://dev.twitter.com/overview/documentation} for more
+  information on using Twitter's API.
 }
 
