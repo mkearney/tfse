@@ -12,11 +12,7 @@
 #' @return friends User ids for everyone a user follows.
 #' @export
 get_friends <- function(user, token, page = "-1", stringify = TRUE) {
-  #if (is_screen_name(user)) {
-  #  id_type <- "screen_name"
-  #} else {
-    id_type <- "user_id"
-  #}
+  id_type <- "user_id"
 
   parameters <- paste0("cursor=",
                        page, "&",
@@ -28,7 +24,7 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
               parameters = parameters,
               token = token)
 
-  out$id
+  out$ids
 }
 
 #' get_friends_max

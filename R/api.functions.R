@@ -37,10 +37,15 @@ TWIT <- function(query, parameters, token, version = "1.1") {
   #stop_for_status(req, task = NULL)
 
   #if (!req$status_code < 400) return(invisible())
+  Sys.sleep(.5)
 
   if (http_error(req)) {
     return(invisible())
   }
+  if (length(req$error) != 0){
+    stop("error! req ")
+  }
+
   out <- fromJSON(content(req, as = "text"))
   out
 }
@@ -121,10 +126,10 @@ check_rate_limit <- function(type, token, seconds = FALSE) {
   if ("lookup" %in% tolower(type)) {
     out <- rate_limit_status$resources$users$`/users/lookup`[[response_type]]
   }
-  if ("followers" %in% tolower(type)) {
+  if ("followers" %in% tolower(type) | "follower" %in% tolower(type)) {
     out <- rate_limit_status$resources$followers$`/followers/ids`[[response_type]]
   }
-  if ("friends" %in% tolower(type)) {
+  if ("friends" %in% tolower(type) | "friend" %in% tolower(type)) {
     out <- rate_limit_status$resources$friends$`/friends/ids`[[response_type]]
   }
   if (seconds) {
