@@ -37,7 +37,7 @@ TWIT <- function(query, parameters, token, version = "1.1") {
   #stop_for_status(req, task = NULL)
 
   #if (!req$status_code < 400) return(invisible())
-  Sys.sleep(.5)
+  #Sys.sleep(.05)
 
   if (http_error(req)) {
     return(invisible())
