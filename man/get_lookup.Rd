@@ -4,7 +4,7 @@
 \alias{get_lookup}
 \title{get_lookup}
 \usage{
-get_lookup(users, token, df = TRUE)
+get_lookup(users, token, df = TRUE, skip = TRUE, entities = FALSE)
 }
 \arguments{
 \item{users}{Screen name or user id of target users.}

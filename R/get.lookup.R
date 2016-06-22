@@ -7,28 +7,40 @@
 #'   information on using Twitter's API.
 #' @return response object
 #' @export
-get_lookup <- function(users, token, df = TRUE) {
+get_lookup <- function(users, token, df = TRUE, skip = TRUE, entities = FALSE) {
+  if (class(users) == "list") {
+    users <- unlist(users)
+  }
+
   if (length(users) > 100) {
     users <- users[1:100]
   }
 
-  if (sum(sapply(users, is_screen_name)) == 0) {
+  if (sum(sapply(users[1:3], is_screen_name)) == 0) {
     id_type <- "user_id"
   } else {
     id_type <- "screen_name"
   }
 
+  parameters = paste0(id_type, "=",
+                      paste(users, collapse = ","))
+
+  if (skip) {
+    parameters <- paste0(parameters, "&skip_status=true")
+  }
+  if (!entities) {
+    parameters <- paste0(parameters, "&include_user_entities=false")
+  }
+
   out <- TWIT(query = "users/lookup",
-              parameters = paste0(id_type, "=",
-                                  paste(users, collapse = ",")
-              ),
+              parameters = parameters,
               token = token)
 
   if (df) {
     out <- data_frame_lookup(out)
   }
 
-  return(out)
+  out
 }
 
 #' data_frame_lookup
@@ -36,10 +48,21 @@ get_lookup <- function(users, token, df = TRUE) {
 #' @param x json resposne object from user lookup Twitter API call.
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return data frame
+#' @import dplyr
 #' @export
 data_frame_lookup <- function(x) {
-  out <- cbind(x[, c(1:7, 9:20)])
-  return(out)
+  x <- data_frame(x)
+
+  x <- x[, names(x)[names(x) %in% c("user_id", "user_id", "account", "group",
+                  "screen_name", "protected", "followers_count",
+                  "friends_count", "created_at", "favourites_count",
+                  "verified", "statuses_count", "lang")] ]
+
+  if (length(x) == 0) {
+    return(invisible())
+  }
+
+  x
 }
 
 #' get_lookup_max

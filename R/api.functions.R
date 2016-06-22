@@ -19,8 +19,7 @@ TWIT <- function(query, parameters, token, version = "1.1") {
                        ".json?",
                        parameters),
                 config(token = token))
-  }
-  if (is.null(parameters)) {
+  } else if (is.null(parameters)) {
     req <- GET(paste0("https://api.twitter.com/",
                       version, "/",
                       query,
@@ -34,19 +33,15 @@ TWIT <- function(query, parameters, token, version = "1.1") {
                       parameters),
                config(token = token))
   }
-  #stop_for_status(req, task = NULL)
-
-  #if (!req$status_code < 400) return(invisible())
-  #Sys.sleep(.05)
 
   if (http_error(req)) {
     return(invisible())
   }
-  if (length(req$error) != 0){
-    stop("error! req ")
-  }
 
-  out <- fromJSON(content(req, as = "text"))
+  out <- fromJSON(content(req, as = "text", encoding = "UTF-8"))
+
+  if (length(out) == 0) return(invisible())
+
   out
 }
 

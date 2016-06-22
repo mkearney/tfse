@@ -18,13 +18,15 @@ get_followers <- function(user, token, page = "-1", stringify = TRUE) {
 
   if (stringify) parameters <- paste0(parameters, "&stringify_ids=true")
 
-  out <- TWIT(query = "followers/ids",
-              parameters = paste0("cursor=",
-                                  page, "&",
-                                  "screen_name=", user,
-                                  "&count=5000"),
-              token = token)
+  out <- try(TWIT(query = "followers/ids",
+                  parameters = paste0("cursor=", page,
+                                      "&screen_name=", user,
+                                      "&count=5000"),
+              token = token), silent = TRUE)
 
+  if (length(out) == 0) {
+    return(invisible())
+  }
   out
 }
 

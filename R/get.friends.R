@@ -12,11 +12,8 @@
 #' @return friends User ids for everyone a user follows.
 #' @export
 get_friends <- function(user, token, page = "-1", stringify = TRUE) {
-  id_type <- "user_id"
-
-  parameters <- paste0("cursor=",
-                       page, "&",
-                       id_type, "=", user)
+  parameters <- paste0("cursor=", page,
+                       "&user_id=", user)
 
   if (stringify) parameters <- paste0(parameters, "&stringify_ids=true")
 
@@ -24,7 +21,14 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
               parameters = parameters,
               token = token)
 
-  out$ids
+  if (length(out) == 0) {
+    return(NA_character_)
+  }
+  if (length(out$ids) == 0) {
+    return(NA_character_)
+  }
+
+  list(out$ids)
 }
 
 #' get_friends_max
@@ -37,46 +41,46 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
 #'   information on using Twitter's API.
 #' @return friends List of user ids each user follows.
+#' @import dplyr
 #' @export
-get_friends_max <- function(ids, tokens, start = 1, stringify = TRUE) {
-  user_ids <- sapply(ids, function(x) as.list(x))
-  first <- start
+get_friends_max <- function(user_ids, tokens, n = 1, stringify = TRUE, verbose = TRUE) {
+  start <- n
+  for (i in tokens) {
+    fdf_token <- get_friends_data(user_ids[which_ids(n)], i)
+    #Sys.sleep(.1)
 
-  for(i in tokens) {
-    remaining <- check_rate_limit(type = "friends", i)
+    if (exists("fdf")) {
+      fdf <- c(fdf, fdf_token)
+    } else {
+      fdf <- fdf_token
+    }
+    if (verbose) cat("*")
 
-    if (remaining > 0) {
-      last <- first + remaining - 1
-
-      if (last > length(ids)) {
-        last <- length(ids)
-      }
-
-      if (!stringify) {
-        o <- lapply(user_ids[first:last], function(x) get_friends(x, i, stringify = FALSE))
-      }
-
-      o <- lapply(user_ids[first:last], function(x) get_friends(x, i))
-
-      o <- data.frame(id = unlist(user_ids[first:last]),
-                      date = Sys.Date(),
-                      friends = I(o),
-                      row.names = NULL,
-                      stringsAsFactors = FALSE)
-
-      if (exists("out")) {
-        out <- rbind(out, o)
-      } else {
-        out <- o
-      }
-
-      first <- last + 1
-
-      if (first > length(ids)) break
+    if (n > 200) {
+      break
+    } else {
+      n <- n + 1
     }
   }
+  data_frame(user_id = user_ids[start:length(fdf)], friends = fdf)
+}
 
-  out
+#' which_ids
+#'
+#' Returns integer values. Used for get_friends function.
+#' @param n starting number for users
+#' @return integers used to identify 15 users
+#' @export
+which_ids <- function(n) {
+  remain <- 15 - 1
+
+  n <- n * (remain + 1) - remain
+  end <- n + remain
+
+  if (end > 3000) {
+    end <- 3000
+  }
+  n:end
 }
 
 
