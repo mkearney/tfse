@@ -12,4 +12,5 @@ Imports:
     httr,
     jsonlite,
     rvest,
-    dplyr
+    dplyr,
+    readr

@@ -4,17 +4,20 @@
 \alias{get_friends_max}
 \title{get_friends_max}
 \usage{
-get_friends_max(user_ids, tokens, n = 1, stringify = TRUE, verbose = TRUE)
+get_friends_max(user_ids, tokens, start = 1, stringify = TRUE,
+  path = NULL)
 }
 \arguments{
+\item{user_ids}{Data frame with column name "screen_name"}
+
 \item{tokens}{OAuth tokens (1.0 or 2.0)}
+
+\item{start}{Starting value (nth user id)}
 
 \item{stringify}{logical, indicating whether to return user ids as strings
 (some ids are too long to be read as numeric). Defaults to \code{TRUE}.}
 
-\item{ids}{Data frame with column name "screen_name"}
-
-\item{start}{Starting value (nth user id)}
+\item{path}{Path name to save rds data file.}
 }
 \value{
 friends List of user ids each user follows.

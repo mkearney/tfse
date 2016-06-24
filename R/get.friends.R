@@ -33,36 +33,55 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 
 #' get_friends_max
 #'
-#' @param ids Data frame with column name "screen_name"
+#' @param user_ids Data frame with column name "screen_name"
 #' @param tokens OAuth tokens (1.0 or 2.0)
 #' @param start Starting value (nth user id)
 #' @param stringify logical, indicating whether to return user ids as strings
 #'   (some ids are too long to be read as numeric). Defaults to \code{TRUE}.
+#' @param path Path name to save rds data file.
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
 #'   information on using Twitter's API.
 #' @return friends List of user ids each user follows.
 #' @import dplyr
+#' @import readr
 #' @export
-get_friends_max <- function(user_ids, tokens, n = 1, stringify = TRUE, verbose = TRUE) {
-  start <- n
+get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, path = NULL) {
+  # starting value
+  n <- start
+
+  # create list item
+  l <- list()
+
+  # max rate limit of tokens exceeds remaining # ids
   for (i in tokens) {
-    fdf_token <- get_friends_data(user_ids[which_ids(n)], i)
-    #Sys.sleep(.1)
-
-    if (exists("fdf")) {
-      fdf <- c(fdf, fdf_token)
+    if (!stringify) {
+      l_token <- sapply(user_ids[which_ids(n)], function(x) get_friends(x, i, stringify = FALSE))
     } else {
-      fdf <- fdf_token
+      l_token <- sapply(user_ids[which_ids(n)], function(x) get_friends(x, i))
     }
-    if (verbose) cat("*")
+    l <- c(l, l_token)
 
-    if (n > 200) {
-      break
+    if (n %% 10 == 0) {
+      cat(paste0(n, " of ", start + length(tokens), "\n"))
     } else {
-      n <- n + 1
+      cat("*")
     }
+
+    n <- n + 1
+
+    if (length(l) + (start * 15) > length(user_ids)) break
   }
-  data_frame(user_id = user_ids[start:length(fdf)], friends = fdf)
+
+  d <- data_frame(user_id = user_ids[1:length(l)], friends = l)
+
+  d$date <- Sys.Date()
+  d <- d[, c(1, 3, 2)]
+
+  if (!is.null(path)) {
+    write_rds(d, path)
+  }
+
+  d
 }
 
 #' which_ids
