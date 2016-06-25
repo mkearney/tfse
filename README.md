@@ -29,7 +29,7 @@ tokens <- c(get_token(app = "app1_name",
                       consumer_key = "xxxxxxxxxxxxxxxxxxxxxxxxx",
                       consumer_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"))
 ```
-
+- example of package use
 ```{r}
 ### install and load tfse
 devtools::install_github("mkearney/tfse")
