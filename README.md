@@ -16,7 +16,7 @@ devtools::install_github("mkearney/tfse")
 ```
 
 ## use
-- to create Twitter apps go visit http://apps.twitter.com/app/new
+- to create Twitter apps visit http://apps.twitter.com/app/new
 ```{r}
 ### save Twitter app name, consumer key, and consumer secret key as reusable oauth token script.
 tokens <- c(get_token(app = "app1_name",
