@@ -49,8 +49,8 @@ hrc_followers
 users <- get_lookup_max(hrc_followers, tokens)
 users
 
-### use multiple tokens to return 45 (15 for each token) user networks 
-###(all of a user's friends or accounts a user follows)
+### use multiple tokens to return 45 (15 for each token) user networks (all of a 
+### user's friends or accounts a user follows)
 user_ids <- sample(users$id[users$protected = FALSE], 45) # random sample of 45 users with unprotected accounts
 user_networks <- get_friends_max(user_ids, tokens)
 user_networks
