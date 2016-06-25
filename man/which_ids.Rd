@@ -4,13 +4,17 @@
 \alias{which_ids}
 \title{which_ids}
 \usage{
-which_ids(n)
+which_ids(n, max_users = 3000, token = NULL)
 }
 \arguments{
 \item{n}{starting number for users}
+
+\item{max_users}{max number of user ids (if rate limit exceeds remaining number of users, this sets upper ceiling and reduces likelihood of API request errors)}
+
+\item{token}{Specify token if there is reason to believe current remaning friend list request is below the rate limit max of 15. This rate limit resets every 15 minutes, so this is usually not necessary. Checking rate limits does not reduce the number of available requests, but it does slow things down.}
 }
 \value{
-integers used to identify 15 users
+integers used to identify 15 (or token max given rate limits) users from provided list of user ids
 }
 \description{
 Returns integer values. Used for get_friends function.

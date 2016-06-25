@@ -37,15 +37,14 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 #' @param tokens OAuth tokens (1.0 or 2.0)
 #' @param start Starting value (nth user id)
 #' @param stringify logical, indicating whether to return user ids as strings
+#' @param verbose default behavior \code{verbose = TRUE} prints asterisk for every 15 (or max of one token) user networks collected. Set \code{verbose = FALSE} to run function silently.
 #'   (some ids are too long to be read as numeric). Defaults to \code{TRUE}.
-#' @param path Path name to save rds data file.
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
 #'   information on using Twitter's API.
 #' @return friends List of user ids each user follows.
 #' @import dplyr
-#' @import readr
 #' @export
-get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, path = NULL) {
+get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE) {
   # starting value
   n <- start
 
@@ -61,10 +60,12 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, path 
     }
     l <- c(l, l_token)
 
-    if (n %% 10 == 0) {
-      cat(paste0(n, " of ", start + length(tokens), "\n"))
-    } else {
-      cat("*")
+    if (verbose) {
+      if (n %% 10 == 0) {
+        cat(paste0(n, " of ", start + length(tokens), "\n"))
+      } else {
+        cat("*")
+      }
     }
 
     n <- n + 1
@@ -77,10 +78,6 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, path 
   d$date <- Sys.Date()
   d <- d[, c(1, 3, 2)]
 
-  if (!is.null(path)) {
-    write_rds(d, path)
-  }
-
   d
 }
 
@@ -88,16 +85,26 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, path 
 #'
 #' Returns integer values. Used for get_friends function.
 #' @param n starting number for users
-#' @return integers used to identify 15 users
+#' @param max_users max number of user ids (if rate limit exceeds remaining number of users, this sets upper ceiling and reduces likelihood of API request errors)
+#' @param token Specify token if there is reason to believe current remaning friend list request is below the rate limit max of 15. This rate limit resets every 15 minutes, so this is usually not necessary. Checking rate limits does not reduce the number of available requests, but it does slow things down.
+#' @return integers used to identify 15 (or token max given rate limits) users from provided list of user ids
 #' @export
-which_ids <- function(n) {
-  remain <- 15 - 1
+which_ids <- function(n, max_users = 3000, token = NULL) {
+  if (!is.null(token)) {
+    total <- check_rate_limit("friends", token)
+    if (total == 0) {
+      return(invisible())
+    }
+  } else {
+    total <- 15
+  }
+  remain <- total - 1
 
   n <- n * (remain + 1) - remain
   end <- n + remain
 
-  if (end > 3000) {
-    end <- 3000
+  if (end > max_users) {
+    end <- max_users
   }
   n:end
 }

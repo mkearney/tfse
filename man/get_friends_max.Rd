@@ -5,7 +5,7 @@
 \title{get_friends_max}
 \usage{
 get_friends_max(user_ids, tokens, start = 1, stringify = TRUE,
-  path = NULL)
+  verbose = TRUE)
 }
 \arguments{
 \item{user_ids}{Data frame with column name "screen_name"}
@@ -14,10 +14,10 @@ get_friends_max(user_ids, tokens, start = 1, stringify = TRUE,
 
 \item{start}{Starting value (nth user id)}
 
-\item{stringify}{logical, indicating whether to return user ids as strings
-(some ids are too long to be read as numeric). Defaults to \code{TRUE}.}
+\item{stringify}{logical, indicating whether to return user ids as strings}
 
-\item{path}{Path name to save rds data file.}
+\item{verbose}{default behavior \code{verbose = TRUE} prints asterisk for every 15 (or max of one token) user networks collected. Set \code{verbose = FALSE} to run function silently.
+(some ids are too long to be read as numeric). Defaults to \code{TRUE}.}
 }
 \value{
 friends List of user ids each user follows.
