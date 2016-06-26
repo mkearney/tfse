@@ -81,6 +81,7 @@ data_frame_lookup <- function(x) {
 get_lookup_max <- function(ids, tokens, start = 1) {
   first <- start
   total <- length(ids)
+  out <- data_frame()
 
   for(i in tokens) {
     remaining <- check_rate_limit(type = "lookup", i)
@@ -92,15 +93,8 @@ get_lookup_max <- function(ids, tokens, start = 1) {
       }
 
       o <- get_lookup(ids[first:last], i)
-
-      if (exists("out")) {
-        out <- rbind(out, o)
-      } else {
-        out <- o
-      }
-
+      out <- bind_rows(out, o)
       first <- last + 1
-
 
       if (first > total) {
         return(out)
