@@ -51,17 +51,21 @@ get_lookup <- function(users, token, df = TRUE, skip = TRUE, entities = FALSE) {
 #' @import dplyr
 #' @export
 data_frame_lookup <- function(x) {
-  x <- data_frame(x)
+  x <- tbl_df(x)
 
-  x <- x[, names(x)[names(x) %in% c("user_id", "user_id", "account", "group",
-                  "screen_name", "protected", "followers_count",
-                  "friends_count", "created_at", "favourites_count",
-                  "verified", "statuses_count", "lang")] ]
+  x <- x[, names(x)[names(x) %in% c("id_str", "screen_name", "protected",
+                                    "followers_count", "friends_count",
+                                    "created_at", "favourites_count",
+                                    "verified", "statuses_count", "lang")] ]
 
   if (length(x) == 0) {
     return(invisible())
   }
 
+  names(x)[names(x) == "id_str"] <- "user_id"
+  if(length(x$created_at) > 0) {
+    x$created_at <- as.Date(as.POSIXct(x$created_at, format="%a %b %d %H:%M:%S %z %Y"), format = "%Y-%M-%D")
+  }
   x
 }
 

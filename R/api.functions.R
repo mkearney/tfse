@@ -128,8 +128,7 @@ check_rate_limit <- function(type, token, seconds = FALSE) {
     out <- rate_limit_status$resources$friends$`/friends/ids`[[response_type]]
   }
   if (seconds) {
-    out <- as.POSIXct(out, origin = "1970-01-01")
-    return(strftime(out, "%H:%M:%S"))
+    as.POSIXct(out, origin = "1970-01-01")
   } else {
     out
   }
