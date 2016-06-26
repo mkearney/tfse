@@ -39,7 +39,7 @@ library(tfse)
 ### first time running script should open web browser with Twitter 
 ### authorization page (for each app)
 source("/Users/xxx/r/twitter_api/create.twitter.tokens.R") 
-length(tokens)
+length(tokens) # number of tokens loaded
 
 ### use multiple tokens to return 225,000 followers (75,000 for each token) of Hillary Clinton
 hrc_followers <- get_followers_max("HillaryClinton", tokens)
@@ -51,7 +51,7 @@ users
 
 ### use multiple tokens to return 45 (15 for each token) user networks (all of a 
 ### user's friends or accounts a user follows)
-user_ids <- sample(users$id[users$protected = FALSE], 45) # random sample of 45 users with unprotected accounts
+user_ids <- sample(users$id[users$protected == FALSE], 45) # random sample of 45 users with unprotected accounts
 user_networks <- get_friends_max(user_ids, tokens)
 user_networks
 ```
