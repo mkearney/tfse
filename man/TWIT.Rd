@@ -4,7 +4,7 @@
 \alias{TWIT}
 \title{TWIT}
 \usage{
-TWIT(query, parameters, token, version = "1.1")
+TWIT(query, parameters, token, version = "1.1", timeout = 3)
 }
 \arguments{
 \item{query}{Twitter API request type string. e.g, \code{"friends/ids"} calls

@@ -11,7 +11,7 @@
 #'   information on using Twitter's API.
 #' @return friends User ids for everyone a user follows.
 #' @export
-get_friends <- function(user, token, page = "-1", stringify = TRUE) {
+get_friends <- function(user, token, page = "-1", stringify = TRUE, timeout = 3) {
   parameters <- paste0("cursor=", page,
                        "&user_id=", user)
 
@@ -19,7 +19,8 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 
   out <- TWIT(query = "friends/ids",
               parameters = parameters,
-              token = token)
+              token = token,
+              timeout = timeout)
 
   if (length(out) == 0) {
     return(NA_character_)
@@ -44,21 +45,22 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 #' @return friends List of user ids each user follows.
 #' @import dplyr
 #' @export
-get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE) {
+get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE, timeout = 3) {
   # starting value
   n <- start
 
-  # create list item
-  l <- list()
+  # create list vector
+  l <- vector("list", length(tokens) * 15)
 
   # max rate limit of tokens exceeds remaining # ids
   for (i in tokens) {
     if (!stringify) {
-      l_token <- sapply(user_ids[which_ids(n)], function(x) get_friends(x, i, stringify = FALSE))
+      l[which_ids(n)] <- sapply(user_ids[which_ids(n)], function(x)
+        get_friends(x, i, stringify = FALSE, timeout = timeout))
     } else {
-      l_token <- sapply(user_ids[which_ids(n)], function(x) get_friends(x, i))
+      l[which_ids(n)] <- sapply(user_ids[which_ids(n)], function(x)
+        get_friends(x, i, timeout = timeout))
     }
-    l <- c(l, l_token)
 
     if (verbose) {
       if (n %% 10 == 0) {
@@ -73,8 +75,30 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbo
     if (length(l) + (start * 15) > length(user_ids)) break
   }
 
-  d <- data_frame(user_id = user_ids[1:length(l)], friends = l)
+  d <- data_frame(user_id = user_ids[min(which_ids(start)):(min(which_ids(start)) + length(l) - 1)],
+                  date = Sys.Date(),
+                  friends = l)
 
+  d
+}
+
+#' get_friends_ply
+#'
+#' @description lapply() version of get_friends_max()
+#' @param user_ids Data frame with column name "screen_name"
+#' @param tokens OAuth tokens (1.0 or 2.0)
+#' @param start Starting value (nth user id)
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
+#'   information on using Twitter's API.
+#' @return friends List of user ids each user follows.
+#' @import dplyr
+#' @export
+get_friends_ply <- function(user_ids, tokens, start = 1) {
+  # lapply
+  l <- mapply(function(i, n) sapply(user_ids[which_ids(n)], function(x) get_friends(x, i)), tokens, start:length(tokens))
+
+  # data frame
+  d <- dplyr::data_frame(user_id = user_ids[1:length(l)], friends = lapply(l, function(x) list(x)[[1]]))
   d$date <- Sys.Date()
   d <- d[, c(1, 3, 2)]
 

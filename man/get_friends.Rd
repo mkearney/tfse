@@ -4,7 +4,7 @@
 \alias{get_friends}
 \title{get_friends}
 \usage{
-get_friends(user, token, page = "-1", stringify = TRUE)
+get_friends(user, token, page = "-1", stringify = TRUE, timeout = 3)
 }
 \arguments{
 \item{user}{Screen name or user id of target user.}
