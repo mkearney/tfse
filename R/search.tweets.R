@@ -80,21 +80,27 @@ search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL, result_
     out <- TWIT(query = "search/tweets",
                 parameters = params,
                 token = token)
-    params <- sub("[?]", "", out$search_metadata$next_results)
+
     if (is.null(out)) {
-      l[[i]] <- NULL
+      break
     } else {
       out$statuses$entities$media <- lapply(out$statuses$entities$media, media_parse)
       entities <- bind_rows(out$statuses$entities$media)
       names(entities)[names(entities) %in% c("id", "id_str")] <- c("media_id", "media_id_str")
-      out <- bind_cols(bind_rows(out$statuses[, unlist(lapply(out$statuses, is.vector))]), entities)
-    out$created_at <- as.Date(as.POSIXct(out$created_at, format="%a %b %d %H:%M:%S %z %Y"), format = "%Y-%M-%D")
-      l[[i]] <- out
+      df <- bind_cols(bind_rows(out$statuses[, unlist(lapply(out$statuses, is.vector))]), entities)
+      df$created_at <- as.Date(as.POSIXct(df$created_at, format="%a %b %d %H:%M:%S %z %Y"), format = "%Y-%M-%D")
+      l[[i]] <- tbl_df(df)
+    }
+    if ("next_results" %in% names(out$search_metadata)) {
+      params <- sub("[?]", "", out$search_metadata$next_results)
+    } else {
+      break
     }
   }
-  out <- bind_rows(l)
 
-  tbl_df(out)
+  df <- bind_rows(l)
+
+  df
 }
 
 
