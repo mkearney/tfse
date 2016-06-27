@@ -58,22 +58,59 @@
 #' @param token OAuth token (1.0 or 2.0)
 #' @seealso \url{https://api.twitter.com/1.1/search/tweets.json}
 #' @return json object
+#' @import dplyr
+#' @export
 search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL, result_type = "mixed", count = 100, until = NULL, since_id = NULL, max_id = NULL, include_entities = TRUE, token) {
+  l <- vector("list", ceiling(count/100))
 
-    params <- paste0("result_type=", result_type, "&count=", count,
-         if (!is.null(geocode)) paste0("&geocode=", geocode),
-         if (!is.null(lang)) paste0("&lang=", lang),
-         if (!is.null(locale)) paste0("&locale=", locale),
-         if (!is.null(until)) paste0("&until=", until),
-         if (!is.null(since_id)) paste0("&since_id=", since_id),
-         if (!is.null(max_id)) paste0("&max_id=", max_id),
-         if (trim_user) paste0("&trim_user=true") else paste0("&trim_user=false"),
-         if (include_entities) paste0("&include_entities=true") else paste0("&include_entities=false")
-  )
+  params <- paste0("result_type=", result_type, "&count=", count,
+                   if (!is.null(geocode)) paste0("&geocode=", geocode),
+                   if (!is.null(lang)) paste0("&lang=", lang),
+                   if (!is.null(locale)) paste0("&locale=", locale),
+                   if (!is.null(until)) paste0("&until=", until),
+                   if (!is.null(since_id)) paste0("&since_id=", since_id),
+                   if (!is.null(max_id)) paste0("&max_id=", max_id),
+                   if (include_entities) paste0("&include_entities=true") else paste0("&include_entities=false"))
+  params <- paste0("q=",
+                   paste(strsplit(q, " ")[[1]], collapse = "%20"),
+                   "&",
+                   params)
 
-  out <- TWIT(query = "search/tweets",
-              parameters = paste0("id=", tweet_id, "&", params),
-              token = token)
+  for (i in seq_along(l)) {
+    out <- TWIT(query = "search/tweets",
+                parameters = params,
+                token = token)
+    params <- sub("[?]", "", out$search_metadata$next_results)
+    if (is.null(out)) {
+      l[[i]] <- NULL
+    } else {
+      out$statuses$entities$media <- lapply(out$statuses$entities$media, media_parse)
+      entities <- bind_rows(out$statuses$entities$media)
+      names(entities)[names(entities) %in% c("id", "id_str")] <- c("media_id", "media_id_str")
+      out <- tbl_df(bind_rows(bind_rows(out$statuses[, unlist(lapply(out$statuses, is.vector))]), entities))
+    out$created_at <- as.Date(as.POSIXct(out$created_at, format="%a %b %d %H:%M:%S %z %Y"), format = "%Y-%M-%D")
+      l[[i]] <- out
+    }
+  }
+  out <- bind_rows(l)
 
-  return(out)
+  out
+}
+
+
+#' media_parse
+#'
+#' @param x json object from search tweets
+#' @import dplyr
+#' @export
+media_parse <- function(x) {
+  media <- data_frame("id" = NA, "id_str" = NA, "indices" = NA, "media_url" = NA, "media_url_https" = NA, "url" = NA,
+                      "display_url" = NA, "expanded_url" = NA, "type" = NA, "sizes" = NA, "source_status_id" = NA,
+                      "source_status_id_str" = NA, "source_user_id" = NA, "source_user_id_str" = NA)
+  if(is.null(x)) {
+    x <- media
+  } else {
+    x <- bind_cols(x, media[names(media) %in% names(x)])
+  }
+  x
 }
