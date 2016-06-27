@@ -72,7 +72,7 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbo
 
     n <- n + 1
 
-    if (length(l) + (start * 15) > length(user_ids)) break
+    if ((length(l) + min(which_ids(start))) > length(user_ids)) break
   }
 
   d <- data_frame(user_id = user_ids[min(which_ids(start)):(min(which_ids(start)) + length(l) - 1)],
