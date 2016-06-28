@@ -16,7 +16,19 @@ devtools::install_github("mkearney/tfse")
 ```
 
 ## use
-- to create Twitter apps visit http://apps.twitter.com/app/new
+1. To create Twitter app(s) [and secure access to oauth tokens necessary for API queries]
+visit http://apps.twitter.com/app/new
+2. Enter information for `Name`, `Description`, `Website`, and `Callback URL` 
+fields. Example provided below. For `Callback URL` make sure to copy/paste 
+the following: `http://127.0.0.1:1410`
+
+|  Field          |      Entry Box                          |
+|-----------------|-----------------------------------------|
+| Name            | tfse_app                                |
+| Description     | Twitter follows and selective exposure  |
+| Website         | http://twitter.com/kearneymw            |
+| Callback URL    | http://127.0.0.1:1410                   |
+
 ```{r}
 ### save Twitter app name, consumer key, and consumer secret key as reusable oauth token script.
 tokens <- c(get_token(app = "app1_name",
