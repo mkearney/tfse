@@ -4,9 +4,10 @@
 \alias{search_tweets}
 \title{search_tweets}
 \usage{
-search_tweets(q, geocode = NULL, lang = NULL, locale = NULL,
-  result_type = "mixed", count = 100, until = NULL, since_id = NULL,
-  max_id = NULL, include_entities = TRUE, token)
+search_tweets(q, media = FALSE, geocode = NULL, lang = NULL,
+  locale = NULL, result_type = "mixed", count = 100, until = NULL,
+  since_id = NULL, max_id = NULL, include_entities = TRUE, token,
+  timeout = 10)
 }
 \arguments{
 \item{q}{required, A UTF-8, URL-encoded search query of 500 characters

@@ -60,7 +60,7 @@
 #' @return json object
 #' @import dplyr
 #' @export
-search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL, result_type = "mixed", count = 100, until = NULL, since_id = NULL, max_id = NULL, include_entities = TRUE, token) {
+search_tweets <- function(q, media = FALSE, geocode = NULL, lang = NULL, locale = NULL, result_type = "mixed", count = 100, until = NULL, since_id = NULL, max_id = NULL, include_entities = TRUE, token, timeout = 10) {
   l <- vector("list", ceiling(count/100))
 
   params <- paste0("result_type=", result_type, "&count=", count,
@@ -79,15 +79,20 @@ search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL, result_
   for (i in seq_along(l)) {
     out <- TWIT(query = "search/tweets",
                 parameters = params,
-                token = token)
+                token = token,
+                timeout = timeout)
 
     if (is.null(out)) {
       break
     } else {
-      out$statuses$entities$media <- lapply(out$statuses$entities$media, media_parse)
-      entities <- bind_rows(out$statuses$entities$media)
-      names(entities)[names(entities) %in% c("id", "id_str")] <- c("media_id", "media_id_str")
-      df <- bind_cols(bind_rows(out$statuses[, unlist(lapply(out$statuses, is.vector))]), entities)
+      if (media) {
+        out$statuses$entities$media <- lapply(out$statuses$entities$media, media_parse)
+        entities <- bind_rows(out$statuses$entities$media)
+        names(entities)[names(entities) %in% c("id", "id_str")] <- c("media_id", "media_id_str")
+        df <- bind_cols(bind_rows(out$statuses[, unlist(lapply(out$statuses, is.vector))]), entities)
+      } else {
+        df <- bind_rows(out$statuses[, unlist(lapply(out$statuses, is.vector))])
+      }
       df$created_at <- as.Date(as.POSIXct(df$created_at, format="%a %b %d %H:%M:%S %z %Y"), format = "%Y-%M-%D")
       l[[i]] <- tbl_df(df)
     }
@@ -119,4 +124,53 @@ media_parse <- function(x) {
     x <- bind_cols(x, media[names(media) %in% names(x)])
   }
   x
+}
+
+
+#' top_tweet_words
+#'
+#' @param tweets_text character vector of tweets text
+#' @param min minimum number of ocurrences to include in returned object
+#' @return list object with top mentions and top words
+#' @import dplyr
+#' @export
+top_tweet_words <- function(tweets_text, min = 3) {
+  tweets_text <- unlist(lapply(tweets_text, function(x) gsub("\\n", " ", x)))
+  tweets_text <- unlist(lapply(tweets_text, function(x) gsub("^[:alnum:]", "", x)  ))
+  tweets_text <- unlist(strsplit(tweets_text, split = " "))
+  mentions <- tweets_text[grep("@", tweets_text)]
+  mentions <- tolower(mentions)
+  mentions <- sort(table(mentions), decreasing = TRUE)
+
+  words <- tweets_text[!1:length(tweets_text) %in% grep("@", tweets_text)]
+  words <- words[!1:length(words) %in% grep("htt", words)]
+  words <- words[!tolower(words) == "rt"]
+  words <- gsub("'t", "t", gsub("'s", "", gsub('"', "", gsub("[#|...|.|,|:|;|-|_|—]", " ", words))))
+  words <- unlist(strsplit(words, split = " "))
+  words <- words[grep("[:digit:]", words)]
+  words <- words[!words == ""]
+  words <- words[nchar(words) > 2]
+  words <- tolower(words)
+  nowd <- c("a", "about", "after", "again", "all", "also", "and",
+            "are", "at", "be", "been", "believe", "but",
+            "can", "cant", "com", "could", "did", "do", "does", "done", "dont", "doesnt",
+            "got", "most", "two", "didnt", "takes", "sent", "both", "guy", "gets", "get", "tweeted",
+            "either", "gave", "get", "give", "go", "going", "had", "her", "him",
+            "hillaryclinton", "instead",
+            "hillaryclintons", "realdonaldtrumps",
+            "his", "htt", "i", "if", "if", "in", "into",
+            "is", "is", "it", "its", "just", "let", "my",
+            "like", "make", "media", "need", "not", "on", "made", "take", "said", "taking", "tell", "there",
+            "the", "isnt", "takes",
+            "one", "org", "our", "out", "pretty", "put", "right",
+            "says", "saying", "totally", "day", "first", "show", "shows", "goes", "have",
+            "should", "since", "days",
+            "still", "than", "that", "the", "their", "them", "then",
+            "they", "theyre", "think", "this", "those", "time", "to",
+            "too", "u", "via", "video", "want", "wants",
+            "were", "what", "which", "will", "with", "would",
+            "would", "www")
+  words <- words[!words %in% nowd]
+  words <- sort(table(words), decreasing = TRUE)
+  list(words = words[words > min], mentions = mentions[mentions > min])
 }
