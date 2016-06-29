@@ -11,25 +11,32 @@
 #'   information on using Twitter's API.
 #' @return friends User ids for everyone a user follows.
 #' @export
-get_friends <- function(user, token, page = "-1", stringify = TRUE, timeout = 3) {
+get_friends <- function(user = user_ids, token, page = "-1", parse = TRUE, stringify = TRUE, timeout = 60) {
   parameters <- paste0("cursor=", page,
                        "&user_id=", user)
-
   if (stringify) parameters <- paste0(parameters, "&stringify_ids=true")
+
+  if (parse) {
+    out <- TWIT(query = "friends/ids",
+                parameters = parameters,
+                token = token,
+                timeout = timeout)
+
+    if (length(out) == 0) {
+      return(NA_character_)
+    }
+    if (length(out$ids) == 0) {
+      return(NA_character_)
+    }
+    return(out$ids)
+  }
 
   out <- TWIT(query = "friends/ids",
               parameters = parameters,
               token = token,
+              parse = FALSE,
               timeout = timeout)
-
-  if (length(out) == 0) {
-    return(NA_character_)
-  }
-  if (length(out$ids) == 0) {
-    return(NA_character_)
-  }
-
-  list(out$ids)
+  out
 }
 
 #' get_friends_max
@@ -45,21 +52,21 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE, timeout = 3)
 #' @return friends List of user ids each user follows.
 #' @import dplyr
 #' @export
-get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE, timeout = 3) {
+get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE, timeout = 60, parse = TRUE) {
   # starting value
   n <- start
 
   # create list vector
-  l <- vector("list", length(tokens) * 15)
+  l <- vector("list", length(tokens))
 
   # max rate limit of tokens exceeds remaining # ids
-  for (i in tokens) {
+  for (i in seq_along(tokens)) {
     if (!stringify) {
-      l[which_ids(n)] <- sapply(user_ids[which_ids(n)], function(x)
-        get_friends(x, i, stringify = FALSE, timeout = timeout))
+      l[[i]] <- sapply(user_ids[which_ids(n)], function(x)
+        get_friends(x, tokens[[i]], parse = parse, timeout = timeout))
     } else {
-      l[which_ids(n)] <- sapply(user_ids[which_ids(n)], function(x)
-        get_friends(x, i, timeout = timeout))
+      l[[i]] <- sapply(user_ids[which_ids(n)], function(x)
+        get_friends(x, tokens[[i]], parse = parse, timeout = timeout))
     }
 
     if (verbose) {
@@ -71,15 +78,23 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbo
     }
 
     n <- n + 1
-
-    if ((length(l) + min(which_ids(start))) > length(user_ids)) break
   }
 
-  d <- data_frame(user_id = user_ids[min(which_ids(start)):(min(which_ids(start)) + length(l) - 1)],
-                  date = Sys.Date(),
-                  friends = l)
+  l
+}
 
-  d
+
+#' fromJS
+#'
+#' @description parse json object
+#' @import jsonlite
+#' @import httr
+#' @export
+fromJS <- function(x) {
+  if (is.null(x)) return(NA)
+  out <- fromJSON(content(x, as = "text", encoding = "UTF-8"))
+  if (length(out) == 0) return(NA)
+  out
 }
 
 #' get_friends_ply

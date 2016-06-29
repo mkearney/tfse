@@ -11,41 +11,33 @@
 #' @import httr
 #' @import jsonlite
 #' @export
-TWIT <- function(query, parameters, token, version = "1.1", timeout = 3) {
+TWIT <- function(query, parameters = NULL, token, parse = TRUE, version = "1.1", timeout = 3) {
+  # POST and GET requests
   if (query == "lists/members") {
     req <- POST(paste0("https://api.twitter.com/",
                        version, "/",
                        query,
                        ".json?",
                        parameters),
-                config(token = token),
-                timeout(timeout))
-  } else if (is.null(parameters)) {
-    req <- GET(paste0("https://api.twitter.com/",
-                      version, "/",
-                      query,
-                      ".json"),
-               config(token = token),
-               timeout(timeout))
+                config = config(token = token),
+                timeout = timeout)
   } else {
     req <- GET(paste0("https://api.twitter.com/",
                       version, "/",
                       query,
                       ".json?",
                       parameters),
-               config(token = token),
-               timeout(timeout))
+               config = config(token = token),
+               timeout = timeout)
   }
 
   if (http_error(req)) {
     return(invisible())
   }
-
-  out <- fromJSON(content(req, as = "text", encoding = "UTF-8"))
-
-  if (length(out) == 0) return(invisible())
-
-  out
+  if(parse) {
+    return(fromJS(req))
+  }
+  req
 }
 
 #' get_api
