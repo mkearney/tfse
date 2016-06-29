@@ -11,7 +11,7 @@
 #'   information on using Twitter's API.
 #' @return friends User ids for everyone a user follows.
 #' @export
-get_friends <- function(user = user_ids, token, page = "-1", parse = TRUE, stringify = TRUE, timeout = 60) {
+get_friends <- function(user = user_ids, token, page = "-1", parse = TRUE, stringify = TRUE) {
   parameters <- paste0("cursor=", page,
                        "&user_id=", user)
   if (stringify) parameters <- paste0(parameters, "&stringify_ids=true")
@@ -19,8 +19,7 @@ get_friends <- function(user = user_ids, token, page = "-1", parse = TRUE, strin
   if (parse) {
     out <- TWIT(query = "friends/ids",
                 parameters = parameters,
-                token = token,
-                timeout = timeout)
+                token = token)
 
     if (length(out) == 0) {
       return(NA_character_)
@@ -34,8 +33,7 @@ get_friends <- function(user = user_ids, token, page = "-1", parse = TRUE, strin
   out <- TWIT(query = "friends/ids",
               parameters = parameters,
               token = token,
-              parse = FALSE,
-              timeout = timeout)
+              parse = FALSE)
   out
 }
 
@@ -52,7 +50,7 @@ get_friends <- function(user = user_ids, token, page = "-1", parse = TRUE, strin
 #' @return friends List of user ids each user follows.
 #' @import dplyr
 #' @export
-get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE, timeout = 60, parse = TRUE) {
+get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE, parse = TRUE) {
   # starting value
   n <- start
 
@@ -63,10 +61,10 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbo
   for (i in seq_along(tokens)) {
     if (!stringify) {
       l[[i]] <- sapply(user_ids[which_ids(n)], function(x)
-        get_friends(x, tokens[[i]], parse = parse, timeout = timeout))
+        get_friends(x, tokens[[i]], parse = parse))
     } else {
       l[[i]] <- sapply(user_ids[which_ids(n)], function(x)
-        get_friends(x, tokens[[i]], parse = parse, timeout = timeout))
+        get_friends(x, tokens[[i]], parse = parse))
     }
 
     if (verbose) {
