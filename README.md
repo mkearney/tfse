@@ -5,8 +5,9 @@ tfse = **t**witter **f**ollows & **s**elective **e**xposure
 - R package consisting of functions designed to interact with twitter's API
 - I originally created this package to gather data for my dissertation
 - I realize there's already an R package ([twitteR](https://github.com/geoffjentry/twitteR))
-that does a lot of the same stuff, but I wanted to get a sense for the inner-workings 
-so I had knowledge (and control) of where the data are coming from
+that does a lot of the same stuff, but I wanted to get a sense for the inner-workings
+so I decided to write an R package from the ground up (and b/c dissertations are 
+supposed to be hard, right?)
 
 ## install
 - to install `tfse` run the following code in R:
