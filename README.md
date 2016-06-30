@@ -7,7 +7,7 @@ tfse = **t**witter **f**ollows & **s**elective **e**xposure
 - this repository will one day be organized into more useful replication materials. until then, it's is a work in progress
 
 ## install
-- to install
+- to install `tfse` run the following code in R:
 ```{r}
 if (packageVersion("devtools") < 1.6) {
   install.packages("devtools")
@@ -22,6 +22,8 @@ visit http://apps.twitter.com/app/new
 2. Enter information in `Name`, `Description`, `Website`, and `Callback URL` 
 fields like example provided below. For `Callback URL` make sure to copy/paste 
 the following: `http://127.0.0.1:1410`
+3. Once the app is created, copy and paste `consumer key` and `consumer secret key` 
+into the `get_token()` function (see demo below).
 
 |                 |                                         |
 |-----------------|-----------------------------------------|
@@ -29,9 +31,6 @@ the following: `http://127.0.0.1:1410`
 | Description     | Twitter follows and selective exposure  |
 | Website         | http://twitter.com/kearneymw            |
 | Callback URL    | http://127.0.0.1:1410                   |
-
-3. Once the app is created, copy and paste `consumer key` and `consumer secret key` 
-into the `get_token()` function (example in demo below).
 
 ## demo
 
