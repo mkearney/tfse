@@ -41,6 +41,8 @@ library(tfse)
 
 ### first time running get_token() function should open web browser 
 ### select yes/agree to authorize each app
+### replace 'appX_name' with name of your application (see: 'obtaining access tokens')
+### replace 'xxxx' with alpha-numeric keys associated with your apps
 tokens <- c(get_token(app = "app1_name",
                       consumer_key = "xxxxxxxxxxxxxxxxxxxxxxxxx",
                       consumer_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"),
@@ -78,7 +80,10 @@ user_networks
 
 ## about me
 - i'm a phd candidate in political communication at the university of kansas
-- my dissertation examines selective exposure and political polarization on twitter
+- i created this package as part of my dissertation on selective exposure and 
+political polarization on twitter
+- my dissertation exists in a private repository, but when it's done my goal is to 
+organize and make everything available via github
 
 ## contact
 - email me at mkearney@ku.edu
