@@ -5,7 +5,7 @@
 \title{get_friends_max}
 \usage{
 get_friends_max(user_ids, tokens, start = 1, stringify = TRUE,
-  verbose = TRUE, timeout = 60, parse = TRUE)
+  verbose = TRUE)
 }
 \arguments{
 \item{user_ids}{Data frame with column name "screen_name"}

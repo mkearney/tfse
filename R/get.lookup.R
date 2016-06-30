@@ -71,7 +71,10 @@ data_frame_lookup <- function(x) {
   user_df
 }
 
-
+#' prep_vector
+#'
+#' @param x data to be vectorized
+#' @export
 prep_vector <- function(x) {
   if (length(x) == 0) return(NA)
   x[unlist(lapply(x, function(x) length(x) > 1))] <- unlist(lapply(x[unlist(lapply(x, function(x) length(x) > 1))], unlist))
@@ -79,7 +82,7 @@ prep_vector <- function(x) {
   x[x == NaN] <- NA
   x[length(x) == 0] <- NA
   x[is.null(x)] <- NA
-  x
+  as.vector(x)
 }
 
 #' get_lookup_max

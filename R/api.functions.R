@@ -38,6 +38,22 @@ TWIT <- function(query, parameters = NULL, token, parse = TRUE, version = "1.1")
   req
 }
 
+#' try_catch
+#'
+#' @param x function call
+#' @export
+try_catch <- function(x) {
+  tryCatch(x, error = function(e) NA)
+}
+
+#' fromJS
+#'
+#' @param x json object
+#' @export
+fromJS <- function(x) {
+  fromJSON(content(x, as = "text", encoding = "UTF-8"))
+}
+
 #' get_api
 #'
 #' @param url API url address.
@@ -85,6 +101,7 @@ get_token <- function(app, consumer_key, consumer_secret) {
 #'
 #' @param x Twitter user id or screen name
 #' @return logical value indicating whether object is screen name [or user ID]
+#' @export
 is_screen_name <- function(x) suppressWarnings(is.na(as.numeric(x)))
 
 #' check_rate_limit

@@ -11,30 +11,21 @@
 #'   information on using Twitter's API.
 #' @return friends User ids for everyone a user follows.
 #' @export
-get_friends <- function(user = user_ids, token, page = "-1", parse = TRUE, stringify = TRUE) {
+get_friends <- function(user, token, page = "-1", stringify = TRUE) {
   parameters <- paste0("cursor=", page,
                        "&user_id=", user)
+
   if (stringify) parameters <- paste0(parameters, "&stringify_ids=true")
 
-  if (parse) {
-    out <- TWIT(query = "friends/ids",
-                parameters = parameters,
-                token = token)
+  out <- try_catch(TWIT(query = "friends/ids",
+                        parameters = parameters,
+                        token = token))
 
-    if (length(out) == 0) {
-      return(NA_character_)
-    }
-    if (length(out$ids) == 0) {
-      return(NA_character_)
-    }
-    return(out$ids)
+  if (length(out) == 0) {
+    return(NA_character_)
   }
 
-  out <- TWIT(query = "friends/ids",
-              parameters = parameters,
-              token = token,
-              parse = FALSE)
-  out
+  out$ids
 }
 
 #' get_friends_max
@@ -50,50 +41,35 @@ get_friends <- function(user = user_ids, token, page = "-1", parse = TRUE, strin
 #' @return friends List of user ids each user follows.
 #' @import dplyr
 #' @export
-get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE, parse = TRUE) {
+get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE) {
+  tot_tokens <- length(tokens)
   # starting value
   n <- start
 
   # create list vector
-  l <- vector("list", length(tokens))
+  l <- list()
 
   # max rate limit of tokens exceeds remaining # ids
   for (i in seq_along(tokens)) {
-    if (!stringify) {
-      l[[i]] <- sapply(user_ids[which_ids(n)], function(x)
-        get_friends(x, tokens[[i]], parse = parse))
-    } else {
-      l[[i]] <- sapply(user_ids[which_ids(n)], function(x)
-        get_friends(x, tokens[[i]], parse = parse))
-    }
+    l[[i]] <- sapply(user_ids[which_ids(n)], function(x)
+      get_friends(x, tokens[[i]], stringify = stringify))
 
     if (verbose) {
       if (n %% 10 == 0) {
-        cat(paste0(n, " of ", start + length(tokens), "\n"))
+        cat(paste0(ceiling((i * 15 + start) / length(user_ids) * 100), "%"), fill = TRUE)
       } else {
         cat("*")
       }
     }
 
     n <- n + 1
+    if (n > 200) break
   }
 
+  l <- do.call("c", l)
   l
 }
 
-
-#' fromJS
-#'
-#' @description parse json object
-#' @import jsonlite
-#' @import httr
-#' @export
-fromJS <- function(x) {
-  if (is.null(x)) return(NA)
-  out <- fromJSON(content(x, as = "text", encoding = "UTF-8"))
-  if (length(out) == 0) return(NA)
-  out
-}
 
 #' get_friends_ply
 #'
@@ -172,7 +148,6 @@ get_friendslist <- function(user, token, page = "-1") {
                                   id_type, "=", user,
                                   "&skip_status=true&include_user_entities=false"),
               token = token)
-
   out
 }
 
