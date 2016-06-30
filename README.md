@@ -40,7 +40,7 @@ devtools::install_github("mkearney/tfse")
 library(tfse)
 
 ### first time running get_token() function should open web browser 
-### select yes/agree to authorize for each app
+### select yes/agree to authorize each app
 tokens <- c(get_token(app = "app1_name",
                       consumer_key = "xxxxxxxxxxxxxxxxxxxxxxxxx",
                       consumer_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"),
@@ -51,9 +51,10 @@ tokens <- c(get_token(app = "app1_name",
                       consumer_key = "xxxxxxxxxxxxxxxxxxxxxxxxx",
                       consumer_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"))
 
-### save tokens for each use in future sessions
-### take note of path
+### save tokens for easy use in future sessions
+### take note of working directory
 save(tokens, file = "tokens")
+getwd()
 
 ### to load tokens in new session, uncomment the next line
 #load("tokens") # specify whole path if changing working directory
