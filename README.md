@@ -3,8 +3,6 @@ tfse = **t**witter **f**ollows & **s**elective **e**xposure
 
 ## about tfse
 - R package consisting of functions designed to interact with twitter's API
-- I created this package to gather data for my dissertation - I'm still doing that but I'm
-trying to add functionality beyond those related to my dissertation
 - I realize there's already an R package ([twitteR](https://github.com/geoffjentry/twitteR))
 that does a lot of the same stuff, but I wanted to get a sense for the inner-workings
 so I decided to write an R package from the ground up (and b/c dissertations are 
