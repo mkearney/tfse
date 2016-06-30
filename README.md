@@ -2,7 +2,7 @@
 tfse = **t**witter **f**ollows & **s**elective **e**xposure
 
 ## about tfse
-- Most of the functions are designed to interact with twitter's API
+- R package of functions designed to interact with twitter's API
 - I created this package to gather data for my dissertation
 - I realize there's already an R package ([twitteR](https://github.com/geoffjentry/twitteR))
 that does this, but I wanted to get a sense for the inner-workings 
