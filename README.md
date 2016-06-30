@@ -2,9 +2,11 @@
 tfse = **t**witter **f**ollows & **s**elective **e**xposure
 
 ## about tfse
-- this package contains R code used in my dissertation
-- most of the functions are designed to interact with twitter's API
-- this repository will one day be organized into more useful replication materials. until then, it's is a work in progress
+- Most of the functions are designed to interact with twitter's API
+- I created this package to gather data for my dissertation
+- I realize there's already an R package ([twitteR](https://github.com/geoffjentry/twitteR))
+that does this, but I wanted to get a sense for the inner-workings 
+so I had knowledge (and control) of where the data are coming from
 
 ## install
 - to install `tfse` run the following code in R:
@@ -16,7 +18,6 @@ devtools::install_github("mkearney/tfse")
 ```
 
 ## obtaining access tokens
-
 1. To create Twitter app(s) [and secure access to oauth tokens necessary for API queries]
 visit http://apps.twitter.com/app/new
 2. Enter information in `Name`, `Description`, `Website`, and `Callback URL` 
@@ -33,7 +34,6 @@ into the `get_token()` function (see demo below).
 | Callback URL    | http://127.0.0.1:1410                   |
 
 ## demo
-
 ```{r}
 ### install and load tfse
 devtools::install_github("mkearney/tfse")
