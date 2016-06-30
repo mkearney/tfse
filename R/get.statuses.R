@@ -88,7 +88,7 @@ get_friendships <- function(user, since_id = NULL, count = NULL, max_id = NULL,
               parameters = paste0(id_type, "=", user, params),
               token = token)
 
-  return(out)
+  out
 }
 
 #' get_statuses_retweets
@@ -116,5 +116,5 @@ get_statuses_retweets <- function(tweet_id, count = 100, trim_user = TRUE, token
               parameters = paste0("id=", tweet_id, "&", params),
               token = token)
 
-  return(out)
+  out
 }

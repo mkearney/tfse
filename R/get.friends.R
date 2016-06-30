@@ -25,7 +25,7 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
     return(NA_character_)
   }
 
-  out$ids
+  as.vector(out$ids)
 }
 
 #' get_friends_max
@@ -42,7 +42,8 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 #' @import dplyr
 #' @export
 get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE) {
-  tot_tokens <- length(tokens)
+  max_users <- length(tokens) / 15
+
   # starting value
   n <- start
 
@@ -51,19 +52,19 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbo
 
   # max rate limit of tokens exceeds remaining # ids
   for (i in seq_along(tokens)) {
-    l[[i]] <- sapply(user_ids[which_ids(n)], function(x)
+    l[[i]] <- sapply(user_ids[which_ids(n), max_users, tokens[[i]]], function(x)
       get_friends(x, tokens[[i]], stringify = stringify))
 
     if (verbose) {
-      if (n %% 10 == 0) {
-        cat(paste0(ceiling((i * 15 + start) / length(user_ids) * 100), "%"), fill = TRUE)
+      if ((n * 15) %% 300 == 0) {
+        cat(paste0(ceiling((n + start) * 15 / length(user_ids) * 100), "%"), fill = TRUE)
       } else {
         cat("*")
       }
     }
 
     n <- n + 1
-    if (n > 200) break
+    if (n > max_users) break
   }
 
   l <- do.call("c", l)

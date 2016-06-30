@@ -60,7 +60,10 @@
 #' @return json object
 #' @import dplyr
 #' @export
-search_tweets <- function(q, media = FALSE, geocode = NULL, lang = NULL, locale = NULL, result_type = "mixed", count = 100, until = NULL, since_id = NULL, max_id = NULL, include_entities = TRUE, token, timeout = 10) {
+search_tweets <- function(q, media = FALSE, geocode = NULL, lang = NULL, locale = NULL,
+                          result_type = "mixed", count = 100, until = NULL, since_id = NULL,
+                          max_id = NULL, include_entities = TRUE, token) {
+
   l <- vector("list", ceiling(count/100))
 
   params <- paste0("result_type=", result_type, "&count=", count,
@@ -71,43 +74,59 @@ search_tweets <- function(q, media = FALSE, geocode = NULL, lang = NULL, locale 
                    if (!is.null(since_id)) paste0("&since_id=", since_id),
                    if (!is.null(max_id)) paste0("&max_id=", max_id),
                    if (include_entities) paste0("&include_entities=true") else paste0("&include_entities=false"))
-  params <- paste0("q=",
-                   paste(strsplit(q, " ")[[1]], collapse = "%20"),
-                   "&",
-                   params)
+
+  params <- paste0("q=", URLencode(q, reserved = TRUE),
+                   "&", params)
 
   for (i in seq_along(l)) {
-    out <- TWIT(query = "search/tweets",
-                parameters = params,
-                token = token,
-                timeout = timeout)
+    out <- try_catch(TWIT(query = "search/tweets",
+                          parameters = params,
+                          token = token))
 
-    if (is.null(out)) {
-      break
-    } else {
-      if (media) {
-        out$statuses$entities$media <- lapply(out$statuses$entities$media, media_parse)
-        entities <- bind_rows(out$statuses$entities$media)
-        names(entities)[names(entities) %in% c("id", "id_str")] <- c("media_id", "media_id_str")
-        df <- bind_cols(bind_rows(out$statuses[, unlist(lapply(out$statuses, is.vector))]), entities)
-      } else {
-        df <- bind_rows(out$statuses[, unlist(lapply(out$statuses, is.vector))])
-      }
-      df$created_at <- as.Date(as.POSIXct(df$created_at, format="%a %b %d %H:%M:%S %z %Y"), format = "%Y-%M-%D")
-      l[[i]] <- tbl_df(df)
+    if (length(out) == 1) return(NULL)
+
+    tweets_df <- status_parse(out$statuses)
+
+    if (media) {
+      media_df <- bind_rows(lapply(out$statuses$entities$media, media_parse))
+      tweets_df <- bind_cols(tweets_df, media_df)
     }
-    if ("next_results" %in% names(out$search_metadata)) {
-      params <- sub("[?]", "", out$search_metadata$next_results)
-    } else {
-      break
-    }
+
+    l[[i]] <- tweets_df
+
+    if (length(out$search_metadata$next_results) == 0) break
+
+    params <- sub("[?]", "", out$search_metadata$next_results)
   }
 
-  df <- bind_rows(l)
-
-  df
+  bind_rows(l)
 }
 
+
+#' status_parse
+#'
+#' @param x json object from search tweets
+#' @import dplyr
+#' @export
+status_parse <- function(x) {
+  status_df <- data_frame("id" = prep_vector(as.character(x$id_str)),
+                          "text" = prep_vector(as.character(x$text)),
+                          "created_at" = as.Date(as.POSIXct(prep_vector(as.character(x$created_at)),
+                                                            format="%a %b %d %H:%M:%S %z %Y"), format = "%Y-%M-%D"),
+                          "source" = prep_vector(as.character(x$source)),
+                          "in_reply_to_status_id" = prep_vector(as.character(x$in_reply_to_status_id_str)),
+                          "in_reply_to_user_id" = prep_vector(as.character(x$in_reply_to_user_id_str)),
+                          "in_reply_to_screen_name" = prep_vector(as.character(x$in_reply_to_screen_name)),
+                          "contributors" = prep_vector(as.character(x$contributors)),
+                          "is_quote_status" = prep_vector(as.character(x$is_quote_status)),
+                          "retweet_count" = prep_vector(as.character(x$retweet_count)),
+                          "favorite_count" = prep_vector(as.character(x$favorite_count)),
+                          "favorited" = prep_vector(as.character(x$favorited)),
+                          "retweeted" = prep_vector(as.character(x$retweeted)),
+                          "lang" = prep_vector(as.character(x$lang)),
+                          "quoted_status_id" = prep_vector(as.character(x$quoted_status_id_str)))
+  status_df
+}
 
 #' media_parse
 #'
@@ -115,15 +134,15 @@ search_tweets <- function(q, media = FALSE, geocode = NULL, lang = NULL, locale 
 #' @import dplyr
 #' @export
 media_parse <- function(x) {
-  media <- data_frame("id" = NA, "id_str" = NA, "indices" = NA, "media_url" = NA, "media_url_https" = NA, "url" = NA,
-                      "display_url" = NA, "expanded_url" = NA, "type" = NA, "sizes" = NA, "source_status_id" = NA,
-                      "source_status_id_str" = NA, "source_user_id" = NA, "source_user_id_str" = NA)
-  if(is.null(x)) {
-    x <- media
-  } else {
-    x <- bind_cols(x, media[names(media) %in% names(x)])
-  }
-  x
+  media_df <- data_frame("media_id" = prep_vector(as.character(x$id_str)),
+                         "media_url" = prep_vector(as.character(x$media_url_https)),
+                         "url" = prep_vector(as.character(x$url)),
+                         "expanded_url" = prep_vector(as.character(x$expanded_url)),
+                         "type" = prep_vector(as.character(x$type)),
+                         "source_status_id" = prep_vector(as.character(x$source_status_id_str)),
+                         "source_user_id" = prep_vector(as.character(x$source_user_id_str)))
+
+  media_df
 }
 
 
@@ -138,6 +157,7 @@ top_tweet_words <- function(tweets_text, min = 3) {
   tweets_text <- unlist(lapply(tweets_text, function(x) gsub("\\n", " ", x)))
   tweets_text <- unlist(lapply(tweets_text, function(x) gsub("^[:alnum:]", "", x)  ))
   tweets_text <- unlist(strsplit(tweets_text, split = " "))
+
   mentions <- tweets_text[grep("@", tweets_text)]
   mentions <- tolower(mentions)
   mentions <- sort(table(mentions), decreasing = TRUE)
@@ -151,26 +171,28 @@ top_tweet_words <- function(tweets_text, min = 3) {
   words <- words[!words == ""]
   words <- words[nchar(words) > 2]
   words <- tolower(words)
+
   nowd <- c("a", "about", "after", "again", "all", "also", "and",
-            "are", "at", "be", "been", "believe", "but",
-            "can", "cant", "com", "could", "did", "do", "does", "done", "dont", "doesnt",
-            "got", "most", "two", "didnt", "takes", "sent", "both", "guy", "gets", "get", "tweeted",
-            "either", "gave", "get", "give", "go", "going", "had", "her", "him",
-            "hillaryclinton", "instead",
-            "hillaryclintons", "realdonaldtrumps",
-            "his", "htt", "i", "if", "if", "in", "into",
-            "is", "is", "it", "its", "just", "let", "my",
-            "like", "make", "media", "need", "not", "on", "made", "take", "said", "taking", "tell", "there",
-            "the", "isnt", "takes",
-            "one", "org", "our", "out", "pretty", "put", "right",
-            "says", "saying", "totally", "day", "first", "show", "shows", "goes", "have",
-            "should", "since", "days",
+            "are", "at", "be", "been", "believe", "but", "instead",
+            "can", "cant", "com", "could", "did", "do", "does", "done",
+            "dont", "doesnt", "got", "most", "two", "didnt", "takes",
+            "sent", "both", "guy", "gets", "get", "tweeted", "either",
+            "gave", "get", "give", "go", "going", "had", "her", "him",
+            "hillaryclinton", "hillaryclintons", "realdonaldtrumps",
+            "his", "htt", "i", "if", "if", "in", "into", "is", "is",
+            "it", "its", "just", "let", "my", "like", "make", "media",
+            "need", "not", "on", "made", "take", "said", "taking",
+            "tell", "there", "the", "isnt", "takes", "one", "org", "our",
+            "out", "pretty", "put", "right", "goes", "have", "should",
+            "says", "saying", "totally", "day", "first", "show", "shows",
             "still", "than", "that", "the", "their", "them", "then",
             "they", "theyre", "think", "this", "those", "time", "to",
-            "too", "u", "via", "video", "want", "wants",
+            "too", "u", "via", "video", "want", "wants", "since", "days",
             "were", "what", "which", "will", "with", "would",
             "would", "www")
+
   words <- words[!words %in% nowd]
   words <- sort(table(words), decreasing = TRUE)
+
   list(words = words[words > min], mentions = mentions[mentions > min])
 }
