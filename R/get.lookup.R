@@ -68,6 +68,7 @@ data_frame_lookup <- function(x) {
                         verified = prep_vector(as.logical(x$verified)),
                         statuses_count = prep_vector(as.integer(x$statuses_count)),
                         lang = prep_vector(as.character(x$lang)))
+
   user_df
 }
 

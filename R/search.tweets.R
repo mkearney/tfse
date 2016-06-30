@@ -60,8 +60,8 @@
 #' @return json object
 #' @import dplyr
 #' @export
-search_tweets <- function(q, media = FALSE, geocode = NULL, lang = NULL, locale = NULL,
-                          result_type = "mixed", count = 100, until = NULL, since_id = NULL,
+search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL,
+                          result_type = "recent", count = 100, until = NULL, since_id = NULL,
                           max_id = NULL, include_entities = TRUE, token) {
 
   l <- vector("list", ceiling(count/100))
@@ -86,11 +86,6 @@ search_tweets <- function(q, media = FALSE, geocode = NULL, lang = NULL, locale 
     if (length(out) == 1) return(NULL)
 
     tweets_df <- status_parse(out$statuses)
-
-    if (media) {
-      media_df <- bind_rows(lapply(out$statuses$entities$media, media_parse))
-      tweets_df <- bind_cols(tweets_df, media_df)
-    }
 
     l[[i]] <- tweets_df
 
@@ -117,33 +112,37 @@ status_parse <- function(x) {
                           "in_reply_to_status_id" = prep_vector(as.character(x$in_reply_to_status_id_str)),
                           "in_reply_to_user_id" = prep_vector(as.character(x$in_reply_to_user_id_str)),
                           "in_reply_to_screen_name" = prep_vector(as.character(x$in_reply_to_screen_name)),
-                          "contributors" = prep_vector(as.character(x$contributors)),
                           "is_quote_status" = prep_vector(as.character(x$is_quote_status)),
                           "retweet_count" = prep_vector(as.character(x$retweet_count)),
                           "favorite_count" = prep_vector(as.character(x$favorite_count)),
                           "favorited" = prep_vector(as.character(x$favorited)),
                           "retweeted" = prep_vector(as.character(x$retweeted)),
                           "lang" = prep_vector(as.character(x$lang)),
-                          "quoted_status_id" = prep_vector(as.character(x$quoted_status_id_str)))
+                          "quoted_status_id" = prep_vector(as.character(x$quoted_status_id_str)),
+                          "urls" = try_catch(lapply(x$entities$urls, function(x) list(prep_vector(x$expanded_url)))),
+                          "user_mentions" = try_catch(lapply(x$entities$user_mentions, function(x) list(prep_vector(x$id)))),
+                          "hashtags" = try_catch(lapply(x$entities$hashtags, function(x) list(prep_vector(x[ , 1])))),
+                          "place_type" = try_catch(prep_vector(x$place$place_type)),
+                          "place_id" = try_catch(prep_vector(x$place$id)),
+                          "place_url" = try_catch(prep_vector(x$place$url)),
+                          "place_name" = try_catch(prep_vector(x$place$name)),
+                          "place_full_name" = try_catch(prep_vector(x$place$full_name)),
+                          "place_country_code" = try_catch(prep_vector(x$place$country_code)),
+                          "place_country" = try_catch(prep_vector(x$place$country)),
+                          "place_long1" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 1, 1]))),
+                          "place_long2" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 2, 1]))),
+                          "place_long3" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 3, 1]))),
+                          "place_long4" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 4, 1]))),
+                          "place_lat1" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 1, 2]))),
+                          "place_lat2" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 2, 2]))),
+                          "place_lat3" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 3, 2]))),
+                          "place_lat4" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 4, 2]))),
+                          "media_id" = try_catch(lapply(x$entities$media, function(x) prep_vector(x$id_str))),
+                          "media_url" = try_catch(lapply(x$entities$media, function(x) prep_vector(x$expanded_url))),
+                          "media_type" = try_catch(lapply(x$entities$media, function(x) prep_vector(x$type))))
   status_df
 }
 
-#' media_parse
-#'
-#' @param x json object from search tweets
-#' @import dplyr
-#' @export
-media_parse <- function(x) {
-  media_df <- data_frame("media_id" = prep_vector(as.character(x$id_str)),
-                         "media_url" = prep_vector(as.character(x$media_url_https)),
-                         "url" = prep_vector(as.character(x$url)),
-                         "expanded_url" = prep_vector(as.character(x$expanded_url)),
-                         "type" = prep_vector(as.character(x$type)),
-                         "source_status_id" = prep_vector(as.character(x$source_status_id_str)),
-                         "source_user_id" = prep_vector(as.character(x$source_user_id_str)))
-
-  media_df
-}
 
 
 #' top_tweet_words

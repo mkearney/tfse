@@ -1,4 +1,4 @@
-#' get_statuses
+#' get_timeline
 #'
 #' Returns a collection of the most recent Tweets posted by the user indicated
 #' by the screen_name or user_id parameters. User timelines belonging to
@@ -42,9 +42,9 @@
 #' @seealso See \url{https://api.twitter.com/1.1/statuses/user_timeline.json}.
 #' @return json object (nested list)
 #' @export
-get_friendships <- function(user, since_id = NULL, count = NULL, max_id = NULL,
-                            trim_user = NULL, exclude_replies = NULL,
-                            contributer_details = NULL, include_rts = NULL,
+get_timeline <- function(user, since_id = NULL, count = NULL, max_id = NULL,
+                            trim_user = NULL, exclude_replies = FALSE,
+                            contributer_details = TRUE, include_rts = TRUE,
                             token) {
 
   if (is_screen_name(user)) {
@@ -53,45 +53,29 @@ get_friendships <- function(user, since_id = NULL, count = NULL, max_id = NULL,
     id_type <- "id"
   }
 
-  if (!is.null(since_id)) {
-    since_id <- paste0("&since_id=", since_id)
-  }
+  if (!is.null(since_id)) since_id <- paste0("&since_id=", since_id)
+  if (!is.null(count)) count <- paste0("&count=", count)
+  if (!is.null(max_id)) max_id <- paste0("&max_id=", max_id)
+  if (!is.null(trim_user)) trim_user <- paste0("&trim_user=", trim_user)
+  if (!is.null(exclude_replies)) exclude_replies <- paste0(
+    "&exclude_replies=", exclude_replies)
+  if (!is.null(contributer_details)) contributer_details <- paste0(
+    "&contributer_details=", contributer_details)
+  if (!is.null(include_rts)) include_rts <- paste0("&include_rts=", include_rts)
 
-  if (!is.null(count)) {
-    count <- paste0("&count=", count)
-  }
-
-  if (!is.null(max_id)) {
-    max_id <- paste0("&max_id=", max_id)
-  }
-
-  if (!is.null(trim_user)) {
-    trim_user <- paste0("&trim_user=", trim_user)
-  }
-
-  if (!is.null(exclude_replies)) {
-    exclude_replies <- paste0("&exclude_replies=", exclude_replies)
-  }
-
-  if (!is.null(contributer_details)) {
-    contributer_details <- paste0("&contributer_details=", contributer_details)
-  }
-
-  if (!is.null(include_rts)) {
-    include_rts <- paste0("&include_rts=", include_rts)
-  }
   params <- paste0(since_id, count, max_id,
                    trim_user, exclude_replies,
                    contributer_details, include_rts)
 
-  out <- TWIT(query = "statuses/user_timeline",
-              parameters = paste0(id_type, "=", user, params),
-              token = token)
+  timeline_df <- try_catch(TWIT(query = "statuses/user_timeline",
+                        parameters = paste0(id_type, "=", user, params),
+                        token = token))
 
-  out
+  timeline_df <- status_parse(timeline_df)
+  timeline_df
 }
 
-#' get_statuses_retweets
+#' get_retweets
 #'
 #' Returns a collection of the 100 most recent retweets of the tweet specified
 #' by the id parameter.
@@ -104,7 +88,7 @@ get_friendships <- function(user, since_id = NULL, count = NULL, max_id = NULL,
 #' @param token OAuth token (1.0 or 2.0)
 #' @seealso \url{https://api.twitter.com/1.1/statuses/retweets/:id.json}
 #' @return json object
-get_statuses_retweets <- function(tweet_id, count = 100, trim_user = TRUE, token) {
+get_retweets <- function(tweet_id, count = 100, trim_user = TRUE, token) {
 
   if (trim_user) {
     params <- paste0("count=", count, "&trim_user=true")
@@ -112,9 +96,11 @@ get_statuses_retweets <- function(tweet_id, count = 100, trim_user = TRUE, token
     params <- paste0("count=", count)
   }
 
-  out <- TWIT(query = "statuses/retweets",
-              parameters = paste0("id=", tweet_id, "&", params),
-              token = token)
+  out <- try_catch(TWIT(query = "statuses/retweets",
+                        parameters = paste0("id=", tweet_id, "&", params),
+                        token = token))
 
   out
 }
+
+
