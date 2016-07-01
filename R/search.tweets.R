@@ -60,11 +60,11 @@
 #' @return json object
 #' @import dplyr
 #' @export
-search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL,
-                          result_type = "recent", count = 100, until = NULL, since_id = NULL,
-                          max_id = NULL, include_entities = TRUE, token) {
+search_tweets <- function(q, token, geocode = NULL, lang = NULL, locale = NULL,
+                          result_type = "recent", count = 100, until = NULL,
+                          since_id = NULL, max_id = NULL, include_entities = TRUE) {
 
-  l <- vector("list", ceiling(count/100))
+  tweets_df <- data_frame()
 
   params <- paste0("result_type=", result_type, "&count=", count,
                    if (!is.null(geocode)) paste0("&geocode=", geocode),
@@ -75,24 +75,22 @@ search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL,
                    if (!is.null(max_id)) paste0("&max_id=", max_id),
                    if (include_entities) paste0("&include_entities=true") else paste0("&include_entities=false"))
 
-  params <- paste0("q=", URLencode(q, reserved = TRUE),
-                   "&", params)
+  params <- paste0("q=", URLencode(q, reserved = TRUE), "&", params)
 
-  for (i in seq_along(l)) {
+  nrows <- 0
+  while (nrows < count) {
     out <- try_catch(TWIT(query = "search/tweets",
                           parameters = params,
                           token = token))
 
-    if (length(out) == 1) return(NULL)
-
-    l[[i]] <- data_frame_status(out$statuses)
+    tweets_df <- bind_rows(tweets_df, data_frame_status(out$statuses))
+    nrows <- nrow(tweets_df)
 
     if (length(out$search_metadata$next_results) == 0) break
 
     params <- sub("[?]", "", out$search_metadata$next_results)
   }
-
-  bind_rows(l)
+  tweets_df
 }
 
 

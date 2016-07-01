@@ -4,14 +4,16 @@
 \alias{search_tweets}
 \title{search_tweets}
 \usage{
-search_tweets(q, geocode = NULL, lang = NULL, locale = NULL,
+search_tweets(q, token, geocode = NULL, lang = NULL, locale = NULL,
   result_type = "recent", count = 100, until = NULL, since_id = NULL,
-  max_id = NULL, include_entities = TRUE, token)
+  max_id = NULL, include_entities = TRUE)
 }
 \arguments{
 \item{q}{required, A UTF-8, URL-encoded search query of 500 characters
 maximum, including operators. Queries may additionally be limited by
 complexity.}
+
+\item{token}{OAuth token (1.0 or 2.0)}
 
 \item{geocode}{optional, Returns tweets by users located within a given
 radius of the given latitude/longitude. The location is preferentially
@@ -57,8 +59,6 @@ than) or equal to the specified ID.}
 
 \item{include_entities}{optional, The entities node will be disincluded when
 set to false.}
-
-\item{token}{OAuth token (1.0 or 2.0)}
 
 \item{callback}{optional, If supplied, the response will use the JSONP format
 with a callback of the given name. The usefulness of this parameter is

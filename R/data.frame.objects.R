@@ -21,9 +21,9 @@ data_frame_status <- function(x) {
     "retweeted" = prep_vector(as.character(x$retweeted)),
     "lang" = prep_vector(as.character(x$lang)),
     "quoted_status_id" = prep_vector(as.character(x$quoted_status_id_str)),
-    "urls" = try_catch(lapply(x$entities$urls, function(x) list(prep_vector(x$expanded_url)))),
-    "user_mentions" = try_catch(lapply(x$entities$user_mentions, function(x) list(prep_vector(x$id)))),
-    "hashtags" = try_catch(lapply(x$entities$hashtags, function(x) list(prep_vector(x[ , 1])))),
+    "urls" = try_catch(lapply(x$entities$urls, function(x) prep_vector(x$expanded_url))),
+    "user_mentions" = try_catch(lapply(x$entities$user_mentions, function(x) prep_vector(x$id))),
+    "hashtags" = try_catch(lapply(x$entities$hashtags, function(x) prep_vector(x[ , 1]))),
     "place_type" = try_catch(prep_vector(x$place$place_type)),
     "place_id" = try_catch(prep_vector(x$place$id)),
     "place_url" = try_catch(prep_vector(x$place$url)),
@@ -86,8 +86,7 @@ data_frame_lookup <- function(x) {
 prep_vector <- function(x) {
   if (length(x) == 0) return(NA)
   x[unlist(lapply(x, function(x) length(x) > 1))] <- unlist(
-    lapply(x[unlist(
-      lapply(x, function(x) length(x) > 1))], unlist))
+    lapply(x[unlist(lapply(x, function(x) length(x) > 1))], unlist))
   x[x == ""] <- NA
   x[x == NaN] <- NA
   x[length(x) == 0] <- NA
