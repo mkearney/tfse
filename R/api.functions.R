@@ -49,6 +49,7 @@ try_catch <- function(x) {
 #' fromJS
 #'
 #' @param x json object
+#' @import jsonlite
 #' @export
 fromJS <- function(x) {
   fromJSON(content(x, as = "text", encoding = "UTF-8"))
@@ -119,7 +120,9 @@ is_screen_name <- function(x) suppressWarnings(is.na(as.numeric(x)))
 #'   requests
 #' @export
 check_rate_limit <- function(type, token, seconds = FALSE) {
-  rate_limit_status <- TWIT("application/rate_limit_status", parameters = NULL, token = token)
+  rate_limit_status <- TWIT("application/rate_limit_status",
+                            parameters = NULL,
+                            token = token)
   if (seconds) {
     response_type <- "reset"
   } else {
