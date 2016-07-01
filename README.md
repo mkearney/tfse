@@ -66,9 +66,9 @@ getwd()
 hrc_followers <- get_followers_max("HillaryClinton", tokens)
 hrc_followers[1:10]
 
-### use multiple tokens to lookup user data for 54,000 users
-### (18,000 users for each token)
-users <- get_lookup_max(hrc_followers, tokens)
+### lookup user data for thousands of users
+### (up to 18,000 users for each token)
+users <- get_lookup_max(hrc_followers[1:5000], tokens)
 users
 
 ### use multiple tokens to return 45 user networks (aka friends)
