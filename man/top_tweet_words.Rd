@@ -4,12 +4,14 @@
 \alias{top_tweet_words}
 \title{top_tweet_words}
 \usage{
-top_tweet_words(tweets_text, min = 3)
+top_tweet_words(tweets_text, min = 3, exclude_words = NULL)
 }
 \arguments{
 \item{tweets_text}{character vector of tweets text}
 
 \item{min}{minimum number of ocurrences to include in returned object}
+
+\item{exclude_words}{other words to exclude}
 }
 \value{
 list object with top mentions and top words
