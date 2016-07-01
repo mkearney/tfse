@@ -85,9 +85,7 @@ search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL,
 
     if (length(out) == 1) return(NULL)
 
-    tweets_df <- status_parse(out$statuses)
-
-    l[[i]] <- tweets_df
+    l[[i]] <- data_frame_status(out$statuses)
 
     if (length(out$search_metadata$next_results) == 0) break
 
@@ -98,61 +96,15 @@ search_tweets <- function(q, geocode = NULL, lang = NULL, locale = NULL,
 }
 
 
-#' status_parse
-#'
-#' @param x json object from search tweets
-#' @import dplyr
-#' @export
-status_parse <- function(x) {
-  status_df <- data_frame("id" = prep_vector(as.character(x$id_str)),
-                          "text" = prep_vector(as.character(x$text)),
-                          "created_at" = as.Date(as.POSIXct(prep_vector(as.character(x$created_at)),
-                                                            format="%a %b %d %H:%M:%S %z %Y"), format = "%Y-%M-%D"),
-                          "source" = prep_vector(as.character(x$source)),
-                          "in_reply_to_status_id" = prep_vector(as.character(x$in_reply_to_status_id_str)),
-                          "in_reply_to_user_id" = prep_vector(as.character(x$in_reply_to_user_id_str)),
-                          "in_reply_to_screen_name" = prep_vector(as.character(x$in_reply_to_screen_name)),
-                          "is_quote_status" = prep_vector(as.character(x$is_quote_status)),
-                          "retweet_count" = prep_vector(as.character(x$retweet_count)),
-                          "favorite_count" = prep_vector(as.character(x$favorite_count)),
-                          "favorited" = prep_vector(as.character(x$favorited)),
-                          "retweeted" = prep_vector(as.character(x$retweeted)),
-                          "lang" = prep_vector(as.character(x$lang)),
-                          "quoted_status_id" = prep_vector(as.character(x$quoted_status_id_str)),
-                          "urls" = try_catch(lapply(x$entities$urls, function(x) list(prep_vector(x$expanded_url)))),
-                          "user_mentions" = try_catch(lapply(x$entities$user_mentions, function(x) list(prep_vector(x$id)))),
-                          "hashtags" = try_catch(lapply(x$entities$hashtags, function(x) list(prep_vector(x[ , 1])))),
-                          "place_type" = try_catch(prep_vector(x$place$place_type)),
-                          "place_id" = try_catch(prep_vector(x$place$id)),
-                          "place_url" = try_catch(prep_vector(x$place$url)),
-                          "place_name" = try_catch(prep_vector(x$place$name)),
-                          "place_full_name" = try_catch(prep_vector(x$place$full_name)),
-                          "place_country_code" = try_catch(prep_vector(x$place$country_code)),
-                          "place_country" = try_catch(prep_vector(x$place$country)),
-                          "place_long1" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 1, 1]))),
-                          "place_long2" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 2, 1]))),
-                          "place_long3" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 3, 1]))),
-                          "place_long4" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 4, 1]))),
-                          "place_lat1" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 1, 2]))),
-                          "place_lat2" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 2, 2]))),
-                          "place_lat3" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 3, 2]))),
-                          "place_lat4" = try_catch(lapply(x$place$bounding_box$coordinates, function(x) prep_vector(x[1, 4, 2]))),
-                          "media_id" = try_catch(lapply(x$entities$media, function(x) prep_vector(x$id_str))),
-                          "media_url" = try_catch(lapply(x$entities$media, function(x) prep_vector(x$expanded_url))),
-                          "media_type" = try_catch(lapply(x$entities$media, function(x) prep_vector(x$type))))
-  status_df
-}
-
-
-
 #' top_tweet_words
 #'
 #' @param tweets_text character vector of tweets text
 #' @param min minimum number of ocurrences to include in returned object
+#' @param exclude_words other words to exclude
 #' @return list object with top mentions and top words
 #' @import dplyr
 #' @export
-top_tweet_words <- function(tweets_text, min = 3) {
+top_tweet_words <- function(tweets_text, min = 3, exclude_words = NULL) {
   tweets_text <- unlist(lapply(tweets_text, function(x) gsub("\\n", " ", x)))
   tweets_text <- unlist(lapply(tweets_text, function(x) gsub("^[:alnum:]", "", x)  ))
   tweets_text <- unlist(strsplit(tweets_text, split = " "))
@@ -177,7 +129,6 @@ top_tweet_words <- function(tweets_text, min = 3) {
             "dont", "doesnt", "got", "most", "two", "didnt", "takes",
             "sent", "both", "guy", "gets", "get", "tweeted", "either",
             "gave", "get", "give", "go", "going", "had", "her", "him",
-            "hillaryclinton", "hillaryclintons", "realdonaldtrumps",
             "his", "htt", "i", "if", "if", "in", "into", "is", "is",
             "it", "its", "just", "let", "my", "like", "make", "media",
             "need", "not", "on", "made", "take", "said", "taking",
@@ -189,6 +140,7 @@ top_tweet_words <- function(tweets_text, min = 3) {
             "too", "u", "via", "video", "want", "wants", "since", "days",
             "were", "what", "which", "will", "with", "would",
             "would", "www")
+  nowd <- c(nowd, unlist(exclude_words))
 
   words <- words[!words %in% nowd]
   words <- sort(table(words), decreasing = TRUE)
