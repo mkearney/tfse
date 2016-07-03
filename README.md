@@ -76,6 +76,21 @@ users
 user_ids <- sample(users$user_id[users$protected == FALSE], 45)
 user_networks <- get_friends_max(user_ids, tokens)
 user_networks
+
+### search tweets via REST API
+### (number of tweets returned varies; broader searchers are best)
+elect16 <- search_tweets(q = "#election2016", 
+                         count = 2000,
+                         token = tokens[[1]])
+elect16
+
+### read tweets in stream
+### (access lots and lots of tweets this way)
+e16stream <- filter_stream(stream = "realdonaldtrump,hillaryclinton,hillary,trump,
+                                     election2016,imwithher,makeamericagreatagain",
+                                    count = 2000, 
+                                    token = tokens[[1]])
+e16stream
 ```
 
 ## about me
