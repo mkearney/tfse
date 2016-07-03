@@ -106,9 +106,9 @@ elect16
 ### the code below returned a data frame with 3963 rows (each row = one tweet)
 e16stream <- filter_stream(stream = "realdonaldtrump,hillaryclinton,hillary,trump,
                                      election2016,imwithher,makeamericagreatagain",
-                                    file_name = "e16stream",
-                                    timeout = 300,
-                                    token = tokens[[1]])
+                           file_name = "e16stream",
+                           timeout = 300,
+                           token = tokens[[1]])
 e16stream
 ```
 
