@@ -12,6 +12,8 @@
 #' @param token OAuth token (1.0 or 2.0)
 #' @export
 filter_stream <- function(stream, delimited = FALSE, stall_warnings = FALSE, token, timeout = 120, file_name) {
+  file.create(paste0(file_name, ".stream.json"))
+
   if (missing(stream)) stop("Must include stream search call.")
 
   stream <- unlist(trimws(unlist(strsplit(stream, ","))))
@@ -31,7 +33,7 @@ filter_stream <- function(stream, delimited = FALSE, stall_warnings = FALSE, tok
                     parameters = params,
                     token = token,
                     timeout = timeout,
-                    file_name = file_name)
+                    file_name = paste0(file_name, ".stream.json"))
 
   stream_df
 }
