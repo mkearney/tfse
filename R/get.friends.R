@@ -56,8 +56,8 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbo
       get_friends(x, tokens[[i]], stringify = stringify))
 
     if (verbose) {
-      if ((n * 15) %% 300 == 0) {
-        cat(paste0(ceiling((n + start) * 15 / length(user_ids) * 100), "%"), fill = TRUE)
+      if ((n * 15) %% 750 == 0) {
+        cat(paste0(floor(n * 15 / length(user_ids) * 100), "%"), fill = TRUE)
       } else {
         cat("*")
       }
