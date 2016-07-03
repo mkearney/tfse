@@ -11,7 +11,7 @@
 #' @import httr
 #' @import jsonlite
 #' @export
-TWIT <- function(query, parameters = NULL, token, parse = TRUE, version = "1.1") {
+TWIT <- function(query, parameters = NULL, token, parse = TRUE, version = "1.1", timeout = 120, file_name) {
   # POST and GET requests
   if (query == "lists/members") {
     req <- POST(paste0("https://api.twitter.com/",
@@ -20,6 +20,39 @@ TWIT <- function(query, parameters = NULL, token, parse = TRUE, version = "1.1")
                        ".json?",
                        parameters),
                 config = config(token = token))
+  } else if (query == "statuses/filter") {
+
+    if (!is.null(parameters)) parameters <- paste0("?", parameters)
+
+    if (foo_params(parameters)) {
+      tryCatch(POST(paste0("https://stream.twitter.com/",
+                                   version, "/",
+                                   "statuses/filter.json",
+                                   parameters),
+                    config = config(token = token),
+                    timeout(timeout),
+                    write_disk(file_name, overwrite = TRUE)),
+               error = function(e) return(invisible()))
+
+      stream_tweets <- stream_in(file(file_name))
+
+      return(data_frame_status(stream_tweets))
+
+    } else {
+      tryCatch(GET(paste0("https://stream.twitter.com/",
+                                  version, "/",
+                                  "statuses/filter.json",
+                                  parameters),
+                   config = config(token = token),
+                   timeout(timeout),
+                   write_disk(file_name, overwrite = TRUE)),
+               error = function(e) return(invisible()))
+
+      stream_tweets <- stream_in(file(file_name))
+
+      return(data_frame_status(stream_tweets))
+
+    }
   } else {
     req <- GET(paste0("https://api.twitter.com/",
                       version, "/",
@@ -53,6 +86,25 @@ try_catch <- function(x) {
 #' @export
 fromJS <- function(x) {
   fromJSON(content(x, as = "text", encoding = "UTF-8"))
+}
+
+#' foo_params
+#'
+#' @param x stream search string
+#' @export
+track_encode <- function(x) {
+  if (length(x) > 0) x <- paste(x, collapse = ",")
+  paste(sapply(unlist(strsplit(x, split = ",")), function(x) URLencode(trimws(x), reserved = FALSE)), collapse = ",")
+}
+
+#' foo_params
+#'
+#' @param x api params
+#' @export
+foo_params <- function(x) {
+  if (length(x) == 0) return(FALSE)
+  if (nchar(x) > 20) return(TRUE)
+  FALSE
 }
 
 #' get_api
