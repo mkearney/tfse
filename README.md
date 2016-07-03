@@ -84,11 +84,12 @@ elect16 <- search_tweets(q = "#election2016",
                          token = tokens[[1]])
 elect16
 
-### read tweets in stream
+### read tweets in stream - collect tweets for 5 minutes (timeout = 300s)
 ### (access lots and lots of tweets this way)
 e16stream <- filter_stream(stream = "realdonaldtrump,hillaryclinton,hillary,trump,
                                      election2016,imwithher,makeamericagreatagain",
-                                    count = 2000, 
+                                    file_name = "e16stream",
+                                    timeout = 300,
                                     token = tokens[[1]])
 e16stream
 ```
