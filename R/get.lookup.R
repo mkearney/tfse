@@ -37,7 +37,7 @@ get_lookup <- function(users, token, df = TRUE, skip = TRUE, entities = FALSE) {
               token = token)
 
   if (df) {
-    out <- data_frame_lookup(out)
+    out <- parse_user(out)
   }
 
   out

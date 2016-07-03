@@ -22,12 +22,10 @@ TWIT <- function(query, parameters = NULL, token, parse = TRUE, version = "1.1",
                 config = config(token = token))
   } else if (query == "statuses/filter") {
 
-    if (!is.null(parameters)) parameters <- paste0("?", parameters)
-
     if (foo_params(parameters)) {
       tryCatch(POST(paste0("https://stream.twitter.com/",
                                    version, "/",
-                                   "statuses/filter.json",
+                                   "statuses/filter.json?",
                                    parameters),
                     config = config(token = token),
                     timeout(timeout),

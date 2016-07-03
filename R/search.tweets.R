@@ -84,6 +84,7 @@ search_tweets <- function(q, token, geocode = NULL, lang = NULL, locale = NULL,
                           token = token))
 
     tweets_df <- bind_rows(tweets_df, data_frame_status(out$statuses))
+
     nrows <- nrow(tweets_df)
 
     if (length(out$search_metadata$next_results) == 0) break
@@ -103,23 +104,16 @@ search_tweets <- function(q, token, geocode = NULL, lang = NULL, locale = NULL,
 #' @import dplyr
 #' @export
 top_tweet_words <- function(tweets_text, min = 3, exclude_words = NULL) {
-  tweets_text <- unlist(lapply(tweets_text, function(x) gsub("\\n", " ", x)))
-  tweets_text <- unlist(lapply(tweets_text, function(x) gsub("^[:alnum:]", "", x)  ))
-  tweets_text <- unlist(strsplit(tweets_text, split = " "))
-
-  mentions <- tweets_text[grep("@", tweets_text)]
-  mentions <- tolower(mentions)
-  mentions <- sort(table(mentions), decreasing = TRUE)
-
-  words <- tweets_text[!1:length(tweets_text) %in% grep("@", tweets_text)]
-  words <- words[!1:length(words) %in% grep("htt", words)]
-  words <- words[!tolower(words) == "rt"]
-  words <- gsub("'t", "t", gsub("'s", "", gsub('"', "", gsub("[#|...|.|,|:|;|-|_|—]", " ", words))))
-  words <- unlist(strsplit(words, split = " "))
-  words <- words[grep("[:digit:]", words)]
-  words <- words[!words == ""]
-  words <- words[nchar(words) > 2]
-  words <- tolower(words)
+  tweets_text <- tweets_text[!is.na(tweets_text)]
+  tweets_text <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", tweets_text)
+  tweets_text = gsub("@\\w+", "", tweets_text)
+  tweets_text = gsub("[[:punct:]]", "", tweets_text)
+  tweets_text = gsub("[[:digit:]]", "", tweets_text)
+  tweets_text = gsub("htt\\w+", "", tweets_text)
+  tweets_text = gsub("[ \t]{2,}", "", tweets_text)
+  tweets_text = gsub("^\\s+|\\s+$", "", tweets_text)
+  tweets_text = gsub("\\n", "", tweets_text)
+  tweets_text <- lapply(tweets_text, function(x) tolower(strsplit(x, split = " ")))
 
   nowd <- c("a", "about", "after", "again", "all", "also", "and",
             "are", "at", "be", "been", "believe", "but", "instead",
@@ -138,10 +132,11 @@ top_tweet_words <- function(tweets_text, min = 3, exclude_words = NULL) {
             "too", "u", "via", "video", "want", "wants", "since", "days",
             "were", "what", "which", "will", "with", "would",
             "would", "www")
+
   nowd <- c(nowd, unlist(exclude_words))
 
   words <- words[!words %in% nowd]
   words <- sort(table(words), decreasing = TRUE)
 
-  list(words = words[words > min], mentions = mentions[mentions > min])
+  words
 }
