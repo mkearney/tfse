@@ -83,7 +83,7 @@ search_tweets <- function(q, token, geocode = NULL, lang = NULL, locale = NULL,
                           parameters = params,
                           token = token))
 
-    tweets_df <- bind_rows(tweets_df, data_frame_status(out$statuses))
+    tweets_df <- bind_rows(tweets_df, parse_all_tweets(out$statuses))
 
     nrows <- nrow(tweets_df)
 

@@ -6,7 +6,7 @@
 Returns public statuses that match one or more filter predicates. Multiple parameters may be specified which allows most clients to use a single connection to the Streaming API. Both GET and POST requests are supported, but GET requests with too many parameters may cause the request to be rejected for excessive URL length. Use a POST request to avoid long URLs.}
 \usage{
 filter_stream(stream, delimited = FALSE, stall_warnings = FALSE, token,
-  timeout = 120, file_name)
+  timeout = 120, file_name = NULL)
 }
 \arguments{
 \item{stream}{either follower A comma separated list of user IDs, indicating the users to return statuses for in the stream. See follow for more information. track Keywords to track. Phrases of keywords are specified by a comma-separated list. See track for more information. Or locations Specifies a set of bounding boxes to track. See locations for more information.}

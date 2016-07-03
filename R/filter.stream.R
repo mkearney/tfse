@@ -10,12 +10,10 @@
 #' @param delimited optional Specifies whether messages should be length-delimited. See delimited for more information.
 #' @param stall_warnings optional Specifies whether stall warnings should be delivered. See stall_warnings for more information.
 #' @param token OAuth token (1.0 or 2.0)
+#' @import jsonlite
 #' @export
-filter_stream <- function(stream, delimited = FALSE, stall_warnings = FALSE, token, timeout = 120, file_name) {
-  file.create(paste0(file_name, ".stream.json"))
-
+filter_stream <- function(stream, delimited = FALSE, stall_warnings = FALSE, token, timeout = 120, file_name = NULL) {
   if (missing(stream)) stop("Must include stream search call.")
-
   stream <- unlist(trimws(unlist(strsplit(stream, ","))))
 
   if (!is_screen_name(stream[[1]])) {
@@ -27,13 +25,18 @@ filter_stream <- function(stream, delimited = FALSE, stall_warnings = FALSE, tok
   } else {
     params <- paste0("track=", track_encode(stream))
   }
-  if (missing(file_name)) file_name <- tempfile()
+  if (is.null(file_name)) file_name <- tempfile()
 
-  stream_df <- TWIT(query = "statuses/filter",
-                    parameters = params,
-                    token = token,
-                    timeout = timeout,
-                    file_name = paste0(file_name, ".stream.json"))
+  TWIT(query = "statuses/filter",
+       parameters = params,
+       token = token,
+       timeout = timeout,
+       file_name = file_name)
 
-  stream_df
+  stream_tweets <- stream_in(file(file_name))
+
+  if (!is.data.frame(stream_tweets)) stop("Error in json file - no stream detected.")
+  stream_df <- parse_all_tweets(stream_tweets)
+
+  return(stream_df[!is.na(stream_df$status_id), ])
 }

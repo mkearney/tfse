@@ -1,9 +1,9 @@
-#' data_frame_status
+#' parse_status
 #'
 #' @param x json object from search tweets
 #' @import dplyr
 #' @export
-data_frame_status <- function(x) {
+parse_status <- function(x) {
   status_df <- data_frame(
     "status_id" = as.character(prep_vector(x$id_str)),
     "text" = as.character(prep_vector(x$text)),
@@ -23,17 +23,63 @@ data_frame_status <- function(x) {
     "retweeted" = as.character(prep_vector(x$retweeted)),
     "lang" = as.character(prep_vector(x$lang)),
     "quoted_status_id" = as.character(prep_vector(x$quoted_status_id_str)))
-
-  if (length(x$place) > 0) {
-    status_df <- bind_rows(status_df, parse_place(x$place))
-  }
-  if (length(x$entities) > 0) {
-    status_df <- bind_rows(status_df, parse_status_entities(x$entities))
-  }
-  if (length(x$user) > 0) {
-    status_df <- bind_rows(status_df, parse_user(x$user))
-  }
   status_df
+}
+
+#' parse_retweet
+#'
+#' @param x json response object as in json_object$retweet_status
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @return data_frame
+#' @import dplyr
+#' @export
+parse_retweet <- function(x) {
+  retweet_df <- extend_label_df(parse_status(x), "retweet")
+
+  if (is.data.frame(x$user)) {
+    user_df <- extend_label_df(parse_user(x$user), "retweet")
+    retweet_df <- bind_rows(retweet_df, user_df)
+  }
+
+  if (is.data.frame(x$place)) {
+    place_df <- extend_label_df(parse_place(x$place), "retweet")
+    retweet_df <- bind_rows(retweet_df, place_df)
+  }
+  if (is.data.frame(x$entities)) {
+    entities_df <- extend_label_df(parse_entities(x$entities), "retweet")
+    retweet_df <- bind_rows(retweet_df, entities_df)
+  }
+  retweet_df
+}
+
+
+#' parse_all_tweets
+#'
+#' @param x json response object from tweet/status Twitter API request.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @return data_frame
+#' @import dplyr
+#' @export
+parse_all_tweets <- function(x) {
+  tweets_df <- bind_rows(parse_status(x), parse_place(x$place))
+
+  if (is.data.frame(x$place)) {
+    tweets_df <- bind_rows(tweets_df, parse_place(x$place))
+  }
+
+  if (is.data.frame(x$entities)) {
+    tweets_df <- bind_rows(tweets_df, parse_entities(x$entities))
+  }
+
+  if (is.data.frame(x$user)) {
+    tweets_df <- bind_rows(tweets_df, parse_user(x$user))
+  }
+
+  if (is.data.frame(x$retweeted_status)) {
+    tweets_df <- bind_rows(tweets_df, parse_retweet(x$retweeted_status))
+  }
+
+  tweets_df
 }
 
 
@@ -62,6 +108,22 @@ parse_place <- function(x) {
     "place_lat3" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 3, 2])),
     "place_lat4" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 4, 2])))
   place_df
+}
+
+#' extend_label_df
+#'
+#' @param dff other, extended data.frame within larger json response object
+#' @param new label to represent the other data.frame
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @return data_frame
+#' @import dplyr
+#' @export
+extend_label_df <- function(dff, label = "other") {
+  names(dff) <- vapply(names(dff),
+                       function(x) paste0(label, "_", unlist(x)),
+                       FUN.VALUE = vector("character", 1),
+                       USE.NAMES = FALSE)
+  dff
 }
 
 #' parse_user
@@ -110,6 +172,33 @@ prep_list <- function(x, colname) {
   x
 }
 
+#' parse_entities
+#'
+#' @param x statuses entities object
+#' @export
+parse_entities <- function(x) {
+  entities_df <- data_frame(
+    "entities_hashtag" = prep_list(x$hashtags, "text"),
+    "entities_user_mentions_user_id" = prep_list(x$user_mentions, "id"),
+    "entities_user_mentions_screen_name" = prep_list(x$user_mentions, "screen_name"),
+    "entities_user_mentions_name" = prep_list(x$user_mentions, "name"),
+    "entities_urls_expanded" = prep_list(x$urls, "expanded_url"),
+    "entities_media_id" = prep_list(x$media, "id_str"),
+    "entities_media_source_status_id" = prep_list(x$media, "source_status_id_str"),
+    "entities_media_source_user_id" = prep_list(x$media, "source_user_id_str"),
+    "entities_media_expanded_url" = prep_list(x$media, "expanded_url"))
+
+  if (is.data.frame(x$extended_entities$media)) {
+    extended_entities_df <- data_frame(
+      "extended_entities_media_id" = prep_list(x$media, "id_str"),
+      "extended_entities_media_source_status_id" = prep_list(x$media, "source_status_id_str"),
+      "extended_entities_media_source_user_id" = prep_list(x$media, "source_user_id_str"),
+      "extended_entities_media_expanded_url" = prep_list(x$media, "expanded_url"))
+    entities_df <- bind_rows(entities_df, extended_entities_df)
+  }
+  entities_df
+}
+
 #' prep_vector
 #'
 #' @param x data to be vectorized
@@ -121,22 +210,4 @@ prep_vector <- function(x) {
   x[length(x) == 0] <- NA
   x[is.null(x)] <- NA
   as.vector(x)
-}
-
-#' parse_status_entities
-#'
-#' @param x statuses entities object
-#' @export
-parse_status_entities <- function(x) {
-  status_entities_df <- data_frame(
-    "entities_hashtag" = prep_list(x$hashtags, "text"),
-    "entities_user_mentions_user_id" = prep_list(x$user_mentions, "id"),
-    "entities_user_mentions_screen_name" = prep_list(x$user_mentions, "screen_name"),
-    "entities_user_mentions_name" = prep_list(x$user_mentions, "name"),
-    "entities_urls_expanded" = prep_list(x$urls, "expanded_url"),
-    "entities_media_id" = prep_list(x$media, "id_str"),
-    "entities_media_source_status_id" = prep_list(x$media, "source_status_id_str"),
-    "entities_media_source_user_id" = prep_list(x$media, "source_user_id_str"),
-    "entities_media_expanded_url" = prep_list(x$media, "expanded_url"))
-  status_entities_df
 }
