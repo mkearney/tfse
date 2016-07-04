@@ -11,7 +11,7 @@ Description: An implementation of http calls and data wrangling
     consideration is given within the functions to use of more
     than one OAuth personal access token.
 Depends:
-    R (>= 3.3.0)
+    R (>= 3.1.0)
 Imports:
     dplyr (>= 0.5.0),
     httr (>= 1.2.1),
