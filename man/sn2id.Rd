@@ -15,6 +15,9 @@ response Twitter account user id
 \description{
 sn2id
 }
+\details{
+rvest
+}
 \seealso{
 See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 }

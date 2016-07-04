@@ -19,4 +19,7 @@ list object with top mentions and top words
 \description{
 top_tweet_words
 }
+\details{
+dplyr
+}
 

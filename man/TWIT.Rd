@@ -34,6 +34,9 @@ from search results. If you want to match for
 completeness you should consider using a Streaming
 API instead.
 }
+\details{
+httr jsonlite
+}
 \seealso{
 See \url{https://dev.twitter.com/overview/documentation} for more
   information on using Twitter's API.

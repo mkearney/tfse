@@ -16,4 +16,7 @@ Assumes response object is json object.
 \description{
 get_api
 }
+\details{
+httr jsonlite
+}
 

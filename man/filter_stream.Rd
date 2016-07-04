@@ -25,6 +25,8 @@ The track, follow, and locations fields should be considered to be combined with
 }
 \details{
 The default access level allows up to 400 track keywords, 5,000 follow userids and 25 0.1-360 degree location boxes. If you need elevated access to the Streaming API, you can contact Gnip.
+
+jsonlite
 }
 \seealso{
 \url{https://stream.twitter.com/1.1/statuses/filter.json}

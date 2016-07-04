@@ -88,6 +88,8 @@ Limiting in v1.1 for information on that model. At this time, users
 represented by access tokens can make 180 requests/queries per 15
 minutes. Using application-only auth, an application can make 450
 queries/requests per 15 minutes on its own behalf without a user context.
+
+dplyr
 }
 \seealso{
 \url{https://api.twitter.com/1.1/search/tweets.json}

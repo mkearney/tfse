@@ -25,6 +25,9 @@ friends List of user ids each user follows.
 \description{
 get_friends_max
 }
+\details{
+dplyr
+}
 \seealso{
 See \url{https://dev.twitter.com/overview/documentation} for more
   information on using Twitter's API.

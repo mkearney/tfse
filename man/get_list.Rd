@@ -24,6 +24,9 @@ json response object as nested list
 \description{
 get_list
 }
+\details{
+httr jsonlite
+}
 \seealso{
 See \url{https://dev.twitter.com/overview/documentation} for more
   information on using Twitter's API.

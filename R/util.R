@@ -11,10 +11,10 @@ sn2id <- function(screen_name) {
          call. = FALSE)
   }
 
-  user_id <- rvest::read_html(paste0("http://twitter.com/", screen_name))
+  user_id <- read_html(paste0("http://twitter.com/", screen_name))
 
-  user_id <- user_id rvest::%>% rvest::html_nodes(".ProfileNav") rvest::%>%
-    rvest::html_attr("data-user-id")
+  user_id <- user_id %>% html_nodes(".ProfileNav") %>%
+    html_attr("data-user-id")
 
   user_id
 }

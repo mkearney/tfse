@@ -18,6 +18,9 @@ data_frame
 \description{
 extend_label_df
 }
+\details{
+dplyr
+}
 \seealso{
 See \url{https://dev.twitter.com/overview/documentation}
 for more information on using Twitter's API.

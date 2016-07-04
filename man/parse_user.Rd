@@ -15,6 +15,9 @@ data frame
 \description{
 parse_user
 }
+\details{
+dplyr
+}
 \seealso{
 See \url{https://dev.twitter.com/overview/documentation}
 for more information on using Twitter's API.

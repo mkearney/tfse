@@ -12,4 +12,7 @@ from_js(x)
 \description{
 from_js
 }
+\details{
+jsonlite httr
+}
 

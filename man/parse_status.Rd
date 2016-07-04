@@ -12,4 +12,7 @@ parse_status(x)
 \description{
 parse_status
 }
+\details{
+dplyr
+}
 
