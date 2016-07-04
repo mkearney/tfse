@@ -10,7 +10,7 @@
 #' @param delimited optional Specifies whether messages should be length-delimited. See delimited for more information.
 #' @param stall_warnings optional Specifies whether stall warnings should be delivered. See stall_warnings for more information.
 #' @param token OAuth token (1.0 or 2.0)
-#' @import jsonlite
+#' @details jsonlite
 #' @export
 filter_stream <- function(stream, delimited = FALSE,
                           stall_warnings = FALSE, token,
@@ -36,7 +36,7 @@ filter_stream <- function(stream, delimited = FALSE,
        timeout = timeout,
        file_name = file_name)
 
-  stream_tweets <- stream_in(file(file_name))
+  stream_tweets <- jsonlite::stream_in(file(file_name))
 
   on.exit(file.remove(file_name), add = TRUE)
 

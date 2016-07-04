@@ -57,7 +57,7 @@ get_lookup <- function(users, token, df = TRUE, skip = TRUE, entities = FALSE) {
 get_lookup_max <- function(ids, tokens, start = 1) {
   first <- start
   total <- length(ids)
-  ooo <- data_frame()
+  ooo <- dplyr::data_frame()
 
   for (i in tokens) {
     remaining <- check_rate_limit(type = "lookup", i)
@@ -69,7 +69,7 @@ get_lookup_max <- function(ids, tokens, start = 1) {
       }
 
       oo <- get_lookup(ids[first:last], i)
-      ooo <- bind_rows(ooo, oo)
+      ooo <- dplyr::bind_rows(ooo, oo)
 
       first <- last + 1
 

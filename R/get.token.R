@@ -8,13 +8,13 @@
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
 #'   information on using Twitter's API.
 #' @return twitter oauth 1.0 token
-#' @import httr
+#' @details httr
 #' @export
 get_token <- function(app, consumer_key, consumer_secret) {
-  out <- oauth_app(appname = app,
+  out <- httr::oauth_app(appname = app,
                    key = consumer_key,
                    secret = consumer_secret)
-  out <- oauth1.0_token(oauth_endpoints("twitter"), out)
+  out <- httr::oauth1.0_token(httr::oauth_endpoints("twitter"), out)
   out
 }
 

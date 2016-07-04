@@ -43,7 +43,7 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
 #'   information on using Twitter's API.
 #' @return friends List of user ids each user follows.
-#' @import dplyr
+#' @details dplyr
 #' @export
 get_friends_max <- function(user_ids, tokens, start = 1,
                             stringify = TRUE, verbose = TRUE) {
@@ -87,7 +87,7 @@ get_friends_max <- function(user_ids, tokens, start = 1,
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
 #'   information on using Twitter's API.
 #' @return friends List of user ids each user follows.
-#' @import dplyr
+#' @details dplyr
 #' @export
 get_friends_ply <- function(user_ids, tokens, start = 1) {
   # lapply

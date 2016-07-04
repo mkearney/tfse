@@ -3,7 +3,7 @@
 #' @param screen_name Twitter handle
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response Twitter account user id
-#' @import rvest
+#' @details rvest
 #' @export
 sn2id <- function(screen_name) {
   if (!requireNamespace("rvest", quietly = TRUE)) {
@@ -13,7 +13,7 @@ sn2id <- function(screen_name) {
 
   user_id <- rvest::read_html(paste0("http://twitter.com/", screen_name))
 
-  user_id <- user_id %>% rvest::html_nodes(".ProfileNav") %>%
+  user_id <- user_id rvest::%>% rvest::html_nodes(".ProfileNav") rvest::%>%
     rvest::html_attr("data-user-id")
 
   user_id
@@ -30,10 +30,10 @@ try_catch <- function(x) {
 #' from_js
 #'
 #' @param x json object
-#' @import jsonlite
+#' @details jsonlite httr
 #' @export
 from_js <- function(x) {
-  jsonlite::fromJSON(content(x, as = "text", encoding = "UTF-8"))
+  jsonlite::fromJSON(httr::content(x, as = "text", encoding = "UTF-8"))
 }
 
 #' enc_track_query
@@ -63,20 +63,19 @@ should_be_post <- function(.query, .nchar = 20) {
 #' @param url API url address.
 #' @return Response formatted as nested list.
 #' Assumes response object is json object.
-#' @import httr
-#' @import jsonlite
+#' @details httr jsonlite
 #' @export
 get_api <- function(url, token = NULL) {
   if (is.null(token)) {
-    req <- GET(url)
+    req <- httr::GET(url)
   } else {
-    req <- GET(url, config(token = as.character(token)))
+    req <- httr::GET(url, httr::config(token = as.character(token)))
   }
 
-  if (http_error(req)) {
+  if (httr::http_error(req)) {
     return(NULL)
   }
 
-  out <- jsonlite::fromJSON(content(req, as = "text"))
+  out <- jsonlite::fromJSON(httr::content(req, as = "text"))
   out
 }

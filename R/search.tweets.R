@@ -64,7 +64,7 @@
 #' @param token OAuth token (1.0 or 2.0)
 #' @seealso \url{https://api.twitter.com/1.1/search/tweets.json}
 #' @return json object
-#' @import dplyr
+#' @details dplyr
 #' @export
 search_tweets <- function(q, token, geocode = NULL, lang = NULL,
   locale = NULL, result_type = "recent", count = 100, until = NULL,
@@ -82,14 +82,14 @@ search_tweets <- function(q, token, geocode = NULL, lang = NULL,
 
   params <- paste0("q=", enc_track_query(q), "&", params)
 
-  tweets_df <- data_frame()
+  tweets_df <- dplyr::data_frame()
   nrows <- 0
 
   while (nrows < count) {
     out <- try_catch(TWIT(query = "search/tweets", parameters = params,
       token = token))
 
-    tweets_df <- bind_rows(tweets_df, parse_all_tweets(out$statuses))
+    tweets_df <- dplyr::bind_rows(tweets_df, parse_all_tweets(out$statuses))
 
     nrows <- nrow(tweets_df)
 
@@ -108,7 +108,7 @@ search_tweets <- function(q, token, geocode = NULL, lang = NULL,
 #' @param min minimum number of ocurrences to include in returned object
 #' @param exclude_words other words to exclude
 #' @return list object with top mentions and top words
-#' @import dplyr
+#' @details dplyr
 #' @export
 top_tweet_words <- function(tweets_text, min = 3, exclude_words = NULL) {
   tweets_text <- tweets_text[!is.na(tweets_text)]

@@ -21,8 +21,7 @@
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
 #'   information on using Twitter's API.
 #' @return json response object as nested list
-#' @import httr
-#' @import jsonlite
+#' @details httr jsonlite
 #' @export
 TWIT <- function(query, parameters = NULL, token,
                  parse = TRUE, version = "1.1",
@@ -35,7 +34,7 @@ TWIT <- function(query, parameters = NULL, token,
              query,
              ".json?",
              parameters),
-      config = config(token = token))
+      config = httr::config(token = token))
 
   } else if (query == "statuses/filter") {
 
@@ -46,9 +45,9 @@ TWIT <- function(query, parameters = NULL, token,
           version, "/",
           "statuses/filter.json?",
           parameters),
-        config = config(token = token),
-        timeout(timeout),
-        write_disk(file_name, overwrite = TRUE)),
+        config = httr::config(token = token),
+        httr::timeout(timeout),
+        httr::write_disk(file_name, overwrite = TRUE)),
         error = function(e) return(invisible()))
 
       return(invisible())
@@ -58,9 +57,9 @@ TWIT <- function(query, parameters = NULL, token,
                version, "/",
                "statuses/filter.json?",
                parameters),
-        config = config(token = token),
-        timeout(timeout),
-        write_disk(file_name, overwrite = TRUE)),
+        config = httr::config(token = token),
+        httr::timeout(timeout),
+        httr::write_disk(file_name, overwrite = TRUE)),
         error = function(e) return(invisible()))
 
       return(invisible())
@@ -72,10 +71,10 @@ TWIT <- function(query, parameters = NULL, token,
              query,
              ".json?",
              parameters),
-      config = config(token = token))
+      config = httr::config(token = token))
   }
 
-  if (http_error(req)) {
+  if (httr::http_error(req)) {
     return (message("http error"))
   }
   if (parse) {

@@ -9,8 +9,7 @@
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more
 #'   information on using Twitter's API.
 #' @return json response object as nested list
-#' @import httr
-#' @import jsonlite
+#' @details httr jsonlite
 #' @export
 get_list <- function(slug, owner, token, count = 5000, cursor = "-1") {
   out <- TWIT(query = "lists/members",
@@ -19,5 +18,5 @@ get_list <- function(slug, owner, token, count = 5000, cursor = "-1") {
                                   "&count=", count,
                                   "&cursor=", cursor),
               token = token)
-  return(out)
+  out
 }
