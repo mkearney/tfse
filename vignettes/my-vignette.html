@@ -77,6 +77,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>to install <code>tfse</code> run the following code in R:</li>
 </ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (<span class="kw">packageVersion</span>(<span class="st">&quot;devtools&quot;</span>) &lt;<span class="st"> </span><span class="fl">1.6</span>) {
+  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
+}
+devtools::<span class="kw">install_github</span>(<span class="st">&quot;mkearney/tfse&quot;</span>)</code></pre></div>
 </div>
 <div id="obtaining-access-tokens" class="section level2">
 <h2>obtaining access tokens</h2>
@@ -108,30 +112,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="demo" class="section level2">
 <h2>demo</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### install and load tfse
-<span class="co">#devtools::install_github(&quot;mkearney/tfse&quot;)</span>
-<span class="kw">library</span>(tfse)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tfse)</code></pre></div>
 <div id="get_token" class="section level3">
 <h3>get_token()</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### first time running get_token() function should open web browser 
 ### select yes/agree to authorize each app
 ### replace 'appX_name' with name of your application (see: 'obtaining access tokens')
 ### replace 'xxxx' with alpha-numeric keys associated with your apps
-<span class="co">#tokens &lt;- c(get_token(app = &quot;app1_name&quot;,</span>
-<span class="co">#                      consumer_key = &quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;,</span>
-<span class="co">#                      consumer_secret = &quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;),</span>
-<span class="co">#            get_token(app = &quot;app2_name&quot;,</span>
-<span class="co">#                      consumer_key = &quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;,</span>
-<span class="co">#                      consumer_secret = &quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;),</span>
-<span class="co">#            get_token(app = &quot;app3_name&quot;,</span>
-<span class="co">#                      consumer_key = &quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;,</span>
-<span class="co">#                      consumer_secret = &quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;))</span>
+tokens &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">get_token</span>(<span class="dt">app =</span> <span class="st">&quot;app1_name&quot;</span>,
+                      <span class="dt">consumer_key =</span> <span class="st">&quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span>,
+                      <span class="dt">consumer_secret =</span> <span class="st">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span>),
+            <span class="kw">get_token</span>(<span class="dt">app =</span> <span class="st">&quot;app2_name&quot;</span>,
+                      <span class="dt">consumer_key =</span> <span class="st">&quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span>,
+                      <span class="dt">consumer_secret =</span> <span class="st">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span>),
+            <span class="kw">get_token</span>(<span class="dt">app =</span> <span class="st">&quot;app3_name&quot;</span>,
+                      <span class="dt">consumer_key =</span> <span class="st">&quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span>,
+                      <span class="dt">consumer_secret =</span> <span class="st">&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span>))
 ### save tokens for easy use in future sessions
 ### take note of working directory
-<span class="co">#save(tokens, file = &quot;tokens&quot;)</span>
-<span class="co">#getwd()</span>
-
-### to load tokens in new session, uncomment the next line
+<span class="kw">save</span>(tokens, <span class="dt">file =</span> <span class="st">&quot;tokens&quot;</span>)
+<span class="kw">getwd</span>()</code></pre></div>
+<pre><code>##  [1] &quot;/Users/mwk/r/tfse&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### to load tokens in new session
 <span class="kw">load</span>(<span class="st">&quot;/Users/mwk/r/tfse/tt/tokens&quot;</span>) <span class="co"># specify whole path if changing working directory</span></code></pre></div>
 </div>
 <div id="get_followers" class="section level3">
@@ -179,14 +181,16 @@ users</code></pre></div>
 ### (15 user networks for each token)
 user_ids &lt;-<span class="st"> </span><span class="kw">sample</span>(users$user_id[users$protected ==<span class="st"> </span><span class="ot">FALSE</span>], <span class="dv">45</span>)
 user_networks &lt;-<span class="st"> </span><span class="kw">get_friends_max</span>(user_ids, tokens[<span class="dv">6</span>:<span class="dv">8</span>])</code></pre></div>
-<pre><code>## ***</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">user_networks[[<span class="dv">1</span>]][<span class="dv">1</span>:<span class="dv">5</span>]</code></pre></div>
-<pre><code>## [1] &quot;71201743&quot;   &quot;62513246&quot;   &quot;1339835893&quot; &quot;813286&quot;     &quot;145125358&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">user_networks[[<span class="dv">2</span>]][<span class="dv">1</span>:<span class="dv">5</span>]</code></pre></div>
-<pre><code>## [1] &quot;3739058774&quot; &quot;9300262&quot;    &quot;18622869&quot;   &quot;15427776&quot;   &quot;285198536&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">user_networks[[<span class="dv">3</span>]][<span class="dv">1</span>:<span class="dv">5</span>]</code></pre></div>
-<pre><code>## [1] &quot;1339835893&quot; &quot;1536791610&quot; &quot;115485051&quot;  &quot;157140968&quot;  &quot;236699098&quot;</code></pre>
 </div>
+</div>
+<div id="section" class="section level2">
+<h2>***</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">user_networks[[<span class="dv">1</span>]][<span class="dv">1</span>:<span class="dv">2</span>]</code></pre></div>
+<pre><code>## [1] &quot;71201743&quot;   &quot;62513246&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">user_networks[[<span class="dv">2</span>]][<span class="dv">1</span>:<span class="dv">2</span>]</code></pre></div>
+<pre><code>## [1] &quot;3739058774&quot; &quot;9300262&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">user_networks[[<span class="dv">3</span>]][<span class="dv">1</span>:<span class="dv">2</span>]</code></pre></div>
+<pre><code>## [1] &quot;1339835893&quot; &quot;1536791610&quot;</code></pre>
 <div id="search_tweets" class="section level3">
 <h3>search_tweets()</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### search tweets via REST API
@@ -258,14 +262,15 @@ e16stream &lt;-<span class="st"> </span><span class="kw">filter_stream</span>(
   <span class="dt">stream =</span> <span class="st">&quot;realdonaldtrump,hillaryclinton,hillary,trump,</span>
 <span class="st">            election2016,imwithher,makeamericagreatagain&quot;</span>,
   <span class="dt">timeout =</span> <span class="dv">10</span>,
-  <span class="dt">token =</span> tokens[[<span class="dv">2</span>]])</code></pre></div>
-<pre><code>## opening file input connection.</code></pre>
-<pre><code>## 
+  <span class="dt">token =</span> tokens[[<span class="dv">2</span>]])
+e16stream</code></pre></div>
+<pre><code>## opening file input connection.
+## 
  Found 158 records...
- Imported 158 records. Simplifying into dataframe...</code></pre>
-<pre><code>## closing file input connection.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e16stream</code></pre></div>
-<pre><code>## Source: local data frame [158 x 116]
+ Imported 158 records. Simplifying into dataframe...
+## closing file input connection.
+e16stream
+## Source: local data frame [158 x 116]
 ## 
 ##             status_id
 ##                 &lt;chr&gt;
