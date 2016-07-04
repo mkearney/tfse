@@ -25,14 +25,16 @@ parse_status <- function(x) {
     "favorited" = as.character(prep_vector(x$favorited)),
     "retweeted" = as.character(prep_vector(x$retweeted)),
     "lang" = as.character(prep_vector(x$lang)),
-    "quoted_status_id" = as.character(prep_vector(x$quoted_status_id_str)))
+    "quoted_status_id" = as.character(
+      prep_vector(x$quoted_status_id_str)))
   status_df
 }
 
 #' parse_retweet
 #'
 #' @param x json response object as in json_object$retweet_status
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation}
+#' for more information on using Twitter's API.
 #' @return data_frame
 #' @import dplyr
 #' @export
@@ -49,7 +51,8 @@ parse_retweet <- function(x) {
     retweet_df <- bind_rows(retweet_df, place_df)
   }
   if (is.data.frame(x$entities)) {
-    entities_df <- extend_label_df(parse_entities(x$entities), "retweet")
+    entities_df <- extend_label_df(parse_entities(x$entities),
+                                   "retweet")
     retweet_df <- bind_rows(retweet_df, entities_df)
   }
   retweet_df
@@ -59,7 +62,8 @@ parse_retweet <- function(x) {
 #' parse_all_tweets
 #'
 #' @param x json response object from tweet/status Twitter API request.
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation}
+#' for more information on using Twitter's API.
 #' @return data_frame
 #' @import dplyr
 #' @export
@@ -89,7 +93,8 @@ parse_all_tweets <- function(x) {
 #' parse_place
 #'
 #' @param x json resposne object from user lookup Twitter API call.
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation}
+#' for more information on using Twitter's API.
 #' @return data frame
 #' @import dplyr
 #' @export
@@ -123,9 +128,11 @@ parse_place <- function(x) {
 
 #' extend_label_df
 #'
-#' @param dff other, extended data.frame within larger json response object
+#' @param dff other, extended data.frame within larger json
+#' response object
 #' @param new label to represent the other data.frame
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation}
+#' for more information on using Twitter's API.
 #' @return data_frame
 #' @import dplyr
 #' @export
@@ -140,7 +147,8 @@ extend_label_df <- function(dff, label = "other") {
 #' parse_user
 #'
 #' @param x json resposne object from user lookup Twitter API call.
-#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @seealso See \url{https://dev.twitter.com/overview/documentation}
+#' for more information on using Twitter's API.
 #' @return data frame
 #' @import dplyr
 #' @export

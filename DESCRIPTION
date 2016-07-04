@@ -1,5 +1,5 @@
 Package: tfse
-Version: 1.1.0
+Version: 1.1.1
 Title: Twitter Follows and Selective Exposure
 Authors@R: person("Mike", "Kearney", email = "mwk@ku.edu",
                   role = c("aut", "cre"))
