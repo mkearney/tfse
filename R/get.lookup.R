@@ -22,7 +22,7 @@ get_lookup <- function(users, token, df = TRUE, skip = TRUE, entities = FALSE) {
     id_type <- "screen_name"
   }
 
-  parameters = paste0(id_type, "=",
+  parameters <- paste0(id_type, "=",
                       paste(users, collapse = ","))
 
   if (skip) {
@@ -59,7 +59,7 @@ get_lookup_max <- function(ids, tokens, start = 1) {
   total <- length(ids)
   ooo <- data_frame()
 
-  for(i in tokens) {
+  for (i in tokens) {
     remaining <- check_rate_limit(type = "lookup", i)
     while (remaining > 0) {
       last <- first + 99

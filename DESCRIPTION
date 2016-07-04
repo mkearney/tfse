@@ -1,14 +1,30 @@
 Package: tfse
-Type: Package
-Title: twitter follows & selective exposure
-Version: 1.0.0
-Author: Michael W. Kearney
-Maintainer: Michael W. Kearney <mkearney@ku.edu>
-Description: this package contains R code used in my dissertation research most of the functions are designed to interact with twitter's API. this repository will one day be organized into more useful replication materials. until then, it's is a work in progress.
+Version: 1.1.0
+Title: Twitter Follows and Selective Exposure
+Authors@R: person("Mike", "Kearney", email = "mwk@ku.edu",
+                  role = c("aut", "cre"))
+Description: An implementation of http calls and data wrangling
+    functions designed to interact with Twitter API's. GET and
+    POST requests are designed to return data from Twitter's
+    search and streaming API's. Returned [json] objects are
+    automatically parsed into data_frames or lists. Specific
+    consideration is given within the functions to use of more
+    than one OAuth personal access token.
+Depends:
+    R (>= 3.3.0)
+Imports:
+    dplyr (>= 0.5.0),
+    httr (>= 1.2.1),
+    jsonlite (>= 1.0)
+Suggests:
+    rvest (>= 3.2),
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
 License: MIT + file LICENSE
 LazyData: TRUE
+URL:
+    https://github.com/mkearney/tfse/,
+    https://dev.twitter.com/overview/documentation
+BugReports: https://github.com/mkearney/tfse/issues
 RoxygenNote: 5.0.1
-Imports:
-    httr,
-    jsonlite,
-    dplyr

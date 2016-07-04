@@ -10,12 +10,15 @@ parse_status <- function(x) {
     "truncated" = as.character(prep_vector(x$text)),
     "result_type" = as.character(prep_vector(x$metadata$result_type)),
     "created_at" = as.Date(as.POSIXct(as.character(prep_vector(x$created_at)),
-                                      format="%a %b %d %H:%M:%S %z %Y"),
+                                      format = "%a %b %d %H:%M:%S %z %Y"),
                            format = "%Y-%M-%D"),
     "source" = as.character(prep_vector(x$source)),
-    "in_reply_to_status_id" = as.character(prep_vector(x$in_reply_to_status_id_str)),
-    "in_reply_to_user_id" = as.character(prep_vector(x$in_reply_to_user_id_str)),
-    "in_reply_to_screen_name" = as.character(prep_vector(x$in_reply_to_screen_name)),
+    "in_reply_to_status_id" = as.character(
+      prep_vector(x$in_reply_to_status_id_str)),
+    "in_reply_to_user_id" = as.character(
+      prep_vector(x$in_reply_to_user_id_str)),
+    "in_reply_to_screen_name" = as.character(
+      prep_vector(x$in_reply_to_screen_name)),
     "is_quote_status" = as.character(prep_vector(x$is_quote_status)),
     "retweet_count" = as.character(prep_vector(x$retweet_count)),
     "favorite_count" = as.character(prep_vector(x$favorite_count)),
@@ -99,14 +102,22 @@ parse_place <- function(x) {
     "place_full_name" = prep_vector(x$full_name),
     "place_country_code" = prep_vector(x$country_code),
     "place_country" = prep_vector(x$country),
-    "place_long1" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 1, 1])),
-    "place_long2" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 2, 1])),
-    "place_long3" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 3, 1])),
-    "place_long4" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 4, 1])),
-    "place_lat1" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 1, 2])),
-    "place_lat2" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 2, 2])),
-    "place_lat3" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 3, 2])),
-    "place_lat4" = lapply(x$bounding_box$coordinates, function(x) prep_vector(x[1, 4, 2])))
+    "place_long1" = lapply(x$bounding_box$coordinates,
+                           function(x) prep_vector(x[1, 1, 1])),
+    "place_long2" = lapply(x$bounding_box$coordinates,
+                           function(x) prep_vector(x[1, 2, 1])),
+    "place_long3" = lapply(x$bounding_box$coordinates,
+                           function(x) prep_vector(x[1, 3, 1])),
+    "place_long4" = lapply(x$bounding_box$coordinates,
+                           function(x) prep_vector(x[1, 4, 1])),
+    "place_lat1" = lapply(x$bounding_box$coordinates,
+                          function(x) prep_vector(x[1, 1, 2])),
+    "place_lat2" = lapply(x$bounding_box$coordinates,
+                          function(x) prep_vector(x[1, 2, 2])),
+    "place_lat3" = lapply(x$bounding_box$coordinates,
+                          function(x) prep_vector(x[1, 3, 2])),
+    "place_lat4" = lapply(x$bounding_box$coordinates,
+                          function(x) prep_vector(x[1, 4, 2])))
   place_df
 }
 
@@ -141,15 +152,17 @@ parse_user <- function(x) {
     "location" = as.character(prep_vector(x$location)),
     "description" = as.character(prep_vector(x$description)),
     "url" = as.character(prep_vector(x$url)),
-    "entities_description_url" = prep_list(x$entities$description$urls, "expanded_url"),
+    "entities_description_url" = prep_list(
+      x$entities$description$urls, "expanded_url"),
     "entities_url" = prep_list(x$entities$url$urls, "expanded_url"),
     "protected" = as.logical(prep_vector(x$protected)),
     "followers_count" = as.integer(prep_vector(x$followers_count)),
     "friends_count" = as.integer(prep_vector(x$friends_count)),
     "listed_count" = as.integer(prep_vector(x$listed_count)),
-    "created_at" = as.Date(as.POSIXct(as.character(prep_vector(x$created_at)),
-                                      format="%a %b %d %H:%M:%S %z %Y"),
-                           format = "%Y-%M-%D"),
+    "created_at" = as.Date(as.POSIXct(
+      as.character(prep_vector(x$created_at)),
+      format = "%a %b %d %H:%M:%S %z %Y"),
+      format = "%Y-%M-%D"),
     "favourites_count" = as.integer(prep_vector(x$favourites_count)),
     "utc_offset" = as.integer(prep_vector(x$utc_offset)),
     "time_zone" = as.character(prep_vector(x$time_zone)),
@@ -167,7 +180,8 @@ parse_user <- function(x) {
 prep_list <- function(x, colname) {
   if (length(x) == 0) return(NA)
   x <- lapply(x, function(x) c(unlist(x[[`colname`]])))
-  x[!unlist(lapply(x, is.null))] <- lapply(x[!unlist(lapply(x, is.null))], tolower)
+  x[!unlist(lapply(x, is.null))] <- lapply(
+    x[!unlist(lapply(x, is.null))], tolower)
   x[unlist(lapply(x, is.null))] <- NA
   x
 }
@@ -178,22 +192,34 @@ prep_list <- function(x, colname) {
 #' @export
 parse_entities <- function(x) {
   entities_df <- data_frame(
-    "entities_hashtag" = prep_list(x$hashtags, "text"),
-    "entities_user_mentions_user_id" = prep_list(x$user_mentions, "id"),
-    "entities_user_mentions_screen_name" = prep_list(x$user_mentions, "screen_name"),
-    "entities_user_mentions_name" = prep_list(x$user_mentions, "name"),
-    "entities_urls_expanded" = prep_list(x$urls, "expanded_url"),
-    "entities_media_id" = prep_list(x$media, "id_str"),
-    "entities_media_source_status_id" = prep_list(x$media, "source_status_id_str"),
-    "entities_media_source_user_id" = prep_list(x$media, "source_user_id_str"),
-    "entities_media_expanded_url" = prep_list(x$media, "expanded_url"))
+    "entities_hashtag" = prep_list(
+      x$hashtags, "text"),
+    "entities_user_mentions_user_id" = prep_list(
+      x$user_mentions, "id"),
+    "entities_user_mentions_screen_name" = prep_list(
+      x$user_mentions, "screen_name"),
+    "entities_user_mentions_name" = prep_list(
+      x$user_mentions, "name"),
+    "entities_urls_expanded" = prep_list(
+      x$urls, "expanded_url"),
+    "entities_media_id" = prep_list(
+      x$media, "id_str"),
+    "entities_media_source_status_id" = prep_list(
+      x$media, "source_status_id_str"),
+    "entities_media_source_user_id" = prep_list(
+      x$media, "source_user_id_str"),
+    "entities_media_expanded_url" = prep_list(
+      x$media, "expanded_url"))
 
   if (is.data.frame(x$extended_entities$media)) {
     extended_entities_df <- data_frame(
       "extended_entities_media_id" = prep_list(x$media, "id_str"),
-      "extended_entities_media_source_status_id" = prep_list(x$media, "source_status_id_str"),
-      "extended_entities_media_source_user_id" = prep_list(x$media, "source_user_id_str"),
-      "extended_entities_media_expanded_url" = prep_list(x$media, "expanded_url"))
+      "extended_entities_media_source_status_id" = prep_list(
+        x$media, "source_status_id_str"),
+      "extended_entities_media_source_user_id" = prep_list(
+        x$media, "source_user_id_str"),
+      "extended_entities_media_expanded_url" = prep_list(
+        x$media, "expanded_url"))
     entities_df <- bind_rows(entities_df, extended_entities_df)
   }
   entities_df

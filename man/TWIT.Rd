@@ -8,9 +8,8 @@ TWIT(query, parameters = NULL, token, parse = TRUE, version = "1.1",
   timeout = 120, file_name)
 }
 \arguments{
-\item{query}{Twitter API request type string. e.g, \code{"friends/ids"} calls
-Twitter API to return information about a user's friend network (i.e.,
-accounts followed by a user).}
+\item{query}{Twitter API request type (e.g., \code{"friends/ids"},
+\code{"users/lookup"}, \code{"statuses/filter"}).}
 
 \item{parameters}{Additional parameters passed along to API call}
 
@@ -22,7 +21,18 @@ accounts followed by a user).}
 json response object as nested list
 }
 \description{
-TWIT
+The Twitter Search API is part of Twitter’s REST API.
+It allows queries against the indices of recent or
+popular Tweets and behaves similarly to, but not
+exactly like the Search feature available in Twitter
+mobile or web clients, such as Twitter.com search.
+The Twitter Search API searches against a sampling of
+recent Tweets published in the past 7 days. The Search
+API is focused on relevance and not completeness.
+This means that some Tweets and users may be missing
+from search results. If you want to match for
+completeness you should consider using a Streaming
+API instead.
 }
 \seealso{
 See \url{https://dev.twitter.com/overview/documentation} for more

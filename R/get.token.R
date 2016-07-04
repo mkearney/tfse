@@ -24,4 +24,3 @@ get_token <- function(app, consumer_key, consumer_secret) {
 #' @return logical value indicating whether object is screen name [or user ID]
 #' @export
 is_screen_name <- function(x) suppressWarnings(is.na(as.numeric(x)))
-

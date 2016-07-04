@@ -1,5 +1,9 @@
 #' get_friends
 #'
+#' Requests information from Twitter's REST API regarding a user's friend
+#' network (i.e., accounts followed by a user). To request information
+#' on followers of accounts @seealso \code{get_followers}.
+#'
 #' @param user Screen name or user id of target user.
 #' @param token OAuth token (1.0 or 2.0)
 #' @param page Default \code{page = -1} specifies first page of json results.
@@ -41,7 +45,8 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 #' @return friends List of user ids each user follows.
 #' @import dplyr
 #' @export
-get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbose = TRUE) {
+get_friends_max <- function(user_ids, tokens, start = 1,
+                            stringify = TRUE, verbose = TRUE) {
   max_users <- length(user_ids)
 
   # starting value
@@ -56,7 +61,7 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbo
       get_friends(x, tokens[[i]], stringify = stringify))
 
     if (verbose) {
-      if ((n * 15) %% 750 == 0) {
+      if (n * 15 %% 750 == 0) {
         cat(paste0(floor(n * 15 / length(user_ids) * 100), "%"), fill = TRUE)
       } else {
         cat("*")
@@ -64,7 +69,8 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbo
     }
 
     n <- n + 1
-    if (n > (max_users/15)) break
+
+    if (n > (max_users / 15)) break
   }
 
   l <- do.call("c", l)
@@ -85,10 +91,14 @@ get_friends_max <- function(user_ids, tokens, start = 1, stringify = TRUE, verbo
 #' @export
 get_friends_ply <- function(user_ids, tokens, start = 1) {
   # lapply
-  l <- mapply(function(i, n) sapply(user_ids[which_ids(n)], function(x) get_friends(x, i)), tokens, start:length(tokens))
+  l <- mapply(function(i, n) sapply(user_ids[which_ids(n)],
+                                    function(x)
+    get_friends(x, i)), tokens, start:length(tokens))
 
   # data frame
-  d <- dplyr::data_frame(user_id = user_ids[1:length(l)], friends = lapply(l, function(x) list(x)[[1]]))
+  d <- dplyr::data_frame(
+    user_id = user_ids[1:length(l)],
+    friends = lapply(l, function(x) list(x)[[1]]))
   d$date <- Sys.Date()
   d <- d[, c(1, 3, 2)]
 
@@ -144,10 +154,13 @@ get_friendslist <- function(user, token, page = "-1") {
   }
 
   out <- TWIT(query = "friends/list",
-              parameters = paste0("count=200&cursor=",
-                                  page, "&",
-                                  id_type, "=", user,
-                                  "&skip_status=true&include_user_entities=false"),
+              parameters = paste0(
+                "count=200&cursor=",
+                page, "&",
+                id_type, "=", user,
+                "&skip_status=true&
+                include_user_entities
+                =false"),
               token = token)
   out
 }

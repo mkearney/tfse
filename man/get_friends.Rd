@@ -22,7 +22,9 @@ object.}
 friends User ids for everyone a user follows.
 }
 \description{
-get_friends
+Requests information from Twitter's REST API regarding a user's friend
+network (i.e., accounts followed by a user). To request information
+on followers of accounts @seealso \code{get_followers}.
 }
 \seealso{
 See \url{https://dev.twitter.com/overview/documentation} for more

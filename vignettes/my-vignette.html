@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="date" content="2016-07-04" />
+
+<title>tfse demo</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">tfse demo</h1>
+<h4 class="date"><em>2016-07-04</em></h4>
+
+
+
+<div id="install" class="section level2">
+<h2>install</h2>
+<ul>
+<li>to install <code>tfse</code> run the following code in R:</li>
+</ul>
+</div>
+<div id="obtaining-access-tokens" class="section level2">
+<h2>obtaining access tokens</h2>
+<ol style="list-style-type: decimal">
+<li>To create Twitter app(s) [and secure access to oauth tokens necessary for API queries] visit <a href="http://apps.twitter.com/app/new" class="uri">http://apps.twitter.com/app/new</a></li>
+<li>Enter information in <code>Name</code>, <code>Description</code>, <code>Website</code>, and <code>Callback URL</code> fields like example provided below. For <code>Callback URL</code> make sure to copy/paste the following: <code>http://127.0.0.1:1410</code></li>
+<li>Once the app is created, copy and paste <code>consumer key</code> and <code>consumer secret key</code> into the <code>get_token()</code> function (see demo below).</li>
+</ol>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">tfse_app</td>
+</tr>
+<tr class="even">
+<td align="left">Description</td>
+<td align="left">Twitter follows and selective exposure</td>
+</tr>
+<tr class="odd">
+<td align="left">Website</td>
+<td align="left"><a href="http://twitter.com/kearneymw" class="uri">http://twitter.com/kearneymw</a></td>
+</tr>
+<tr class="even">
+<td align="left">Callback URL</td>
+<td align="left"><a href="http://127.0.0.1:1410" class="uri">http://127.0.0.1:1410</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="demo" class="section level2">
+<h2>demo</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### install and load tfse
+<span class="co">#devtools::install_github(&quot;mkearney/tfse&quot;)</span>
+<span class="kw">library</span>(tfse)</code></pre></div>
+<div id="get_token" class="section level3">
+<h3>get_token()</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### first time running get_token() function should open web browser 
+### select yes/agree to authorize each app
+### replace 'appX_name' with name of your application (see: 'obtaining access tokens')
+### replace 'xxxx' with alpha-numeric keys associated with your apps
+<span class="co">#tokens &lt;- c(get_token(app = &quot;app1_name&quot;,</span>
+<span class="co">#                      consumer_key = &quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;,</span>
+<span class="co">#                      consumer_secret = &quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;),</span>
+<span class="co">#            get_token(app = &quot;app2_name&quot;,</span>
+<span class="co">#                      consumer_key = &quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;,</span>
+<span class="co">#                      consumer_secret = &quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;),</span>
+<span class="co">#            get_token(app = &quot;app3_name&quot;,</span>
+<span class="co">#                      consumer_key = &quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;,</span>
+<span class="co">#                      consumer_secret = &quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;))</span>
+### save tokens for easy use in future sessions
+### take note of working directory
+<span class="co">#save(tokens, file = &quot;tokens&quot;)</span>
+<span class="co">#getwd()</span>
+
+### to load tokens in new session, uncomment the next line
+<span class="kw">load</span>(<span class="st">&quot;/Users/mwk/r/tfse/tt/tokens&quot;</span>) <span class="co"># specify whole path if changing working directory</span></code></pre></div>
+</div>
+<div id="get_followers" class="section level3">
+<h3>get_followers()</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### use multiple tokens to return 225,000 followers 
+### (75,000 followers for each token)
+hrc_followers &lt;-<span class="st"> </span><span class="kw">get_followers_max</span>(<span class="st">&quot;HillaryClinton&quot;</span>, tokens[<span class="dv">3</span>:<span class="dv">4</span>])
+hrc_followers[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
+<pre><code>##  [1] &quot;750026524779216896&quot; &quot;750027440135757824&quot; &quot;750026662402723841&quot;
+##  [4] &quot;750027119271538688&quot; &quot;4159860484&quot;         &quot;750027122052333570&quot;
+##  [7] &quot;750026175792185344&quot; &quot;750024264582135809&quot; &quot;42521826&quot;          
+## [10] &quot;750027371332378625&quot;</code></pre>
+</div>
+<div id="get_lookup" class="section level3">
+<h3>get_lookup()</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### lookup user data for thousands of users
+### (up to 18,000 users for each token)
+users &lt;-<span class="st"> </span><span class="kw">get_lookup_max</span>(hrc_followers[<span class="dv">1</span>:<span class="dv">1000</span>], tokens[<span class="dv">1</span>:<span class="dv">2</span>])
+users</code></pre></div>
+<pre><code>## Source: local data frame [1,000 x 20]
+## 
+##               user_id                name     screen_name  location
+##                 &lt;chr&gt;               &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;
+## 1  750026524779216896       Reuben Cargil   King_Smiley24        NA
+## 2  750027440135757824   Donetta monferini donettamonferi5        NA
+## 3  750026662402723841         Adel Hameed    AdelHameed16        NA
+## 4  750027119271538688                 Dan   Project_Gen_Y        NA
+## 5          4159860484         Dana Bassem     bassem_dana        NA
+## 6  750027122052333570         Jerry Kauyu      JerryKauyu        NA
+## 7  750026175792185344 Андрій Лоточинський        SKY__BOW        NA
+## 8  750024264582135809    فاروق مح ابو عمر yyuuiioopp20151        NA
+## 9            42521826    Dana Jacklyn Roy     yummydanish neverland
+## 10 750027371332378625     PAZ Y SEGURIDAD      co_trabajo        NA
+## ..                ...                 ...             ...       ...
+## Variables not shown: description &lt;chr&gt;, url &lt;chr&gt;,
+##   entities_description_url &lt;lgl&gt;, entities_url &lt;lgl&gt;, protected &lt;lgl&gt;,
+##   followers_count &lt;int&gt;, friends_count &lt;int&gt;, listed_count &lt;int&gt;,
+##   created_at &lt;date&gt;, favourites_count &lt;int&gt;, utc_offset &lt;int&gt;, time_zone
+##   &lt;chr&gt;, geo_enabled &lt;lgl&gt;, verified &lt;lgl&gt;, statuses_count &lt;int&gt;, lang
+##   &lt;chr&gt;.</code></pre>
+</div>
+<div id="get_friends" class="section level3">
+<h3>get_friends()</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### use multiple tokens to return 45 user networks (aka friends)
+### (15 user networks for each token)
+user_ids &lt;-<span class="st"> </span><span class="kw">sample</span>(users$user_id[users$protected ==<span class="st"> </span><span class="ot">FALSE</span>], <span class="dv">45</span>)
+user_networks &lt;-<span class="st"> </span><span class="kw">get_friends_max</span>(user_ids, tokens[<span class="dv">6</span>:<span class="dv">8</span>])</code></pre></div>
+<pre><code>## ***</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">user_networks[[<span class="dv">1</span>]][<span class="dv">1</span>:<span class="dv">5</span>]</code></pre></div>
+<pre><code>## [1] &quot;71201743&quot;   &quot;62513246&quot;   &quot;1339835893&quot; &quot;813286&quot;     &quot;145125358&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">user_networks[[<span class="dv">2</span>]][<span class="dv">1</span>:<span class="dv">5</span>]</code></pre></div>
+<pre><code>## [1] &quot;3739058774&quot; &quot;9300262&quot;    &quot;18622869&quot;   &quot;15427776&quot;   &quot;285198536&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">user_networks[[<span class="dv">3</span>]][<span class="dv">1</span>:<span class="dv">5</span>]</code></pre></div>
+<pre><code>## [1] &quot;1339835893&quot; &quot;1536791610&quot; &quot;115485051&quot;  &quot;157140968&quot;  &quot;236699098&quot;</code></pre>
+</div>
+<div id="search_tweets" class="section level3">
+<h3>search_tweets()</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### search tweets via REST API
+### (number of tweets returned varies; broader searchers are best)
+elect16 &lt;-<span class="st"> </span><span class="kw">search_tweets</span>(<span class="dt">q =</span> <span class="st">&quot;election2016&quot;</span>, 
+                         <span class="dt">count =</span> <span class="dv">500</span>,
+                         <span class="dt">token =</span> tokens[[<span class="dv">2</span>]])
+elect16</code></pre></div>
+<pre><code>## Source: local data frame [900 x 116]
+## 
+##             status_id
+##                 &lt;chr&gt;
+## 1  750027959646453760
+## 2  750027943057977344
+## 3  750027784836227072
+## 4  750027704158879744
+## 5  750027639931502592
+## 6  750027345151557632
+## 7  750027283990089728
+## 8  750027096173449216
+## 9  750027093384294401
+## 10 750027057745129472
+## ..                ...
+## Variables not shown: text &lt;chr&gt;, truncated &lt;chr&gt;, result_type &lt;chr&gt;,
+##   created_at &lt;date&gt;, source &lt;chr&gt;, in_reply_to_status_id &lt;chr&gt;,
+##   in_reply_to_user_id &lt;chr&gt;, in_reply_to_screen_name &lt;chr&gt;,
+##   is_quote_status &lt;chr&gt;, retweet_count &lt;chr&gt;, favorite_count &lt;chr&gt;,
+##   favorited &lt;chr&gt;, retweeted &lt;chr&gt;, lang &lt;chr&gt;, quoted_status_id &lt;chr&gt;,
+##   place_id &lt;chr&gt;, place_url &lt;chr&gt;, place_type &lt;chr&gt;, place_name &lt;chr&gt;,
+##   place_full_name &lt;chr&gt;, place_country_code &lt;chr&gt;, place_country &lt;chr&gt;,
+##   place_long1 &lt;list&gt;, place_long2 &lt;list&gt;, place_long3 &lt;list&gt;, place_long4
+##   &lt;list&gt;, place_lat1 &lt;list&gt;, place_lat2 &lt;list&gt;, place_lat3 &lt;list&gt;,
+##   place_lat4 &lt;list&gt;, entities_hashtag &lt;list&gt;,
+##   entities_user_mentions_user_id &lt;list&gt;,
+##   entities_user_mentions_screen_name &lt;list&gt;, entities_user_mentions_name
+##   &lt;list&gt;, entities_urls_expanded &lt;list&gt;, entities_media_id &lt;list&gt;,
+##   entities_media_source_status_id &lt;list&gt;, entities_media_source_user_id
+##   &lt;list&gt;, entities_media_expanded_url &lt;list&gt;, user_id &lt;chr&gt;, name &lt;chr&gt;,
+##   screen_name &lt;chr&gt;, location &lt;chr&gt;, description &lt;chr&gt;, url &lt;chr&gt;,
+##   entities_description_url &lt;list&gt;, entities_url &lt;list&gt;, protected &lt;lgl&gt;,
+##   followers_count &lt;int&gt;, friends_count &lt;int&gt;, listed_count &lt;int&gt;,
+##   favourites_count &lt;int&gt;, utc_offset &lt;int&gt;, time_zone &lt;chr&gt;, geo_enabled
+##   &lt;lgl&gt;, verified &lt;lgl&gt;, statuses_count &lt;int&gt;, retweet_status_id &lt;chr&gt;,
+##   retweet_text &lt;chr&gt;, retweet_truncated &lt;chr&gt;, retweet_result_type &lt;chr&gt;,
+##   retweet_created_at &lt;date&gt;, retweet_source &lt;chr&gt;,
+##   retweet_in_reply_to_status_id &lt;chr&gt;, retweet_in_reply_to_user_id &lt;chr&gt;,
+##   retweet_in_reply_to_screen_name &lt;chr&gt;, retweet_is_quote_status &lt;chr&gt;,
+##   retweet_retweet_count &lt;chr&gt;, retweet_favorite_count &lt;chr&gt;,
+##   retweet_favorited &lt;chr&gt;, retweet_retweeted &lt;chr&gt;, retweet_lang &lt;chr&gt;,
+##   retweet_quoted_status_id &lt;chr&gt;, retweet_user_id &lt;chr&gt;, retweet_name
+##   &lt;chr&gt;, retweet_screen_name &lt;chr&gt;, retweet_location &lt;chr&gt;,
+##   retweet_description &lt;chr&gt;, retweet_url &lt;chr&gt;,
+##   retweet_entities_description_url &lt;list&gt;, retweet_entities_url &lt;list&gt;,
+##   retweet_protected &lt;lgl&gt;, retweet_followers_count &lt;int&gt;,
+##   retweet_friends_count &lt;int&gt;, retweet_listed_count &lt;int&gt;,
+##   retweet_favourites_count &lt;int&gt;, retweet_utc_offset &lt;int&gt;,
+##   retweet_time_zone &lt;chr&gt;, retweet_geo_enabled &lt;lgl&gt;, retweet_verified
+##   &lt;lgl&gt;, retweet_statuses_count &lt;int&gt;, retweet_place_id &lt;chr&gt;,
+##   retweet_place_url &lt;chr&gt;, retweet_place_type &lt;chr&gt;, retweet_place_name
+##   &lt;chr&gt;, retweet_place_full_name &lt;chr&gt;, retweet_place_country_code &lt;chr&gt;,
+##   retweet_place_country &lt;chr&gt;, retweet_place_long1 &lt;list&gt;,
+##   retweet_place_long2 &lt;list&gt;, and 15 more &lt;...&gt;.</code></pre>
+</div>
+<div id="filter_stream" class="section level3">
+<h3>filter_stream()</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### read tweets in stream - collect tweets for 5 minutes (timeout = 300s)
+### the code below returned a data frame with 3963 rows 
+e16stream &lt;-<span class="st"> </span><span class="kw">filter_stream</span>(
+  <span class="dt">stream =</span> <span class="st">&quot;realdonaldtrump,hillaryclinton,hillary,trump,</span>
+<span class="st">            election2016,imwithher,makeamericagreatagain&quot;</span>,
+  <span class="dt">timeout =</span> <span class="dv">10</span>,
+  <span class="dt">token =</span> tokens[[<span class="dv">2</span>]])</code></pre></div>
+<pre><code>## opening file input connection.</code></pre>
+<pre><code>## 
+ Found 158 records...
+ Imported 158 records. Simplifying into dataframe...</code></pre>
+<pre><code>## closing file input connection.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e16stream</code></pre></div>
+<pre><code>## Source: local data frame [158 x 116]
+## 
+##             status_id
+##                 &lt;chr&gt;
+## 1  750028110972592128
+## 2  750028111413071872
+## 3  750028111845163008
+## 4  750028112608370688
+## 5  750028113015349248
+## 6  750028113225056257
+## 7  750028113158045696
+## 8  750028112633602048
+## 9  750028115175440384
+## 10 750028115309686789
+## ..                ...
+## Variables not shown: text &lt;chr&gt;, truncated &lt;chr&gt;, result_type &lt;chr&gt;,
+##   created_at &lt;date&gt;, source &lt;chr&gt;, in_reply_to_status_id &lt;chr&gt;,
+##   in_reply_to_user_id &lt;chr&gt;, in_reply_to_screen_name &lt;chr&gt;,
+##   is_quote_status &lt;chr&gt;, retweet_count &lt;chr&gt;, favorite_count &lt;chr&gt;,
+##   favorited &lt;chr&gt;, retweeted &lt;chr&gt;, lang &lt;chr&gt;, quoted_status_id &lt;chr&gt;,
+##   place_id &lt;chr&gt;, place_url &lt;chr&gt;, place_type &lt;chr&gt;, place_name &lt;chr&gt;,
+##   place_full_name &lt;chr&gt;, place_country_code &lt;chr&gt;, place_country &lt;chr&gt;,
+##   place_long1 &lt;list&gt;, place_long2 &lt;list&gt;, place_long3 &lt;list&gt;, place_long4
+##   &lt;list&gt;, place_lat1 &lt;list&gt;, place_lat2 &lt;list&gt;, place_lat3 &lt;list&gt;,
+##   place_lat4 &lt;list&gt;, entities_hashtag &lt;list&gt;,
+##   entities_user_mentions_user_id &lt;list&gt;,
+##   entities_user_mentions_screen_name &lt;list&gt;, entities_user_mentions_name
+##   &lt;list&gt;, entities_urls_expanded &lt;list&gt;, entities_media_id &lt;list&gt;,
+##   entities_media_source_status_id &lt;list&gt;, entities_media_source_user_id
+##   &lt;list&gt;, entities_media_expanded_url &lt;list&gt;, user_id &lt;chr&gt;, name &lt;chr&gt;,
+##   screen_name &lt;chr&gt;, location &lt;chr&gt;, description &lt;chr&gt;, url &lt;chr&gt;,
+##   entities_description_url &lt;lgl&gt;, entities_url &lt;lgl&gt;, protected &lt;lgl&gt;,
+##   followers_count &lt;int&gt;, friends_count &lt;int&gt;, listed_count &lt;int&gt;,
+##   favourites_count &lt;int&gt;, utc_offset &lt;int&gt;, time_zone &lt;chr&gt;, geo_enabled
+##   &lt;lgl&gt;, verified &lt;lgl&gt;, statuses_count &lt;int&gt;, retweet_status_id &lt;chr&gt;,
+##   retweet_text &lt;chr&gt;, retweet_truncated &lt;chr&gt;, retweet_result_type &lt;chr&gt;,
+##   retweet_created_at &lt;date&gt;, retweet_source &lt;chr&gt;,
+##   retweet_in_reply_to_status_id &lt;chr&gt;, retweet_in_reply_to_user_id &lt;chr&gt;,
+##   retweet_in_reply_to_screen_name &lt;chr&gt;, retweet_is_quote_status &lt;chr&gt;,
+##   retweet_retweet_count &lt;chr&gt;, retweet_favorite_count &lt;chr&gt;,
+##   retweet_favorited &lt;chr&gt;, retweet_retweeted &lt;chr&gt;, retweet_lang &lt;chr&gt;,
+##   retweet_quoted_status_id &lt;chr&gt;, retweet_user_id &lt;chr&gt;, retweet_name
+##   &lt;chr&gt;, retweet_screen_name &lt;chr&gt;, retweet_location &lt;chr&gt;,
+##   retweet_description &lt;chr&gt;, retweet_url &lt;chr&gt;,
+##   retweet_entities_description_url &lt;lgl&gt;, retweet_entities_url &lt;lgl&gt;,
+##   retweet_protected &lt;lgl&gt;, retweet_followers_count &lt;int&gt;,
+##   retweet_friends_count &lt;int&gt;, retweet_listed_count &lt;int&gt;,
+##   retweet_favourites_count &lt;int&gt;, retweet_utc_offset &lt;int&gt;,
+##   retweet_time_zone &lt;chr&gt;, retweet_geo_enabled &lt;lgl&gt;, retweet_verified
+##   &lt;lgl&gt;, retweet_statuses_count &lt;int&gt;, retweet_place_id &lt;chr&gt;,
+##   retweet_place_url &lt;chr&gt;, retweet_place_type &lt;chr&gt;, retweet_place_name
+##   &lt;chr&gt;, retweet_place_full_name &lt;chr&gt;, retweet_place_country_code &lt;chr&gt;,
+##   retweet_place_country &lt;chr&gt;, retweet_place_long1 &lt;list&gt;,
+##   retweet_place_long2 &lt;list&gt;, and 15 more &lt;...&gt;.</code></pre>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

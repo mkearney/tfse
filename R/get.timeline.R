@@ -71,7 +71,7 @@ get_timeline <- function(user, since_id = NULL, count = NULL, max_id = NULL,
                         parameters = paste0(id_type, "=", user, params),
                         token = token))
 
-  timeline_df <- data_frame_status(timeline_df)
+  timeline_df <- parse_all_tweets(timeline_df)
   timeline_df
 }
 
@@ -100,8 +100,6 @@ get_retweets <- function(tweet_id, count = 100, trim_user = TRUE, token) {
                         parameters = paste0("id=", tweet_id, "&", params),
                         token = token))
 
-  out <- data_frame_status(out)
+  out <- parse_all_tweets(out)
   out
 }
-
-

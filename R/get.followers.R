@@ -39,8 +39,9 @@ get_followers_max <- function(user, tokens) {
   page <- "-1"
   f <- character()
 
-  for(i in seq_along(tokens)) {
-    followerid_limit <- check_rate_limit(type = "followers", token = tokens[[i]])
+  for (i in seq_along(tokens)) {
+    followerid_limit <- check_rate_limit(
+      type = "followers", token = tokens[[i]])
 
     while (followerid_limit > 0) {
       flwrs <- get_followers(user, tokens[[i]], page)
@@ -55,7 +56,8 @@ get_followers_max <- function(user, tokens) {
         return(f)
       }
 
-      followerid_limit <- check_rate_limit(type = "followers", token = tokens[[i]])
+      followerid_limit <- check_rate_limit(
+        type = "followers", token = tokens[[i]])
     }
   }
   f
@@ -85,7 +87,9 @@ get_followerslist <- function(user, token, page = "-1") {
               parameters = paste0("count=200&cursor=",
                                   page, "&",
                                   id_type, "=", user,
-                                  "&skip_status=true&include_user_entities=false"),
+                                  "&skip_status=true&
+                                  include_user_entities
+                                  =false"),
               token = token)
 
   out

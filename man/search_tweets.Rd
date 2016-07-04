@@ -34,9 +34,9 @@ consumers and the default should work in the majority of cases.}
 
 \item{result_type}{optional, Specifies what type of search results you would
 prefer to receive. The current default is “mixed.” Valid values include
-\code{"mixed"} to include both popular and real time results in the
-response, \code{"recent"} to return only the most recent results in the
-response, and\code{"popular"} to return only the most popular results in
+\code{'mixed'} to include both popular and real time results in the
+response, \code{'recent'} to return only the most recent results in the
+response, and\code{'popular'} to return only the most popular results in
 the response.}
 
 \item{count}{optional, The number of tweets to return per page, up to a
@@ -46,7 +46,7 @@ the old Search API.}
 \item{until}{optional, Returns tweets created before the given date. Date
 should be formatted as YYYY-MM-DD. Keep in mind that the search index has a
 7-day limit. In other words, no tweets will be found for a date older than
-one week. Example Values: \code{"2015-07-19"}.}
+one week. Example Values: \code{'2015-07-19'}.}
 
 \item{since_id}{optional, Returns results with an ID greater than (that is,
 more recent than) the specified ID. There are limits to the number of
@@ -63,7 +63,7 @@ set to false.}
 \item{callback}{optional, If supplied, the response will use the JSONP format
 with a callback of the given name. The usefulness of this parameter is
 somewhat diminished by the requirement of authentication for requests to
-this endpoint. Example Values: \code{"processTweets"}}
+this endpoint.}
 }
 \value{
 json object
@@ -80,6 +80,14 @@ user) are not currently supported on this endpoint. To learn how to use
 Twitter Search effectively, consult our guide to Using the Twitter Search
 API. See Working with Timelines to learn best practices for navigating
 results by since_id and max_id.
+}
+\details{
+The GET search/tweets is part of the Twitter REST API 1.1 and
+is rate limited similarly to other v1.1 methods. See REST API Rate
+Limiting in v1.1 for information on that model. At this time, users
+represented by access tokens can make 180 requests/queries per 15
+minutes. Using application-only auth, an application can make 450
+queries/requests per 15 minutes on its own behalf without a user context.
 }
 \seealso{
 \url{https://api.twitter.com/1.1/search/tweets.json}

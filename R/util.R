@@ -1,3 +1,24 @@
+#' sn2id
+#'
+#' @param screen_name Twitter handle
+#' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
+#' @return response Twitter account user id
+#' @import rvest
+#' @export
+sn2id <- function(screen_name) {
+  if (!requireNamespace("rvest", quietly = TRUE)) {
+    stop("Rvest needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+
+  user_id <- rvest::read_html(paste0("http://twitter.com/", screen_name))
+
+  user_id <- user_id %>% rvest::html_nodes(".ProfileNav") %>%
+    rvest::html_attr("data-user-id")
+
+  user_id
+}
+
 #' try_catch
 #'
 #' @param x function call
@@ -6,32 +27,35 @@ try_catch <- function(x) {
   tryCatch(x, error = function(e) NA)
 }
 
-#' fromJS
+#' from_js
 #'
 #' @param x json object
 #' @import jsonlite
 #' @export
-fromJS <- function(x) {
-  fromJSON(content(x, as = "text", encoding = "UTF-8"))
+from_js <- function(x) {
+  jsonlite::fromJSON(content(x, as = "text", encoding = "UTF-8"))
 }
 
-#' foo_params
+#' enc_track_query
 #'
-#' @param x stream search string
+#' @param .track stream search string
 #' @export
-track_encode <- function(x) {
-  if (length(x) > 0) x <- paste(x, collapse = ",")
-  paste(sapply(unlist(strsplit(x, split = ",")), function(x) URLencode(trimws(x), reserved = FALSE)), collapse = ",")
+enc_track_query <- function(.track) {
+  if (length(.track) > 0) .track <- paste(.track, collapse = ",")
+  paste(sapply(unlist(strsplit(.track, split = ",")), function(x)
+    URLencode(trimws(x), reserved = FALSE)), collapse = ",")
 }
 
-#' foo_params
+#' should_be_post
 #'
 #' @param x api params
+#' @return logical indicating whether the query exceeds the specified
+#' cutoff point
 #' @export
-foo_params <- function(x) {
-  if (length(x) == 0) return(FALSE)
-  if (nchar(x) > 20) return(TRUE)
-  FALSE
+should_be_post <- function(.query, .nchar = 20) {
+  if (length(.query) == 0) return(FALSE)
+  if (nchar(.query) > .nchar) return(TRUE)
+  return(FALSE)
 }
 
 #' get_api
@@ -53,9 +77,6 @@ get_api <- function(url, token = NULL) {
     return(NULL)
   }
 
-  out <- fromJSON(content(req, as = "text"))
+  out <- jsonlite::fromJSON(content(req, as = "text"))
   out
 }
-
-
-

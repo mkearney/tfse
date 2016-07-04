@@ -12,18 +12,21 @@
 #' @param token OAuth token (1.0 or 2.0)
 #' @import jsonlite
 #' @export
-filter_stream <- function(stream, delimited = FALSE, stall_warnings = FALSE, token, timeout = 120, file_name = NULL) {
+filter_stream <- function(stream, delimited = FALSE,
+                          stall_warnings = FALSE, token,
+                          timeout = 120, file_name = NULL) {
+
   if (missing(stream)) stop("Must include stream search call.")
   stream <- unlist(trimws(unlist(strsplit(stream, ","))))
 
-  if (!is_screen_name(stream[[1]])) {
-    if (is.integer(stream[[1]])) {
-      params <- paste0("follow=", track_encode(stream))
+  if (!all(is_screen_name(stream))) {
+    if (all(is.integer(as.integer(stream)))) {
+      params <- paste0("follow=", enc_track_query(stream))
     } else {
-      params <- paste0("locations=", track_encode(stream))
+      params <- paste0("locations=", enc_track_query(stream))
     }
   } else {
-    params <- paste0("track=", track_encode(stream))
+    params <- paste0("track=", enc_track_query(stream))
   }
   if (is.null(file_name)) file_name <- tempfile()
 
@@ -35,7 +38,10 @@ filter_stream <- function(stream, delimited = FALSE, stall_warnings = FALSE, tok
 
   stream_tweets <- stream_in(file(file_name))
 
-  if (!is.data.frame(stream_tweets)) stop("Error in json file - no stream detected.")
+  on.exit(file.remove(file_name), add = TRUE)
+
+  if (!is.data.frame(stream_tweets)) stop(
+    "Error in json file - no stream detected.")
   stream_df <- parse_all_tweets(stream_tweets)
 
   return(stream_df[!is.na(stream_df$status_id), ])

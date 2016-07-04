@@ -13,25 +13,26 @@
 #'   requests
 #' @export
 check_rate_limit <- function(type, token, seconds = FALSE) {
-  rate_limit_status <- TWIT("application/rate_limit_status",
-                            parameters = NULL,
-                            token = token)
+  rl_st <- TWIT("application/rate_limit_status",
+                parameters = NULL,
+                token = token)
   if (seconds) {
-    response_type <- "reset"
+    resp_type <- "reset"
   } else {
-    response_type <- "remaining"
+    resp_type <- "remaining"
   }
   if (missing(token)) {
-    return(rate_limit_status)
+    return(rl_st)
   }
+
   if ("lookup" %in% tolower(type)) {
-    out <- rate_limit_status$resources$users$`/users/lookup`[[response_type]]
+    out <- rl_st$resources$users$`/users/lookup`[[resp_type]]
   }
   if ("followers" %in% tolower(type) | "follower" %in% tolower(type)) {
-    out <- rate_limit_status$resources$followers$`/followers/ids`[[response_type]]
+    out <- rl_st$resources$followers$`/followers/ids`[[resp_type]]
   }
   if ("friends" %in% tolower(type) | "friend" %in% tolower(type)) {
-    out <- rate_limit_status$resources$friends$`/friends/ids`[[response_type]]
+    out <- rl_st$resources$friends$`/friends/ids`[[resp_type]]
   }
   if (seconds) {
     out <- as.POSIXct(out, origin = "1970-01-01")
