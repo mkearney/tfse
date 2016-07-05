@@ -39,7 +39,7 @@ TWIT <- function(query, parameters = NULL, token,
   } else if (query == "statuses/filter") {
 
     if (should_be_post(parameters)) {
-      httr::RETRY("POST",
+      tryCatch(httr::RETRY("POST",
         paste0(
           "https://stream.twitter.com/",
           version, "/",
@@ -48,11 +48,12 @@ TWIT <- function(query, parameters = NULL, token,
         config = httr::config(token = token),
         httr::timeout(timeout),
         httr::write_disk(file_name, overwrite = TRUE),
-        times = 20)
+        times = 20), error = function(e)
+          return(invisible()))
 
       return(invisible())
     } else {
-      httr::RETRY("GET",
+      tryCatch(httr::RETRY("GET",
         paste0("https://stream.twitter.com/",
                version, "/",
                "statuses/filter.json?",
@@ -60,7 +61,8 @@ TWIT <- function(query, parameters = NULL, token,
         config = httr::config(token = token),
         httr::timeout(timeout),
         httr::write_disk(file_name, overwrite = TRUE),
-        times = 20)
+        times = 20), error = function(e)
+          return(invisible()))
 
       return(invisible())
     }
