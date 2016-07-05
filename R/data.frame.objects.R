@@ -68,7 +68,7 @@ parse_retweet <- function(x) {
 #' @details dplyr
 #' @export
 parse_all_tweets <- function(x) {
-  tweets_df <- dplyr::bind_rows(parse_status(x), parse_place(x$place))
+  tweets_df <- parse_status(x)
 
   if (is.data.frame(x$place)) {
     tweets_df <- dplyr::bind_rows(tweets_df, parse_place(x$place))

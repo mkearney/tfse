@@ -28,18 +28,18 @@ TWIT <- function(query, parameters = NULL, token,
                  timeout = 120, file_name) {
   # POST and GET requests
   if (query == "lists/members") {
-    req <- httr::POST(
-      paste0("https://api.twitter.com/",
-             version, "/",
-             query,
-             ".json?",
-             parameters),
-      config = httr::config(token = token))
+    req <- httr::RETRY("POST",
+                       paste0("https://api.twitter.com/",
+                              version, "/",
+                              query,
+                              ".json?",
+                              parameters),
+                       config = httr::config(token = token))
 
   } else if (query == "statuses/filter") {
 
     if (should_be_post(parameters)) {
-      tryCatch(httr::POST(
+      httr::RETRY("POST",
         paste0(
           "https://stream.twitter.com/",
           version, "/",
@@ -47,31 +47,31 @@ TWIT <- function(query, parameters = NULL, token,
           parameters),
         config = httr::config(token = token),
         httr::timeout(timeout),
-        httr::write_disk(file_name, overwrite = TRUE)),
-        error = function(e) return(invisible()))
+        httr::write_disk(file_name, overwrite = TRUE),
+        times = 20)
 
       return(invisible())
     } else {
-      tryCatch(httr::GET(
+      httr::RETRY("GET",
         paste0("https://stream.twitter.com/",
                version, "/",
                "statuses/filter.json?",
                parameters),
         config = httr::config(token = token),
         httr::timeout(timeout),
-        httr::write_disk(file_name, overwrite = TRUE)),
-        error = function(e) return(invisible()))
+        httr::write_disk(file_name, overwrite = TRUE),
+        times = 20)
 
       return(invisible())
     }
   } else {
-    req <- httr::GET(
-      paste0("https://api.twitter.com/",
-             version, "/",
-             query,
-             ".json?",
-             parameters),
-      config = httr::config(token = token))
+    req <- httr::RETRY("GET",
+                       paste0("https://api.twitter.com/",
+                              version, "/",
+                              query,
+                              ".json?",
+                              parameters),
+                       config = httr::config(token = token))
   }
 
   if (httr::http_error(req)) {

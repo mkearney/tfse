@@ -86,10 +86,13 @@ search_tweets <- function(q, token, geocode = NULL, lang = NULL,
   nrows <- 0
 
   while (nrows < count) {
-    out <- try_catch(TWIT(query = "search/tweets", parameters = params,
-      token = token))
+    out <- TWIT(query = "search/tweets",
+                parameters = params,
+                token = token)
 
-    tweets_df <- dplyr::bind_rows(tweets_df, parse_all_tweets(out$statuses))
+    tweets_df <- dplyr::bind_rows(
+      tweets_df,
+      parse_all_tweets(out$statuses))
 
     nrows <- nrow(tweets_df)
 

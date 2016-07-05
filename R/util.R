@@ -4,7 +4,6 @@
 #' @seealso See \url{https://dev.twitter.com/overview/documentation} for more information on using Twitter's API.
 #' @return response Twitter account user id
 #' @details rvest
-#' @export
 sn2id <- function(screen_name) {
   if (!requireNamespace("rvest", quietly = TRUE)) {
     stop("Rvest needed for this function to work. Please install it.",
@@ -52,7 +51,7 @@ enc_track_query <- function(.track) {
 #' @return logical indicating whether the query exceeds the specified
 #' cutoff point
 #' @export
-should_be_post <- function(.query, .nchar = 20) {
+should_be_post <- function(.query, .nchar = 30) {
   if (length(.query) == 0) return(FALSE)
   if (nchar(.query) > .nchar) return(TRUE)
   return(FALSE)

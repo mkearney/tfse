@@ -1,5 +1,6 @@
 Package: tfse
-Version: 1.1.1
+Version: 1.1.2
+Date: 2016-07-02
 Title: Twitter Follows and Selective Exposure
 Authors@R: person("Mike", "Kearney", email = "mwk@ku.edu",
                   role = c("aut", "cre"))
@@ -13,13 +14,13 @@ Description: An implementation of http calls and data wrangling
 Depends:
     R (>= 3.1.0)
 Imports:
-    dplyr (>= 0.5.0),
-    httr (>= 1.2.1),
-    jsonlite (>= 1.0)
+    dplyr,
+    httr,
+    jsonlite
 Suggests:
-    rvest (>= 3.2),
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 LazyData: TRUE

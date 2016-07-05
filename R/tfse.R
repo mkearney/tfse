@@ -5,7 +5,7 @@
 #' POST requests are designed to return data from Twitter's
 #' search and streaming API's. Returned [json] objects are
 #' automatically parsed into data_frames or lists. Specific
-#' consideration is given within the functions to use of more
+#' consideration is given to functions to use of more
 #' than one OAuth personal access token.
 #' @docType package
 #' @name tfse
