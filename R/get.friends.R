@@ -21,15 +21,20 @@ get_friends <- function(user, token, page = "-1", stringify = TRUE) {
 
   if (stringify) parameters <- paste0(parameters, "&stringify_ids=true")
 
-  out <- try_catch(TWIT(query = "friends/ids",
-                        parameters = parameters,
-                        token = token))
+  json.friends <- TWIT(query = "friends/ids",
+                       parameters = parameters,
+                       token = token)
 
-  if (length(out) == 0) {
-    return(NA_character_)
+  if (!is.null(json.friends["ids"])) {
+    return(json.friends["ids"])
   }
-
-  as.vector(out$ids)
+  if (!is.null(getElement(json.friends, "ids"))) {
+    return(list(ids = getElement(json.friends, "ids")))
+  }
+  if (!is.null(json.friends$ids)) {
+    return(list(ids = json.friends$ids))
+  }
+  list(ids = NA)
 }
 
 #' get_friends_max
@@ -49,6 +54,9 @@ get_friends_max <- function(user_ids, tokens, start = 1,
                             stringify = TRUE, verbose = TRUE) {
   max_users <- length(user_ids)
 
+  # set options
+  #options(httr_oauth_cache = FALSE)
+
   # starting value
   n <- start
 
@@ -57,11 +65,11 @@ get_friends_max <- function(user_ids, tokens, start = 1,
 
   # max rate limit of tokens exceeds remaining # ids
   for (i in seq_along(tokens)) {
-    l[[i]] <- sapply(user_ids[which_ids(n, max_users, tokens[[i]])], function(x)
-      get_friends(x, tokens[[i]], stringify = stringify))
+    l[[i]] <- vapply(user_ids[which_ids(n)], function(x)
+      get_friends(x, tokens[[i]]), FUN.VALUE = vector("list", 1))
 
     if (verbose) {
-      if (n * 15 %% 750 == 0) {
+      if (n * 15 %% (max_users/4) == 0) {
         cat(paste0(floor(n * 15 / length(user_ids) * 100), "%"), fill = TRUE)
       } else {
         cat("*")
@@ -73,8 +81,7 @@ get_friends_max <- function(user_ids, tokens, start = 1,
     if (n > (max_users / 15)) break
   }
 
-  l <- do.call("c", l)
-  l
+  do.call("c", l)
 }
 
 

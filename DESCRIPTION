@@ -1,5 +1,5 @@
 Package: tfse
-Version: 1.1.2
+Version: 1.1.3
 Date: 2016-07-02
 Title: Twitter Follows and Selective Exposure
 Authors@R: person("Mike", "Kearney", email = "mwk@ku.edu",

@@ -22,65 +22,70 @@
 #'   information on using Twitter's API.
 #' @return json response object as nested list
 #' @details httr jsonlite
+#' @import httr
 #' @export
 TWIT <- function(query, parameters = NULL, token,
                  parse = TRUE, version = "1.1",
                  timeout = 120, file_name) {
-  # POST and GET requests
+
   if (query == "lists/members") {
-    req <- httr::RETRY("POST",
-                       paste0("https://api.twitter.com/",
-                              version, "/",
-                              query,
-                              ".json?",
-                              parameters),
-                       config = httr::config(token = token))
+    req <- POST(paste0("https://api.twitter.com/",
+                       version, "/",
+                       query, ".json?",
+                       parameters),
+                config(token = token))
 
   } else if (query == "statuses/filter") {
 
     if (should_be_post(parameters)) {
-      tryCatch(httr::RETRY("POST",
-        paste0(
-          "https://stream.twitter.com/",
-          version, "/",
-          "statuses/filter.json?",
-          parameters),
-        config = httr::config(token = token),
-        httr::timeout(timeout),
-        httr::write_disk(file_name, overwrite = TRUE),
-        times = 20), error = function(e)
-          return(invisible()))
+      req <- POST(paste0("https://stream.twitter.com/",
+                        version, "/",
+                        query, ".json?",
+                        parameters),
+                 config(token = token),
+                 timeout(timeout),
+                 write_disk(file_name,
+                            overwrite = TRUE))
 
       return(invisible())
     } else {
-      tryCatch(httr::RETRY("GET",
-        paste0("https://stream.twitter.com/",
-               version, "/",
-               "statuses/filter.json?",
-               parameters),
-        config = httr::config(token = token),
-        httr::timeout(timeout),
-        httr::write_disk(file_name, overwrite = TRUE),
-        times = 20), error = function(e)
-          return(invisible()))
+      req <- GET(paste0("https://stream.twitter.com/",
+                        version, "/",
+                        "statuses/filter.json?",
+                        parameters),
+                 config(token = token),
+                 timeout(timeout),
+                 write_disk(file_name,
+                            overwrite = TRUE))
 
       return(invisible())
     }
-  } else {
-    req <- httr::RETRY("GET",
-                       paste0("https://api.twitter.com/",
-                              version, "/",
-                              query,
-                              ".json?",
-                              parameters),
-                       config = httr::config(token = token))
-  }
+  } else if (query == "friends/ids") {
+    req <- GET(paste0("https://api.twitter.com/",
+                        version, "/",
+                        query, ".json?",
+                        parameters),
+               config(token = token))
 
-  if (httr::http_error(req)) {
-    return (message("http error"))
-  }
-  if (parse) {
-    return (from_js(req))
+    if (http_error(req)) {
+      return(list(ids = NA))
+
+    } else if (parse) {
+      return(from_js(req))
+    }
+  } else {
+    req <- GET(paste0("https://api.twitter.com/",
+                      version, "/",
+                      query, ".json?",
+                      parameters),
+               config(token = token))
+
+    if (http_error(req)) {
+      return(invisible())
+
+    } else if (parse) {
+      return(from_js(req))
+    }
   }
   req
 }

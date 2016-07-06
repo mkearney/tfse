@@ -4,7 +4,7 @@
 \alias{should_be_post}
 \title{should_be_post}
 \usage{
-should_be_post(.query, .nchar = 30)
+should_be_post(.query, .nchar = 60)
 }
 \arguments{
 \item{x}{api params}

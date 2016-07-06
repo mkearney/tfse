@@ -32,7 +32,7 @@ try_catch <- function(x) {
 #' @details jsonlite httr
 #' @export
 from_js <- function(x) {
-  jsonlite::fromJSON(httr::content(x, as = "text", encoding = "UTF-8"))
+  jsonlite::fromJSON(httr::content(x, as = "text"))
 }
 
 #' enc_track_query
@@ -51,7 +51,7 @@ enc_track_query <- function(.track) {
 #' @return logical indicating whether the query exceeds the specified
 #' cutoff point
 #' @export
-should_be_post <- function(.query, .nchar = 30) {
+should_be_post <- function(.query, .nchar = 60) {
   if (length(.query) == 0) return(FALSE)
   if (nchar(.query) > .nchar) return(TRUE)
   return(FALSE)
@@ -68,13 +68,12 @@ get_api <- function(url, token = NULL) {
   if (is.null(token)) {
     req <- httr::GET(url)
   } else {
-    req <- httr::GET(url, httr::config(token = as.character(token)))
+    req <- httr::GET(url, httr::config(token = token))
   }
 
   if (httr::http_error(req)) {
-    return(NULL)
+    return(NA)
   }
 
-  out <- jsonlite::fromJSON(httr::content(req, as = "text"))
-  out
+  from_js(req)
 }
