@@ -14,4 +14,15 @@ automatically parsed into data_frames or lists. Specific
 consideration is given to functions to use of more
 than one OAuth personal access token.
 }
+\examples{
+\dontrun{get.followers("HillaryClinton")}
+}
+\author{
+Michael W Kearney
+}
+\seealso{
+\code{httr}
+}
+\keyword{package}
+\keyword{tfse-package}
 
