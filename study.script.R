@@ -16,14 +16,6 @@ o <- readr::read_csv("/Users/mwk/r/tfse/study/data/users_3000")
 user_ids <- o$user_id
 rm(o)
 
-# for loop function
-tokeN <- function(n) {
-  nset <- unlist(lapply(c(
-    1:length(tokens), 1:(200 - length(tokens))),
-    function(x) rep(x, 15)))
-  nset[n]
-}
-
 ##------------------------------------------------------------------##
 ##                         collect data                             ##
 ##------------------------------------------------------------------##
@@ -31,20 +23,24 @@ tokeN <- function(n) {
 # create list vector
 d <- vector("list", 3000)
 max_tkn <- (length(tokens) * 15)
+j <- 1
 
 # run loop(s) to collect data
-for (i in 1:max_tkn) {
-  d[[i]] <- get_friends(user_ids[i], tokens[[tokeN(i)]])
+for (i in seq_len(max_tkn)) {
+  fds <- get_friends(user_ids[i], tokens[[j]], recode_error = TRUE)
+  d[[i]] <- fds["ids"]
+  if ((i %% 15) == 0) j <- j + 1
 }
 
 # wait if necessary
-rate_limit(tokens[[1]], "friends/ids")
+rate_limit(tokens[[j]], "friends/ids")
 
 # final data collection loop
+j <- 1
 for (i in (max_tkn + 1):3000) {
-  d[[i]] <- get_friends(
-    user_ids[i],
-    tokens[[tokeN(i)]])
+  fds <- get_friends(user_ids[i], tokens[[j]], recode_error = TRUE)
+  d[[i]] <- fds["ids"]
+  if ((i %% 15) == 0) j <- j + 1
 }
 
 # create data frame
@@ -84,4 +80,4 @@ wave_num_path <- paste0(
 
 # save data
 readr::write_rds(d, wave_num_path)
-message(paste0("Data saved as ", wave_num_path, " !"))
+message(paste0("Data saved as ", wave_num_path, "!"))
