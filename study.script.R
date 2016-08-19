@@ -50,7 +50,7 @@ for (i in (max_tkn + 1):3000) {
 # create data frame
 d <- dplyr::data_frame(
   user_id = user_ids,
-  date = (Sys.Date() - 1),
+  date = Sys.Date(),
   friends = d)
 
 ##------------------------------------------------------------------##
