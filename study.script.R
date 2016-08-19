@@ -4,7 +4,6 @@
 
 # install rtweet
 # devtools::install_github("mkearney/rtweet")
-
 # load rtweet
 library(rtweet)
 
@@ -27,26 +26,31 @@ j <- 1
 
 # run loop(s) to collect data
 for (i in seq_len(max_tkn)) {
-  fds <- get_friends(user_ids[i], tokens[[j]], recode_error = TRUE)
-  d[[i]] <- fds["ids"]
-  if ((i %% 15) == 0) j <- j + 1
+  r <- tryCatch(get_friends(user_ids[i], token = tokens[j]),
+    error = function(e) return(NULL))
+  if (is.null(r)) r <- dplyr::data_frame(ids = NA_real_)
+  d[[i]] <- r
+  if (i %% 15 == 0) j <- j + 1
 }
 
+
 # wait if necessary
+j <- 1
 rate_limit(tokens[[j]], "friends/ids")
 
 # final data collection loop
-j <- 1
 for (i in (max_tkn + 1):3000) {
-  fds <- get_friends(user_ids[i], tokens[[j]], recode_error = TRUE)
-  d[[i]] <- fds["ids"]
-  if ((i %% 15) == 0) j <- j + 1
+  r <- tryCatch(get_friends(user_ids[i], token = tokens[j]),
+    error = function(e) return(NULL))
+  if (is.null(r)) r <- dplyr::data_frame(ids = NA_real_)
+  d[[i]] <- r
+  if (i %% 15 == 0) j <- j + 1
 }
 
 # create data frame
 d <- dplyr::data_frame(
   user_id = user_ids,
-  date = Sys.Date(),
+  date = (Sys.Date() - 1),
   friends = d)
 
 ##------------------------------------------------------------------##
