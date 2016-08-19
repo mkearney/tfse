@@ -11,7 +11,8 @@ library(rtweet)
 tokens <- get_tokens()
 
 # get sample user ids
-o <- readr::read_csv("/Users/mwk/r/tfse/study/data/users_3000")
+o <- suppressMessages(readr::read_csv(
+  "/Users/mwk/r/tfse/study/data/users_3000"))
 user_ids <- o$user_id
 rm(o)
 
