@@ -28,7 +28,7 @@ j <- 1
 for (i in seq_len(max_tkn)) {
   r <- tryCatch(get_friends(user_ids[i], token = tokens[j]),
     error = function(e) return(NULL))
-  if (is.null(r)) r <- dplyr::data_frame(ids = NA_real_)
+  if (is.null(r)) r <- data_frame_(ids = NA_real_)
   d[[i]] <- r
   if (i %% 15 == 0) j <- j + 1
   if (i %% 300 == 0) message(paste0(i/30, "% completed."))
@@ -38,19 +38,21 @@ for (i in seq_len(max_tkn)) {
 # wait if necessary
 j <- 1
 wait <- rate_limit(tokens[[j]], "friends/ids")[["reset"]]
-Sys.sleep(wait[[1]] * 70)
+if (wait[[1]] < 14) {
+  Sys.sleep(wait[[1]] * 65)
+}
 
 # final data collection loop
 for (i in (max_tkn + 1):3000) {
   r <- tryCatch(get_friends(user_ids[i], token = tokens[j]),
     error = function(e) return(NULL))
-  if (is.null(r)) r <- dplyr::data_frame(ids = NA_real_)
+  if (is.null(r)) r <- data_frame_(ids = NA_real_)
   d[[i]] <- r
   if (i %% 15 == 0) j <- j + 1
 }
 
 # create data frame
-d <- dplyr::data_frame(
+d <- data_frame_(
   user_id = user_ids,
   date = Sys.Date(),
   friends = d)
@@ -71,7 +73,7 @@ hist(fl, col = "gray", breaks = 30,
 # unique ids
 if (all(
   length(unique(d$user_id)) == 3000,
-  sum(fl == 1) < 100,
+  sum(fl == 1) < 200,
   length(unique(fl)))) {
   message("Wave data collection completed!")
 }
