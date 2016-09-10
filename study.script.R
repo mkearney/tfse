@@ -5,6 +5,7 @@
 # install/load rtweet
 # devtools::install_github("mkearney/rtweet")
 library(rtweet)
+library(tfse)
 
 # load twitter oauth tokens
 tokens <- get_tokens()
@@ -49,23 +50,27 @@ for (i in (max_tkn + 1):3000) {
   if (is.null(r)) r <- data_frame_(ids = NA_real_)
   d[[i]] <- r
   if (i %% 15 == 0) j <- j + 1
+  if (i %% 300 == 0) message(paste0(i/30, "% completed."))
 }
 
 # create data frame
 d <- data_frame_(
   user_id = user_ids,
   date = Sys.Date(),
-  friends = d)
+  friends = I(d))
 
 ##------------------------------------------------------------------##
 ##                         inspect data                             ##
 ##------------------------------------------------------------------##
 
 # first 10 rows
-d
+head(d, 10)
 
 # friends list length
-fl <- unlist(lapply(d$friends, function(x) length(unlist(x))))
+fl <- unlist(lapply(d$friends,
+  function(x) length(unlist(x))))
+
+# should look like count distr
 hist(fl, col = "gray", breaks = 30,
   main = "Friends", ylab = "freq",
   xlab = "# of friends")
