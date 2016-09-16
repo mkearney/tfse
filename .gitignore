@@ -22,3 +22,5 @@ study/filters.R
 tt
 .json
 inst/doc
+usr_sept.tweets.csv
+usr_sept.users.csv
