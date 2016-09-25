@@ -34,7 +34,7 @@ for (i in seq_len(max_tkn)) {
   if (is.null(r)) r <- data_frame_(ids = NA_real_)
   d[[i]] <- r
   if (i %% 15 == 0) j <- j + 1
-  if (i %% 30 == 0) message(paste0(round(i/3, 0), "% completed."))
+  if (i %% 30 == 0) message(paste0(round(i/300, 0), "% completed."))
 }
 
 
@@ -52,7 +52,7 @@ for (i in (max_tkn + 1):3000) {
   if (is.null(r)) r <- data_frame_(ids = NA_real_)
   d[[i]] <- r
   if (i %% 15 == 0) j <- j + 1
-  if (i %% 30 == 0) message(paste0(round(i/30, 0), "% completed."))
+  if (i %% 30 == 0) message(paste0(round(i/300, 0), "% completed."))
 }
 
 # create data frame
@@ -102,8 +102,8 @@ readr::write_rds(d,
   paste0("/Users/mwk/r/tfse/study/data/wave", wave_num))
 
 # save dropbox
-readr::write_rds(d,
-  paste0("/Users/mwk/Dropbox/dissrtweetion/data/wave", wave_num))
+#readr::write_rds(d,
+#  paste0("/Users/mwk/Dropbox/dissrtweetion/data/wave", wave_num))
 
 message(paste0("Data saved as ",
   paste0("/Users/mwk/r/tfse/study/data/wave", wave_num),
