@@ -34,7 +34,7 @@ for (i in seq_len(max_tkn)) {
   if (is.null(r)) r <- data_frame_(ids = NA_real_)
   d[[i]] <- r
   if (i %% 15 == 0) j <- j + 1
-  if (i %% 30 == 0) message(paste0(round(i/300, 0), "% completed."))
+  if (i %% 300 == 0) message(paste0(round(i/30, 0), "% completed."))
 }
 
 
@@ -52,7 +52,7 @@ for (i in (max_tkn + 1):3000) {
   if (is.null(r)) r <- data_frame_(ids = NA_real_)
   d[[i]] <- r
   if (i %% 15 == 0) j <- j + 1
-  if (i %% 30 == 0) message(paste0(round(i/300, 0), "% completed."))
+  if (i %% 30 == 0) message(paste0(round(i/30, 0), "% completed."))
 }
 
 # create data frame
@@ -80,7 +80,7 @@ hist(fl, col = "gray", breaks = 30,
 # unique ids
 if (all(
   length(unique(d$user_id)) == 3000,
-  sum(fl == 1) < 200,
+  sum(fl == 1) < 400,
   length(unique(fl)))) {
   message("Wave data collection completed!")
 }

@@ -6,16 +6,7 @@
 \alias{tfse-package}
 \title{tfse: Twitter Follows and Selective Exposure}
 \description{
-An implementation of http calls and data wrangling
-functions designed to interact with Twitter API's. GET and
-POST requests are designed to return data from Twitter's
-search and streaming API's. Returned [json] objects are
-automatically parsed into data_frames or lists. Specific
-consideration is given to functions to use of more
-than one OAuth personal access token.
-}
-\examples{
-\dontrun{get.followers("HillaryClinton")}
+Useful user functions and imported functions.
 }
 \author{
 Michael W Kearney
