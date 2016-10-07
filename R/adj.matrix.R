@@ -1,29 +1,4 @@
-library(rtweet)
-mookie <- get_timeline("ncamookie", n = 10000)
-mookie$user_id
 
-mookie.friends <- get_friends("ncamookie")
-user_ids <- mookie.friends[[1]]
-mookie.network <- lookup_users(user_ids)
-
-n <- length(user_ids)
-f <- vector("list", n)
-tokens <- get_tokens()
-j <- 1L
-
-for (i in seq_len(n)) {
-  f[[i]] <- tryCatch(get_friends(user_ids[i], token = tokens[j]),
-    error = function(e) return(NULL))
-  #if (is.null(r)) r <- data_frame_(ids = NA_real_)
-  if (i %% 10 == 0) j <- j + 1
-  if (i %% 25 == 0) message(paste0(round(i/2.44, 0), "% completed."))
-}
-
-keep <- user_ids %in% mookie.network$user_id
-friend.networks <- f[keep]
-names(friend.networks) <- mookie.network$screen_name
-
-library(rtweet)
 gf <- function(x, token, ...) {
   tryCatch(get_friends(x, token = token, ...),
     error = function(e) return(NULL))
@@ -31,12 +6,6 @@ gf <- function(x, token, ...) {
 ply_gf <- function(ids, tokens) {
   mapply(gf, ids, tokens)
 }
-flw <- get_followers("kearneymw")
-flw <- unique(flw[[1]])[!is.na(unique(flw[[1]]))]
-x <- lookup_users(flw)
-kmw <- lookup_users("kearneymw")
-x <- rbind(kmw, x)
-tokens <- get_tokens()
 
 adj_matrix <- function(x, tokens) {
   screen_names <- x[["screen_name"]]
