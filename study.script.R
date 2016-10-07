@@ -29,7 +29,7 @@ j <- 1
 
 # run loop(s) to collect data
 for (i in seq_len(max_tkn)) {
-  r <- tryCatch(get_friends(user_ids[i], token = tokens[j]),
+  r <- tryCatch(get_friends(user_ids[i], token = tokens[[j]]),
     error = function(e) return(NULL))
   if (is.null(r)) r <- data_frame_(ids = NA_real_)
   d[[i]] <- r
@@ -58,7 +58,7 @@ for (i in (max_tkn + 1):3000) {
 # create data frame
 d <- data_frame_(
   user_id = user_ids,
-  date = Sys.Date(),
+  date = Sys.time(),
   friends = I(d))
 
 ##------------------------------------------------------------------##
