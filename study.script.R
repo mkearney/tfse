@@ -25,34 +25,30 @@ rm(o)
 # create list vector
 d <- vector("list", 3000)
 max_tkn <- (length(tokens) * 15)
-j <- 1
+j <- 1L
 
 # run loop(s) to collect data
 for (i in seq_len(max_tkn)) {
-  r <- tryCatch(get_friends(user_ids[i], token = tokens[[j]]),
-    error = function(e) return(NULL))
-  if (is.null(r)) r <- data_frame_(ids = NA_real_)
-  d[[i]] <- r
+  d[[i]] <- tryCatch(get_friends(user_ids[i], token = tokens[[j]]),
+    error = function(e) return(data_frame_(ids = NA_real_)))
   if (i %% 15 == 0) j <- j + 1
   if (i %% 300 == 0) message(paste0(round(i/30, 0), "% completed."))
 }
 
 
 # wait if necessary
-j <- 1
-wait <- rate_limit(tokens[[j]], "friends/ids")[["reset"]]
-if (wait[[1]] < 14) {
-  Sys.sleep(wait[[1]] * 65)
-}
+j <- 1L
+#wait <- rate_limit(tokens[[j]], "friends/ids")[["reset"]]
+#if (wait[[1]] < 14) {
+#  Sys.sleep(wait[[1]] * 65)
+#}
 
 # final data collection loop
 for (i in (max_tkn + 1):3000) {
-  r <- tryCatch(get_friends(user_ids[i], token = tokens[j]),
-    error = function(e) return(NULL))
-  if (is.null(r)) r <- data_frame_(ids = NA_real_)
-  d[[i]] <- r
+  d[[i]] <- tryCatch(get_friends(user_ids[i], token = tokens[j]),
+    error = function(e) return(data_frame_(ids = NA_real_)))
   if (i %% 15 == 0) j <- j + 1
-  if (i %% 30 == 0) message(paste0(round(i/30, 0), "% completed."))
+  if (i %% 300 == 0) message(paste0(round(i/30, 0), "% completed."))
 }
 
 # create data frame

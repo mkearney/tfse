@@ -15,7 +15,7 @@ NULL
 .onAttach <- function(libname, pkgname) {
   days <- (as.Date("2017-04-01") - Sys.Date())[[1]]
   tbl_wide()
-  packageStartupMessage(paste0("you've got ", days,
+  packageStartupMessage(paste0("you have ", days,
     " days to complete your dissertation!"))
 }
 
