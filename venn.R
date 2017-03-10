@@ -1,21 +1,24 @@
-library(VennDiagram)
 
 
-
-grid.newpage()
-pdf("venn.pdf", 7, 7)
-par(family = "Latin Modern Roman 12")
+## draw plot (create tikz file to be included)
+tikzDevice::tikz("../tex/figures/venn.tex",
+                 standAlone = FALSE,
+                 width = 6,
+                 height = 5)
 draw.triple.venn(
-  area1 = 20, area2 = 20, area3 = 20,
+  area1 = 10, area2 = 10, area3 = 10,
   n12 = 1, n23 = 1, n13 = 1, n123 = 1,
   category = c("@maddow\n@salon\n@HuffPostPol\n@paulkrugman",
-    "@seanhannity\n@SarahPalinUSA\n@DRUDGE_REPORT\n@FoxNews",
-    "@AMC_TV\n@AmericanIdol\n@SInow\n@survivorcbs"),
-  lty = 2, label.col = rep("transparent", 7),
-  cat.dist = c(-.05, -.05, -.03), cat.cex = rep(1.3, 3),
-  cat.fontface = rep(1, 3), col = rep("#333333", 3),
+    "@seanhannity\n@SarahPalinUSA\n@DRUDGE\\_REPORT\n@FoxNews",
+    "@AMC\\_TV\n@SInow\n@survivorcbs\n"),
+  lty = 1,
+  label.col = rep("transparent", 7),
+  cat.dist = c(-.05, -.05, -.03),
+  cat.cex = rep(1.3, 3),
+  cat.fontface = rep(1, 3),
+  col = c("#002244", "#330000", "#330033"),
   lwd = rep(1.5, 3),
-  fill = c("#3366ff", "#dd3333", rgb(.2, .8, .2, .5)))
+  fill = c("#3366ffcc", "#dd3333cc", "#dd33dd88"))
 dev.off()
 
 

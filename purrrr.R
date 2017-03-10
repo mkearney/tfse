@@ -1,11 +1,16 @@
+devtools::load_all("/Users/mwk/r/tfse")
+devtools::document("/Users/mwk/r/tfse")
+devtools::install("/Users/mwk/r/tfse")
 library(rtweet)
+
+
 
 tw <- search_tweets("trump clinton", n = 300, parse = FALSE)
 tw[[2]] %>% lapply(., tidy_twt)
 tw[[2]] %>% .[["statuses"]] %>% .[["retweeted"]]
 tw[[3]] %>% tidy_twt %>% head
 tw[[4]] %>% tidy_twt %>% head
-tw %>% lapply(., tidy_twt) %>% lapply(., names) 
+tw %>% lapply(., tidy_twt) %>% lapply(., names)
 tw[[4]] %>% .[["statuses"]] %>% .[["coordinates"]]%>% is.na
 tw[[1]] %>% .[["statuses"]] %>% str1
 tw[[2]] %>% .[["statuses"]] %>% str1(vec.len = 0)
@@ -29,7 +34,7 @@ str1 <- function(., ...) str(., 1, vec.len = 0, ...)
 str2 <- function(., ...) str(., 2, vec.len = 0, ...)
 
 return_vectors <- function(x) {
-  x %>% .[!sapply(., is.recursive)] %>% data.frame(., 
+  x %>% .[!sapply(., is.recursive)] %>% data.frame(.,
     stringsAsFactors = FALSE)
 }
 return_recursives <- function(x) {
@@ -47,7 +52,7 @@ uNAlist <- function(x) {
 ply_extract <- function(., x, f) {
   if (!missing(x)) {
     . <- lapply(., function(.) .[[x]])
-  } 
+  }
   if (!missing(f)) {
     . <- lapply(., f)
   }
@@ -102,12 +107,12 @@ tidy_twt <- function(d) {
   expanded_url <- recur_df %>% .[["entities"]] %>% .[["urls"]] %>%
     ply_extract(x = "expanded_url", as.character) %>% fill_na
 
-  mentions_screen_name <- recur_df %>% .[["entities"]] %>% 
-    .[["user_mentions"]] %>% 
+  mentions_screen_name <- recur_df %>% .[["entities"]] %>%
+    .[["user_mentions"]] %>%
     ply_extract(x = "screen_name", as.character) %>% fill_na
 
   mentions_user_id <- recur_df %>% .[["entities"]] %>%
-  	.[["user_mentions"]] %>% 
+  	.[["user_mentions"]] %>%
     ply_extract(x = "id_str", as.character) %>% fill_na
 
   ##------------------------------------------------------------------##
@@ -128,16 +133,16 @@ tidy_twt <- function(d) {
       place_name = rep(NA_character_, nrow(vecs_df)),
       place_country_code = rep(NA_character_, nrow(vecs_df)),
       place_country = rep(NA_character_, nrow(vecs_df)))
-    coordinates <- lapply(rep(NA_real_, nrow(vecs_df)), 
+    coordinates <- lapply(rep(NA_real_, nrow(vecs_df)),
       function(.) matrix(., ncol = 8))
   } else {
     place_vecs_df <- place_vecs_df[names(place_vecs_df) %in% c(
-    "url", "place_type", "name", 
+    "url", "place_type", "name",
     "country_code", "country")]
-    names(place_vecs_df) <- paste0("place_", 
+    names(place_vecs_df) <- paste0("place_",
       gsub("place_", "", names(place_vecs_df)))
-    coordinates <- recur_df %>% .[["place"]] %>%  
-    .[["bounding_box"]] %>% .[["coordinates"]] %>% 
+    coordinates <- recur_df %>% .[["place"]] %>%
+    .[["bounding_box"]] %>% .[["coordinates"]] %>%
     ply_extract(., f = as.numeric) %>% lapply(., matrix, 1, 8)
   }
 
@@ -150,7 +155,7 @@ tidy_twt <- function(d) {
   ##------------------------------------------------------------------##
   ##                        retweet_status_id                         ##
   ##------------------------------------------------------------------##
-  retweet_status_id <- recur_df %>% .[["retweeted_status"]] %>% 
+  retweet_status_id <- recur_df %>% .[["retweeted_status"]] %>%
     .[["id_str"]] %>% as.character
   if (identical(length(retweet_status_id), 0L)) {
     retweet_status_id <- rep(NA_character_, nrow(vecs_df))
@@ -158,7 +163,7 @@ tidy_twt <- function(d) {
   ##------------------------------------------------------------------##
   ##                        quoted_status_id                          ##
   ##------------------------------------------------------------------##
-  quoted_status_id <- recur_df %>% .[["quoted_status"]] %>% 
+  quoted_status_id <- recur_df %>% .[["quoted_status"]] %>%
     .[["id_str"]] %>% as.character
   if (identical(length(quoted_status_id), 0L)) {
     quoted_status_id <- rep(NA_character_, nrow(vecs_df))
@@ -166,10 +171,10 @@ tidy_twt <- function(d) {
   ##------------------------------------------------------------------##
   ##                     USER ID and SCREN NAME                       ##
   ##------------------------------------------------------------------##
-  user_id <- recur_df %>% .[["user"]] %>% 
+  user_id <- recur_df %>% .[["user"]] %>%
     .[["id_str"]] %>% as.character
 
-  screen_name <- recur_df %>% .[["user"]] %>% 
+  screen_name <- recur_df %>% .[["user"]] %>%
     .[["screen_name"]] %>% as.character
 
   data.frame_(
@@ -194,13 +199,13 @@ tidy_usr <- function(x) {
   vecs_df <- x %>% return_vectors
   x_recs <- x %>% return_recursives
 
-  user_url <- x_recs %>% .[["entities"]] %>% .[["url"]] %>% 
-    .[["urls"]] %>% ply_extract(x = "expanded_url") %>% 
+  user_url <- x_recs %>% .[["entities"]] %>% .[["url"]] %>%
+    .[["urls"]] %>% ply_extract(x = "expanded_url") %>%
     as.character %>% fill_na
 
-  description_urls <- x_recs %>% .[["entities"]] %>% 
-    .[["description"]] %>% .[["urls"]] %>% 
-    ply_extract(x = "expanded_url", f = as.character) %>% 
+  description_urls <- x_recs %>% .[["entities"]] %>%
+    .[["description"]] %>% .[["urls"]] %>%
+    ply_extract(x = "expanded_url", f = as.character) %>%
     fill_na
 
   data.frame_(
