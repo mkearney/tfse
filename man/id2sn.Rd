@@ -4,23 +4,14 @@
 \alias{id2sn}
 \title{id2sn}
 \usage{
-id2sn(user_id)
-
-id2sn(user_id)
+id2sn(user_id, mc.cores = 1L)
 }
 \arguments{
 \item{user_id}{Vector of user_id(s)}
-
-\item{user_id}{Vector of user ids}
 }
 \value{
 Named vector of screen names.
-
-Vector of screen names
 }
 \description{
 Converts user ids to screen names.
-
-Returns screen_names for given ids
 }
-

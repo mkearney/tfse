@@ -10,4 +10,3 @@ tbl_df(data.frame(x = rnorm(10), y = rnorm(10)))
 tibble
 }
 \keyword{internal}
-

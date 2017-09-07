@@ -8,12 +8,11 @@
 \description{
 Useful user functions and imported functions.
 }
-\author{
-Michael W Kearney
-}
 \seealso{
 \code{httr}
 }
+\author{
+Michael W Kearney
+}
 \keyword{package}
 \keyword{tfse-package}
-

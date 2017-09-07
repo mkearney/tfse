@@ -22,4 +22,3 @@ top_tweet_words
 \details{
 dplyr
 }
-
