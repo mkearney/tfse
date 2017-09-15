@@ -6,6 +6,12 @@
 \usage{
 any_recursive(x)
 }
+\arguments{
+\item{x}{Object to be tested}
+}
+\value{
+Logical
+}
 \description{
 Tests whether any element is recursive.
 }
