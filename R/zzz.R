@@ -1,7 +1,6 @@
-#' get_var
+#' go_get_var
 #'
 #' Looks for and returns element of given name
-#'
 #'
 #' @param x Data object. Particularly useful for recursive lists.
 #' @param ... Names at each successive level from which to dive and return.
@@ -26,7 +25,7 @@
 #' ## fetch and return all v2's
 #' get_var(lst, "II", "B", "v2")
 #' @export
-get_var <- function(x, ...) {
+go_get_var <- function(x, ...) {
   vars <- c(...)
   success <- FALSE
   for (i in vars) {
@@ -113,8 +112,6 @@ any_recursive <- function(x) {
   any(vapply(x, is.recursive, logical(1)))
 }
 
-## hase name(s) accepts one or more names (looks for all == TRUE)
-
 
 #' has_name_
 #'
@@ -152,78 +149,7 @@ has_name_ <- function(x, ...) {
   all(vars %in% names(x))
 }
 
-#' check_renv
-#'
-#' Checks whether one can safely append to .Renvir file.
-#'
-#'
-#' @param path Path/to/.Renvir
-#' @usage
-#' check_renv(path)
-#' @export
-check_renv <- function(path) {
-  if (!file.exists(path)) {
-    return(invisible())
-  }
-  con <- file(path)
-  x <- readLines(con, warn = FALSE)
-  close(con)
-  x <- clean_renv(x)
-  x <- paste(x, collapse = "\n")
-  cat(x, file = path, fill = TRUE)
-  invisible()
-}
 
-clean_renv <- function(x) {
-  stopifnot(is.character(x))
-  ## remove incomplete vars
-  x <- grep("=$", x, value = TRUE, invert = TRUE)
-  ## split lines with double entries and fix into new vars
-  xs <- strsplit(x, "=")
-  vals <- sub("[^=]*=", "", x)
-  kp <- !grepl("[[:upper:]]{1,}=", vals)
-  if (sum(!kp) > 0L) {
-    m <- regexpr("[[:upper:]_]{1,}(?==)", x[!kp], perl = TRUE)
-    newlines <- paste0(regmatches(x[!kp], m), "=", sub(".*=", "", x[!kp]))
-    x <- x[kp]
-    x[(length(x) + 1):(length(x) + length(newlines))] <- newlines
-  }
-  ## remove double entries
-  xs <- strsplit(x, "=")
-  kp <- !duplicated(sapply(xs, "[[", 1))
-  x <- x[kp]
-  x
-}
-
-#' menuline
-#'
-#' Creates interactive multiple choice question.
-#'
-#'
-#' @param q Question to be asked in interactive session.
-#' @param a Answer choices.
-#' @return Selection provided by user in interactive session.
-#' @export
-menuline <- function(q, a) {
-  message(q)
-  menu(a)
-}
-
-
-#' readline_
-#'
-#' Worry free way to read lines from interactive sessions.
-#'
-#' @param ... Character string or vector to be used as prompt during
-#'   interactive R session. Ultimately, this function only sends a
-#'   single string to the user, but it will accept a vector if you're
-#'   picky about not creating strings of a certain width.
-#' @return Input entered during interactive session without extra quotes.
-#' @export
-readline_ <- function(...) {
-  input <- readline(paste(unlist(c(...)), collapse = ""))
-  gsub("^\"|^'|\"$|'$", "", input)
-}
 
 
 #' trim_ws

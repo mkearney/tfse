@@ -8,8 +8,7 @@
 funs <- function(names) {
   fun <- function(name = "foo") {
     paste0(
-    "\n#\' ",
-    name,
+    "\n#\' ", name,
     "\n#\' ",
     "\n#\' Verbs object",
     "\n#\' ",
