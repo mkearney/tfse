@@ -41,7 +41,10 @@ update_version_number <- function(update_type = "patch", pkg = getwd()) {
 }
 
 
-
+#' version_number
+#'
+#' Class for version numbers.
+#' 
 #' @param major Increment major, e.g. 1.0.0, for a major release. This
 #'   is best reserved for changes that are not backward compatible and
 #'   that are likely to affect many users. Going from 0.b.c to 1.0.0
@@ -57,6 +60,7 @@ update_version_number <- function(update_type = "patch", pkg = getwd()) {
 #'   patch release if, after release, I discover a show-stopping bug
 #'   that needs to be fixed ASAP. Most releases will have a patch
 #'   number of 0.
+#' @export
 version_number <- function(major, minor, patch) {
   stopifnot(map_lgl(is.numeric, list(major, minor, patch)))
   major <- as.integer(major)
@@ -78,6 +82,7 @@ version_number <- function(major, minor, patch) {
   )
 }
 
+#' @export
 as.version_number <- function(x) {
   stopifnot(length(x) == 1L)
   x <- strsplit(x, "\\.")[[1]]
@@ -87,6 +92,7 @@ as.version_number <- function(x) {
   do.call(version_number, as.list(as.integer(x)))
 }
 
+#' @export
 print.version_number <- function(x) {
   if (x[3] < 10L & x[3] > 0L) {
     x[3] <- paste0("0", x[3])
@@ -97,6 +103,7 @@ print.version_number <- function(x) {
   print(x)
 }
 
+#' @export
 paste.version_number <- function(x) {
   if (x[3] < 10L & x[3] > 0L) {
     x[3] <- paste0("0", x[3])
@@ -107,10 +114,12 @@ paste.version_number <- function(x) {
 }
 
 
+#' @export
 cutnum <- function(x, s1, s2) {
   as.numeric(substr(x, s1, s2))
 }
 
+#' @export
 `+.version_number` <- function(e1, e2) {
   if (length(e2) == 1L && is.character(e2)) {
     e2 <- as.version_number(e2)
@@ -135,15 +144,4 @@ cutnum <- function(x, s1, s2) {
   }
   do.call("version_number", x)
 }
-
-version_number(1, 0, 0)
-
-e1 <- version_number(0, 3, 90)
-e2 <- version_number(0, 0, 10)
-e1
-e2
-e1 + e2
-e1 + 100
-e1 + 1200
-e1 + "0.0.10"
 

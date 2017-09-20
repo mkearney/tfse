@@ -117,7 +117,6 @@ any_recursive <- function(x) {
 #'
 #' Tests whether object contains name(s)
 #'
-#'
 #' @param x Data object. This function is not recursive, so must be applied to
 #'   object at intended level of inspection.
 #' @param ... Names to look for in data object.
@@ -168,7 +167,7 @@ trim_ws <- function(x) {
 #'
 #' Vector of stopwords
 #' @docType data
-NULL
+"stopwords"
 
 stopwords <- tidytext::stop_words$word[tidytext::stop_words$lexicon == "SMART"]
 
