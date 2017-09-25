@@ -1,20 +1,21 @@
 
 #' update_version_number
-#' 
+#'
 #' Updates version number in R package documentation
 #'
-#' @param update_type 
+#' @param update_type Patch, minor, or major update.
 #' @param path Path to base directory of given R package.
 #' @return Updates and saves DESCRIPTION file.
-#' @export 
-update_version_number <- function(update_type = "patch", pkg = getwd()) {
-  pkg <- gsub("DESCRIPTION$", "", pkg)
-  if (!file.exists(file.path(pkg, "DESCRIPTION"))) {
+#' @export
+update_version_number <- function(update_type = "patch", pkg = ".") {
+  pkg <- normalizePath(pkg)
+  path_to_DESCRIPTION <- file.path(pkg, "DESCRIPTION")
+  if (!file.exists(path_to_DESCRIPTION)) {
     stop(
       "No file named \"DESCRIPTION\" found in pkg directory."
     )
   }
-  x <- readlines(file.path(pkg, "DESCRIPTION"))
+  x <- readlines(path_to_DESCRIPTION)
   v <- grep("^Version:", x)
   nv <- gsub("Version:\\s{0,1}", "", x[v], perl = TRUE)
   nv <- as.version_number(nv)
@@ -32,19 +33,39 @@ update_version_number <- function(update_type = "patch", pkg = getwd()) {
     )
   }
   nv <- nv + update
+  new_version_text <- paste.version_number(nv)
   x[v] <- gsub(
     "(?<=Version: )([[:digit:]]|.){1,}",
-    paste.version_number(nv),
+    new_version_text,
     x[v], perl = TRUE
   )
-  writelines(x, "DESCRIPTION")
+  d <- grep("^Date:", x)
+  x[d] <- paste0("Date: ", Sys.Date())
+  writelines(x, path_to_DESCRIPTION)
+  update_citation(new_version_text, pkg)
+  message("the version number has been updated")
 }
 
+#' update_citation
+#'
+#' Updates package citation file
+#'
+#' @param version New version number.
+#' @param path Path to pkg, defaults to "."
+#' @export
+update_citation <- function(version, path = ".") {
+  path <- normalizePath(path)
+  path_to_CITATION <- file.path(path, "inst", "CITATION")
+  x <- readlines(path_to_CITATION)
+  version <- paste0("package version ", version)
+  x <- gsub("package version [[:digit:].]{3,}", version, x)
+  writelines(x, path_to_CITATION)
+}
 
 #' version_number
 #'
 #' Class for version numbers.
-#' 
+#'
 #' @param major Increment major, e.g. 1.0.0, for a major release. This
 #'   is best reserved for changes that are not backward compatible and
 #'   that are likely to affect many users. Going from 0.b.c to 1.0.0
@@ -99,7 +120,7 @@ print.version_number <- function(x) {
   } else if (x[3] %% 10L == 0) {
     x[3] <- substr(x[3], 1, 1)
   }
-  x <- paste0(x[1], ".", x[2], ".", x[3])  
+  x <- paste0(x[1], ".", x[2], ".", x[3])
   print(x)
 }
 
@@ -125,11 +146,11 @@ cutnum <- function(x, s1, s2) {
     e2 <- as.version_number(e2)
   } else if (length(e2) == 1L && is.numeric(e2)) {
     if (e2 < 100) {
-      e2 <- version_number(0, 0, cutnum(e2, 1, 2)) 
+      e2 <- version_number(0, 0, cutnum(e2, 1, 2))
     } else if (e2 < 1000) {
-      e2 <- version_number(0, cutnum(e2, 1, 1), cutnum(e2, 2, 3)) 
+      e2 <- version_number(0, cutnum(e2, 1, 1), cutnum(e2, 2, 3))
     } else {
-      e2 <- version_number(cutnum(e2, 1, 1), cutnum(e2, 2, 2), cutnum(e2, 3, 4)) 
+      e2 <- version_number(cutnum(e2, 1, 1), cutnum(e2, 2, 2), cutnum(e2, 3, 4))
     }
   }
   x <- as.matrix(e1) + as.matrix(e2)

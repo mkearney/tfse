@@ -4,39 +4,35 @@
 ##----------------------------------------------------------------------------##
 
 #' readlines
-#' 
+#'
 #' Verbs object
-#' 
+#'
 #' @param x Input
 #' @param ... Other args passed to \code{readLines}.
 #' @return Output
 #' @export
 readlines <- function(x, ...) {
-  dots <- list(con = x, ...)
-  if (!"warn" %in% names(dots)) {
-    dots[["warn"]] <- FALSE
-  }
   con <- file(x)
-  x <- do.call("readLines", dots)
+  x <- readLines(con, warn = FALSE, ...)
   close(con)
   x
 }
 
 #' writelines
-#' 
+#'
 #' Writes lines to file
-#' 
-#' @param x Character, file name to save as.
+#'
+#' @param x Text to output.
+#' @param file File name
 #' @param ... Other args passed to \code{writeLines}.
 #' @return Saves/overwrites to file.
 #' @export
-writelines <- function(x, ...) {
+writelines <- function(x, file, ...) {
   con <- file(file)
-  writeLines(x, con = con, ...)
+  writeLines(x, con, ...)
   close(con)
   message("Wrote lines to ", file)
 }
-
 
 ##----------------------------------------------------------------------------##
 ##                           INTERACTIVE READ/WRITE                           ##

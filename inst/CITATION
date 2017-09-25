@@ -5,13 +5,13 @@ citEntry(entry        = "PhdThesis",
          author       = as.person("Michael Wayne Kearney"),
          school       = "University of Kansas",
          year         = "2016",
-         note         = "R package version 1.0.1",
+         note         = "R package version 3.1.04",
          url          = "http://github.com/mkearney/tfse",
 
          textVersion  =
            paste("Kearney, M. W. (2016). Twitter follows and",
                      "selective exposure: Data collection using Twitter's",
-                     "REST and streaming APIs. R package version 1.0.1.",
+                     "REST and streaming APIs. R package version 3.1.04",
                      "Unpublished PhdThesis in Communication Studies",
                      "at the University of Kansas.", sep = "\n")
 )
