@@ -1,7 +1,7 @@
 Package: tfse
 Version: 3.1.04
 Date: 2017-09-21
-Title: Twitter Follows and Selective Exposure
+Title: The First Scriptorium Emporium
 Authors@R: person("Mike", "Kearney", email = "kearneymw@missouri.edu",
                   role = c("aut", "cre"))
 Description: Misc functions of mine.
