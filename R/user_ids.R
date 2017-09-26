@@ -7,9 +7,9 @@
 #' @export
 sn2id <- function(screen_name, mc.cores = 1L) {
   if (mc.cores > 1L) {
-    out <- parallel::mcMap("sn2id_", user_id, mc.cores = mc.cores)
+    out <- parallel::mcMap("sn2id_", screen_name, mc.cores = mc.cores)
   } else {
-    out <- Map("sn2id_", user_id)
+    out <- Map("sn2id_", screen_name)
   }
   out <- unlist(out)
   names(out) <- screen_name
@@ -20,7 +20,7 @@ sn2id_ <- function(x) {
   x <- xml2::read_html(
     paste0("http://twitter.com/", x)
   )
-  x <- rvest::html_attr("data-user-id", rvest::html_nodes(x, ".ProfileNav"))
+  x <- rvest::html_attr(rvest::html_nodes(x, ".ProfileNav"), "data-user-id")
   if (length(x) == 0L) {
     return(NA_character_)
   } else if (length(x) > 1L) {
