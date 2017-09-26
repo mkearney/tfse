@@ -1,12 +1,12 @@
-#' @title tfse: Twitter Follows and Selective Exposure
+#' @title tfse: The First Scriptorium Emporium
 #'
-#' @description Useful user functions and imported functions.
+#' @description Collection of useful functions.
 #'
-#' @author Michael W Kearney
+#' @author Michael W. Kearney
 #' @docType package
 #' @name tfse
 #' @aliases tfse
 #' @keywords package tfse-package
-#' @seealso \code{httr}
+#' @seealso \code{rtweet}
 NULL
 

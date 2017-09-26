@@ -4,15 +4,15 @@
 \name{tfse}
 \alias{tfse}
 \alias{tfse-package}
-\title{tfse: Twitter Follows and Selective Exposure}
+\title{tfse: The First Scriptorium Emporium}
 \description{
-Useful user functions and imported functions.
+Collection of useful functions.
 }
 \seealso{
-\code{httr}
+\code{rtweet}
 }
 \author{
-Michael W Kearney
+Michael W. Kearney
 }
 \keyword{package}
 \keyword{tfse-package}
