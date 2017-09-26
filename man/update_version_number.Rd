@@ -4,10 +4,10 @@
 \alias{update_version_number}
 \title{update_version_number}
 \usage{
-update_version_number(update_type = "patch", pkg = getwd())
+update_version_number(update_type = "patch", pkg = ".")
 }
 \arguments{
-\item{update_type}{}
+\item{update_type}{Patch, minor, or major update.}
 
 \item{path}{Path to base directory of given R package.}
 }

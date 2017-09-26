@@ -4,10 +4,12 @@
 \alias{writelines}
 \title{writelines}
 \usage{
-writelines(x, ...)
+writelines(x, file, ...)
 }
 \arguments{
-\item{x}{Character, file name to save as.}
+\item{x}{Text to output.}
+
+\item{file}{File name}
 
 \item{...}{Other args passed to \code{writeLines}.}
 }
