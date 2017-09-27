@@ -20,7 +20,8 @@ sn2id_ <- function(x) {
   x <- xml2::read_html(
     paste0("http://twitter.com/", x)
   )
-  x <- rvest::html_attr(rvest::html_nodes(x, ".ProfileNav"), "data-user-id")
+  x <- rvest::html_attr(rvest::html_nodes(
+    x, ".ProfileNav"), "data-user-id")
   if (length(x) == 0L) {
     return(NA_character_)
   } else if (length(x) > 1L) {
@@ -38,7 +39,7 @@ sn2id_ <- function(x) {
 #'
 #' @param user_id Vector of user_id(s)
 #' @param mc.cores Number of cores. If greater than 1, then mcMap is used.
-#' 
+#'
 #' @return Named vector of screen names.
 #' @importFrom rvest html_text html_nodes
 #' @importFrom xml2 read_html
