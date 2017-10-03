@@ -4,12 +4,15 @@
 \alias{tabsort}
 \title{tabsort}
 \usage{
-tabsort(x, V1 = NULL)
+tabsort(x, V1 = NULL, percent = TRUE)
 }
 \arguments{
 \item{x}{Character vector}
 
 \item{V1}{Optional, name of term variable. Defaults to "term".}
+
+\item{percent}{Logical indicating whether to include a percent of total
+column.}
 }
 \value{
 Frequency tbl

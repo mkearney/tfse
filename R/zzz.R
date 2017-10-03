@@ -216,33 +216,31 @@ rm_stopwords <- function(x, stopwords = stopwords) {
 #'
 #' @param x Character vector
 #' @param V1 Optional, name of term variable. Defaults to "term".
+#' @param percent Logical indicating whether to include a percent of total
+#'   column.
 #' @return Frequency tbl
 #' @export
-tabsort <- function(x, V1 = NULL) {
+tabsort <- function(x, V1 = NULL, percent = TRUE) {
   x <- sort(table(x), decreasing = TRUE)
   x <- tibble::data_frame(term = names(x), n = as.integer(x))
+  if (percent) {
+    x$percent <- x$n / sum(x$n, na.rm = TRUE)
+  }
   if (!is.null(V1)) {
     names(x)[1] <- V1
   }
   x
 }
 
-#' stripped_down_words
+#' emc2ascii
 #'
-#' Strip (clean) and tokenize text
+#' Makes text to ascii friendly.
 #'
-#' @param x CHaracter vector of text to clean.
-#' @return Split into vectors of words for each character string.
-#' @examples
-#' x <- "Some sentencE with AWK. formatting
-#' and \t a URL link to https://google.com   , maybe?"
-#' stripped_down_words(x)
+#' @param x Text, a character vector.
+#' @param y Replacement for non-ascii characters. Defaults to "" (blank).
+#' @return ascii friendly text
 #' @export
-stripped_down_words <- function(x) {
-  x <- gsub("\\n|\\t", " ", x)
-  x <- rm_links(x)
-  x <- tolower(x)
-  x <- iconv(x, "utf-8", "ascii", "")
-  x <- trim_ws(x)
-  strsplit(x, " ")
+enc2ascii <- function(x, y = "") {
+  stopifnot(is.character(x))
+  iconv(x, to = "ascii", sub = y)
 }

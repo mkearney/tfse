@@ -21,16 +21,12 @@ as_tbl <- function(...) {
   tibble::as_tibble(..., validate = FALSE)
 }
 
-
-#' tibble
+#' tbl
 #'
-#' @name tbl
+#' @name tbl_df
 #' @rdname tbl
 #' @keywords internal
 #' @export
-#' @importFrom tibble data_frame
-#' @usage data_frame(data.frame(x = rnorm(10), y = rnorm(10)))
-tbl <- function(...) {
-  tibble::data_frame(...)
-}
-
+#' @importFrom dplyr tbl_df
+#' @usage tbl_df(...)
+NULL
