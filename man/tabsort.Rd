@@ -4,7 +4,7 @@
 \alias{tabsort}
 \title{tabsort}
 \usage{
-tabsort(x, V1 = NULL, percent = TRUE)
+tabsort(x, V1 = NULL, percent = TRUE, na_omit = TRUE)
 }
 \arguments{
 \item{x}{Character vector}
@@ -13,6 +13,9 @@ tabsort(x, V1 = NULL, percent = TRUE)
 
 \item{percent}{Logical indicating whether to include a percent of total
 column.}
+
+\item{na_omit}{Logical indicating whether to exclude missing. If all
+responses are missing, a missing value is used as the single category.}
 }
 \value{
 Frequency tbl

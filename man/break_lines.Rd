@@ -4,12 +4,17 @@
 \alias{break_lines}
 \title{break_lines}
 \usage{
-break_lines(x, n = 80)
+break_lines(x, n = 80, sep = "\\\\. ", collapse = "\\n")
 }
 \arguments{
 \item{x}{Input text}
 
 \item{n}{Number of characters (width) on which to truncate given text}
+
+\item{sep}{Separator used for subunits.}
+
+\item{y}{When text is recombined into single string, this value is used
+as the sepator. Defaults to three line breaks.}
 }
 \value{
 Output with line breaks optimized for n width.

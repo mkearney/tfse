@@ -10,6 +10,7 @@
 #'   default (NULL) omits alpha columns from the returned hexidecimal 
 #'   characters.
 #' @return Hexidicimal color codes
+#' @importFrom grDevices col2rgb
 #' @export
 col2hex <- function(color, alpha = NULL) {
   if (is.character(color)) {
@@ -30,6 +31,7 @@ col2hex <- function(color, alpha = NULL) {
 #'
 #' gg_cols(8)
 #' @keywords internal
+#' @importFrom grDevices hcl
 #' @export
 gg_cols <- function(n) {
   hues = seq(15, 375, length = n + 1)
@@ -37,7 +39,7 @@ gg_cols <- function(n) {
 }
 
 
-#' @importFrom grDevices rgb
+#' @importFrom grDevices rgb col2rgb
 alphacolor <- function(cols, a = .99) {
   cols <- t(col2rgb(cols, alpha = TRUE)) / 255
   rgb(cols, alpha = a)

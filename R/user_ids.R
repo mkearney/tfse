@@ -3,7 +3,8 @@
 #' @param screen_name Twitter handle
 #' @param mc.cores Number of cores. If greater than 1, then mcMap is used.
 #' @return response Twitter account user id
-#' @import rvest
+#' @importFrom parallel mcMap
+#' 
 #' @export
 sn2id <- function(screen_name, mc.cores = 1L) {
   if (mc.cores > 1L) {
@@ -16,6 +17,8 @@ sn2id <- function(screen_name, mc.cores = 1L) {
   out
 }
 
+#' @importFrom xml2 read_html
+#' @importFrom rvest html_attr html_nodes
 sn2id_ <- function(x) {
   x <- xml2::read_html(
     paste0("http://twitter.com/", x)
@@ -42,6 +45,7 @@ sn2id_ <- function(x) {
 #' @return Named vector of screen names.
 #' @importFrom rvest html_text html_nodes
 #' @importFrom xml2 read_html
+#' @importFrom parallel mcMap
 #' @export
 id2sn <- function(user_id, mc.cores = 1L) {
   if (mc.cores > 1L) {
@@ -54,6 +58,8 @@ id2sn <- function(user_id, mc.cores = 1L) {
   out
 }
 
+#' @importFrom xml2 read_html
+#' @importFrom rvest html_attr html_nodes html_text
 id2sn_ <- function(x) {
   h <- xml2::read_html(paste0("https://twitter.com/intent/user?user_id=", x))
   x <- rvest::html_text(rvest::html_nodes(h, "p span.nickname"))

@@ -18,7 +18,7 @@ update_version_number <- function(update_type = "patch", pkg = ".") {
   x <- readlines(path_to_DESCRIPTION)
   v <- grep("^Version:", x)
   nv <- gsub("Version:\\s{0,1}", "", x[v], perl = TRUE)
-  nv <- as.version_number(nv)
+  nv <- as_version_number(nv)
   if (update_type == "patch") {
     update <- 1
   } else if (update_type == "minor") {
@@ -81,6 +81,7 @@ update_citation <- function(version, path = ".") {
 #'   patch release if, after release, I discover a show-stopping bug
 #'   that needs to be fixed ASAP. Most releases will have a patch
 #'   number of 0.
+#' @return Version number classed object.
 #' @export
 version_number <- function(major, minor, patch) {
   stopifnot(map_lgl(is.numeric, list(major, minor, patch)))
@@ -103,8 +104,15 @@ version_number <- function(major, minor, patch) {
   )
 }
 
+#' as_version_number
+#'
+#' Converts object to version number
+#'
+#' @param x Object to be converted
+#' @return Object of class version number.
+#' @rdname version_number
 #' @export
-as.version_number <- function(x) {
+as_version_number <- function(x) {
   stopifnot(length(x) == 1L)
   x <- strsplit(x, "\\.")[[1]]
   if (nchar(x[[3]]) == 1) {
@@ -124,6 +132,13 @@ print.version_number <- function(x) {
   print(x)
 }
 
+#' paste.version_number
+#'
+#' Converts object to printed version number
+#'
+#' @param x Object to be printed
+#' @return Printed version number.
+#' @rdname version_number
 #' @export
 paste.version_number <- function(x) {
   if (x[3] < 10L & x[3] > 0L) {
@@ -134,16 +149,13 @@ paste.version_number <- function(x) {
   paste0(x[1], ".", x[2], ".", x[3])
 }
 
-
-#' @export
 cutnum <- function(x, s1, s2) {
   as.numeric(substr(x, s1, s2))
 }
 
-#' @export
 `+.version_number` <- function(e1, e2) {
   if (length(e2) == 1L && is.character(e2)) {
-    e2 <- as.version_number(e2)
+    e2 <- as_version_number(e2)
   } else if (length(e2) == 1L && is.numeric(e2)) {
     if (e2 < 100) {
       e2 <- version_number(0, 0, cutnum(e2, 1, 2))

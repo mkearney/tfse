@@ -7,15 +7,29 @@ devtools::document(roclets = c('rd', 'collate', 'namespace'))
 ## install
 devtools::install()
 
+## get some tweets
+rt <- rtweet::search_tweets("lang:en")
+
+## format the text
 x <- rm_links(rt$text[1:15])
 x <- rm_linebreaks(x)
 x <- rm_amp(x)
+x <- rm_retweets(x)
 x <- enc2ascii(x)
 x <- trim_ws(x)
-x <- rm_retweets(x)
-cat(break_lines(x, n = 30), fill = TRUE)
+x <- break_lines(x, n = 60)
 
+## view print out
+cat(paste(x, collapse = "\n"), fill = TRUE)
+
+## view original
+rt$text[1:15]
+
+## tabsort
 tabsort(unlist(rt$mentions_screen_name))
+
+## has_factor_potential
+map_lgl(has_factor_potential, rt)
 
 ## check
 if (FALSE) {
@@ -27,6 +41,8 @@ if (FALSE) {
 
 ## pkgdown
 devtools::install_github("hadley/pkgdown")
+
+## build site
 pkgdown::build_site()
 
 

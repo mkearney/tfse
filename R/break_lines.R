@@ -4,11 +4,15 @@
 #' 
 #' @param x Input text
 #' @param n Number of characters (width) on which to truncate given text
+#' @param sep Separator used for subunits.
+#' @param y When text is recombined into single string, this value is used
+#'   as the sepator. Defaults to three line breaks.
 #' @return Output with line breaks optimized for n width.
 #' @export
-break_lines <- function(x, n = 80) {
+break_lines <- function(x, n = 80, sep = "\\. ", collapse = "\n") {
   stopifnot(is.character(x))
-  sapply(x, break_lines_, n = n)
+  map_chr("break_lines_", x,
+          MoreArgs = list(n = n, sep = sep, collapse = collapse))
 }
 
 
@@ -51,37 +55,49 @@ rm_retweets <- function(x, ...) {
   UseMethod("rm_retweets")
 }
 
-#' @export
-rm_retweets.default <- function(x, ...) {
-  grep("^RT ", x, ignore.case = TRUE, invert = TRUE, value = TRUE)
-}
 
 #' @export
 rm_retweets.data.frame <- function(x,
                                    text = "text",
                                    is_retweet = "is_retweet") {
-  stopifnot(is.character(x[[text]]), is.logical(x[[is_retweet]]))
-  x[x[[!is_retweet]], ]
+  stopifnot(is.character(x[[text]]))
+  if ("is_retweet" %in% names(x)) {
+    stopifnot(is.logical(x[[is_retweet]]))
+    is_retweet <- x[[is_retweet]]
+  } else {
+    is_retweet <- grep(
+      "^RT ", x[[text]], ignore.case = TRUE, value = TRUE
+    )
+  }
+  x[[text]][is_retweet] <- ""
+  x
 }
 
 #' @export
 rm_retweets.list <- function(x,
                              text = "text",
                              is_retweet = "is_retweet") {
-  stopifnot(is.character(x[[text]]), is.logical(x[[is_retweet]]))
-  x[[text]] <- x[[text]][x[[is_retweet]]]
+  stopifnot(is.character(x[[text]]))
+  if ("is_retweet" %in% names(x)) {
+    stopifnot(is.logical(x[[is_retweet]]))
+    is_retweet <- x[[is_retweet]]
+  } else {
+    is_retweet <- grep(
+      "^RT ", x[[text]], ignore.case = TRUE, value = TRUE
+    )
+  }
+  x[[text]][is_retweet] <- ""
   x
 }
 
 #' @export
-rm_retweets.character <- function(x,
-                                  is_retweet = NULL) {
+rm_retweets.character <- function(x, is_retweet = NULL) {
   if (is.null(is_retweet)) {
-    grep("^RT ", x, ignore.case = TRUE, invert = TRUE, value = TRUE)
-  } else {
-    stopifnot(!identical(length(x), length(is_retweet)))
-    x[!is_retweet]
+    is_retweet <- grep("^RT ", x, ignore.case = TRUE,  value = TRUE)
   }
+  stopifnot(!identical(length(x), length(is_retweet)))
+  x[is_retweet] <- ""
+  x
 }
 
 break_line <- function(x, n) {
@@ -105,9 +121,13 @@ break_line <- function(x, n) {
   paste0(out, "\n", x)
 }
 
-
-break_lines_ <- function(x, n) {
-  x <- strsplit(x, "\\n\\n")
-  x <- sapply(x, break_line, n = n)
-  paste(x, collapse = "\n\n")
+break_lines_ <- function(x, n, sep = "\\. ", collapse = "\n") {
+  if (!is.null(sep)) {
+    x <- strsplit(x, sep)[[1]]    
+  }
+  x <- map_chr("break_line", x, MoreArgs = list(n = n))
+  if (!is.null(collapse)) {
+    x <- paste(x, collapse = collapse)
+  }
+  x
 }

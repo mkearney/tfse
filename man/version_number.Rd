@@ -2,9 +2,15 @@
 % Please edit documentation in R/version_number.R
 \name{version_number}
 \alias{version_number}
+\alias{as_version_number}
+\alias{paste.version_number}
 \title{version_number}
 \usage{
 version_number(major, minor, patch)
+
+as_version_number(x)
+
+paste.version_number(x)
 }
 \arguments{
 \item{major}{Increment major, e.g. 1.0.0, for a major release. This
@@ -19,12 +25,27 @@ backward compatibility. This is the most common type of
 release. It’s perfectly fine to have so many minor releases that
 you need to use two (or even three!) digits, e.g. 1.17.0.}
 
+\item{x}{Object to be converted}
+
 \item{major}{Increment patch, e.g. 0.8.2 for a patch: you’ve fixed
 bugs without adding any significant new features. I’ll often do a
 patch release if, after release, I discover a show-stopping bug
 that needs to be fixed ASAP. Most releases will have a patch
 number of 0.}
+
+\item{x}{Object to be printed}
+}
+\value{
+Version number classed object.
+
+Object of class version number.
+
+Printed version number.
 }
 \description{
 Class for version numbers.
+
+Converts object to version number
+
+Converts object to printed version number
 }

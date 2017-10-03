@@ -10,6 +10,7 @@
 #' @param gray Gray color.
 #' @param ... Other args passed along to theme
 #' @return My ggplot2 theme (similar to theme_minimal/theme_bw)
+#' @importFrom ggplot2 theme_bw theme element_blank element_rect element_text element_line rel
 #' @export
 theme_mwk <- function(base_size = 15,
                       base_family = "Roboto",

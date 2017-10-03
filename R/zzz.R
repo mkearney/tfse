@@ -35,8 +35,8 @@ go_get_var <- function(x, ...) {
       if (i == vars[length(vars)]) {
         success <- TRUE
       }
-    } else if (any_recursive(x) && any(sapply(x, has_name_, i))) {
-      kp <- sapply(x, has_name_, i)
+    } else if (any_recursive(x) && any(map_chr("has_name_", x, i))) {
+      kp <- map_lgl("has_name_", x, i)
       x <- x[kp]
       x <- lapply(x, "[[", i)
       if (i == vars[length(vars)]) {
@@ -218,10 +218,16 @@ rm_stopwords <- function(x, stopwords = stopwords) {
 #' @param V1 Optional, name of term variable. Defaults to "term".
 #' @param percent Logical indicating whether to include a percent of total
 #'   column.
+#' @param na_omit Logical indicating whether to exclude missing. If all
+#'   responses are missing, a missing value is used as the single category.
 #' @return Frequency tbl
 #' @export
-tabsort <- function(x, V1 = NULL, percent = TRUE) {
-  x <- sort(table(x), decreasing = TRUE)
+tabsort <- function(x, V1 = NULL, percent = TRUE, na_omit = TRUE) {
+  if (is.atomic(x) && all(is.na(x))) {
+    x <- table(x, useNA = "ifany")
+  } else {
+    x <- sort(table(x), decreasing = TRUE)
+  }
   x <- tibble::data_frame(term = names(x), n = as.integer(x))
   if (percent) {
     x$percent <- x$n / sum(x$n, na.rm = TRUE)
@@ -243,4 +249,33 @@ tabsort <- function(x, V1 = NULL, percent = TRUE) {
 enc2ascii <- function(x, y = "") {
   stopifnot(is.character(x))
   iconv(x, to = "ascii", sub = y)
+}
+
+
+#' has_factor_potential
+#'
+#' Tests whether vector has factor potential
+#'
+#' @param x Vector
+#' @param p_uq Proportion of cases that represent unique values. If this value
+#'   is less than one, than ID vars will be returned FALSE, and so on.
+#' @param max_chars Number of chars from which the maximum acceptable
+#'   MEAN string size should be allowed.
+#' @return Logical.
+#' @export
+has_factor_potential <- function(x, p_uq = .9, max_chars = 60) {
+  if (!is.atomic(x)) {
+    return(FALSE)
+  }
+  if (is.character(x)) {
+    if (mean(nchar(x), na.rm = TRUE) > max_chars) {
+      return(FALSE)
+    }
+  }
+  x <- as.character(x)
+  n1 <- length(x) - ceiling(length(x) * (1 - p_uq))
+  if (n_uq(x) > n1) {
+    return(FALSE)
+  }
+  TRUE
 }
