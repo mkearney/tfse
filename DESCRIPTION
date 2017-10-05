@@ -1,5 +1,5 @@
 Package: tfse
-Version: 3.2.01
+Version: 3.2.02
 Date: 2017-10-05
 Title: The First Scriptorium Emporium
 Authors@R: person("Mike", "Kearney", email = "kearneymw@missouri.edu",

@@ -3,9 +3,23 @@
 
 ## update/document package
 devtools::document(roclets = c('rd', 'collate', 'namespace'))
+devtools::load_all()
 
 ## install
 devtools::install()
+
+foo <- function(x) normalizePath(x)
+
+basename(foo("."))
+make_citation()
+## update version number
+make_package(update = "patch")
+traceback()
+make_package
+validate_pkg_name(".")
+
+## add to git
+add_to_git("added devtool wrapper funs")
 
 ## get some tweets
 rt <- rtweet::search_tweets("lang:en")

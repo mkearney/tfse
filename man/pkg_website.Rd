@@ -4,7 +4,10 @@
 \alias{pkg_website}
 \title{Updates pkg website using pkgdown}
 \usage{
-pkg_website()
+pkg_website(pkg = ".")
+}
+\arguments{
+\item{pkg}{Name of package. Defaults to current file name.}
 }
 \description{
 Updates pkg website using pkgdown

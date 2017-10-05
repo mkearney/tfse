@@ -4,13 +4,13 @@
 \alias{make_package}
 \title{make_package}
 \usage{
-make_package(pkg = ".", update = NULL, load_all = TRUE)
+make_package(update = NULL, pkg = ".", load_all = TRUE)
 }
 \arguments{
-\item{pkg}{Name of package. Defaults to current file name.}
-
 \item{update}{Optional, indicating the size of change so as to automate
 updating of the package version number.}
+
+\item{pkg}{Name of package. Defaults to current file name.}
 
 \item{load_all}{Logical indicating whether or not to load all functions
 on exit.}

@@ -1,17 +1,18 @@
+
 citHeader("To cite tfse use:")
 
-citEntry(entry        = "PhdThesis",
-         title        = "Twitter Follows and Selective Exposure (tfse)",
-         author       = as.person("Michael Wayne Kearney"),
-         school       = "University of Kansas",
-         year         = "2016",
-         note         = "R package version 3.2.01",
-         url          = "http://github.com/mkearney/tfse",
-
-         textVersion  =
-           paste("Kearney, M. W. (2016). Twitter follows and",
-                     "selective exposure: Data collection using Twitter's",
-                     "REST and streaming APIs. R package version 3.2.01",
-                     "Unpublished PhdThesis in Communication Studies",
-                     "at the University of Kansas.", sep = "\n")
+citEntry(
+    entry        = "Manual",
+    title        = "tfse: The First Scriptorium Emporium"
+    author       = as.person("Michael W. Kearney"),
+    year         = 2017,
+    note         = "R package version 3.2.02",
+    url          = "https://github.com/mkearney/tfse/",
+    key          = "tfse-package",
+    textVersion  = paste(
+        "Kearney, M. W. (2017). tfse: The First Scriptorium Emporium.",
+        "R package version 3.2.02. Retrieved from",
+        "https://github.com/mkearney/tfse/"
+    )
 )
+
