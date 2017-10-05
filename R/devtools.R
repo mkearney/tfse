@@ -40,9 +40,9 @@ make_package <- function(update = NULL, pkg = ".", load_all = TRUE) {
 #' @return Sends local repo to Github.
 #' @export 
 add_to_git <- function(m = "misc", pkg = ".", pull = TRUE) {
-  pkg <- basename(normalizePath(pkg))
   msg <- paste0(
-    "Sure you want to update your github repo for ", pkg, "?"
+    "Sure you want to update your github repo for ",
+    basename(normalizePath(pkg)), "?"
   )
   r <- menuline(msg, c("Yes", "No"))
   if (r == 2L) {
@@ -119,7 +119,7 @@ make_citation <- function(pkg = ".") {
 citHeader("To cite ', d$Package, ' use:")\n
 citEntry(
     entry        = "Manual",
-    title        = "', d$Title, '"
+    title        = "', d$Title, '",
     author       = as.person("Michael W. Kearney"),
     year         = ', year, ',
     note         = "R package version ', d$Version, '",
