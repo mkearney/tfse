@@ -40,3 +40,27 @@ clean_renv <- function(x) {
   x <- x[kp]
   x
 }
+
+dots <- list(a = 1, b = 2)
+
+
+#' set_renv
+#'
+#' Create and save new R environment variable
+#'
+#' @param ... Named values where names correspond to the name of the
+#'   environment variables. Must include names for each value.
+#' @param path Path to Renviron file, typcally .Renviron found in home
+#'   directory.
+#' @return Saves and reads into current session new environment variable(s).
+#' @export
+set_renv <- function(..., path = "~/.Renviron") {
+  dots <- list(...)
+  nms <- names(dots)
+  stopifnot(length(nms) > 0L)
+  stopifnot(length(dots) == length(nms))
+  x <- paste0(nms, "=", dots, collapse = "\n")
+  check_renv(path)
+  cat(x, file = path, fill = TRUE, append = TRUE)
+  readRenviron(path)
+}

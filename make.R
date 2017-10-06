@@ -8,18 +8,11 @@ devtools::load_all()
 ## install
 devtools::install()
 
-foo <- function(x) normalizePath(x)
-
-basename(foo("."))
-make_citation()
 ## update version number
 make_package(update = "patch")
-traceback()
-make_package
-validate_pkg_name(".")
 
 ## add to git
-add_to_git("added devtool wrapper funs")
+add_to_git("added pbcopy, set_renv, and tweaked theme_mwk")
 
 ## get some tweets
 rt <- rtweet::search_tweets("lang:en")
@@ -58,5 +51,3 @@ devtools::install_github("hadley/pkgdown")
 
 ## build site
 pkgdown::build_site()
-
-

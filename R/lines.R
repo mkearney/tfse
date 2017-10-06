@@ -67,3 +67,20 @@ readline_ <- function(...) {
   input <- readline(paste(unlist(c(...)), collapse = ""))
   gsub("^\"|^'|\"$|'$", "", input)
 }
+
+#' pbcopy
+#'
+#' Adds input to clipboard for pasting
+#'
+#' @param x Input passed to cat function.
+#' @return Prints x to clipboard.
+#' @examples
+#' ## alphabet as string
+#' pbcopy(paste(letters, collapse = ""))
+#' ## paste e.g., C-v
+#' @export
+pbcopy <- function(x) {
+  con <- pipe("pbcopy", "w")
+  cat(x, file = con)
+  close(con)
+}

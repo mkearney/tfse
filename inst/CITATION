@@ -6,12 +6,12 @@ citEntry(
     title        = "tfse: The First Scriptorium Emporium"
     author       = as.person("Michael W. Kearney"),
     year         = 2017,
-    note         = "R package version 3.2.03",
+    note         = "R package version 0.2.04",
     url          = "https://github.com/mkearney/tfse/",
     key          = "tfse-package",
     textVersion  = paste(
         "Kearney, M. W. (2017). tfse: The First Scriptorium Emporium.",
-        "R package version 3.2.03 Retrieved from",
+        "R package version 0.2.04 Retrieved from",
         "https://github.com/mkearney/tfse/"
     )
 )

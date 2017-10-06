@@ -1,18 +1,17 @@
 
 #' theme_mwk
-#' 
+#'
 #' My ggplot2 theme
-#' 
+#'
 #' @param base_size Base font size
 #' @param base_family Font family.
 #' @param dark Primary forefront color.
 #' @param light Primary background color.
 #' @param gray Gray color.
-#' @param ... Other args passed along to theme
 #' @return My ggplot2 theme (similar to theme_minimal/theme_bw)
 #' @importFrom ggplot2 theme_bw theme element_blank element_rect element_text element_line rel
 #' @export
-theme_mwk <- function(base_size = 15,
+theme_mwk <- function(base_size = 14,
                       base_family = "Roboto",
                       dark = "#24292e",
                       light = "#ffffff",
@@ -34,7 +33,7 @@ theme_mwk <- function(base_size = 15,
       plot.title = ggplot2::element_text(
         face = "bold", colour = dark, size = ggplot2::rel(1.2)),
       plot.subtitle = ggplot2::element_text(
-        colour = dark, size = ggplot2::rel(1.1)),
+        colour = dark, size = ggplot2::rel(1.0)),
       text = ggplot2::element_text(colour = dark),
       strip.background = ggplot2::element_rect(
         fill = gray, colour = dark),
@@ -46,6 +45,8 @@ theme_mwk <- function(base_size = 15,
         color = dark, size = ggplot2::rel(.050)),
       panel.grid.minor = ggplot2::element_line(
         color = dark, size = ggplot2::rel(.025)),
-      ...
+      axis.ticks = element_blank(),
+      panel.border = ggplot2::element_rect(
+        colour = light)
     )
 }

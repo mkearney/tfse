@@ -4,7 +4,7 @@
 \alias{theme_mwk}
 \title{theme_mwk}
 \usage{
-theme_mwk(base_size = 15, base_family = "Roboto", dark = "#24292e",
+theme_mwk(base_size = 14, base_family = "Roboto", dark = "#24292e",
   light = "#ffffff", gray = "#f0f0f0", ...)
 }
 \arguments{
@@ -17,8 +17,6 @@ theme_mwk(base_size = 15, base_family = "Roboto", dark = "#24292e",
 \item{light}{Primary background color.}
 
 \item{gray}{Gray color.}
-
-\item{...}{Other args passed along to theme}
 }
 \value{
 My ggplot2 theme (similar to theme_minimal/theme_bw)
