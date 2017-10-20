@@ -172,42 +172,6 @@ trim_ws <- function(x) {
 stopwords <- tidytext::stop_words$word[tidytext::stop_words$lexicon == "SMART"]
 
 
-#' rm_links
-#'
-#' Removes URL links included in tweets.
-#'
-#' @param x Character vector of Twitter statuses.
-#' @return Character vector of statuses without URLs.
-#' @export
-rm_links <- function(x) {
-  x <- gsub("\\s{0,1}http\\S{1,}\\s{0,1}", "", x)
-  gsub("\\s{0,1}\\S{1,}\\.com\\b\\s{0,1}", "", x)
-}
-
-#' rm_stopwords
-#'
-#' Returns statuses with stop words removed
-#'
-#' @param x Vector of text.
-#' @param stopwords Optional, stop words to be removed from text. Defaults to
-#'   SMART stop words provided by tidytext package.
-#' @return Character vector with stopwords removed
-#' @export
-rm_stopwords <- function(x, stopwords = stopwords) {
-  wordbreakor <- function(x) {
-    x <- paste(x, collapse = "\\s{0,1}\\b|\\b\\s{0,1}")
-    paste0("\\b", x, "\\b")
-  }
-  if (is.null(stopwords)) {
-    stopwords <- c(
-      tidytext::stop_words$word[tidytext::stop_words$lexicon == "SMART"],
-      0:9
-    )
-  }
-  stopwords <- wordbreakor(stopwords)
-  x <- gsub(stopwords, " ", x, perl = TRUE, ignore.case = TRUE)
-  trim_ws(x)
-}
 
 
 #' tabsort

@@ -1,1 +1,1 @@
-open -a emacs -n .make.R
+open -a emacs -n make.R

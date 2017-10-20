@@ -1,7 +1,7 @@
 #' rm_amp
-#' 
+#'
 #' Remove ampersands as they show up in tweet data
-#' 
+#'
 #' @param x Input character vector
 #' @param y Replacement text
 #' @return Output character vector
@@ -13,9 +13,9 @@ rm_amp <- function(x, y = "&") {
 
 
 #' rm_linebreaks
-#' 
+#'
 #' Remove linebreaks
-#' 
+#'
 #' @param x Input character vector
 #' @param y Replacement text
 #' @return Output character vector
@@ -25,9 +25,9 @@ rm_linebreaks <- function(x, y = " ") {
 }
 
 #' rm_retweets
-#' 
+#'
 #' Remove retweets from data.
-#' 
+#'
 #' @param x Input, should be either data frame (or list) or character.
 #'   If list/data frame, the text of the tweet is assumed to be named
 #'   "text" while the logical is_retweet is assuemd to be named "is_retweet"
@@ -80,4 +80,42 @@ rm_retweets.character <- function(x, is_retweet = NULL) {
   stopifnot(identical(length(x), length(is_retweet)))
   x[is_retweet] <- ""
   x
+}
+
+
+#' rm_links
+#'
+#' Removes URL links included in tweets.
+#'
+#' @param x Character vector of Twitter statuses.
+#' @return Character vector of statuses without URLs.
+#' @export
+rm_links <- function(x) {
+  x <- gsub("\\s{0,1}http\\S{1,}\\s{0,1}", "", x)
+  gsub("\\s{0,1}\\S{1,}\\.com\\b\\s{0,1}", "", x)
+}
+
+#' rm_stopwords
+#'
+#' Returns statuses with stop words removed
+#'
+#' @param x Vector of text.
+#' @param stopwords Optional, stop words to be removed from text. Defaults to
+#'   SMART stop words provided by tidytext package.
+#' @return Character vector with stopwords removed
+#' @export
+rm_stopwords <- function(x, stopwords = stopwords) {
+  wordbreakor <- function(x) {
+    x <- paste(x, collapse = "\\s{0,1}\\b|\\b\\s{0,1}")
+    paste0("\\b", x, "\\b")
+  }
+  if (is.null(stopwords)) {
+    stopwords <- c(
+      tidytext::stop_words$word[tidytext::stop_words$lexicon == "SMART"],
+      0:9
+    )
+  }
+  stopwords <- wordbreakor(stopwords)
+  x <- gsub(stopwords, " ", x, perl = TRUE, ignore.case = TRUE)
+  trim_ws(x)
 }
