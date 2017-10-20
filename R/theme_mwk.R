@@ -45,7 +45,6 @@ theme_mwk <- function(base_size = 13,
       panel.grid.minor = ggplot2::element_line(
         color = dark, size = ggplot2::rel(.025)),
       axis.ticks = ggplot2::element_blank(),
-      panel.border = ggplot2::element_blank(),
-      legend.title = ggplot2::element_blank()
+      panel.border = ggplot2::element_blank()
     )
 }
