@@ -11,8 +11,9 @@ devtools::install()
 ## update version number
 make_package(update = "patch")
 
+
 ## add to git
-add_to_git("rm duplicate in theme_mwk")
+add_to_git("added set_description_params and MIT_license devtools funs")
 1
 
 ## get some tweets

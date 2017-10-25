@@ -7,9 +7,13 @@
 #' @param pkg Name of package. Defaults to current file name.
 #' @param load_all Logical indicating whether or not to load all functions
 #'   on exit.
-#' @importFrom devtools install document load_all
+#' @importFrom devtools install document load_all create_description
 #' @export
 make_package <- function(update = NULL, pkg = ".", load_all = TRUE) {
+  ## if not already package, create one
+  if ("DESCRIPTION" %!in% list.files(pkg)) {
+    devtools::create_description(pkg)
+  }
   pkg <- basename(normalizePath(pkg))
   if (!is.null(update)) {
     if (!update %in% c("minor", "major", "patch")) {
@@ -25,6 +29,16 @@ make_package <- function(update = NULL, pkg = ".", load_all = TRUE) {
   return(invisible())
 }
 
+
+#' set class
+#'
+#' Set class with a parenthetical function.
+#'
+#' @param x Object to assign new class to.
+#' @param value Class value to assign to x
+#' @return Object x as class value.
+#' @export
+set_class <- function(x, value) set_class <- `class<-`
 
 ## do the git stuff
 
@@ -160,8 +174,8 @@ set_description_params <- function(pkg = ".",
   desc <- list(
     "Package" = pkg,
     "Maintainer" = "'Michael Wayne Kearney' <kearneymw@missouri.edu>",
-    "Authors@R" = person("Michael W.", "Kearney", "",
-                         "kearneymw@missouri.edu", c("aut", "cre")),
+    "Authors@R" = 'person("Michael W.", "Kearney", "",
+                         "kearneymw@missouri.edu", c("aut", "cre"))',
     "License" = "MIT + file LICENSE",
     "Description" = description,
     "Title" = title
