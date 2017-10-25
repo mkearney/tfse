@@ -12,7 +12,8 @@ devtools::install()
 make_package(update = "patch")
 
 ## add to git
-add_to_git("added pbcopy, set_renv, and tweaked theme_mwk")
+add_to_git("rm duplicate in theme_mwk")
+1
 
 ## get some tweets
 rt <- rtweet::search_tweets("lang:en")

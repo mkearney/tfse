@@ -1,5 +1,5 @@
 #' make_package
-#' 
+#'
 #' Document and load R package (devtools wrapper)
 #'
 #' @param update Optional, indicating the size of change so as to automate
@@ -8,7 +8,7 @@
 #' @param load_all Logical indicating whether or not to load all functions
 #'   on exit.
 #' @importFrom devtools install document load_all
-#' @export 
+#' @export
 make_package <- function(update = NULL, pkg = ".", load_all = TRUE) {
   pkg <- basename(normalizePath(pkg))
   if (!is.null(update)) {
@@ -29,16 +29,16 @@ make_package <- function(update = NULL, pkg = ".", load_all = TRUE) {
 ## do the git stuff
 
 #' add_to_git
-#' 
+#'
 #' Update github repository
 #'
 #' @param m Commit message
 #' @param pkg Repo name. Defaults to working directory file name.
 #' @param pull Logical indicating whether to pull the repo prior to
 #'   pushing
-#' 
+#'
 #' @return Sends local repo to Github.
-#' @export 
+#' @export
 add_to_git <- function(m = "misc", pkg = ".", pull = TRUE) {
   msg <- paste0(
     "Sure you want to update your github repo for ",
@@ -62,17 +62,17 @@ add_to_git <- function(m = "misc", pkg = ".", pull = TRUE) {
 }
 
 ## pkg_website
-#' 
+#'
 #' Updates pkg website using pkgdown
 #'
 #' @param pkg Name of package. Defaults to current file name.
-#' 
+#'
 #' @details If custom css is supplied (must be saved as custom.css in the
 #'   docs folder), then it will be used to supplement the default pkgdown
 #'   theme.
 #'
 #' @importFrom pkgdown build_site
-#' @export 
+#' @export
 pkg_website  <- function(pkg = ".") {
   pkg <- basename(normalizePath(pkg))
   pkgdown::build_site(preview = FALSE)
@@ -91,12 +91,12 @@ pkg_website  <- function(pkg = ".") {
 }
 
 #' make_citation
-#' 
+#'
 #' Makes (or updates) CITATION file.
-#' 
+#'
 #' @param pkg Name of package. Defaults to current file name.
 #' @return Saves updated CITATION file.
-#' @export 
+#' @export
 make_citation <- function(pkg = ".") {
   ## read description
   if (!file.exists("DESCRIPTION")) {
@@ -142,3 +142,46 @@ citEntry(
   cat(ce, file = "inst/CITATION", fill = TRUE)
 }
 
+
+
+#' set_description_params
+#'
+#' Sets desc options for devtools
+#'
+#' @param pkg Name of package (basename of wd)
+#' @param title Title of package.
+#' @param description Description of package.
+#' @return Stores description info for devtools.
+#' @export
+set_description_params <- function(pkg = ".",
+                                   title = NULL,
+                                   description = NULL) {
+  pkg <- basename(pkg)
+  desc <- list(
+    "Package" = pkg,
+    "Maintainer" = "'Michael Wayne Kearney' <kearneymw@missouri.edu>",
+    "Authors@R" = person("Michael W.", "Kearney", "",
+                         "kearneymw@missouri.edu", c("aut", "cre")),
+    "License" = "MIT + file LICENSE",
+    "Description" = description,
+    "Title" = title
+  )
+  options("devtools.desc" = desc)
+}
+
+#' MIT_license
+#'
+#' Creates MIT license
+#'
+#' @param pkg Name of package (basename of wd)
+#' @return Saves license file.
+#' @export
+MIT_license <- function(pkg = ".") {
+  x <- paste0(
+    "YEAR: ",
+    format(Sys.Date(), "%Y"),
+    "\nCOPYRIGHT HOLDER: Michael W. Kearney"
+  )
+  y <- file.path(pkg, "LICENSE")
+  cat(x, file = y, fill = TRUE)
+}
