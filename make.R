@@ -3,7 +3,7 @@
 
 ## update/document package
 devtools::document(roclets = c('rd', 'collate', 'namespace'))
-devtools::load_all()
+#devtools::load_all()
 
 ## install
 devtools::install()
@@ -13,7 +13,7 @@ make_package(update = "patch")
 
 
 ## add to git
-add_to_git("added set_description_params and MIT_license devtools funs")
+add_to_git("syncing repos")
 1
 
 ## get some tweets

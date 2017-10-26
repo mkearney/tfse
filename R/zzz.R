@@ -1,3 +1,12 @@
+topcats <- function(x, n = 5) {
+  cats <- names(sort(table(x), decreasing = TRUE))
+  if (length(cats) > n) {
+    cats <- cats[seq_len(n)]
+  }
+  x[!x %in% cats] <- NA_character_
+  x
+}
+
 
 #' not in
 #'
