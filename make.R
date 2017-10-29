@@ -13,7 +13,7 @@ make_package(update = "patch")
 
 
 ## add to git
-add_to_git("syncing repos")
+add_to_git("added new functions: lib() and update_packages()")
 1
 
 ## get some tweets
