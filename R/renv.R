@@ -41,9 +41,6 @@ clean_renv <- function(x) {
   x
 }
 
-dots <- list(a = 1, b = 2)
-
-
 #' set_renv
 #'
 #' Create and save new R environment variable

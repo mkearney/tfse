@@ -61,3 +61,102 @@ NULL
 #' @export
 #' @importFrom tibble as_tibble
 NULL
+
+
+#' Filter rows
+#'
+#' @name filter
+#' @rdname filter
+#' @keywords internal
+#' @export
+#' @importFrom dplyr filter
+#' @usage filter(.data, ...)
+NULL
+
+
+#' Select columns
+#'
+#' @name select
+#' @rdname select
+#' @keywords internal
+#' @export
+#' @importFrom dplyr select
+#' @usage select(.data, ...)
+NULL
+
+
+#' Group observations by column
+#'
+#' @name group_by
+#' @rdname group_by
+#' @keywords internal
+#' @export
+#' @importFrom dplyr group_by
+#' @usage group_by(.data, ..., add = FALSE)
+NULL
+
+
+#' Join data frames
+#'
+#' @name full_join
+#' @rdname join
+#' @keywords internal
+#' @export
+#' @importFrom dplyr full_join
+#' @usage full_join(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
+NULL
+
+#' @name left_join
+#' @rdname join
+#' @keywords internal
+#' @export
+#' @importFrom dplyr left_join
+#' @usage left_join(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
+NULL
+
+#' @name right_join
+#' @rdname join
+#' @keywords internal
+#' @export
+#' @importFrom dplyr right_join
+#' @usage right_join(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
+NULL
+
+#' Summarise data frame
+#'
+#' @name summarise
+#' @rdname summarise
+#' @keywords internal
+#' @export
+#' @importFrom dplyr summarise
+#' @usage summarise(.data, ...)
+NULL
+
+#' @name summarize
+#' @rdname summarise
+#' @keywords internal
+#' @export
+#' @importFrom dplyr summarize
+#' @usage summarize(.data, ...)
+NULL
+
+#' Mutate data frame
+#'
+#' @name mutate
+#' @rdname mutate
+#' @keywords internal
+#' @export
+#' @importFrom dplyr mutate
+#' @usage mutate(.data, ...)
+NULL
+
+#' Convert data from wide to long
+#'
+#' @name gather
+#' @rdname gather
+#' @keywords internal
+#' @export
+#' @importFrom tidyr gather
+#' @usage gather(data, key = "key", value = "value", ..., na.rm = FALSE,
+#'   convert = FALSE, factor_key = FALSE)
+NULL

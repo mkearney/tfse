@@ -8,15 +8,12 @@ devtools::document(roclets = c('rd', 'collate', 'namespace'))
 ## install
 devtools::install()
 
-
-
-
 ## update version number
 make_package(update = "patch")
 
 
 ## add to git
-add_to_git("added add_var and add_vars functions")
+add_to_git("imports my fav tidyverse funs")
 1
 
 ## get some tweets
