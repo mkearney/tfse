@@ -8,12 +8,15 @@ devtools::document(roclets = c('rd', 'collate', 'namespace'))
 ## install
 devtools::install()
 
+
+
+
 ## update version number
 make_package(update = "patch")
 
 
 ## add to git
-add_to_git("added new functions: lib() and update_packages()")
+add_to_git("added add_var and add_vars functions")
 1
 
 ## get some tweets

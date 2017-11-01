@@ -7,7 +7,6 @@ topcats <- function(x, n = 5) {
   x
 }
 
-
 #' not in
 #'
 #' A more convenient way to say no lhs in rhs
