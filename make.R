@@ -13,7 +13,7 @@ make_package(update = "patch")
 
 
 ## add to git
-add_to_git("imports my fav tidyverse funs")
+add_to_git("added rm.DS_Store function")
 1
 
 ## get some tweets

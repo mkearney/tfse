@@ -18,7 +18,7 @@ topcats <- function(x, n = 5) {
 #' @usage lhs \%>\% rhs
 #' @examples
 #' ## is "a" in the alphabet?
-#' "a" %!in% letters
+#' "a" %nin% letters
 #'
 #' ## vector of "elephant" letters?
 #' elephant <- strsplit("elephant", "")[[1]]
@@ -27,12 +27,12 @@ topcats <- function(x, n = 5) {
 #' abc <- c("a", "b", "c")
 #'
 #' ## are  "a", "b", or "c" not in
-#' abc %!in% elephant
+#' abc %nin% elephant
 #'
 #' @details Number of returned logical values is equal to the length or number of
 #'   columns of LHS (behaves the same as base in function).
 #' @export
-`%!in%` <- function(lhs, rhs) !lhs %in% rhs
+`%nin%` <- function(lhs, rhs) !lhs %in% rhs
 
 
 #' go_get_var
