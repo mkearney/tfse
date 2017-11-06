@@ -9,10 +9,11 @@ devtools::document(roclets = c('rd', 'collate', 'namespace'))
 devtools::install()
 
 ## update version number
+unloadNamespace("tfse")
 make_package(update = "patch")
 
 ## add to git
-add_to_git("added location2state function")
+add_to_git("added token_used function")
 1
 
 ## get some tweets
