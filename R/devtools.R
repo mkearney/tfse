@@ -11,7 +11,7 @@
 #' @export
 make_package <- function(update = NULL, pkg = ".", load_all = TRUE) {
   ## if not already package, create one
-  if ("DESCRIPTION" %!in% list.files(pkg)) {
+  if ("DESCRIPTION" %nin% list.files(pkg)) {
     devtools::create_description(pkg)
   }
   pkg <- basename(normalizePath(pkg))

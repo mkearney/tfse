@@ -13,8 +13,8 @@ topcats <- function(x, n = 5) {
 #'
 #' @param lhs Left hand side
 #' @param rhs Right hand side
-#' @return Logical indicating whether lhs are NOT in rhs. For more info on the output
-#'   vector.
+#' @return Logical indicating whether lhs are NOT in rhs. For more
+#'   info on the output vector.
 #' @usage lhs \%>\% rhs
 #' @examples
 #' ## is "a" in the alphabet?
@@ -29,8 +29,9 @@ topcats <- function(x, n = 5) {
 #' ## are  "a", "b", or "c" not in
 #' abc %nin% elephant
 #'
-#' @details Number of returned logical values is equal to the length or number of
-#'   columns of LHS (behaves the same as base in function).
+#' @details Number of returned logical values is equal to the length
+#'   or number of columns of LHS (behaves the same as base in
+#'   function).
 #' @export
 `%nin%` <- function(lhs, rhs) !lhs %in% rhs
 

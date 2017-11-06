@@ -12,15 +12,16 @@ lhs \%>\% rhs
 \item{rhs}{Right hand side}
 }
 \value{
-Logical indicating whether lhs are NOT in rhs. For more info on the output
-  vector.
+Logical indicating whether lhs are NOT in rhs. For more
+  info on the output vector.
 }
 \description{
 A more convenient way to say no lhs in rhs
 }
 \details{
-Number of returned logical values is equal to the length or number of
-  columns of LHS (behaves the same as base in function).
+Number of returned logical values is equal to the length
+  or number of columns of LHS (behaves the same as base in
+  function).
 }
 \examples{
 ## is "a" in the alphabet?

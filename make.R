@@ -11,9 +11,8 @@ devtools::install()
 ## update version number
 make_package(update = "patch")
 
-
 ## add to git
-add_to_git("added rm.DS_Store function")
+add_to_git("added location2state function")
 1
 
 ## get some tweets

@@ -17,7 +17,7 @@ as_tbl <- function(...) {
   if (length(args) == 0L) {
     args <- list(data.frame())
   }
-  if ("validate" %!in% names(args)) {
+  if ("validate" %nin% names(args)) {
     args[["validate"]] <- FALSE
   }
   do.call("as_tibble", args)
@@ -31,15 +31,6 @@ as_tbl <- function(...) {
 #' @export
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
-NULL
-
-#' @name tbl_df
-#' @rdname tbl
-#' @inheritParams tbl
-#' @examples
-#' tbl_df(mtcars)
-#' @export
-#' @importFrom dplyr tbl_df
 NULL
 
 
@@ -148,6 +139,17 @@ NULL
 #' @export
 #' @importFrom dplyr mutate
 #' @usage mutate(.data, ...)
+NULL
+
+
+#' Arrange data frame
+#'
+#' @name arrange
+#' @rdname arrange
+#' @keywords internal
+#' @export
+#' @importFrom dplyr arrange
+#' @usage arrange(.data, ...)
 NULL
 
 #' Convert data from wide to long

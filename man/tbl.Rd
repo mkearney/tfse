@@ -2,7 +2,6 @@
 % Please edit documentation in R/imports.R
 \name{as_tbl}
 \alias{as_tbl}
-\alias{tbl_df}
 \alias{data_frame}
 \alias{as_tibble}
 \title{tbl}
@@ -24,7 +23,6 @@ Tibble functions
 }
 \examples{
 as_tbl(data.frame(x = rnorm(10), y = rnorm(10)))
-tbl_df(mtcars)
 data_frame(x = rnorm(10), y = rnorm(10)))
 as_tibble(mtcars)
 }
