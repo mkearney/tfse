@@ -2,18 +2,15 @@
 ## Package make file
 
 ## update/document package
+unloadNamespace("tfse")
 devtools::document(roclets = c('rd', 'collate', 'namespace'))
 #devtools::load_all()
 
-## install
-devtools::install()
-
 ## update version number
-unloadNamespace("tfse")
 make_package(update = "patch")
 
 ## add to git
-add_to_git("added token_used function")
+add_to_git("added api_call function")
 1
 
 ## get some tweets
