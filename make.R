@@ -7,10 +7,12 @@ devtools::document(roclets = c('rd', 'collate', 'namespace'))
 #devtools::load_all()
 
 ## update version number
-make_package(update = "patch")
+make_package()
+
+search_files("importFrom")
 
 ## add to git
-add_to_git("added api_call function")
+add_to_git("fixed pkg dependencies")
 1
 
 ## get some tweets

@@ -16,6 +16,7 @@ Imports:
     parallel,
     rvest,
     tibble,
+    tidyr,
     xml2
 Suggests:
     knitr,

@@ -85,9 +85,13 @@ add_to_git <- function(m = "misc", pkg = ".", pull = TRUE) {
 #'   docs folder), then it will be used to supplement the default pkgdown
 #'   theme.
 #'
-#' @importFrom pkgdown build_site
 #' @export
 pkg_website  <- function(pkg = ".") {
+  if (!requireNamespace("pkgdown", quietly = TRUE)) {
+    warning("must install pkgdown to build site", call. = FALSE)
+    message("devtools::install_github(\"hadley/pkgdown\")")
+    return(invisible())
+  }
   pkg <- basename(normalizePath(pkg))
   pkgdown::build_site(preview = FALSE)
   if (file.exists("docs/custom.css")) {
