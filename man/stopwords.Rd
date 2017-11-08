@@ -9,6 +9,6 @@
 stopwords
 }
 \description{
-Vector of stopwords
+Vector of stopwords taken from SMART lexicon in tidytext
 }
 \keyword{datasets}

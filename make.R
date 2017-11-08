@@ -9,7 +9,9 @@ devtools::document(roclets = c('rd', 'collate', 'namespace'))
 ## update version number
 make_package()
 
-search_files("importFrom")
+?tidytext::stop_words
+
+search_files("tidytext")
 
 ## add to git
 add_to_git("fixed pkg dependencies")

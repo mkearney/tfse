@@ -203,13 +203,9 @@ trim_ws <- function(x) {
 
 #' stopwords
 #'
-#' Vector of stopwords
+#' Vector of stopwords taken from SMART lexicon in tidytext
 #' @docType data
 "stopwords"
-
-stopwords <- tidytext::stop_words$word[tidytext::stop_words$lexicon == "SMART"]
-
-
 
 
 #' tabsort
