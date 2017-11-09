@@ -4,7 +4,7 @@
 \alias{rm_stopwords}
 \title{rm_stopwords}
 \usage{
-rm_stopwords(x, stopwords = stopwords)
+rm_stopwords(x, stopwords)
 }
 \arguments{
 \item{x}{Vector of text.}

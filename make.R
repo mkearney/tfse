@@ -4,18 +4,15 @@
 ## update/document package
 unloadNamespace("tfse")
 devtools::document(roclets = c('rd', 'collate', 'namespace'))
-#devtools::load_all()
+devtools::install()
 
 ## update version number
-make_package()
-
-?tidytext::stop_words
-
-search_files("tidytext")
+make_package(load_all = FALSE, update = "patch")
 
 ## add to git
-add_to_git("fixed pkg dependencies")
+add_to_git("add sysdata stopwords")
 1
+
 
 ## get some tweets
 rt <- rtweet::search_tweets("lang:en")

@@ -104,16 +104,10 @@ rm_links <- function(x) {
 #'   SMART stop words provided by tidytext package.
 #' @return Character vector with stopwords removed
 #' @export
-rm_stopwords <- function(x, stopwords = stopwords) {
+rm_stopwords <- function(x, stopwords) {
   wordbreakor <- function(x) {
     x <- paste(x, collapse = "\\s{0,1}\\b|\\b\\s{0,1}")
     paste0("\\b", x, "\\b")
-  }
-  if (is.null(stopwords)) {
-    stopwords <- c(
-      tidytext::stop_words$word[tidytext::stop_words$lexicon == "SMART"],
-      0:9
-    )
   }
   stopwords <- wordbreakor(stopwords)
   x <- gsub(stopwords, " ", x, perl = TRUE, ignore.case = TRUE)

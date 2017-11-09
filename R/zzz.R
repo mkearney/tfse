@@ -207,7 +207,6 @@ trim_ws <- function(x) {
 #' @docType data
 "stopwords"
 
-
 #' tabsort
 #'
 #' Returns a sorted (descending) frequence tbl
