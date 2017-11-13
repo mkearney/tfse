@@ -6,9 +6,6 @@
 \usage{
 check_renv(path)
 }
-\arguments{
-\item{path}{Path/to/.Renvir}
-}
 \description{
 Checks whether one can safely append to .Renvir file.
 }

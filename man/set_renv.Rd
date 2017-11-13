@@ -4,14 +4,11 @@
 \alias{set_renv}
 \title{set_renv}
 \usage{
-set_renv(..., path = "~/.Renviron")
+set_renv(...)
 }
 \arguments{
 \item{...}{Named values where names correspond to the name of the
 environment variables. Must include names for each value.}
-
-\item{path}{Path to Renviron file, typcally .Renviron found in home
-directory.}
 }
 \value{
 Saves and reads into current session new environment variable(s).

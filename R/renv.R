@@ -2,23 +2,17 @@
 #'
 #' Checks whether one can safely append to .Renvir file.
 #'
-#'
-#' @param path Path/to/.Renvir
 #' @usage
 #' check_renv(path)
 #' @export
-check_renv <- function(path) {
-  if (!file.exists(path)) {
-    return(invisible())
+check_renv <- function() {
+  if (is_incomplete(.Renviron())) {
+    append_lines("", file = .Renviron())
   }
-  con <- file(path)
-  x <- readLines(con, warn = FALSE)
-  close(con)
-  x <- clean_renv(x)
-  x <- paste(x, collapse = "\n")
-  cat(x, file = path, fill = TRUE)
-  invisible()
 }
+
+
+
 
 clean_renv <- function(x) {
   stopifnot(is.character(x))
@@ -47,17 +41,32 @@ clean_renv <- function(x) {
 #'
 #' @param ... Named values where names correspond to the name of the
 #'   environment variables. Must include names for each value.
-#' @param path Path to Renviron file, typcally .Renviron found in home
-#'   directory.
 #' @return Saves and reads into current session new environment variable(s).
 #' @export
-set_renv <- function(..., path = "~/.Renviron") {
+set_renv <- function(...) {
   dots <- list(...)
-  nms <- names(dots)
-  stopifnot(length(nms) > 0L)
-  stopifnot(length(dots) == length(nms))
-  x <- paste0(nms, "=", dots, collapse = "\n")
-  check_renv(path)
-  cat(x, file = path, fill = TRUE, append = TRUE)
-  readRenviron(path)
+  stopifnot(are_named(dots))
+  x <- paste0(names(dots), "=", dots)
+  x <- paste(x, collapse = "\n")
+  check_renv()
+  append_lines(x, file = .Renviron())
+  readRenviron(.Renviron())
+}
+
+.Renviron <- function() {
+  if (file.exists(".Renviron")) {
+    ".Renviron"
+  } else if (!identical(Sys.getenv("HOME"), "")) {
+    file.path(Sys.getenv("HOME"), ".Renviron")
+  } else {
+    file.path(normalizePath("~"), ".Renviron")
+  }
+}
+
+home <- function() {
+  if (!identical(Sys.getenv("HOME"), "")) {
+    file.path(Sys.getenv("HOME"))
+  } else {
+    file.path(normalizePath("~"))
+  }
 }

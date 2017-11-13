@@ -4,13 +4,16 @@
 ## update/document package
 unloadNamespace("tfse")
 devtools::document(roclets = c('rd', 'collate', 'namespace'))
+rm_.DS_Store()
 devtools::install()
 
 ## update version number
 make_package(load_all = FALSE, update = "patch")
 
+
+
 ## add to git
-add_to_git("add sysdata stopwords")
+add_to_git("redid writelines, set_renv")
 1
 
 
