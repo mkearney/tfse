@@ -4,7 +4,7 @@
 \alias{add_to_git}
 \title{add_to_git}
 \usage{
-add_to_git(m = "misc", pkg = ".", pull = TRUE)
+add_to_git(m = "misc", pkg = ".", pull = TRUE, interactive = TRUE)
 }
 \arguments{
 \item{m}{Commit message}
@@ -13,6 +13,9 @@ add_to_git(m = "misc", pkg = ".", pull = TRUE)
 
 \item{pull}{Logical indicating whether to pull the repo prior to
 pushing}
+
+\item{interactive}{Logical indicating whether to ask prior to
+committing to Github repo.}
 }
 \value{
 Sends local repo to Github.

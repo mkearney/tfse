@@ -50,17 +50,21 @@ set_class <- function(x, value) set_class <- `class<-`
 #' @param pkg Repo name. Defaults to working directory file name.
 #' @param pull Logical indicating whether to pull the repo prior to
 #'   pushing
+#' @param interactive Logical indicating whether to ask prior to
+#'   committing to Github repo.
 #'
 #' @return Sends local repo to Github.
 #' @export
-add_to_git <- function(m = "misc", pkg = ".", pull = TRUE) {
+add_to_git <- function(m = "misc", pkg = ".", pull = TRUE, interactive = TRUE) {
   msg <- paste0(
     "Sure you want to update your github repo for ",
     basename(normalizePath(pkg)), "?"
   )
-  r <- menuline(msg, c("Yes", "No"))
-  if (r == 2L) {
-    stop("cool cool cool no doubt no doubt")
+  if (interactive) {
+    r <- menuline(msg, c("Yes", "No"))
+    if (r == 2L) {
+      stop("cool cool cool no doubt no doubt")
+    }
   }
   if (!identical(pkg, ".")) {
     op <- getwd()

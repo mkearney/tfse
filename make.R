@@ -10,10 +10,8 @@ devtools::install()
 ## update version number
 make_package(load_all = FALSE, update = "patch")
 
-
-
 ## add to git
-add_to_git("redid writelines, set_renv")
+add_to_git("added interactive arg to add_to_git")
 1
 
 
