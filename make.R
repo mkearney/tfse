@@ -8,10 +8,17 @@ rm_.DS_Store()
 devtools::install()
 
 ## update version number
-make_package(load_all = FALSE, update = "patch")
+make_package(load_all = FALSE)
+
+hd(as_tbl(mtcars))
+tl(as_tbl(mtcars))
+row.names(mtcars) <- NULL
+hd(mtcars)
+tl(mtcars)
+substrev("asdfsdf asdf asfd adf", 5)
 
 ## add to git
-add_to_git("added interactive arg to add_to_git")
+add_to_git("added hd/tl methods and substrev")
 1
 
 
