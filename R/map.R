@@ -6,8 +6,8 @@
 #' @examples
 #' x <- c("A", "brown", "car", "drove", "eighty", "four", "gallons", "how")
 #' map_chr(function(x) substr(x, 1, 1), x)
-#' @export 
-map_chr <- function(f, ...) {
+#' @export
+mmap_chr <- function(f, ...) {
   f <- match.fun(f)
   x <- mapply(FUN = f, ..., SIMPLIFY = FALSE, USE.NAMES = FALSE)
   if (any(vapply(x, is.recursive, logical(1)))) {
@@ -28,8 +28,8 @@ map_chr <- function(f, ...) {
 #' @examples
 #' x <- rnorm(10)
 #' map_dbl(round, x, 2)
-#' @export 
-map_dbl <- function(f, ...) {
+#' @export
+mmap_dbl <- function(f, ...) {
   f <- match.fun(f)
   x <- mapply(FUN = f, ..., SIMPLIFY = FALSE, USE.NAMES = FALSE)
   if (any(vapply(x, is.recursive, logical(1)))) {
@@ -47,8 +47,8 @@ map_dbl <- function(f, ...) {
 #' @param f Function
 #' @param ... Other args passed to function.
 #' @return Vector type integer
-#' @export 
-map_int <- function(f, ...) {
+#' @export
+mmap_int <- function(f, ...) {
   f <- match.fun(f)
   x <- mapply(FUN = f, ..., SIMPLIFY = FALSE, USE.NAMES = FALSE)
   if (any(vapply(x, is.recursive, logical(1)))) {
@@ -69,7 +69,7 @@ map_int <- function(f, ...) {
 #' @examples
 #' map_lgl(is.numeric, list(rnorm(10), rnorm(10)))
 #' @export
-map_lgl <- function(f, ...) {
+mmap_lgl <- function(f, ...) {
   f <- match.fun(f)
   x <- mapply(FUN = f, ..., SIMPLIFY = FALSE, USE.NAMES = FALSE)
   if (any(vapply(x, is.recursive, logical(1)))) {
