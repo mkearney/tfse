@@ -84,7 +84,7 @@ update_citation <- function(version, path = ".") {
 #' @return Version number classed object.
 #' @export
 version_number <- function(major, minor, patch) {
-  stopifnot(map_lgl(is.numeric, list(major, minor, patch)))
+  stopifnot(map_lgl_(is.numeric, list(major, minor, patch)))
   major <- as.integer(major)
   if (minor == 0) {
     minor <- 0L
@@ -177,4 +177,3 @@ cutnum <- function(x, s1, s2) {
   }
   do.call("version_number", x)
 }
-

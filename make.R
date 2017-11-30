@@ -10,9 +10,8 @@
 make_package(load_all = FALSE, update = "patch")
 
 ## add to git
-add_to_git("added map, pluck, and add_names")
+add_to_git("now contains map_ (mine) and map (purrr compat) functions")
 1
-
 
 ## check
 if (FALSE) {

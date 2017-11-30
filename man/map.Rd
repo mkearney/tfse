@@ -2,39 +2,102 @@
 % Please edit documentation in R/map-purrr.R
 \name{map}
 \alias{map}
+\alias{map_if}
 \alias{map_lgl}
 \alias{map_int}
 \alias{map_dbl}
 \alias{map_chr}
 \alias{map_cpl}
-\title{Base version of map over function}
+\title{Apply a function to each element of a vector}
 \usage{
-map(.f, .x, ...)
+map(.x, .f, ...)
 
-map_lgl(.f, .x, ...)
+map_if(.x, .p, .f, ...)
 
-map_int(.f, .x, ...)
+map_lgl(.x, .f, ...)
 
-map_dbl(.f, .x, ...)
+map_int(.x, .f, ...)
 
-map_chr(.f, .x, ...)
+map_dbl(.x, .f, ...)
 
-map_cpl(.f, .x, ...)
+map_chr(.x, .f, ...)
+
+map_cpl(.x, .f, ...)
 }
 \arguments{
-\item{.f}{function}
+\item{.x}{A list or atomic vector.}
 
-\item{.x}{first param value}
+\item{.f}{A function, formula, or atomic vector.}
 
-\item{...}{additional args}
+\item{...}{Additional arguments passed on to '.f'.}
+
+\item{.p}{A single predicate function, a formula describing such a
+predicate function, or a logical vector of the same length as
+'.x'. Alternatively, if the elements of '.x' are themselves lists
+of objects, a string indicating the name of a logical element in
+the inner lists. Only those elements where '.p' evaluates to
+'TRUE' will be modified.}
 }
 \value{
-Data returned as list vector
+All functions return a vector the same length as '.x'.
 }
 \description{
-Base version of map over function equivalent of lapply
+The map functions transform their input by applying a function to
+each element and returning a vector the same length as the input.
 }
 \examples{
+1:10 \%>\%
+  map(rnorm, n = 10) \%>\%
+  map_dbl(mean)
 
-map(is.numeric, mtcars)
+# Or use an anonymous function
+1:10 \%>\%
+  map(function(x) rnorm(10, x))
+
+# Or a formula
+#' 1:10 \%>\%
+  map(~ rnorm(10, .x))
+
+# Extract by name or position
+# .default specifies value for elements that are missing or NULL
+l1 <- list(list(a = 1L), list(a = NULL, b = 2L), list(b = 3L))
+l1 \%>\% map("a", .default = "???")
+l1 \%>\% map_int("b", .default = NA)
+l1 \%>\% map_int(2, .default = NA)
+
+# Supply multiple values to index deeply into a list
+l2 <- list(
+  list(num = 1:3,#' letters[1:3]),
+  list(num = 101:103, letters[4:6]),
+  list()
+)
+l2 \%>\% map(c(2, 2))
+
+# Use a list to build an extractor that mixes numeric indices and names,
+# and .default to provide a default value if the element does not exist
+l2 \%>\% map(list("num", 3))
+l2 \%>\% map_int(list("num", 3), .default = NA)
+
+# A more realistic example: split a data frame into pieces, fit a
+# model to each piece, summarise and extract R^2
+mtcars \%>\%
+  split(.$cyl) \%>\%
+  map(~ lm(mpg ~ wt, data = .x)) \%>\%
+  map(summary) \%>\%
+  map_dbl("r.squared")
+
+# Use map_lgl(), map_dbl(), etc to reduce to a vector.
+# * list
+mtcars \%>\% map(sum)
+# * vector
+mtcars \%>\% map_dbl(sum)
+
+# If each element of the output is a data frame, use
+# map_dfr to row-bind them together:
+mtcars \%>\%
+  split(.$cyl) \%>\%
+  map(~ lm(mpg ~ wt, data = .x)) \%>\%
+  map_dfr(~ as.data.frame(t(as.matrix(coef(.)))))
+# (if you also want to preserve the variable names see
+# the broom package)
 }

@@ -11,7 +11,7 @@
 #' @export
 break_lines <- function(x, n = 80, sep = "\\. ", collapse = "\n") {
   stopifnot(is.character(x))
-  map_chr("break_lines_", x,
+  map_chr_("break_lines_", x,
           MoreArgs = list(n = n, sep = sep, collapse = collapse))
 }
 
@@ -41,7 +41,7 @@ break_lines_ <- function(x, n, sep = "\\. ", collapse = "\n") {
   if (!is.null(sep)) {
     x <- strsplit(x, sep)[[1]]
   }
-  x <- map_chr("break_line", x, MoreArgs = list(n = n))
+  x <- map_chr_("break_line", x, MoreArgs = list(n = n))
   if (!is.null(collapse)) {
     x <- paste(x, collapse = collapse)
   }

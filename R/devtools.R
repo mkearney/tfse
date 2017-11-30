@@ -129,8 +129,8 @@ make_citation <- function(pkg = ".") {
   x <- strsplit(x, "\\:(?!\\/)", perl = TRUE)
   x <- x[lengths(x) == 2L]
   d <- as.list(structure(
-    trim_ws(map_chr("[[", x, 2L)),
-    names = map_chr("[[", x, 1L),
+    trim_ws(map_chr_("[[", x, 2L)),
+    names = map_chr_("[[", x, 1L),
     class = "list"
   ))
   year <- format(Sys.Date(), "%Y")

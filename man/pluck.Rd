@@ -2,37 +2,15 @@
 % Please edit documentation in R/map-purrr.R
 \name{pluck}
 \alias{pluck}
-\alias{pluck_lgl}
-\alias{pluck_int}
-\alias{pluck_dbl}
-\alias{pluck_chr}
-\alias{pluck_cpl}
-\title{Pluck elements from list}
+\title{Pluck out a single an element from a vector or environment}
 \usage{
 pluck(.x, .f)
-
-pluck_lgl(.x, .f)
-
-pluck_int(.x, .f)
-
-pluck_dbl(.x, .f)
-
-pluck_chr(.x, .f)
-
-pluck_cpl(.x, .f)
 }
 \arguments{
-\item{.x}{Data}
+\item{.x}{A vector or environment}
 
-\item{.f}{Named data object or integer position number}
-}
-\value{
-Data plucked from input
+\item{.f}{Accessors for indexing into the object. Can be an integer position, a string name, or an accessor function.}
 }
 \description{
-Extracts from list named or integer position data.
-}
-\examples{
-pluck(list(mtcars), "cyl")
-
+Pluck out a single an element from a vector or environment
 }
