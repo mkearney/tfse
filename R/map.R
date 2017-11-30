@@ -10,7 +10,7 @@
 #' @details Yes, this is identical to base \code{Map} but it also
 #'   hardwires USE.NAMES to FALSE.
 #' @examples
-#' map_(mtcars, as.data.frame)
+#' map_(as.data.frame, mtcars)
 #' @rdname map_
 #' @export
 map_ <- function(f, ...) {

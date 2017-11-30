@@ -76,7 +76,7 @@ Yes, this is identical to base \code{Map} but it also
   hardwires USE.NAMES to FALSE.
 }
 \examples{
-map_(mtcars, as.data.frame)
+map_(as.data.frame, mtcars)
 x <- c("A", "brown", "car", "drove", "eighty", "four", "gallons", "how")
 map_chr_(function(x) substr(x, 1, 1), x)
 x <- rnorm(10)
