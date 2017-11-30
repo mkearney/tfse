@@ -10,7 +10,7 @@
 make_package(load_all = FALSE, update = "patch")
 
 ## add to git
-add_to_git("now contains map_ (mine) and map (purrr compat) functions")
+add_to_git("udpated readme and pkgdown site")
 1
 
 ## check
@@ -20,6 +20,8 @@ if (FALSE) {
     check_dir = ".check"
   )
 }
+
+rm_.DS_Store()
 
 ## pkgdown
 devtools::install_github("hadley/pkgdown")

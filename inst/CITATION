@@ -3,7 +3,7 @@ citHeader("To cite tfse use:")
 
 citEntry(
     entry        = "Manual",
-    title        = "tfse: The First Scriptorium Emporium"
+    title        = "tfse: The First Scriptorium Emporium",
     author       = as.person("Michael W. Kearney"),
     year         = 2017,
     note         = "R package version 0.2.2",
@@ -15,4 +15,3 @@ citEntry(
         "https://github.com/mkearney/tfse/"
     )
 )
-

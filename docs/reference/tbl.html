@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tbl — tbl_df • tfse</title>
+<title>tbl — as_tbl • tfse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -52,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -84,17 +84,49 @@
     </div>
 
     
-    <p>tbl</p>
+    <p>Tibble functions</p>
     
 
-    <pre class="usage"><span class='fu'>tbl_df</span>(<span class='no'>...</span>)</pre>
-        
+    <pre class="usage"><span class='fu'>as_tbl</span>(<span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed to <code>as_tibble</code>, <code>tbl_df</code>,
+or <code>data_frame</code>.</p></td>
+    </tr>
+    <tr>
+      <th>validate</th>
+      <td><p>Logical indicating whether to validate tibble. Defaults to
+FALSE because it's slightly faster.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A tibble data frame</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>as_tbl(data.frame(x = rnorm(10), y = rnorm(10)))
+data_frame(x = rnorm(10), y = rnorm(10)))
+as_tibble(mtcars)
+</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:2:41: unexpected ')'</span>
+#&gt; <span class='error'>1: as_tbl(data.frame(x = rnorm(10), y = rnorm(10)))</span>
+#&gt; <span class='error'>2: data_frame(x = rnorm(10), y = rnorm(10)))</span>
+#&gt; <span class='error'>                                           ^</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
