@@ -10,7 +10,8 @@
 make_package(load_all = FALSE, update = "patch")
 
 ## add to git
-add_to_git("udpated readme and pkgdown site")
+rm_.DS_Store()
+add_to_git("added sem_fit and par_table (lavaan functions)")
 1
 
 ## check
