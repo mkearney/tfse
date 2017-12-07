@@ -11,7 +11,10 @@ make_package(load_all = FALSE, update = "patch")
 
 ## add to git
 rm_.DS_Store()
-add_to_git("added sem_fit and par_table (lavaan functions)")
+add_to_git("added round_time and cc and fixed api_call")
+example(round_time)
+cc("sdf,asdf,asdf")
+
 1
 
 ## check

@@ -27,7 +27,11 @@
 #'
 #' @export
 api_call <- function(url, ...) {
+  stopifnot(grepl("^http", url))
   dots <- list(...)
+  if (length(dots) == 1L && is.list(dots[[1]])) {
+    dots <- dots[[1]]
+  }
   if (length(dots) > 0L) {
     dots <- paste0(names(dots), "=", dots)
     dots <- paste(dots, collapse = "&")
