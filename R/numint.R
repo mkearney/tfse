@@ -6,10 +6,10 @@
 #' @param x Vector to test whether it can be converted to numeric.
 #' @return Logical value of true or false.
 #' @export
-canbe_num <- function(x) UseMethod("canbe_num")
+can_num <- function(x) UseMethod("can_num")
 
 #' @export
-canbe_num.character <- function(x) {
+can_num.character <- function(x) {
   x <- suppressWarnings(as.numeric(x))
   naprop <- sum(is.na(x)) / length(x)
   if (naprop < .5) return(TRUE)
@@ -17,20 +17,20 @@ canbe_num.character <- function(x) {
 }
 
 #' @export
-canbe_num.numeric <- function(x) TRUE
+can_num.numeric <- function(x) TRUE
 
 #' @export
-canbe_num.integer <- function(x) TRUE
+can_num.integer <- function(x) TRUE
 
 #' @export
-canbe_num.list <- function(x) {
+can_num.list <- function(x) {
   if (any(lengths(x) > 1L)) return(FALSE)
   x <- as.character(x)
-  NextMethod("canbe_num")
+  NextMethod("can_num")
 }
 
 #' @export
-canbe_num.data.frame <- function(x) FALSE
+can_num.data.frame <- function(x) FALSE
 
 #' Determines whether vector can be converted to integer
 #'
