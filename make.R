@@ -7,14 +7,13 @@
 #devtools::install()
 
 ## build package / update version number
-make_package(load_all = FALSE, update = "patch")
+make_package(load_all = FALSE)
+
+## rm annoying .ds_store files
+rm_.DS_Store()
 
 ## add to git
-rm_.DS_Store()
-add_to_git("added round_time and cc and fixed api_call")
-example(round_time)
-cc("sdf,asdf,asdf")
-
+add_to_git("added canbe_int and canbe_num methods")
 1
 
 ## check
@@ -24,8 +23,6 @@ if (FALSE) {
     check_dir = ".check"
   )
 }
-
-rm_.DS_Store()
 
 ## pkgdown
 devtools::install_github("hadley/pkgdown")
