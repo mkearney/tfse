@@ -7,13 +7,13 @@
 #devtools::install()
 
 ## build package / update version number
-make_package(load_all = FALSE)
+make_package(load_all = FALSE, update = "patch")
 
 ## rm annoying .ds_store files
 rm_.DS_Store()
 
 ## add to git
-add_to_git("fixed can_num and updated documentation")
+add_to_git("added nin and yin functions")
 1
 
 ## check
