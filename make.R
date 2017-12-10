@@ -13,7 +13,7 @@ make_package(load_all = FALSE)
 rm_.DS_Store()
 
 ## add to git
-add_to_git("added canbe_int and canbe_num methods")
+add_to_git("fixed can_num and updated documentation")
 1
 
 ## check

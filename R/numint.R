@@ -1,10 +1,26 @@
-#' Determines whether vector can be converted to numeric
+#' Determines whether vector can be converted to numeric or integer
 #'
 #' Converts vector (if possible) into numeric and determines if it makes
 #' sense to do so.
 #'
-#' @param x Vector to test whether it can be converted to numeric.
+#' @param x Vector to test whether it can be converted to numeric or integer.
 #' @return Logical value of true or false.
+#' @examples
+#' ## data with columns of all characters
+#' df <- mtcars
+#' df[, 1:ncol(df)] <- lapply(
+#'   df[, 1:ncol(df)], as.character
+#' )
+#'
+#' ## convert to integer
+#' df <- df %>% dplyr::mutate_if(can_int, as.integer)
+#'
+#' ## convert to numeric
+#' df <- df %>% dplyr::mutate_if(can_num, as.numeric)
+#'
+#' ## view columns with class information
+#' tibble::as_tibble(df)
+#'
 #' @export
 can_num <- function(x) UseMethod("can_num")
 
@@ -20,7 +36,7 @@ can_num.character <- function(x) {
 can_num.numeric <- function(x) TRUE
 
 #' @export
-can_num.integer <- function(x) TRUE
+can_num.integer <- function(x) FALSE
 
 #' @export
 can_num.list <- function(x) {
@@ -32,13 +48,8 @@ can_num.list <- function(x) {
 #' @export
 can_num.data.frame <- function(x) FALSE
 
-#' Determines whether vector can be converted to integer
-#'
-#' Converts vector (if possible) into integer and determines if it makes
-#' sense to do so.
-#'
-#' @param x Vector to test whether it can be converted to integer.
-#' @return Logical value of true or false.
+#' @inheritParams can_num
+#' @rdname can_num
 #' @export
 can_int <- function(x) UseMethod("can_int")
 

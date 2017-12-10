@@ -2,12 +2,15 @@
 % Please edit documentation in R/numint.R
 \name{can_num}
 \alias{can_num}
-\title{Determines whether vector can be converted to numeric}
+\alias{can_int}
+\title{Determines whether vector can be converted to numeric or integer}
 \usage{
 can_num(x)
+
+can_int(x)
 }
 \arguments{
-\item{x}{Vector to test whether it can be converted to numeric.}
+\item{x}{Vector to test whether it can be converted to numeric or integer.}
 }
 \value{
 Logical value of true or false.
@@ -15,4 +18,21 @@ Logical value of true or false.
 \description{
 Converts vector (if possible) into numeric and determines if it makes
 sense to do so.
+}
+\examples{
+## data with columns of all characters
+df <- mtcars
+df[, 1:ncol(df)] <- lapply(
+  df[, 1:ncol(df)], as.character
+)
+
+## convert to integer
+df <- df \%>\% dplyr::mutate_if(can_int, as.integer)
+
+## convert to numeric
+df <- df \%>\% dplyr::mutate_if(can_num, as.numeric)
+
+## view columns with class information
+tibble::as_tibble(df)
+
 }
