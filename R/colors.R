@@ -17,9 +17,33 @@ col2hex <- function(color, alpha = NULL) UseMethod("col2hex")
 
 #' @export
 col2hex.character <- function(color, alpha = NULL) {
-  if (is.character(color)) {
-    color <- grDevices::col2rgb(color)
+  color <- grDevices::col2rgb(color)
+  col2hex(color, alpha)
+}
+
+#' @export
+col2hex.numeric <- function(color, alpha = NULL) {
+  color <- matrix(color, 3)
+  if (any(unlist(lapply(col2rgb(cols), unlist)) > 1.0)) {
+    maxColorValue <- 255
+  } else {
+    maxColorValue <- 1
   }
+  color <- grDevices::rgb(
+    color[1, ], color[2, ], color[3, ], maxColorValue = maxColorValue)
+  col2hex(color, alpha)
+}
+
+#' @export
+col2hex.integer <- function(color, alpha = NULL) {
+  color <- matrix(color, 3)
+  if (any(unlist(lapply(col2rgb(cols), unlist)) > 1.0)) {
+    maxColorValue <- 255
+  } else {
+    maxColorValue <- 1
+  }
+  color <- grDevices::rgb(
+    color[1, ], color[2, ], color[3, ], maxColorValue = maxColorValue)
   col2hex(color, alpha)
 }
 
