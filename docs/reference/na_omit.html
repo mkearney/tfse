@@ -52,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -116,13 +116,13 @@ omitted</p>
 )
 
 <span class='co'>## data frame</span>
-<span class='fu'>na_omit</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt;      a b      c
-#&gt; 1 1, 2 a  1.124
-#&gt; 3 1, 2 c -1.234</div><div class='input'>
+<span class='fu'>na_omit</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt;      a b         c
+#&gt; 1 1, 2 a  1.124300
+#&gt; 3 1, 2 c -1.234134</div><div class='input'>
 <span class='co'>## matrix</span>
-<span class='fu'>na_omit</span>(<span class='fu'>as.matrix</span>(<span class='no'>df</span>))</div><div class='output co'>#&gt;      a         b   c     
-#&gt; [1,] Numeric,2 "a" 1.124 
-#&gt; [2,] Numeric,2 "c" -1.234</div><div class='input'>
+<span class='fu'>na_omit</span>(<span class='fu'>as.matrix</span>(<span class='no'>df</span>))</div><div class='output co'>#&gt;      a         b   c        
+#&gt; [1,] Numeric,2 "a" 1.1243   
+#&gt; [2,] Numeric,2 "c" -1.234134</div><div class='input'>
 <span class='co'>## list</span>
 <span class='fu'>na_omit</span>(<span class='fu'>apply</span>(<span class='no'>df</span>, <span class='fl'>1</span>, <span class='no'>c</span>))</div><div class='output co'>#&gt; [[1]]
 #&gt; [[1]]$a
@@ -132,7 +132,7 @@ omitted</p>
 #&gt; [1] "a"
 #&gt; 
 #&gt; [[1]]$c
-#&gt; [1] 1.124
+#&gt; [1] 1.1243
 #&gt; 
 #&gt; 
 #&gt; [[2]]
@@ -143,7 +143,7 @@ omitted</p>
 #&gt; [1] "c"
 #&gt; 
 #&gt; [[2]]$c
-#&gt; [1] -1.234
+#&gt; [1] -1.234134
 #&gt; 
 #&gt; </div><div class='input'>
 <span class='co'>## atomic vector</span>

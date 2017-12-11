@@ -52,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -137,31 +137,31 @@ available.</p></td>
 
 <span class='co'>## view fit stats</span>
 <span class='fu'>sem_fit</span>(<span class='no'>f1</span>)</div><div class='output co'>#&gt; <span class='message'>Scaled fit statistics</span></div><div class='output co'>#&gt; # A tibble: 1 x 7
-#&gt;       N ChiSq   CFI   TLI RMSEA      RMSEA_ci  SRMR
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;         &lt;chr&gt; &lt;dbl&gt;
-#&gt; 1     5 40.88 0.735  0.47 0.474 [0.341,0.619] 0.198</div><div class='input'>
+#&gt;       N  ChiSq   CFI   TLI RMSEA      RMSEA_ci  SRMR
+#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;         &lt;chr&gt; &lt;dbl&gt;
+#&gt; 1     5 40.881 0.735  0.47 0.474 [0.341,0.619] 0.198</div><div class='input'>
 <span class='co'>## view par estimates</span>
 <span class='fu'>par_table</span>(<span class='no'>f1</span>)</div><div class='output co'>#&gt; # A tibble: 17 x 9
-#&gt;      lhs    op   rhs        est      se          z         p   ci.lower
-#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-#&gt;  1     e    =~   cyl  8.964e-01 0.05614  1.597e+01 0.000e+00  7.864e-01
-#&gt;  2     e    =~    hp  8.334e-01 0.10405  8.010e+00 1.110e-15  6.295e-01
-#&gt;  3     e    =~    wt  8.551e-01 0.12995  6.580e+00 4.702e-11  6.004e-01
-#&gt;  4   mpg     ~     e -8.980e-01 0.12456 -7.209e+00 5.627e-13 -1.142e+00
-#&gt;  5   mpg     ~  gear  7.687e-02 0.07550  1.018e+00 3.086e-01 -7.110e-02
-#&gt;  6   cyl    ~~   cyl  1.652e-01 0.05314  3.109e+00 1.877e-03  6.106e-02
-#&gt;  7    hp    ~~    hp  2.742e-01 0.13390  2.048e+00 4.056e-02  1.178e-02
-#&gt;  8    wt    ~~    wt  2.376e-01 0.08277  2.871e+00 4.097e-03  7.537e-02
-#&gt;  9   mpg    ~~   mpg  9.653e-02 0.05686  1.698e+00 8.958e-02 -1.492e-02
-#&gt; 10     e    ~~     e  1.000e+00 0.00000         NA        NA  1.000e+00
-#&gt; 11  gear    ~~  gear  9.687e-01 0.00000         NA        NA  9.687e-01
-#&gt; 12   cyl    ~1        7.121e-16 0.17399  4.093e-15 1.000e+00 -3.410e-01
-#&gt; 13    hp    ~1        2.022e-16 0.17399  1.162e-15 1.000e+00 -3.410e-01
-#&gt; 14    wt    ~1        3.072e-16 0.17399  1.766e-15 1.000e+00 -3.410e-01
-#&gt; 15   mpg    ~1        1.262e-15 0.16798  7.510e-15 1.000e+00 -3.292e-01
-#&gt; 16  gear    ~1       -3.469e-18 0.00000         NA        NA -3.469e-18
-#&gt; 17     e    ~1        0.000e+00 0.00000         NA        NA  0.000e+00
-#&gt; # ... with 1 more variables: ci.upper &lt;dbl&gt;</div><div class='input'>
+#&gt;      lhs    op   rhs           est         se             z            p
+#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;        &lt;dbl&gt;
+#&gt;  1     e    =~   cyl  8.964025e-01 0.05613879  1.596761e+01 0.000000e+00
+#&gt;  2     e    =~    hp  8.333885e-01 0.10404560  8.009839e+00 1.110223e-15
+#&gt;  3     e    =~    wt  8.550734e-01 0.12994897  6.580070e+00 4.702261e-11
+#&gt;  4   mpg     ~     e -8.980040e-01 0.12456280 -7.209247e+00 5.626610e-13
+#&gt;  5   mpg     ~  gear  7.687214e-02 0.07549680  1.018217e+00 3.085747e-01
+#&gt;  6   cyl    ~~   cyl  1.652121e-01 0.05313885  3.109064e+00 1.876809e-03
+#&gt;  7    hp    ~~    hp  2.742140e-01 0.13389583  2.047965e+00 4.056339e-02
+#&gt;  8    wt    ~~    wt  2.375991e-01 0.08277030  2.870584e+00 4.097141e-03
+#&gt;  9   mpg    ~~   mpg  9.652980e-02 0.05686186  1.697620e+00 8.957959e-02
+#&gt; 10     e    ~~     e  1.000000e+00 0.00000000            NA           NA
+#&gt; 11  gear    ~~  gear  9.687500e-01 0.00000000            NA           NA
+#&gt; 12   cyl    ~1        7.120990e-16 0.17399264  4.092696e-15 1.000000e+00
+#&gt; 13    hp    ~1        2.021814e-16 0.17399264  1.162011e-15 1.000000e+00
+#&gt; 14    wt    ~1        3.072168e-16 0.17399264  1.765688e-15 1.000000e+00
+#&gt; 15   mpg    ~1        1.261553e-15 0.16797890  7.510185e-15 1.000000e+00
+#&gt; 16  gear    ~1       -3.469447e-18 0.00000000            NA           NA
+#&gt; 17     e    ~1        0.000000e+00 0.00000000            NA           NA
+#&gt; # ... with 2 more variables: ci.lower &lt;dbl&gt;, ci.upper &lt;dbl&gt;</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

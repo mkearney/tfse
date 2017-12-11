@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert Twitter locations to U.S. state names — location2state • tfse</title>
+<title>Return lhs values not in rhs values — nin • tfse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -80,42 +80,48 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert Twitter locations to U.S. state names</h1>
+    <h1>Return lhs values not in rhs values</h1>
     </div>
 
     
-    <p>Estimates U.S. state given Twitter user location data.</p>
+    <p>Return lhs values not in rhs values</p>
     
 
-    <pre class="usage"><span class='fu'>location2state</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>nin</span>(<span class='no'>lhs</span>, <span class='no'>rhs</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>yin</span>(<span class='no'>lhs</span>, <span class='no'>rhs</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Character vector of Twitter user location data.</p></td>
+      <th>lhs</th>
+      <td><p>Values to check whether they are/not contained in the other</p></td>
+    </tr>
+    <tr>
+      <th>rhs</th>
+      <td><p>Values to use as the reference</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>Logical indicating whether to return the value or a logical vector</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Character vector of same length with U.S. names (or a
-  generic "United States") for values based on best guess for each
-  user. Cases with insufficient information are returned as NAs.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='co'>## a, b, zz in alphabet letters</span>
+<span class='fu'>yin</span>(<span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"zz"</span>), <span class='no'>letters</span>)</div><div class='output co'>#&gt; [1] "a" "b"</div><div class='input'>
+<span class='co'>## a, b, zz NOT in alphabet letters</span>
+<span class='fu'>nin</span>(<span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"zz"</span>), <span class='no'>letters</span>)</div><div class='output co'>#&gt; [1] "zz"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 

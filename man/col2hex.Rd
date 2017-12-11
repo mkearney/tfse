@@ -10,8 +10,8 @@ col2hex(color, alpha = NULL)
 \item{color}{One or more named colors. Also acccepts hex colors (useful for
 adding alpha values).}
 
-\item{alpha}{Alpha level ranging form 1.0 (opaque) to 0.0 (transparent). The 
-default (NULL) omits alpha columns from the returned hexidecimal 
+\item{alpha}{Alpha level ranging form 1.0 (opaque) to 0.0 (transparent). The
+default (NULL) omits alpha columns from the returned hexidecimal
 characters.}
 }
 \value{

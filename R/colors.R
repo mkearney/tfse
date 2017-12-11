@@ -1,24 +1,39 @@
 
 
 #' col2hex
-#' 
+#'
 #' Converts named colors to hex (html) codes.
-#' 
+#'
 #' @param color One or more named colors. Also acccepts hex colors (useful for
 #'   adding alpha values).
-#' @param alpha Alpha level ranging form 1.0 (opaque) to 0.0 (transparent). The 
-#'   default (NULL) omits alpha columns from the returned hexidecimal 
+#' @param alpha Alpha level ranging form 1.0 (opaque) to 0.0 (transparent). The
+#'   default (NULL) omits alpha columns from the returned hexidecimal
 #'   characters.
 #' @return Hexidicimal color codes
 #' @importFrom grDevices col2rgb
 #' @export
-col2hex <- function(color, alpha = NULL) {
+col2hex <- function(color, alpha = NULL) UseMethod("col2hex")
+
+
+#' @export
+col2hex.character <- function(color, alpha = NULL) {
   if (is.character(color)) {
-    color <- col2rgb(color)
+    color <- grDevices::col2rgb(color)
   }
-  stopifnot(is.matrix(color))
-  colors_and_matrices(color, alpha)
+  col2hex(color, alpha)
 }
+
+#' @export
+col2hex.matrix <- function(color, alpha = NULL) {
+  stopifnot(nrow(color) == 3L)
+  if (all(c("h", "s", "v") %in% row.names(color))) {
+    coltype <- "hsv"
+  } else {
+    coltype <- "rgb"
+  }
+  matrix2col(coltype, color, alpha)
+}
+
 
 #' gg_cols
 #'
