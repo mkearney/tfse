@@ -1,6 +1,6 @@
 Package: tfse
-Version: 0.2.33
-Date: 2017-12-11
+Version: 0.2.34
+Date: 2017-12-18
 Title: The First Scriptorium Emporium
 Authors@R: person("Mike", "Kearney", email = "kearneymw@missouri.edu",
                   role = c("aut", "cre"))

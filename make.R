@@ -13,7 +13,7 @@ make_package(load_all = FALSE, update = "patch")
 rm_.DS_Store()
 
 ## add to git
-add_to_git("made col2hex into method")
+add_to_git("added new read_json function and exported tweet_url method")
 1
 
 ## check

@@ -1,10 +1,19 @@
+#' tweet url
+#'
+#' Returns URL to twitter status
+#'
+#' @param x Data with status ID and screen name variables.
+#' @return URLs to statuses.
+#' @export
 tweet_url <- function(x) UseMethod("tweet_url")
 
+#' @export
 tweet_url.list <- function(x) {
   paste0("https://twitter.com/",
          paste(x[[1]], "status", x[[2]], sep = "/"))
 }
 
+#' @export
 tweet_url.data.frame <- function(x) {
   x <- list(x$screen_name, x$status_id)
   tweet_url(x)
