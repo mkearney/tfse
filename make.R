@@ -2,6 +2,7 @@
 ## Package make file
 
 ## unload tfse
+
 #unloadNamespace("tfse")
 #devtools::document(roclets = c('rd', 'collate', 'namespace'))
 #devtools::install()
@@ -12,8 +13,10 @@ make_package(load_all = FALSE, update = "patch")
 ## rm annoying .ds_store files
 rm_.DS_Store()
 
+swp(p = 1 - .0001, lang = "en")
+
 ## add to git
-add_to_git("added new read_json function and exported tweet_url method")
+add_to_git("added swp (stop words by probability) function")
 1
 
 ## check
