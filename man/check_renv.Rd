@@ -4,7 +4,7 @@
 \alias{check_renv}
 \title{check_renv}
 \usage{
-check_renv(path)
+check_renv()
 }
 \description{
 Checks whether one can safely append to .Renvir file.

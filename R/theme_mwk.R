@@ -9,14 +9,15 @@
 #' @param light Primary background color.
 #' @param gray Gray color.
 #' @return My ggplot2 theme (similar to theme_minimal/theme_bw)
-#' @importFrom ggplot2 theme_bw theme element_blank element_rect element_text element_line rel
 #' @export
 theme_mwk <- function(base_size = 13,
-                      base_family = "Roboto",
+                      base_family = "Helvetica Neue",
                       dark = "#24292e",
                       light = "#ffffff",
-                      gray = "#eaeaea",
-                      ...) {
+                      gray = "#eaeaea") {
+  if (!requireNamespace("ggplot2", quietly = FALSE)) {
+    stop("must install ggplot2 pkg", call. = FALSE)
+  }
   ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
       legend.title = ggplot2::element_blank(),

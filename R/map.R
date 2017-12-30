@@ -22,10 +22,7 @@ map_ <- function(f, ...) {
 #'
 #' maps function and returns character vector
 #'
-#' @param f Function
-#' @param ... Other args passed to function, i.e., named parameters
-#'   specific to f function, and also the \code{MoreArgs} argument
-#'   from \code{mapply}.
+#' @inheritParams map_
 #' @return Vector type character
 #' @examples
 #' x <- c("A", "brown", "car", "drove", "eighty", "four", "gallons", "how")
@@ -39,6 +36,8 @@ map_chr_ <- function(f, ...) {
     stop("Expected atomic but returned recursive.", call.. = FALSE)
   }
   if (any(lengths(x) > 1L)) {
+    msg <- which(lengths(x) > 1L)
+    msg <- paste0("")
     stop("Return object length exceeded 1.")
   }
   if (any(lengths(x) == 0L)) {
@@ -52,14 +51,13 @@ map_chr_ <- function(f, ...) {
 }
 
 
+
+
 #' map_dbl_
 #'
 #' maps function and returns double vector
 #'
-#' @param f Function
-#' @param ... Other args passed to function, i.e., named parameters
-#'   specific to f function, and also the \code{MoreArgs} argument
-#'   from \code{mapply}.
+#' @inheritParams map_
 #' @return Vector type double
 #' @examples
 #' x <- rnorm(10)
@@ -89,10 +87,7 @@ map_dbl_ <- function(f, ...) {
 #'
 #' maps function and returns integer vector
 #'
-#' @param f Function
-#' @param ... Other args passed to function, i.e., named parameters
-#'   specific to f function, and also the \code{MoreArgs} argument
-#'   from \code{mapply}.
+#' @inheritParams map_
 #' @return Vector type integer
 #' @rdname map_
 #' @examples
@@ -122,10 +117,7 @@ map_int_ <- function(f, ...) {
 #'
 #' maps function and returns logical vector
 #'
-#' @param f Function
-#' @param ... Other args passed to function, i.e., named parameters
-#'   specific to f function, and also the \code{MoreArgs} argument
-#'   from \code{mapply}.
+#' @inheritParams map_
 #' @return Vector type logical.
 #' @rdname map_
 #' @examples

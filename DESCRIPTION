@@ -1,6 +1,6 @@
 Package: tfse
-Version: 0.2.35
-Date: 2017-12-19
+Version: 0.3.0
+Date: 2017-12-30
 Title: The First Scriptorium Emporium
 Authors@R: person("Mike", "Kearney", email = "kearneymw@missouri.edu",
                   role = c("aut", "cre"))
@@ -8,20 +8,11 @@ Description: Misc functions.
 Depends:
     R (>= 3.1.0)
 Imports:
-    devtools,
-    dplyr,
-    ggplot2,
     grDevices,
-    magrittr,
-    parallel,
-    rvest,
-    tibble,
-    tidyr,
-    xml2
+    hms
 Suggests:
     knitr,
-    rmarkdown,
-    testthat
+    rmarkdown
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 LazyData: TRUE

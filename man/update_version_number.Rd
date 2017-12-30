@@ -9,7 +9,7 @@ update_version_number(update_type = "patch", pkg = ".")
 \arguments{
 \item{update_type}{Patch, minor, or major update.}
 
-\item{path}{Path to base directory of given R package.}
+\item{pkg}{Path to base directory of given R package.}
 }
 \value{
 Updates and saves DESCRIPTION file.

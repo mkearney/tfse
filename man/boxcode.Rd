@@ -2,9 +2,18 @@
 % Please edit documentation in R/box_code.R
 \name{boxcode}
 \alias{boxcode}
+\alias{codebox}
+\alias{box_code}
+\alias{code_box}
 \title{boxcode}
 \usage{
 boxcode(label = "")
+
+codebox(label = "")
+
+box_code(label = "")
+
+code_box(label = "")
 }
 \arguments{
 \item{label}{Name of section/block}
@@ -13,6 +22,6 @@ boxcode(label = "")
 Text for code box saved into clipboard. Paste to use at cursor.
 }
 \description{
-Load clipboard with code chunk square. Paste to insert square into R script 
+Load clipboard with code chunk square. Paste to insert square into R script
   file at cursor location.
 }

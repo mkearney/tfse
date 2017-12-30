@@ -3,9 +3,6 @@
 #'
 #' Adds new variable column to data frame
 #'
-#' @param x Data frame.
-#' @param ... Named, preferably, value of either length 1 or length equal
-#'   to the number of rows in x.
 #' @export
 add_var <- function(x, ...) {
   dots <- list(...)
@@ -29,7 +26,7 @@ add_var_ <- function(x, name, value) {
 #'
 #' @param x Data frame to be added to.
 #' @param ... Named variables to add to data frame
-#' @return A tbl data frame.
+#' @return A data frame.
 #' @examples
 #'
 #' ## add to vars to mtcars data set
@@ -43,5 +40,5 @@ add_vars <- function(x, ...) {
   for (i in seq_along(dots)) {
     x <- add_var_(x, vars[i], dots[[i]])
   }
-  tibble::as_tibble(x, validate = FALSE)
+  x
 }

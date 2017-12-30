@@ -5,7 +5,7 @@
 #' @param x Input text
 #' @param n Number of characters (width) on which to truncate given text
 #' @param sep Separator used for subunits.
-#' @param y When text is recombined into single string, this value is used
+#' @param collapse When text is recombined into single string, this value is used
 #'   as the sepator. Defaults to three line breaks.
 #' @return Output with line breaks optimized for n width.
 #' @export

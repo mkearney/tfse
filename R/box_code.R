@@ -1,12 +1,12 @@
 
 #' boxcode
-#' 
-#' Load clipboard with code chunk square. Paste to insert square into R script 
+#'
+#' Load clipboard with code chunk square. Paste to insert square into R script
 #'   file at cursor location.
-#'   
+#'
 #' @param label Name of section/block
 #' @return Text for code box saved into clipboard. Paste to use at cursor.
-#' 
+#'
 #' @export
 boxcode <- function(label = "") {
   n <- nchar(label)
@@ -30,12 +30,17 @@ boxcode <- function(label = "") {
 }
 
 #' @export
-#' @noRd
+#' @inheritParams boxcode
+#' @rdname boxcode
 codebox <- function(label = "") boxcode(label)
+
 #' @export
-#' @noRd
+#' @inheritParams boxcode
+#' @rdname boxcode
 box_code <- function(label = "") boxcode(label)
+
 #' @export
-#' @noRd
+#' @inheritParams boxcode
+#' @rdname boxcode
 code_box <- function(label = "") boxcode(label)
 

@@ -33,15 +33,15 @@ rm_linebreaks <- function(x, y = " ") {
 #'   "text" while the logical is_retweet is assuemd to be named "is_retweet"
 #' @return Output
 #' @export
-rm_retweets <- function(x, ...) {
+rm_retweets <- function(x) {
   UseMethod("rm_retweets")
 }
 
 
 #' @export
-rm_retweets.data.frame <- function(x,
-                                   text = "text",
-                                   is_retweet = "is_retweet") {
+rm_retweets.data.frame <- function(x) {
+  text <- "text"
+  is_retweet <- "is_retweet"
   stopifnot(is.character(x[[text]]))
   if (is_retweet %in% names(x)) {
     stopifnot(is.logical(x[[is_retweet]]))
@@ -56,9 +56,9 @@ rm_retweets.data.frame <- function(x,
 }
 
 #' @export
-rm_retweets.list <- function(x,
-                             text = "text",
-                             is_retweet = "is_retweet") {
+rm_retweets.list <- function(x) {
+  text <- "text"
+  is_retweet <- "is_retweet"
   stopifnot(is.character(x[[text]]))
   if (is_retweet %in% names(x)) {
     stopifnot(is.logical(x[[is_retweet]]))

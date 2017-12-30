@@ -15,7 +15,7 @@ topcats <- function(x, n = 5) {
 #' @param rhs Right hand side
 #' @return Logical indicating whether lhs are NOT in rhs. For more
 #'   info on the output vector.
-#' @usage lhs \%>\% rhs
+#' @usage lhs \%nin\% rhs
 #' @examples
 #' ## is "a" in the alphabet?
 #' "a" %nin% letters
@@ -61,7 +61,7 @@ topcats <- function(x, n = 5) {
 #' lst <- replicate(2, list(lst))
 #'
 #' ## fetch and return all v2's
-#' get_var(lst, "II", "B", "v2")
+#' go_get_var(lst, "II", "B", "v2")
 #' @export
 go_get_var <- function(x, ...) {
   vars <- c(...)
@@ -225,7 +225,8 @@ tabsort <- function(x, V1 = NULL, percent = TRUE, na_omit = TRUE) {
   } else {
     x <- sort(table(x), decreasing = TRUE)
   }
-  x <- tibble::data_frame(term = names(x), n = as.integer(x))
+  x <- data.frame(
+    term = names(x), n = as.integer(x), stringsAsFactors = FALSE)
   if (percent) {
     x$percent <- x$n / sum(x$n, na.rm = TRUE)
   }

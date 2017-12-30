@@ -2,8 +2,7 @@
 #'
 #' Checks whether one can safely append to .Renvir file.
 #'
-#' @usage
-#' check_renv(path)
+#' @usage check_renv()
 #' @export
 check_renv <- function() {
   if (is_incomplete(.Renviron())) {

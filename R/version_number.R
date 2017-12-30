@@ -4,7 +4,7 @@
 #' Updates version number in R package documentation
 #'
 #' @param update_type Patch, minor, or major update.
-#' @param path Path to base directory of given R package.
+#' @param pkg Path to base directory of given R package.
 #' @return Updates and saves DESCRIPTION file.
 #' @export
 update_version_number <- function(update_type = "patch", pkg = ".") {
@@ -74,10 +74,10 @@ update_citation <- function(version, path = ".") {
 #' @param minor Increment minor, e.g. 0.9.0, for a minor release. A
 #'   minor release can include bug fixes, new features and changes in
 #'   backward compatibility. This is the most common type of
-#'   release. It’s perfectly fine to have so many minor releases that
+#'   release. It's perfectly fine to have so many minor releases that
 #'   you need to use two (or even three!) digits, e.g. 1.17.0.
-#' @param major Increment patch, e.g. 0.8.2 for a patch: you’ve fixed
-#'   bugs without adding any significant new features. I’ll often do a
+#' @param patch Increment patch, e.g. 0.8.2 for a patch: you've fixed
+#'   bugs without adding any significant new features. I'll often do a
 #'   patch release if, after release, I discover a show-stopping bug
 #'   that needs to be fixed ASAP. Most releases will have a patch
 #'   number of 0.
@@ -108,7 +108,7 @@ version_number <- function(major, minor, patch) {
 #'
 #' Converts object to version number
 #'
-#' @param x Object to be converted
+#' @param x Version number
 #' @return Object of class version number.
 #' @rdname version_number
 #' @export
@@ -132,14 +132,7 @@ print.version_number <- function(x) {
   print(x)
 }
 
-#' paste.version_number
-#'
-#' Converts object to printed version number
-#'
-#' @param x Object to be printed
-#' @return Printed version number.
-#' @rdname version_number
-#' @export
+
 paste.version_number <- function(x) {
   if (x[3] < 10L & x[3] > 0L) {
     x[3] <- paste0("0", x[3])

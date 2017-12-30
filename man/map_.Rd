@@ -24,30 +24,6 @@ map_lgl_(f, ...)
 \item{...}{Other args passed to function, i.e., named parameters
 specific to f function, and also the \code{MoreArgs} argument
 from \code{mapply}.}
-
-\item{f}{Function}
-
-\item{...}{Other args passed to function, i.e., named parameters
-specific to f function, and also the \code{MoreArgs} argument
-from \code{mapply}.}
-
-\item{f}{Function}
-
-\item{...}{Other args passed to function, i.e., named parameters
-specific to f function, and also the \code{MoreArgs} argument
-from \code{mapply}.}
-
-\item{f}{Function}
-
-\item{...}{Other args passed to function, i.e., named parameters
-specific to f function, and also the \code{MoreArgs} argument
-from \code{mapply}.}
-
-\item{f}{Function}
-
-\item{...}{Other args passed to function, i.e., named parameters
-specific to f function, and also the \code{MoreArgs} argument
-from \code{mapply}.}
 }
 \value{
 List

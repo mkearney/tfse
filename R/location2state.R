@@ -6,7 +6,6 @@
 #' @return Character vector of same length with U.S. names (or a
 #'   generic "United States") for values based on best guess for each
 #'   user. Cases with insufficient information are returned as NAs.
-#' @examples
 #'
 #' @export
 location2state <- function(x) {
@@ -47,21 +46,19 @@ location2state <- function(x) {
   states
 }
 
-
-
 state.abb2name <- function(x) {
-  state.name[match(toupper(x), state.abb)]
+  datasets::state.name[match(toupper(x), datasets::state.abb)]
 }
 
 state.name2name <- function(x) {
   x <- tolower(trim_ws(x))
-  state.name[match(x, tolower(state.name))]
+  datasets::state.name[match(x, tolower(datasets::state.name))]
 }
 
 state.any2name_ns <- function(x) {
   x <- tolower(trim_ws(x))
-  x <- c(state.name, state.name)[match(
-    x, gsub(" ", "", tolower(c(state.name, state.abb))))
+  x <- c(datasets::state.name, datasets::state.name)[match(
+    x, gsub(" ", "", tolower(c(datasets::state.name, datasets::state.abb))))
   ]
   if (length(x) == 0L) return(NA_character_)
   x[1L]

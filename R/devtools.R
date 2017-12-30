@@ -7,9 +7,11 @@
 #' @param pkg Name of package. Defaults to current file name.
 #' @param load_all Logical indicating whether or not to load all functions
 #'   on exit.
-#' @importFrom devtools install document load_all create_description
 #' @export
 make_package <- function(update = NULL, pkg = ".", load_all = TRUE) {
+  if (!requireNamespace("devtools", quietly = FALSE)) {
+    stop("must install devtools pkg", call. = FALSE)
+  }
   ## if not already package, create one
   if ("DESCRIPTION" %nin% list.files(pkg)) {
     devtools::create_description(pkg)
@@ -109,7 +111,7 @@ pkg_website  <- function(pkg = ".") {
       fill = TRUE
     )
   }
-  browseURL("docs/index.html")
+  utils::browseURL("docs/index.html")
 }
 
 #' make_citation

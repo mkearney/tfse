@@ -24,7 +24,7 @@ col2hex.character <- function(color, alpha = NULL) {
 #' @export
 col2hex.numeric <- function(color, alpha = NULL) {
   color <- matrix(color, 3)
-  if (any(unlist(lapply(col2rgb(cols), unlist)) > 1.0)) {
+  if (any(unlist(lapply(col2rgb(color), unlist)) > 1.0)) {
     maxColorValue <- 255
   } else {
     maxColorValue <- 1
@@ -37,7 +37,7 @@ col2hex.numeric <- function(color, alpha = NULL) {
 #' @export
 col2hex.integer <- function(color, alpha = NULL) {
   color <- matrix(color, 3)
-  if (any(unlist(lapply(col2rgb(cols), unlist)) > 1.0)) {
+  if (any(unlist(lapply(col2rgb(color), unlist)) > 1.0)) {
     maxColorValue <- 255
   } else {
     maxColorValue <- 1

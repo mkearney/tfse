@@ -4,7 +4,7 @@
 \alias{\%nin\%}
 \title{not in}
 \usage{
-lhs \%>\% rhs
+lhs \%nin\% rhs
 }
 \arguments{
 \item{lhs}{Left hand side}

@@ -27,10 +27,10 @@ df[, 1:ncol(df)] <- lapply(
 )
 
 ## convert to integer
-df <- df \%>\% dplyr::mutate_if(can_int, as.integer)
+df <- dplyr::mutate_if(df, can_int, as.integer)
 
 ## convert to numeric
-df <- df \%>\% dplyr::mutate_if(can_num, as.numeric)
+df <- dplyr::mutate_if(df, can_num, as.numeric)
 
 ## view columns with class information
 tibble::as_tibble(df)

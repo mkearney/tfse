@@ -10,17 +10,12 @@ add_var(x, ...)
 add_vars(x, ...)
 }
 \arguments{
-\item{x}{Data frame.}
-
-\item{...}{Named, preferably, value of either length 1 or length equal
-to the number of rows in x.}
-
 \item{x}{Data frame to be added to.}
 
 \item{...}{Named variables to add to data frame}
 }
 \value{
-A tbl data frame.
+A data frame.
 }
 \description{
 Adds new variable column to data frame

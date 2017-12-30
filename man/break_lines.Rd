@@ -13,7 +13,7 @@ break_lines(x, n = 80, sep = "\\\\. ", collapse = "\\n")
 
 \item{sep}{Separator used for subunits.}
 
-\item{y}{When text is recombined into single string, this value is used
+\item{collapse}{When text is recombined into single string, this value is used
 as the sepator. Defaults to three line breaks.}
 }
 \value{

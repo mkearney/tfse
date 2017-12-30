@@ -6,6 +6,7 @@
 #unloadNamespace("tfse")
 #devtools::document(roclets = c('rd', 'collate', 'namespace'))
 #devtools::install()
+search_files("congress", "R")
 
 ## build package / update version number
 make_package(load_all = FALSE, update = "patch")

@@ -16,13 +16,11 @@ par_table(x)
 
 \item{scaled}{Logical indicating whether to return scaled fit indices if
 available.}
-
-\item{x}{Object of class lavaan}
 }
 \value{
-Fit statistics tibble.
+Fit statistics data frame.
 
-Tibble of parameter estimates
+Data frame of parameter estimates
 }
 \description{
 Returns data frame of SEM fit statistics
@@ -39,7 +37,7 @@ normalize <- function(x) (x - mean(x, na.rm = TRUE)) / sd(x, na.rm = TRUE)
 ## fit model
 f1 <- lavaan::sem(
   m1,
-  data = tibble::as_tibble(dplyr::mutate_if(mtcars, is.numeric, normalize)),
+  data = dplyr::mutate_if(mtcars, is.numeric, normalize),
   std.lv = TRUE,
   estimator = "mlr"
 )

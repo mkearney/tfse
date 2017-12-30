@@ -97,7 +97,7 @@ is_incomplete <- function(x) {
 #' @export
 menuline <- function(q, a) {
   message(q)
-  menu(a)
+  utils::menu(a)
 }
 
 

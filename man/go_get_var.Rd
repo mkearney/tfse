@@ -35,5 +35,5 @@ lst <- list(
 lst <- replicate(2, list(lst))
 
 ## fetch and return all v2's
-get_var(lst, "II", "B", "v2")
+go_get_var(lst, "II", "B", "v2")
 }

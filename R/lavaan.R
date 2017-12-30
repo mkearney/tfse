@@ -16,7 +16,7 @@
 #' ## fit model
 #' f1 <- lavaan::sem(
 #'   m1,
-#'   data = tibble::as_tibble(dplyr::mutate_if(mtcars, is.numeric, normalize)),
+#'   data = dplyr::mutate_if(mtcars, is.numeric, normalize),
 #'   std.lv = TRUE,
 #'   estimator = "mlr"
 #' )
@@ -27,11 +27,13 @@
 #' ## view par estimates
 #' par_table(f1)
 #'
-#' @return Fit statistics tibble.
-#' @importFrom lavaan fitMeasures
+#' @return Fit statistics data frame.
 #' @export
 #' @rdname lavaan
 sem_fit <- function(x, digits = 3, scaled = TRUE) {
+  if (!requireNamespace("lavaan", quietly = FALSE)) {
+    stop("must install lavaan pkg", call. = FALSE)
+  }
   stopifnot(inherits(x, "lavaan"))
   x <- lavaan::fitMeasures(x)
   x <- round(x, digits = digits)
@@ -58,28 +60,30 @@ sem_fit <- function(x, digits = 3, scaled = TRUE) {
     message("Fit statistics")
   }
   rmsea_ci <- paste0("[", l, ",", u, "]")
-  tibble::as_tibble(data.frame(
+  data.frame(
     N = df,
     ChiSq = chisq,
     CFI = cfi,
     TLI = tli,
     RMSEA = rmsea,
     RMSEA_ci = rmsea_ci,
-    SRMR = srmr
-  ), validate = FALSE)
+    SRMR = srmr)
 }
 
 #' SEM parameter table
 #'
-#' @param x Object of class lavaan
-#' @return Tibble of parameter estimates
+#' @inheritParams sem_fit
+#' @return Data frame of parameter estimates
 #' @rdname lavaan
 #' @export
 par_table <- function(x) {
+  if (!requireNamespace("lavaan", quietly = FALSE)) {
+    stop("must install lavaan pkg", call. = FALSE)
+  }
   stopifnot(inherits(x, "lavaan"))
   pt <- lavaan::parameterEstimates(x)
   cstr <- function(x) strsplit(x, ",")[[1]]
   pt <- pt[, names(pt) %in% cstr("group,free,lhs,op,rhs,est,se,z,pvalue,ci.lower,ci.upper")]
   names(pt)[names(pt) == "pvalue"] <- "p"
-  tibble::as_tibble(pt, validate = FALSE)
+  pt
 }

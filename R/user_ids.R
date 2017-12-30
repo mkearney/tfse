@@ -3,11 +3,13 @@
 #' @param screen_name Twitter handle
 #' @param mc.cores Number of cores. If greater than 1, then mcMap is used.
 #' @return response Twitter account user id
-#' @importFrom parallel mcMap
-#' 
+#'
 #' @export
 sn2id <- function(screen_name, mc.cores = 1L) {
   if (mc.cores > 1L) {
+    if (!requireNamespace("parallel", quietly = FALSE)) {
+      stop("must install parallel pkg", call. = FALSE)
+    }
     out <- parallel::mcMap("sn2id_", screen_name, mc.cores = mc.cores)
   } else {
     out <- Map("sn2id_", screen_name)
@@ -17,9 +19,10 @@ sn2id <- function(screen_name, mc.cores = 1L) {
   out
 }
 
-#' @importFrom xml2 read_html
-#' @importFrom rvest html_attr html_nodes
 sn2id_ <- function(x) {
+  if (!requireNamespace("rvest", quietly = FALSE)) {
+    stop("must install rvest pkg", call. = FALSE)
+  }
   x <- xml2::read_html(
     paste0("http://twitter.com/", x)
   )
@@ -44,12 +47,12 @@ sn2id_ <- function(x) {
 #' @param mc.cores Number of cores. If greater than 1, then mcMap is used.
 #'
 #' @return Named vector of screen names.
-#' @importFrom rvest html_text html_nodes
-#' @importFrom xml2 read_html
-#' @importFrom parallel mcMap
 #' @export
 id2sn <- function(user_id, mc.cores = 1L) {
   if (mc.cores > 1L) {
+    if (!requireNamespace("parallel", quietly = FALSE)) {
+      stop("must install parallel pkg", call. = FALSE)
+    }
     out <- parallel::mcMap("id2sn_", user_id, mc.cores = mc.cores)
   } else {
     out <- Map("id2sn_", user_id)
@@ -59,9 +62,10 @@ id2sn <- function(user_id, mc.cores = 1L) {
   out
 }
 
-#' @importFrom xml2 read_html
-#' @importFrom rvest html_attr html_nodes html_text
 id2sn_ <- function(x) {
+  if (!requireNamespace("rvest", quietly = FALSE)) {
+    stop("must install rvest pkg", call. = FALSE)
+  }
   h <- xml2::read_html(paste0("https://twitter.com/intent/user?user_id=", x))
   x <- rvest::html_text(rvest::html_nodes(h, "p span.nickname"))
   if (length(x) == 0L) {

@@ -13,8 +13,7 @@ blank2na <- function(x) {
 #' @return Arrange data frame with calculated used column.
 #' @export
 token_used <- function(x) {
-  x %>%
-    mutate(used = limit - remaining) %>%
-    arrange(, -used) %>%
-    select(query, limit, remaining, reset, used)
+  x$used <- x$limit - x$remaining
+  x <- x[order(x$used, decreasing = TRUE), ]
+  x[, c("query", "limit", "remaining", "reset", "used")]
 }

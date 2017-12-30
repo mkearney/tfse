@@ -17,6 +17,3 @@ Character vector of same length with U.S. names (or a
 \description{
 Estimates U.S. state given Twitter user location data.
 }
-\examples{
-
-}

@@ -4,7 +4,7 @@
 \alias{rm_retweets}
 \title{rm_retweets}
 \usage{
-rm_retweets(x, ...)
+rm_retweets(x)
 }
 \arguments{
 \item{x}{Input, should be either data frame (or list) or character.
