@@ -57,24 +57,58 @@ can_eval <- function(.e) {
 #' "T$" + "his" + "that" + "or" + "the other" + "^."
 #'
 #'
+#' @method + character
 #' @export
-`+` <- function(e1, e2) {
-  if (can_eval(e1) && can_plus(e1) && can_eval(e2) && can_plus(e2)) {
-    return(try(.Primitive("+")(e1, e2)))
-  }
-  if (!can_eval(e1) || (!can_plus(e1) && !is_alnum(e1))) {
-    stop("object ", sQuote(substitute(e1)), " not found", call. = FALSE)
-  }
-  if (!can_eval(e2) || (!can_plus(e2) && !is_alnum(e2))) {
-    stop("object ", sQuote(substitute(e2)), " not found", call. = FALSE)
-  }
-  if (is.numeric(e1) || is.integer(e1) || is.logical(e1)) e1 <- as.character(e1)
-  if (is.numeric(e2) || is.integer(e2) || is.logical(e2)) e2 <- as.character(e2)
-  if (!is.character(e2)) {
-    stop("object ", sQuote(substitute(e2)), " must be character", call. = FALSE)
-  }
-  try(`+.character`(e1, e2))
+"+.character" <- function(e1, e2) {
+  unlist(Map("plus_character", e1, e2, USE.NAMES = FALSE))
 }
+
+
+`+` <- function(e1, e2) {
+   if (is.character(e1) || is.character(e2)) {
+     return(try(`+.character`(e1, e2)))
+   }
+   try(.Primitive("+")(e1, e2))
+}
+
+#' @export
+"%+%" <- `+.character`
+
+## `+` <- function(e1, e2) {
+##   if (!(is.character(e1) || is.character(e2))) {
+##     return(try(.Primitive("+")(e1, e2)))
+##   }
+##   ## if (can_eval(e1) && can_plus(e1) && can_eval(e2) && can_plus(e2)) {
+##   ##   return(try(.Primitive("+")(e1, e2)))
+##   ## }
+##   ## if (!can_eval(e1) || (!can_plus(e1) && !is_alnum(e1))) {
+##   ##   stop("object ", sQuote(substitute(e1)), " not found", call. = FALSE)
+##   ## }
+##   ## if (!can_eval(e2) || (!can_plus(e2) && !is_alnum(e2))) {
+##   ##   stop("object ", sQuote(substitute(e2)), " not found", call. = FALSE)
+##   ## }
+##   if (is.numeric(e1) || is.integer(e1)) e1 <- as.character(e1)
+##   if (is.numeric(e2) || is.integer(e2)) e2 <- as.character(e2)
+##   try(`+.character`(e1, e2))
+## }
+
+## `+` <- function(e1, e2) {
+##   if (!(is.character(e1) || is.character(e2))) {
+##     return(try(.Primitive("+")(e1, e2)))
+##   }
+##   ## if (can_eval(e1) && can_plus(e1) && can_eval(e2) && can_plus(e2)) {
+##   ##   return(try(.Primitive("+")(e1, e2)))
+##   ## }
+##   ## if (!can_eval(e1) || (!can_plus(e1) && !is_alnum(e1))) {
+##   ##   stop("object ", sQuote(substitute(e1)), " not found", call. = FALSE)
+##   ## }
+##   ## if (!can_eval(e2) || (!can_plus(e2) && !is_alnum(e2))) {
+##   ##   stop("object ", sQuote(substitute(e2)), " not found", call. = FALSE)
+##   ## }
+##   if (is.numeric(e1) || is.integer(e1)) e1 <- as.character(e1)
+##   if (is.numeric(e2) || is.integer(e2)) e2 <- as.character(e2)
+##   try(`+.character`(e1, e2))
+## }
 
 `plus_character` <- function(e1, e2) {
   if (is.na(e1)) e1 <- "$"
@@ -92,7 +126,3 @@ can_eval <- function(.e) {
 }
 
 is_alnum <- function(x) inherits(x, c("character", "numeric", "integer", "logical"))
-
-`+.character` <- function(e1, e2) {
-  unlist(Map("plus_character", e1, e2, USE.NAMES = FALSE))
-}

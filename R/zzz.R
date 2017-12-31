@@ -73,7 +73,7 @@ go_get_var <- function(x, ...) {
       if (i == vars[length(vars)]) {
         success <- TRUE
       }
-    } else if (any_recursive(x) && any(map_chr_("has_name_", x, i))) {
+    } else if (any_recursive(x) && any(map_lgl_("has_name_", x, i))) {
       kp <- map_lgl_("has_name_", x, i)
       x <- x[kp]
       x <- lapply(x, "[[", i)
