@@ -37,23 +37,15 @@ Sys.Date() + Sys.Date()
 ## ignores missing
 c(NA, "this") + c("that", NA) + c("other", "other")
 
-## use paste0 instead of paste
-"this" + "^that"
-"this$" + "that"
-
-## escape ^ or $ to use paste
-"this" + "\\\\^that"
-"this\\\\$" + "that"
-
-## add new ^ or $ and escape other to still use paste0
-"this" + "^\\\\^that"
-"this\\\\$$" + "that"
+## add space to behave like paste
+"this" + " that"
+"this " + "that"
 
 ## string together any number of character vectors
-"this" + "that" + "other"
-"ABC_$" + letters + "^_XYZ"
-letters + "^$" + letters
-"T$" + "his" + "that" + "or" + "the other" + "^."
+"this " + "that " + "and the other"
+"ABC_" + letters + "_XYZ"
+letters + letters
+"T" + "his " + "that " + "and " + "the other."
 
 
 }

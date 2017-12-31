@@ -8,6 +8,14 @@
 #devtools::install()
 search_files("nv", "R")
 
+tfse:::`plus_character`("this", "that")
+tfse:::`+.character`("this", "that")
+tfse:::`+`("this", "that")
+
+traceback()
+
+"this " + "that"
+
 ## build package / update version number
 make_package(load_all = FALSE, update = "patch")
 
