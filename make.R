@@ -2,22 +2,16 @@
 ## Package make file
 
 ## unload tfse
-
 #unloadNamespace("tfse")
+
+## build via devtools
 #devtools::document(roclets = c('rd', 'collate', 'namespace'))
 #devtools::install()
-search_files("nv", "R")
-
-tfse:::`plus_character`("this", "that")
-tfse:::`+.character`("this", "that")
-tfse:::`+`("this", "that")
-
-traceback()
 
 "this " + "that"
 
 ## build package / update version number
-make_package(load_all = FALSE, update = "patch")
+make_package(load_all = FALSE, update = NULL)
 
 ## rm annoying .ds_store files
 rm_.DS_Store()
