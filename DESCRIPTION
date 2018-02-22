@@ -18,4 +18,4 @@ License: MIT + file LICENSE
 LazyData: TRUE
 URL: https://github.com/mkearney/tfse/
 BugReports: https://github.com/mkearney/tfse/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000

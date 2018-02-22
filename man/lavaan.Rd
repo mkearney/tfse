@@ -24,8 +24,6 @@ Data frame of parameter estimates
 }
 \description{
 Returns data frame of SEM fit statistics
-
-SEM parameter table
 }
 \examples{
 ## specify model
