@@ -8,8 +8,6 @@
 #devtools::document(roclets = c('rd', 'collate', 'namespace'))
 #devtools::install()
 
-"this " + "that"
-
 ## build package / update version number
 make_package(load_all = FALSE, update = NULL)
 
