@@ -89,4 +89,3 @@ can_eval <- function(.e) {
 "%+%" <- `+.character`
 
 
-is_alnum <- function(x) inherits(x, c("character", "numeric", "integer", "logical"))

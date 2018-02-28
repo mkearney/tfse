@@ -1,3 +1,5 @@
+is_alnum <- function(x) inherits(x, c("character", "numeric", "integer", "logical"))
+
 topcats <- function(x, n = 5) {
   cats <- names(sort(table(x), decreasing = TRUE))
   if (length(cats) > n) {
