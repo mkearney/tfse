@@ -7,9 +7,10 @@ Authors@R: person("Mike", "Kearney", email = "kearneymw@missouri.edu",
 Description: Misc functions.
 Depends:
     R (>= 3.1.0)
-Imports:
+Imports: 
     grDevices,
-    hms
+    hms,
+    magrittr
 Suggests:
     knitr,
     rmarkdown
