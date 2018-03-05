@@ -1,11 +1,11 @@
 #' funs
-#' 
+#'
 #' Pastes fun skeletons into clipboard
 #'
 #' @param names Names of functions.
 #' @return Skeleton function code copied to clipboard.
 #' @export
-funs <- function(names) {
+pfuns <- function(names) {
   fun <- function(name = "foo") {
     paste0(
     "\n#\' ", name,
