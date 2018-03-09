@@ -52,11 +52,11 @@ rproj_settings <- function(pkg = TRUE,
 #'
 #' Creates new .Rproj file.
 #'
-#' @param name Project name (path).
+#' @param path Project name (path).
 #' @return Saved .Rproj file in path.
 #' @rdname rproj
 #' @export
-rproj_pkg <- function(pkg = NULL) {
+rproj_pkg <- function(path = NULL) {
   if (is.null(path)) {
     path <- basename(getwd())
   }

@@ -5,12 +5,12 @@
 \alias{rproj_site}
 \title{rproj}
 \usage{
-rproj_pkg(pkg = NULL)
+rproj_pkg(path = NULL)
 
 rproj_site(path = NULL)
 }
 \arguments{
-\item{name}{Project name (path).}
+\item{path}{Project name (path).}
 }
 \value{
 Saved .Rproj file in path.
