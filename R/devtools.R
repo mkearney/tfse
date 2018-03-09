@@ -1,37 +1,3 @@
-#' make_package
-#'
-#' Document and load R package (devtools wrapper)
-#'
-#' @param update Optional, indicating the size of change so as to automate
-#'   updating of the package version number.
-#' @param pkg Name of package. Defaults to current file name.
-#' @param load_all Logical indicating whether or not to load all functions
-#'   on exit.
-#' @export
-make_package <- function(update = NULL, pkg = ".", load_all = TRUE) {
-  if (!requireNamespace("devtools", quietly = FALSE)) {
-    stop("must install devtools pkg", call. = FALSE)
-  }
-  ## if not already package, create one
-  if ("DESCRIPTION" %nin% list.files(pkg)) {
-    devtools::create_description(pkg)
-  }
-  pkg <- basename(normalizePath(pkg))
-  if (!is.null(update)) {
-    if (!update %in% c("minor", "major", "patch")) {
-      stop("update must be one of patch, minor, or major", call. = FALSE)
-    }
-    update_version_number(update)
-  }
-  devtools::document(roclets = c('rd', 'collate', 'namespace'))
-  devtools::install()
-  if (load_all) {
-    devtools::load_all()
-  }
-  return(invisible())
-}
-
-
 #' set class
 #'
 #' Set class with a parenthetical function.
@@ -164,48 +130,4 @@ citEntry(
   }
   ## save updated citation
   cat(ce, file = "inst/CITATION", fill = TRUE)
-}
-
-
-
-#' set_description_params
-#'
-#' Sets desc options for devtools
-#'
-#' @param pkg Name of package (basename of wd)
-#' @param title Title of package.
-#' @param description Description of package.
-#' @return Stores description info for devtools.
-#' @export
-set_description_params <- function(pkg = ".",
-                                   title = NULL,
-                                   description = NULL) {
-  pkg <- basename(pkg)
-  desc <- list(
-    "Package" = pkg,
-    "Maintainer" = "'Michael Wayne Kearney' <kearneymw@missouri.edu>",
-    "Authors@R" = 'person("Michael W.", "Kearney", "",
-                         "kearneymw@missouri.edu", c("aut", "cre"))',
-    "License" = "MIT + file LICENSE",
-    "Description" = description,
-    "Title" = title
-  )
-  options("devtools.desc" = desc)
-}
-
-#' MIT_license
-#'
-#' Creates MIT license
-#'
-#' @param pkg Name of package (basename of wd)
-#' @return Saves license file.
-#' @export
-MIT_license <- function(pkg = ".") {
-  x <- paste0(
-    "YEAR: ",
-    format(Sys.Date(), "%Y"),
-    "\nCOPYRIGHT HOLDER: Michael W. Kearney"
-  )
-  y <- file.path(pkg, "LICENSE")
-  cat(x, file = y, fill = TRUE)
 }

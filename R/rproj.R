@@ -50,18 +50,84 @@ rproj_settings <- function(pkg = TRUE,
 
 #' rproj
 #'
-#' Creates new rProf file.
+#' Creates new .Rproj file.
 #'
-#' @param name Name of project. Defaults to basename of working directory.
-#' @param pkg Logical indicating whether the project is an R package. Defaults
-#'   to true.
-#' @param ... Other args passed to rproj settings.
-#' @return Saved .Rproj file in current working directory.
+#' @param name Project name (path).
+#' @return Saved .Rproj file in path.
+#' @rdname rproj
 #' @export
-rproj <- function(name = NULL, pkg = TRUE, ...) {
-  if (is.null(name)) {
-    name <- basename(getwd())
+rproj_pkg <- function(pkg = NULL) {
+  if (is.null(path)) {
+    path <- basename(getwd())
   }
-  rproj <- rproj_settings(pkg = pkg, ...)
-  cat(rproj, file = paste0(name, ".Rproj"), fill = TRUE)
+  x <- as.character(rproj_new_pkg())
+  writeLines(x, paste0(path, ".Rproj"))
+}
+
+#' @rdname rproj
+rproj_site <- function(path = NULL) {
+  if (is.null(path)) {
+    path <- basename(getwd())
+  }
+  x <- as.character(rproj_new_site())
+  writeLines(x, paste0(path, ".Rproj"))
+}
+
+
+rproj_new_site <- function() {
+  structure(list(
+    Version                 = "1.0",
+    BuildType               = "Website",
+
+    `\nRestoreWorkspace`    = FALSE,
+    SaveWorkspace           = FALSE,
+    AlwaysSaveHistory       = FALSE,
+    EnableCodeIndexing      = TRUE,
+    UseSpacesForTab         = TRUE,
+    NumSpacesForTab         = 2,
+    Encoding                = "UTF-8",
+
+    `\nRnwWeave`            = "knitr",
+    LaTeX                   = "XeLaTeX",
+
+    `\nAutoAppendNewline`   = TRUE,
+    StripTrailingWhitespace = TRUE
+  ), class = "rproj")
+}
+
+as.character.rproj <- function(x) {
+  nms <- names(x)
+  x <- unlist(unclass(x))
+  x <- dplyr::case_when(
+    x == TRUE ~ "Yes",
+    x == FALSE ~ "No",
+    TRUE ~ x
+  )
+  x <- paste0(nms, ":\t", x)
+  x <- unlist(strsplit(x, "\\n"))
+  tfse:::fill_space(x)
+}
+
+rproj_new_pkg <- function() {
+  structure(list(
+    Version                 = "1.0",
+    `\nBuildType`           = "Package",
+    PackageUseDevtools      = TRUE,
+    PackageInstallArgs      = "--no-multiarch --with-keep.source",
+    PackageRoxygenize       = "rd,collate,namespace",
+
+    `\nRestoreWorkspace`    = FALSE,
+    SaveWorkspace           = FALSE,
+    AlwaysSaveHistory       = FALSE,
+    EnableCodeIndexing      = TRUE,
+    UseSpacesForTab         = TRUE,
+    NumSpacesForTab         = 2,
+    Encoding                = "UTF-8",
+
+    `\nRnwWeave`            = "knitr",
+    LaTeX                   = "XeLaTeX",
+
+    `\nAutoAppendNewline`   = TRUE,
+    StripTrailingWhitespace = TRUE
+  ), class = "rproj")
 }
