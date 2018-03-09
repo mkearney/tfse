@@ -65,6 +65,7 @@ rproj_pkg <- function(pkg = NULL) {
 }
 
 #' @rdname rproj
+#' @export
 rproj_site <- function(path = NULL) {
   if (is.null(path)) {
     path <- basename(getwd())
