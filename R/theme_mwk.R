@@ -13,7 +13,7 @@
 theme_mwk <- function(base_size = 13,
                       base_family = "Helvetica Neue",
                       dark = "#24292e",
-                      light = "#ffffff",
+                      light = "#f7f7f7",
                       gray = "#eaeaea") {
   if (!requireNamespace("ggplot2", quietly = FALSE)) {
     stop("must install ggplot2 pkg", call. = FALSE)
@@ -30,22 +30,22 @@ theme_mwk <- function(base_size = 13,
         fill = light, colour = light),
       panel.background = ggplot2::element_rect(
         fill = light, colour = light),
+      panel.border = ggplot2::element_blank(),
       plot.title = ggplot2::element_text(
         face = "bold", colour = dark, size = ggplot2::rel(1.2)),
       plot.subtitle = ggplot2::element_text(
-        colour = dark, size = ggplot2::rel(.9)),
+        colour = dark, size = ggplot2::rel(.85)),
       text = ggplot2::element_text(colour = dark),
       strip.background = ggplot2::element_rect(
         fill = gray, colour = dark),
       axis.text = ggplot2::element_text(
-        colour = dark, size = ggplot2::rel(.6)),
+        colour = dark, size = ggplot2::rel(.65)),
       axis.title = ggplot2::element_text(
         colour = dark, size = ggplot2::rel(.85)),
       panel.grid.major = ggplot2::element_line(
-        color = dark, size = ggplot2::rel(.050)),
+        color = "#111111", size = ggplot2::rel(.040)),
       panel.grid.minor = ggplot2::element_line(
-        color = dark, size = ggplot2::rel(.025)),
-      axis.ticks = ggplot2::element_blank(),
-      panel.border = ggplot2::element_blank()
+        color = "#111111", size = ggplot2::rel(.020)),
+      axis.ticks = ggplot2::element_blank()
     )
 }

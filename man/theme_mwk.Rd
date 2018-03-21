@@ -5,7 +5,7 @@
 \title{theme_mwk}
 \usage{
 theme_mwk(base_size = 13, base_family = "Helvetica Neue",
-  dark = "#24292e", light = "#ffffff", gray = "#eaeaea")
+  dark = "#24292e", light = "#f7f7f7", gray = "#eaeaea")
 }
 \arguments{
 \item{base_size}{Base font size}
