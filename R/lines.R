@@ -128,7 +128,11 @@ readline_ <- function(...) {
 #' ## paste e.g., C-v
 #' @export
 pbcopy <- function(x) {
-  con <- pipe("pbcopy", "w")
+  if (.Platform$OS.type == "unix") {
+    con <- pipe("pbcopy", "w")
+  } else {
+    con <- file("clipboard", "w")
+  }
   cat(x, file = con)
   close(con)
 }
