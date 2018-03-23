@@ -19,8 +19,8 @@ time2utc.POSIXt <- function(x) {
 
 #' @export
 time2utc.data.frame <- function(x) {
-  if (any(vply_lgl(inherits, x, "POSIXt"))) {
-    psx <- vply_lgl(inherits, x, "POSIXt")
+  if (any(vply_lgl(x, ~ inherits(., "POSIXt")))) {
+    psx <- vply_lgl(x, ~ inherits(., "POSIXt"))
     x[psx] <- lapply(x[psx], time2utc)
   }
   x
