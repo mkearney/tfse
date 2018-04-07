@@ -10,7 +10,8 @@ Depends:
 Imports: 
     grDevices,
     hms,
-    magrittr
+    magrittr,
+    shape
 Suggests:
     knitr,
     rmarkdown
