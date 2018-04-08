@@ -20,6 +20,8 @@ tfse = **T**he **F**irst **S**criptorium **E**mporium
 
 ## Install
 
+To install the package
+
 ```{r, eval=FALSE}
 ## install from github
 devtools::install_github("mkearney/tfse")
@@ -27,19 +29,27 @@ devtools::install_github("mkearney/tfse")
 
 ## Usage
 
+Load the package and go
+
 ```{r}
 ## load pkg
 library(tfse)
 
 ## use functions like col2hex
 col2hex("greenyellow")
+```
 
+## Help
+
+View the help documentation
+
+```{r, eval=FALSE}
 ## view R help documentatoin
-help(package = "rtweet")
+help(package = "tfse")
 ```
 
 ## about tfse
-- My personal package of utility functions
-- Why "tfse"? The acronym was creatively reconfigured from its
+- This is my personal R package of utility functions
+- Why *tfse*? The acronym was creatively reconfigured from its
   originally intended state
 

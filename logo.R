@@ -50,11 +50,11 @@ p <- ggplot(dfhex, aes(x, y)) +
   geom_path(data = w2, size = 1.5, lineend = "square") +
   geom_path(data = w3, size = 1.5, lineend = "square") +
   coord_cartesian(xlim = range(dfhex$x), ylim = range(dfhex$y)) +
-  annotate("text", 0, -.3, label = "tfse", size = 38, family = "FreeMono",
+  annotate("text", 0, -.3, label = "tfse", size = 38, family = "Consolas",
     fontface = "bold", colour = "black") +
   theme_void() +
   labs(x = NULL, y = NULL, title = NULL) +
-  theme(plot.margin = margin(-1.55, -1.34, -1.71, -1.52, "line"),
+  theme(plot.margin = margin(-1.55, -1.35, -1.75, -1.54, "line"),
     plot.background = element_rect(fill = "transparent"))
 
 ## quick view in device window
