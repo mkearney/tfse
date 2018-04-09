@@ -35,22 +35,22 @@ w3 <- data.frame(
 )
 ## hexagon (background) data
 dfhex <- hexdf()
-
+size <- .5
 ## create hex logo plot object
 p <- ggplot(dfhex, aes(x, y)) +
-  geom_polygon(fill = "#BED0DF", colour = "black", size = 2) +
+  geom_polygon(fill = "#BED0DF", colour = "black", size = 1) +
   geom_polygon(data = top, fill = "#555555")  +
   geom_polygon(data = body, fill = "#f0f0f0") +
   geom_polygon(data = w1, fill = blue) +
   geom_polygon(data = w2, fill = red) +
   geom_polygon(data = w3, fill = gold) +
-  geom_path(size = 1.5, lineend = "square") +
-  geom_path(data = body[-c(5:7), ], size = 1.75) +
-  geom_path(data = w1, size = 1.5, lineend = "square") +
-  geom_path(data = w2, size = 1.5, lineend = "square") +
-  geom_path(data = w3, size = 1.5, lineend = "square") +
+  geom_path(size = size, lineend = "square") +
+  geom_path(data = body[-c(5:7), ], size = size) +
+  geom_path(data = w1, size = size, lineend = "square") +
+  geom_path(data = w2, size = size, lineend = "square") +
+  geom_path(data = w3, size = size, lineend = "square") +
   coord_cartesian(xlim = range(dfhex$x), ylim = range(dfhex$y)) +
-  annotate("text", 0, -.3, label = "tfse", size = 38, family = "Consolas",
+  annotate("text", 0, -.3, label = "tfse", size = 10, family = "Consolas",
     fontface = "bold", colour = "black") +
   theme_void() +
   labs(x = NULL, y = NULL, title = NULL) +
@@ -58,9 +58,14 @@ p <- ggplot(dfhex, aes(x, y)) +
     plot.background = element_rect(fill = "transparent"))
 
 ## quick view in device window
-p
+p <- p + hexagon::theme_hexagon()
 
 ## save, making sure background is saved as transparent
 ggsave("man/figures/logo.png", p,
   width = (1.73/2.0) * 7, height = 7,
+  units = "in", bg = "transparent")
+
+
+ggsave("~/Desktop/tfse-logo.png", p,
+  width = 1.73, height = 2,
   units = "in", bg = "transparent")
