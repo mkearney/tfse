@@ -38,7 +38,7 @@ dfhex <- hexdf()
 size <- .5
 ## create hex logo plot object
 p <- ggplot(dfhex, aes(x, y)) +
-  geom_polygon(fill = "#BED0DF", colour = "black", size = 1) +
+  geom_polygon(fill = "#BED0DF", colour = "black", size = 1.25) +
   geom_polygon(data = top, fill = "#555555")  +
   geom_polygon(data = body, fill = "#f0f0f0") +
   geom_polygon(data = w1, fill = blue) +
@@ -60,12 +60,15 @@ p <- ggplot(dfhex, aes(x, y)) +
 ## quick view in device window
 p <- p + hexagon::theme_hexagon()
 
+## view
+p
+
 ## save, making sure background is saved as transparent
 ggsave("man/figures/logo.png", p,
-  width = (1.73/2.0) * 7, height = 7,
+  width = 1.73, height = 2,
   units = "in", bg = "transparent")
 
-
-ggsave("~/Desktop/tfse-logo.png", p,
+## save to logos folder
+ggsave("~/Dropbox/official_logos/tfse-logo.png", p,
   width = 1.73, height = 2,
   units = "in", bg = "transparent")
