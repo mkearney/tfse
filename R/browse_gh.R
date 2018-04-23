@@ -53,6 +53,8 @@ browse_gh <- function(repo = NULL) {
     paste0("plotly,drake,pdftools,git2r,fulltext,bikedata,RefManageR,tabulizer,",
       "magick,rplos,assertr,elastic,rrrpkg,Rselenium,googleLanguageR"))) {
     repo <- sprintf("ropensci/%s")
+  } else {
+    repo <- sprintf("search?q=%s", repo)
   }
   browseURL(sprintf("https://github.com/%s", repo))
 }
