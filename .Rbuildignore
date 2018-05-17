@@ -6,3 +6,5 @@
 ^make\.R$
 ^R/plus_paste\.R$
 ^logo\.R$
+^tfse\.sublime-workspace$
+^tfse\.sublime-project$
