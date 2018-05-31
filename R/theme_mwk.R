@@ -10,8 +10,8 @@
 #' @param gray Gray color.
 #' @return My ggplot2 theme (similar to theme_minimal/theme_bw)
 #' @export
-theme_mwk <- function(base_size = 13,
-                      base_family = "Helvetica Neue",
+theme_mwk <- function(base_size = 12,
+                      base_family = "Roboto Condensed",
                       dark = "#24292e",
                       light = "#f7f7f7",
                       gray = "#eaeaea") {
@@ -25,9 +25,11 @@ theme_mwk <- function(base_size = 13,
       legend.background = ggplot2::element_rect(
         fill = light, colour = light),
       legend.text = ggplot2::element_text(
-        colour = dark, size = ggplot2::rel(.7)),
+        colour = dark, size = ggplot2::rel(.75)),
       plot.background = ggplot2::element_rect(
         fill = light, colour = light),
+      plot.caption = ggplot2::element_text(
+        face = "italic", size = ggplot2::rel(.75)),
       panel.background = ggplot2::element_rect(
         fill = light, colour = light),
       panel.border = ggplot2::element_blank(),
@@ -41,7 +43,7 @@ theme_mwk <- function(base_size = 13,
       axis.text = ggplot2::element_text(
         colour = dark, size = ggplot2::rel(.65)),
       axis.title = ggplot2::element_text(
-        colour = dark, size = ggplot2::rel(.85)),
+        colour = dark, size = ggplot2::rel(.85), hjust = .95, face = "italic"),
       panel.grid.major = ggplot2::element_line(
         color = "#111111", size = ggplot2::rel(.040)),
       panel.grid.minor = ggplot2::element_line(

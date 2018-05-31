@@ -57,21 +57,57 @@ rproj_settings <- function(pkg = TRUE,
 #' @rdname rproj
 #' @export
 rproj_pkg <- function(path = NULL) {
+  ## set path to current wd if null
   if (is.null(path)) {
-    path <- basename(getwd())
+    path <- "."
   }
-  x <- as.character(rproj_new_pkg())
-  writeLines(x, paste0(path, ".Rproj"))
+  ## create path if doesn't exist
+  if (!dir.exists(path)) {
+    dir.create(path)
+  }
+  ## expand path if current wd otherwise set wd
+  if (identical(path, ".")) {
+    path <- getwd()
+  } else {
+    op <- getwd()
+    on.exit(setwd(op))
+    setwd(path)
+  }
+  ## proj name
+  pkg <- basename(path)
+  ## create project
+  usethis::create_package(path, open = FALSE)
+  ## overwrite proj file
+  x <- as.character(rproj_new_site())
+  writeLines(x, paste0(pkg, ".Rproj"))
 }
 
 #' @rdname rproj
 #' @export
 rproj_site <- function(path = NULL) {
+  ## set path to current wd if null
   if (is.null(path)) {
-    path <- basename(getwd())
+    path <- "."
   }
+  ## create path if doesn't exist
+  if (!dir.exists(path)) {
+    dir.create(path)
+  }
+  ## expand path if current wd otherwise set wd
+  if (identical(path, ".")) {
+    path <- getwd()
+  } else {
+    op <- getwd()
+    on.exit(setwd(op))
+    setwd(path)
+  }
+  ## proj name
+  site <- basename(path)
+  ## create project
+  usethis::create_project(path, open = FALSE)
+  ## overwrite proj file
   x <- as.character(rproj_new_site())
-  writeLines(x, paste0(path, ".Rproj"))
+  writeLines(x, paste0(site, ".Rproj"))
 }
 
 

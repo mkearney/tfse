@@ -4,7 +4,7 @@
 \alias{theme_mwk}
 \title{theme_mwk}
 \usage{
-theme_mwk(base_size = 13, base_family = "Helvetica Neue",
+theme_mwk(base_size = 12, base_family = "Roboto Condensed",
   dark = "#24292e", light = "#f7f7f7", gray = "#eaeaea")
 }
 \arguments{
