@@ -78,7 +78,7 @@ rproj_pkg <- function(path = NULL) {
   ## create project
   usethis::create_package(path, open = FALSE)
   ## overwrite proj file
-  x <- as.character(rproj_new_site())
+  x <- as.character(rproj_new_pkg())
   writeLines(x, paste0(pkg, ".Rproj"))
 }
 
