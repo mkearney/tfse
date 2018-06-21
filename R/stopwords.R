@@ -1,3 +1,10 @@
+
+#' stopwords
+#'
+#' Vector of stopwords taken from SMART lexicon in tidytext
+#' @docType data
+"stopwords"
+
 #' stop words by probability
 #'
 #' Return Twitter specific stopwords by expected probability of a term

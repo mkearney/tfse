@@ -1,9 +1,29 @@
 
 devtools::install("~/R/tfse")
-setwd("~/R/tfse")
-usethis::use_build_ignore("make.R")
-usethis::use_build_ignore("tfse.sublime-workspace")
-usethis::use_build_ignore("tfse.sublime-project")
-usethis::use_git_ignore("tfse.sublime-workspace")
-usethis::use_git_ignore("tfse.sublime-project")
-add_to_git()
+
+library(purrr)
+library(tfse)
+
+find_funfile <- function(x) {
+  x <- search_files(gsub("\\.", "\\\\.", x), "R")
+  x <- grep("R/\\S+\\.R", x, value = TRUE)
+  unique(gsub("^R/|\\.R.*", "", x))
+}
+find_funfiles <- function(x) {
+  f <- map(x, find_funfile)
+  names(f) <- x
+  f
+}
+
+move_file <- function(x) {
+  file.copy(sprintf("R/%s.R", x), sprintf("~/Desktop/tfse-old/%s.R", x))
+  file.remove(sprintf("R/%s.R", x))
+}
+devtools::install()
+devtools::document()
+
+move_file("zzz")
+map("funs", move_file)
+
+devtools
+usethis::use_build_ignore(sprintf("R/%s.R", fd))
