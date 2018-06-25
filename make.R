@@ -1,3 +1,5 @@
+devtools::document()
+devtools::install()
 
 devtools::install("~/R/tfse")
 
