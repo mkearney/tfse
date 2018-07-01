@@ -142,7 +142,19 @@ as.character.rproj <- function(x) {
   )
   x <- paste0(nms, ":\t", x)
   x <- unlist(strsplit(x, "\\n"))
-  tfse:::fill_space(x)
+  fill_space(x)
+}
+
+fill_space <- function(x) {
+  lns <- nchar(x) + 2L
+  mln <- max(lns, na.rm = TRUE)
+  make_space <- function(n) {
+    make_space_ <- function(n) paste(rep(" ", n), collapse = "")
+    sapply(n, make_space_)
+  }
+  sps <- make_space(mln - nchar(x))
+  x <- strsplit(x, "\\t")
+  unlist(Map(paste, x, collapse = sps))
 }
 
 rproj_new_pkg <- function() {

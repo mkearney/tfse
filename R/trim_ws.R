@@ -7,6 +7,6 @@
 #' @return Character vector without extra spaces
 #' @export
 trim_ws <- function(x) {
-  x <- gsub("\\s{2,}", " ", x)
-  gsub("^\\s|\\s$", "", x)
+  x <- gsub("[ ]{2,}", " ", x)
+  gsub("^[ ]+|[ ]+$", "", x)
 }

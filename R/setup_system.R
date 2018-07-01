@@ -26,7 +26,7 @@ setup_system <- function() {
 install_if_ <- function(x) {
   i <- !requireNamespace(x, quietly = TRUE)
   if (i) {
-    install.packages(x, quiet = TRUE)
+    install_pkg_verbose(x)
   }
   i
 }

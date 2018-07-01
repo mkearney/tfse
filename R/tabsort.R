@@ -3,27 +3,31 @@
 #'
 #' Returns a sorted (descending) frequence tbl
 #'
-#' @param x Character vector
-#' @param V1 Optional, name of term variable. Defaults to "term".
-#' @param percent Logical indicating whether to include a percent of total
-#'   column.
+#' @param data Data
+#' @param prop Logical indicating whether to include a proportion of total
+#'   obs column.
 #' @param na_omit Logical indicating whether to exclude missing. If all
 #'   responses are missing, a missing value is used as the single category.
 #' @return Frequency tbl
 #' @export
-tabsort <- function(x, V1 = NULL, percent = TRUE, na_omit = TRUE) {
-  if (is.atomic(x) && all(is.na(x))) {
-    x <- table(x, useNA = "ifany")
+tabsort <- function(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE) {
+  if (!is.recursive(data)) {
+    data <- list(term = data)
   } else {
-    x <- sort(table(x), decreasing = TRUE)
+    vars <- tidyselect::vars_select(names(data), ...)
+    if (length(vars) > 0) {
+      data <- data[vars]
+    }
   }
-  x <- data.frame(
-    term = names(x), n = as.integer(x), stringsAsFactors = FALSE)
-  if (percent) {
-    x$percent <- x$n / sum(x$n, na.rm = TRUE)
+  if (na_omit) {
+    data <- na_omit(data)
   }
-  if (!is.null(V1)) {
-    names(x)[1] <- V1
+  x <- as_tbl(do.call("table", data))
+  if (prop) {
+    x$prop <- x$n / sum(x$n, na.rm = TRUE)
+  }
+  if (sort) {
+    x <- dplyr::arrange_all(x)
   }
   x
 }

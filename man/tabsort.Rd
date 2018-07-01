@@ -4,15 +4,13 @@
 \alias{tabsort}
 \title{tabsort}
 \usage{
-tabsort(x, V1 = NULL, percent = TRUE, na_omit = TRUE)
+tabsort(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE)
 }
 \arguments{
-\item{x}{Character vector}
+\item{data}{Data}
 
-\item{V1}{Optional, name of term variable. Defaults to "term".}
-
-\item{percent}{Logical indicating whether to include a percent of total
-column.}
+\item{prop}{Logical indicating whether to include a proportion of total
+obs column.}
 
 \item{na_omit}{Logical indicating whether to exclude missing. If all
 responses are missing, a missing value is used as the single category.}

@@ -19,7 +19,7 @@ NULL
 #' @keywords internal
 #' @export
 #' @importFrom tibble as_tibble
-as_tbl <- tibble::as_tibble
+as_tbl <- function(...) tibble::as_tibble(..., validate = FALSE)
 
 #' tibble
 #'
