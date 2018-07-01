@@ -21,7 +21,7 @@ show_connections <- function() {
   ## convert is_ and can_ columns to logical
   conns <- conns %>%
     dplyr::mutate_if(grepl("^is_|^can_", names(conns)),
-    ~ case_when(
+    ~ dplyr::case_when(
       .x == "opened" ~ TRUE,
       .x == "closed" ~ FALSE,
       .x == "yes" ~ TRUE,

@@ -42,9 +42,9 @@ print_tbl <- function(x, ..., title = TRUE) {
     p <- c(p[1:overfill], x)
   }
   if (is.character(title)) {
-    p[1] <- paste0("# ", title)
+    p[1] <- paste0("# ", title, "\n")
   } else if (!title) {
     p <- p[-1]
   }
-  cat(p, fill = TRUE)
+  cat(paste(p, collapse = "\n"), fill = TRUE)
 }
