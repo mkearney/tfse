@@ -34,9 +34,6 @@ show_connections <- function() {
   }
 
   ## print conns tbl_df
-  print_tbl(conns, title = "Connections:")
-
-  ## return
-  invisible(conns)
+  print_tbl(conns)
 }
 
