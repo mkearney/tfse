@@ -21,22 +21,22 @@ NULL
 #' @importFrom tibble as_tibble
 as_tbl <- function(...) {
   x <- rlang::enquos(...)
-  if (length(x) == 1 && is.list(eval_tidy(x[[1]])[[1]]) &&
-      length(eval_tidy(x[[1]])) == 1 &
-      length(unique(lengths(eval_tidy(x[[1]])[[1]]))) == 1) {
-    x <- eval_tidy(x[[1]])[[1]]
-  } else if (length(x) == 1 && is.list(eval_tidy(x[[1]])[[1]])) {
-    x <- eval_tidy(x[[1]])
-  } else if (length(x) == 1 && is.list(eval_tidy(x[[1]]))) {
+  if (length(x) == 1 && is.list(rlang::eval_tidy(x[[1]])[[1]]) &&
+      length(rlang::eval_tidy(x[[1]])) == 1 &
+      length(unique(lengths(rlang::eval_tidy(x[[1]])[[1]]))) == 1) {
+    x <- rlang::eval_tidy(x[[1]])[[1]]
+  } else if (length(x) == 1 && is.list(rlang::eval_tidy(x[[1]])[[1]])) {
+    x <- rlang::eval_tidy(x[[1]])
+  } else if (length(x) == 1 && is.list(rlang::eval_tidy(x[[1]]))) {
     nms <- as.character(x[[1]][[2]])[-1]
-    x <- eval_tidy(x[[1]])
+    x <- rlang::eval_tidy(x[[1]])
     if (is.null(names(x))) {
       names(x) <- nms
     } else {
       names(x)[names(x) == ""] <- nms[names(x) == ""]
     }
   } else {
-    x <- purrr::map(x, eval_tidy)
+    x <- purrr::map(x, rlang::eval_tidy)
     names(x) <- expr_names(x)
   }
   tibble::as_tibble(x, validate = FALSE)
