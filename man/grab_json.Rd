@@ -6,6 +6,9 @@
 \usage{
 grab_json(x)
 }
+\arguments{
+\item{x}{input}
+}
 \value{
 if json found then parsed list
 }

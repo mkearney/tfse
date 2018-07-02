@@ -19,7 +19,35 @@ NULL
 #' @keywords internal
 #' @export
 #' @importFrom tibble as_tibble
-as_tbl <- function(...) tibble::as_tibble(..., validate = FALSE)
+as_tbl <- function(...) {
+  x <- rlang::enquos(...)
+  if (length(x) == 1 && is.list(eval_tidy(x[[1]])[[1]]) &&
+      length(eval_tidy(x[[1]])) == 1 &
+      length(unique(lengths(eval_tidy(x[[1]])[[1]]))) == 1) {
+    x <- eval_tidy(x[[1]])[[1]]
+  } else if (length(x) == 1 && is.list(eval_tidy(x[[1]])[[1]])) {
+    x <- eval_tidy(x[[1]])
+  } else if (length(x) == 1 && is.list(eval_tidy(x[[1]]))) {
+    nms <- as.character(x[[1]][[2]])[-1]
+    x <- eval_tidy(x[[1]])
+    if (is.null(names(x))) {
+      names(x) <- nms
+    } else {
+      names(x)[names(x) == ""] <- nms[names(x) == ""]
+    }
+  } else {
+    x <- purrr::map(x, eval_tidy)
+    names(x) <- expr_names(x)
+  }
+  tibble::as_tibble(x, validate = FALSE)
+}
+
+expr_names <- function(x) {
+  exprnames <- purrr::map_chr(x, ~ sub("~", "", rlang::expr_text(.x)))
+  ifelse(names(x) == "", exprnames, names(x))
+}
+
+is_recursive <- function(x) vapply(x, is.recursive, logical(1))
 
 #' tibble
 #'

@@ -7,13 +7,13 @@
 \alias{code_box}
 \title{boxcode}
 \usage{
-boxcode(label = "")
+boxcode(...)
 
-codebox(label = "")
+codebox(...)
 
-box_code(label = "")
+box_code(...)
 
-code_box(label = "")
+code_box(...)
 }
 \arguments{
 \item{label}{Name of section/block}

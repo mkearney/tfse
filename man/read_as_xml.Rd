@@ -6,6 +6,9 @@
 \usage{
 read_as_xml(x)
 }
+\arguments{
+\item{x}{input}
+}
 \value{
 xml_document
 }

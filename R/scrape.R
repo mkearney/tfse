@@ -1,7 +1,7 @@
 
 #' read as xml
 #'
-#' @param input
+#' @param x input
 #' @return xml_document
 #' @export
 read_as_xml <- function(x) {
@@ -65,7 +65,7 @@ read_as_xml <- function(x) {
 
 #' grab json
 #'
-#' @param input
+#' @param x input
 #' @return if json found then parsed list
 #' @examples
 #' \dontrun{
@@ -78,8 +78,14 @@ read_as_xml <- function(x) {
 #' }
 #' @export
 grab_json <- function(x) {
+  ## if json
+  if (grepl("\\[?\\{", x)) {
+    j <- tryCatch(jsonlite::fromJSON(x), error = function(e) return(NULL))
+    if (!is.null(j)) return(j)
+  }
+
   ## read as xml
-  x <- read_as_xml(x)
+  x <- tryCatch(read_as_xml(x), error = function(e) return(x))
 
   ## convert to char
   x <- as.character(x)
@@ -109,9 +115,6 @@ grab_json <- function(x) {
   unique(o)
 }
 
-#lr1 <- function(li, r) if (any(r > li)) safely_fromJSON(substr(x, li, r[r > li][1])) else NULL
-#lr2 <- function(l, r) purrr:::map(l, lr1, r)
-#lr3 <- function(l, r) purrr::map(seq_along(r), ~ lr2(l, r[-.x]))
 
 safely_parse_json <- function(x, pat) {
   if (grepl("\\(\\?", pat)) {

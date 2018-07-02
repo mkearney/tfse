@@ -8,7 +8,12 @@
 #' @return Text for code box saved into clipboard. Paste to use at cursor.
 #'
 #' @export
-boxcode <- function(label = "") {
+boxcode <- function(...) {
+  txt <- paste0(paste(purrr::map_chr(c(...), boxcode_), collapse = "\n\n"), "\n")
+  pbcopy(txt)
+}
+
+boxcode_ <- function(label = "") {
   n <- nchar(label)
   ws <- 76L - n
   if (ws %% 2L > 0L) {
@@ -19,28 +24,29 @@ boxcode <- function(label = "") {
   f <- function(n) paste(rep(" ", n), collapse = "")
   ws <- unlist(Map("f", ws))
   label <- paste0("##", ws[1], label, ws[2], "##")
-  txt <- paste(
+  paste(
     "##----------------------------------------------------------------------------##",
     label, sep = "\n",
     "##----------------------------------------------------------------------------##"
   )
-  con <- pipe("pbcopy", "w")
-  cat(txt, file = con)
-  close(con)
+
+  #con <- pipe("pbcopy", "w")
+  #cat(txt, file = con)
+  #close(con)
 }
 
 #' @export
 #' @inheritParams boxcode
 #' @rdname boxcode
-codebox <- function(label = "") boxcode(label)
+codebox <- function(...) boxcode(...)
 
 #' @export
 #' @inheritParams boxcode
 #' @rdname boxcode
-box_code <- function(label = "") boxcode(label)
+box_code <- function(...) boxcode(...)
 
 #' @export
 #' @inheritParams boxcode
 #' @rdname boxcode
-code_box <- function(label = "") boxcode(label)
+code_box <- function(...) boxcode(...)
 
