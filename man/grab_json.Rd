@@ -12,3 +12,13 @@ if json found then parsed list
 \description{
 grab json
 }
+\examples{
+\dontrun{
+## scrape espn
+e <- grab_json("http:/www.espn.com/")
+str(e, 3)
+
+## convert html text
+grab_json('<html>{\\"mpg\\":21,\\"cyl\\":6,\\"disp\\":160,\\"lgl\\":false}</html>')
+}
+}

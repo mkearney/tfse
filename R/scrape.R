@@ -67,6 +67,15 @@ read_as_xml <- function(x) {
 #'
 #' @param input
 #' @return if json found then parsed list
+#' @examples
+#' \dontrun{
+#' ## scrape espn
+#' e <- grab_json("http:/www.espn.com/")
+#' str(e, 3)
+#'
+#' ## convert html text
+#' grab_json('<html>{\"mpg\":21,\"cyl\":6,\"disp\":160,\"lgl\":false}</html>')
+#' }
 #' @export
 grab_json <- function(x) {
   ## read as xml
@@ -86,28 +95,54 @@ grab_json <- function(x) {
   ## validate x
   stopifnot(is.character(x))
 
-  ## parse json text
-  m <- gregexpr("\\{\".*\\}(?=;</script>)", x, perl = TRUE)
+  ## initialize output vector
+  o <- list()
 
-  ## if no matches try again
-  if (identical(m[[1]], -1)) {
-    m <- gregexpr("\\{\".*\\}(?=(;|\\s))", x, perl = TRUE)
+  ## swing for fences
+  o[[length(o) + 1L]] <- safely_parse_json(x, "\\[\\{\".*\\}\\](?!\\,)")
+  o[[length(o) + 1L]] <- safely_parse_json(x, "(?<!\\[)\\{\".*\\}(?!\\,|\\]|\\})")
+  o[[length(o) + 1L]] <- safely_parse_json(x, "\\{\".*\\}(?=;</script>)")
+  o[[length(o) + 1L]] <- safely_parse_json(x, "\\{\".*\\}(?=(;|\\s))")
+  o[[length(o) + 1L]] <- safely_parse_json(x, "\\{\".*\\}(?!\\,)")
+
+  ## return o
+  unique(o)
+}
+
+#lr1 <- function(li, r) if (any(r > li)) safely_fromJSON(substr(x, li, r[r > li][1])) else NULL
+#lr2 <- function(l, r) purrr:::map(l, lr1, r)
+#lr3 <- function(l, r) purrr::map(seq_along(r), ~ lr2(l, r[-.x]))
+
+safely_parse_json <- function(x, pat) {
+  if (grepl("\\(\\?", pat)) {
+    perl <- TRUE
+  } else {
+    perl <- FALSE
   }
-
-  ## if still no matches try one more time
-  if (identical(m[[1]], -1)) {
-    m <- gregexpr("\\{\".*\\}(?!\\,)", x, perl = TRUE)
+  m <- gregexpr(pat, x, perl = perl)
+  if (!identical(m[[1]], -1)) {
+    x <- regmatches(x, m)[[1]]
   }
+  safely_fromJSON(x)
+}
 
-  ## if still no matches, return null
-  if (identical(m[[1]], -1)) return(NULL)
-
-  ## parse matches
-  x <- regmatches(x, m)[[1]]
-
-  ## if empty return null
+safely_fromJSON <- function(x) {
   if (length(x) == 0) return(NULL)
-
-  ## attempt to convert to list
-  tryCatch(jsonlite::fromJSON(x), error = function(e) return(NULL))
+  fj <- function(x) {
+    o <- tryCatch(jsonlite::fromJSON(x), error = function(e) return(NULL))
+    if (is.null(o)) {
+      o <- tryCatch(jsonlite::fromJSON(paste0("[", x, "]")), error = function(e) return(NULL))
+    }
+    o
+  }
+  x <- purrr::map(x, fj)
+  if (is.null(x) || all(lengths(x) == 0)) return(NULL)
+  x <- x[lengths(x) > 0]
+  names(x) <- paste0("j", seq_along(x))
+  if (length(x) == 1 && is.atomic(x[[1]]) && length(x[[1]]) == 1L) return(NULL)
+  if (length(x) == 1 && is.data.frame(x[[1]])) x <- x[[1]]
+  if (length(x) == 1 && is.list(x[[1]]) && length(unique(lengths(x[[1]]))) == 1) {
+    x <- as_tbl(x[[1]])
+  }
+  x
 }
