@@ -6,7 +6,7 @@
 \alias{tbl_df}
 \title{tibble}
 \usage{
-as_tbl(...)
+as_tbl(x, row.names = FALSE)
 
 tbl_df(...)
 }
