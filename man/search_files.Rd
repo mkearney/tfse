@@ -4,13 +4,24 @@
 \alias{search_files}
 \title{search_files}
 \usage{
-search_files(x, path = ".")
+search_files(x, path = ".", recursive = TRUE, invert = FALSE,
+  file_names = FALSE, all.files = FALSE, intern = FALSE)
 }
 \arguments{
 \item{x}{Pattern.}
 
 \item{path}{Path on which to restrict search. Defaults to current working
 directory.}
+
+\item{recursive}{logical}
+
+\item{invert}{logical}
+
+\item{file_names}{only show matching file names}
+
+\item{all.files}{default false excludes dot files}
+
+\item{intern}{logical}
 }
 \value{
 Output from terminal - file name, line number, and preview of
