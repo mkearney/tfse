@@ -34,7 +34,7 @@ rcmd_install <- function(pkg) {
     deps <- deps[deps %in% ip]
     newdeps <- deps[!deps %in% ip]
     for (i in newdeps) {
-      task <- rlang::quo(sh <- suppressMessages(install.packages(newdeps[i],
+      task <- rlang::quo(suppressMessages(install.packages(newdeps[i],
         verbose = FALSE, quiet = TRUE)))
       task_progress_bar(task, sprintf("Installing %s", newdeps[i]))
     }
@@ -42,7 +42,7 @@ rcmd_install <- function(pkg) {
   if (any(deps %in% op)) {
     olddeps <- deps[deps %in% op]
     for (i in seq_along(olddeps)) {
-      task <- rlang::quo(sh <- suppressMessages(update.packages(olddeps[i],
+      task <- rlang::quo(suppressMessages(update.packages(olddeps[i],
         ask = FALSE)))
       task_progress_bar(task, sprintf("Installing %s", olddeps[i]))
     }
@@ -89,8 +89,9 @@ system3 <- function(cmd, ..., capture = FALSE) {
     args <- ""
   args <- paste(args, collapse = " ")
   cmd <- paste(shQuote(cmd), args)
-  if (!capture)
+  if (!capture) {
     cmd <- paste(cmd, ">/dev/null 2>/dev/null")
+  }
   invisible(tryCatch(.Internal(system(cmd, TRUE, 0)),
     error = function(e) return(e)))
 }

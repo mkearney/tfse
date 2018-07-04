@@ -114,4 +114,4 @@ is_recursive <- function(x) vapply(x, is.recursive, logical(1))
 #' @keywords internal
 #' @export
 #' @importFrom tibble data_frame
-tbl_df <- tibble::data_frame
+tbl_frame <- tibble::data_frame

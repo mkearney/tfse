@@ -3,12 +3,12 @@
 \name{tibble}
 \alias{tibble}
 \alias{as_tbl}
-\alias{tbl_df}
+\alias{tbl_frame}
 \title{tibble}
 \usage{
 as_tbl(x, row.names = FALSE)
 
-tbl_df(...)
+tbl_frame(...)
 }
 \description{
 See \code{tibble::\link[tibble]{as_tibble}} for details.
