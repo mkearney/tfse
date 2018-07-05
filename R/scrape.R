@@ -70,14 +70,14 @@ read_as_xml <- function(x) {
 #' @examples
 #' \dontrun{
 #' ## scrape espn
-#' e <- grab_json("http:/www.espn.com/")
+#' e <- parse_json("http:/www.espn.com/")
 #' str(e, 3)
 #'
 #' ## convert html text
-#' grab_json('<html>{\"mpg\":21,\"cyl\":6,\"disp\":160,\"lgl\":false}</html>')
+#' parse_json('<html>{\"mpg\":21,\"cyl\":6,\"disp\":160,\"lgl\":false}</html>')
 #' }
 #' @export
-grab_json <- function(x) {
+parse_json <- function(x) {
   ## if json
   if (grepl("\\[?\\{", x)) {
     j <- tryCatch(jsonlite::fromJSON(x), error = function(e) return(NULL))

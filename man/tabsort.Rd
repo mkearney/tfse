@@ -2,9 +2,12 @@
 % Please edit documentation in R/tabsort.R
 \name{tabsort}
 \alias{tabsort}
+\alias{ntbl}
 \title{tabsort}
 \usage{
 tabsort(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE)
+
+ntbl(data, ...)
 }
 \arguments{
 \item{data}{Data}

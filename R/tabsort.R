@@ -12,7 +12,7 @@
 #' @export
 tabsort <- function(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE) {
   if (!is.recursive(data)) {
-    data <- list(term = data)
+    data <- tbl_frame(!!rlang::quo_text(rlang::enquo(data)) := data)
   } else {
     vars <- tidyselect::vars_select(names(data), ...)
     if (length(vars) > 0) {
@@ -27,7 +27,17 @@ tabsort <- function(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE) {
     x$prop <- x$n / sum(x$n, na.rm = TRUE)
   }
   if (sort) {
-    x <- dplyr::arrange_all(x)
+    x <- dplyr::arrange(repos_back(x, 1))
+    x <- repos_front(x, ncol(x))
   }
   x
+}
+
+
+#' @inheritParams tabsort
+#' @rdname tabsort
+#' @export
+ntbl <- function(data, ...) {
+  data <- rlang::with_env(data, tidyselector(data, ...))
+  as_tbl(table(data))
 }
