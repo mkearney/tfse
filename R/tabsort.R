@@ -13,6 +13,9 @@
 tabsort <- function(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE) {
   if (!is.recursive(data)) {
     data <- tbl_frame(!!rlang::quo_text(rlang::enquo(data)) := data)
+    if (nchar(names(data)) > 20) {
+      names(data) <- "term"
+    }
   } else {
     vars <- tidyselect::vars_select(names(data), ...)
     if (length(vars) > 0) {
@@ -27,8 +30,7 @@ tabsort <- function(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE) {
     x$prop <- x$n / sum(x$n, na.rm = TRUE)
   }
   if (sort) {
-    x <- dplyr::arrange(repos_back(x, 1))
-    x <- repos_front(x, ncol(x))
+    x <- dplyr::arrange(x, dplyr::desc(n))
   }
   x
 }
