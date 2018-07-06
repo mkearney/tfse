@@ -11,16 +11,14 @@
 #' @return Frequency tbl
 #' @export
 tabsort <- function(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE) {
-  if (!is.recursive(data)) {
-    data <- tbl_frame(!!rlang::quo_text(rlang::enquo(data)) := data)
-    if (nchar(names(data)) > 20) {
-      names(data) <- "term"
-    }
+  vars <- names(rlang::enquos(...))
+  if (!is.recursive(data) && length(vars) > 0) {
+    tnames <- c(letters[c(24:26, 1:23)], paste0(letters[c(24:26, 1:23)], "2"))
+    data <- structure(list(data, ...), class = "list", names = tnames[seq_len(length(list(data, ...)))])
+  } else if (!is.recursive(data)) {
+    data <- list(x = data)
   } else {
-    vars <- tidyselect::vars_select(names(data), ...)
-    if (length(vars) > 0) {
-      data <- data[vars]
-    }
+    data <- tidyselector(data, ...)
   }
   if (na_omit) {
     data <- na_omit(data)

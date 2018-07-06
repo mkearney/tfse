@@ -110,7 +110,9 @@ repos_back <- function(data, ...) {
 #' @param ... vars to select
 #' @export
 tidyselector <- function(data, ...) {
-  vars <- tidyselect::vars_select(names(data), ...)
+  vars <- tryCatch(tidyselect::vars_select(names(data), ...),
+    error = function(e) return(NULL))
+  #if (is.null(vars)) return(data)
   if (length(vars) > 0) {
     data <- data[vars]
   }
