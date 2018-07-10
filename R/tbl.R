@@ -1,28 +1,12 @@
+
+
 #' tbl
 #'
 #' See \code{tibble::\link[tibble]{as_tibble}} for details.
 #'
-#' @export
 #' @param x Data
 #' @param row.names Logical indicating whether to convert non-null row names
 #'   into the first column.
-#' @rdname tbl
-#' @importFrom tibble as_tibble
-tbl <- function(x, row.names = FALSE) {
-  if (row.names && !identical(as.character(seq_len(nrow(x))), row.names(x))) {
-    x$row_names <- row.names(x)
-    repos_front(x, row_names)
-  } else {
-    tibble::as_tibble(x, validate = FALSE)
-  }
-}
-
-
-#' as_tbl
-#'
-#' See \code{tibble::\link[tibble]{as_tibble}} for details.
-#'
-#' @inheritParams tbl
 #' @rdname tbl
 #' @importFrom tibble as_tibble
 #' @export
