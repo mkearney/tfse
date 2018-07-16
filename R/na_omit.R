@@ -49,7 +49,7 @@ na_omit.data.frame <- function(x) {
     function(i) all_na(x[i, ]), logical(1),
     USE.NAMES = FALSE
   )
-  x[!na_rows, ]
+  x[!na_rows, , drop = FALSE]
 }
 
 #' @export
@@ -59,5 +59,5 @@ na_omit.matrix <- function(x) {
     function(i) all_na(x[i, ]), logical(1),
     USE.NAMES = FALSE
   )
-  x[!na_rows, ]
+  x[!na_rows, , drop = FALSE]
 }
