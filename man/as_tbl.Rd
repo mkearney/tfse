@@ -5,7 +5,7 @@
 \alias{tbl_frame}
 \alias{as_tbl_smart}
 \alias{tblframe}
-\title{tbl}
+\title{as_tbl}
 \usage{
 as_tbl(x, row.names = FALSE)
 

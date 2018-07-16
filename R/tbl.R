@@ -1,13 +1,13 @@
 
 
-#' tbl
+#' as_tbl
 #'
 #' See \code{tibble::\link[tibble]{as_tibble}} for details.
 #'
 #' @param x Data
 #' @param row.names Logical indicating whether to convert non-null row names
 #'   into the first column.
-#' @rdname tbl
+#' @rdname as_tbl
 #' @importFrom tibble as_tibble
 #' @export
 as_tbl <- function(x, row.names = FALSE) {
@@ -21,16 +21,16 @@ as_tbl <- function(x, row.names = FALSE) {
 
 
 
-#' tbl_frame
+#' as_tbl_frame
 #'
-#' @rdname tbl
+#' @rdname as_tbl
 #' @export
 #' @importFrom tibble data_frame
 tbl_frame <- tibble::data_frame
 
 
-#' @inheritParams tbl
-#' @rdname tbl
+#' @inheritParams as_tbl
+#' @rdname as_tbl
 #' @export
 as_tbl_smart <- function(x) {
   if (length(x) == 1 && inherits(rlang::eval_tidy(x[[1]]), "table")) {
@@ -58,9 +58,9 @@ as_tbl_smart <- function(x) {
 }
 
 #' @export
-#' @rdname tbl
-#' @inheritParams tbl
-tblframe <- function(x) tbl_frame(!!rlang::quo_text(rlang::enquo(x)) := x)
+#' @rdname as_tbl
+#' @inheritParams as_tbl
+tblframe <- function(x) as_tbl_frame(!!rlang::quo_text(rlang::enquo(x)) := x)
 
 
 #' move vars to front
