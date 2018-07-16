@@ -12,11 +12,13 @@
 #' @export
 tabsort <- function(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE) {
   vars <- names(rlang::enquos(...))
-  if (!is.recursive(data) && length(vars) > 0) {
+  if (missing(data)) {
+    data <- data.frame(..., stringsAsFactors = FALSE)
+  } else if (!is.recursive(data) && length(vars) > 0) {
     tnames <- c(letters[c(24:26, 1:23)], paste0(letters[c(24:26, 1:23)], "2"))
     data <- structure(list(data, ...), class = "list", names = tnames[seq_len(length(list(data, ...)))])
   } else if (!is.recursive(data)) {
-    data <- list(x = data)
+    data <- data.frame(x = data, stringsAsFactors = FALSE)
   } else {
     data <- tidyselector(data, ...)
   }
