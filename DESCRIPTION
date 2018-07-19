@@ -12,6 +12,7 @@ Imports:
     devtools,
     dplyr,
     ggplot2,
+    glue,
     grDevices,
     httr,
     jsonlite,
