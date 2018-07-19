@@ -8,9 +8,26 @@ Description: Misc functions.
 Depends:
     R (>= 3.1.0)
 Imports:
+    datasets,
+    devtools,
+    dplyr,
+    ggplot2,
     grDevices,
+    httr,
+    jsonlite,
     magrittr,
-    tibble
+    purrr,
+    readr,
+    rdrop2,
+    rlang,
+    rvest,
+    stringr,
+    tibble,
+    tidyselect,
+    tools,
+    usethis,
+    utils,
+    xml2
 Suggests:
     knitr,
     rmarkdown
