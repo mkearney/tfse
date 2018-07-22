@@ -78,20 +78,26 @@ read_as_xml <- function(x) {
 #' }
 #' @export
 parse_json <- function(x) {
-  ## validate x
-  stopifnot(is.character(x) && length(x) == 1L)
-
-  ## if json
-  if (grepl("^\\[\\{", x)) {
-    j <- tryCatch(jsonlite::fromJSON(x), error = function(e) return(NULL))
-    if (!is.null(j)) return(j)
-  } else if (file.exists(x) || grepl("^http", x)) {
-    ## read as xml
-    x <- tryCatch(read_as_xml(x), error = function(e) return(x))
-    ## convert to char
-    x <- as.character(x)
+  ## validate input
+  stopifnot(is.character(x))
+  ## when x is chr and len 1
+  if (is.character(x) && length(x) == 1L) {
+    ## if json
+    if (grepl("^\\[\\{", x)) {
+      j <- tryCatch(jsonlite::fromJSON(x), error = function(e) return(NULL))
+      if (!is.null(j)) {
+        j <- peel_lists(j)
+        if (is.data.frame(j)) j <- tryCatch(as_tbl(j),
+          error = function(e) return(j))
+        return(j)
+      }
+    } else if (file.exists(x) || grepl("^http", x)) {
+      ## read as xml
+      x <- tryCatch(read_as_xml(x), error = function(e) return(x))
+      ## convert to char
+      x <- as.character(x)
+    }
   }
-
   ## if null/empty return null
   if (length(x) == 0) return(NULL)
 
@@ -109,14 +115,14 @@ parse_json <- function(x) {
   o[[length(o) + 1L]] <- safely_parse_json(x, "\\{\".*\\}(?=;</script>)")
   o[[length(o) + 1L]] <- safely_parse_json(x, "\\{\".*\\}(?=(;|\\s))")
   o[[length(o) + 1L]] <- safely_parse_json(x, "\\{\".*\\}(?!\\,)")
+  o[[length(o) + 1L]] <- safely_parse_json(x, "\\{.*\\}")
 
   ## return o
   o <- o[lengths(o) > 0]
   if (length(o) == 0) return(o)
   o <- lapply(o, peel_lists)
   o <- unique(o)
-  if (length(o) == 1) o <- o[[1]]
-  o
+  peel_lists(o)
 }
 
 
@@ -154,9 +160,18 @@ safely_fromJSON <- function(x) {
   if (is.null(x) || all(lengths(x) == 0)) return(NULL)
   x <- x[lengths(x) > 0]
   names(x) <- paste0("j", seq_along(x))
-  if (length(x) == 1 && is.atomic(x[[1]]) && length(x[[1]]) == 1L) return(NULL)
-  if (length(x) == 1 && is.data.frame(x[[1]])) x <- x[[1]]
-  if (length(x) == 1 && is.list(x[[1]]) && length(unique(lengths(x[[1]]))) == 1) {
+  x <- flattendfs(x)
+  peel_lists(x)
+}
+
+
+flattendfs <- function(x) {
+  if (is.atomic(x[[1]]) && length(x[[1]]) == 1L) return(NULL)
+  if (!is.data.frame(x) && is.data.frame(x[[1]])) x <- as_tbl(x[[1]])
+  if (!is.data.frame(x) && is.list(x[[1]]) &
+      length(x[[1]]) == 1 & is.data.frame(x[[1]][[1]])) x <- as_tbl(x[[1]][[1]])
+  if (is.data.frame(x)) x <- as_tbl(x)
+  if (is.list(x[[1]]) && length(unique(lengths(x[[1]]))) == 1) {
     x <- as_tbl(x[[1]])
   }
   x

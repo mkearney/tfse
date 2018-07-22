@@ -11,6 +11,13 @@
 #' @importFrom tibble as_tibble
 #' @export
 as_tbl <- function(x, row.names = FALSE) {
+  isdf <- which(vapply(x, is.data.frame, FUN.VALUE = logical(1), USE.NAMES = FALSE))
+  if (length(isdf) > 0) {
+    for (i in isdf) {
+      x[[i]] <- x[[i]]
+    }
+  }
+  #x[isdf] <- lapply(x[isdf], list)
   if (row.names && !identical(as.character(seq_len(nrow(x))), row.names(x))) {
     x$row_names <- row.names(x)
     repos_front(x, row_names)
