@@ -78,17 +78,19 @@ read_as_xml <- function(x) {
 #' }
 #' @export
 parse_json <- function(x) {
+  ## validate x
+  stopifnot(is.character(x) && length(x) == 1L)
+
   ## if json
-  if (grepl("\\[?\\{", x)) {
+  if (grepl("^\\[\\{", x)) {
     j <- tryCatch(jsonlite::fromJSON(x), error = function(e) return(NULL))
     if (!is.null(j)) return(j)
+  } else if (file.exists(x) || grepl("^http", x)) {
+    ## read as xml
+    x <- tryCatch(read_as_xml(x), error = function(e) return(x))
+    ## convert to char
+    x <- as.character(x)
   }
-
-  ## read as xml
-  x <- tryCatch(read_as_xml(x), error = function(e) return(x))
-
-  ## convert to char
-  x <- as.character(x)
 
   ## if null/empty return null
   if (length(x) == 0) return(NULL)
@@ -97,9 +99,6 @@ parse_json <- function(x) {
   if (is.character(x) && length(x) > 1) {
     x <- paste(x, collapse = "\n")
   }
-
-  ## validate x
-  stopifnot(is.character(x))
 
   ## initialize output vector
   o <- list()
@@ -112,21 +111,34 @@ parse_json <- function(x) {
   o[[length(o) + 1L]] <- safely_parse_json(x, "\\{\".*\\}(?!\\,)")
 
   ## return o
-  unique(o)
+  o <- o[lengths(o) > 0]
+  if (length(o) == 0) return(o)
+  o <- lapply(o, peel_lists)
+  o <- unique(o)
+  if (length(o) == 1) o <- o[[1]]
+  o
 }
 
 
+regex_match <- function(m) {
+  o <- rep(FALSE, length(m))
+  o[lengths(m) > 1] <- TRUE
+  o[lengths(m) == 1] <- vapply(m[lengths(m) == 1], function(x) x[1] > -1, FUN.VALUE = logical(1),
+    USE.NAMES = FALSE)
+  o
+}
+
 safely_parse_json <- function(x, pat) {
-  if (grepl("\\(\\?", pat)) {
-    perl <- TRUE
+  m <- gregexpr_(x, pat)
+  if (regex_match(m)) {
+    x <- regmatches_(x, pat, drop = TRUE)
+  }
+  if (length(x) > 1) {
+    x <- lapply(x, safely_fromJSON)
   } else {
-    perl <- FALSE
+    x <- safely_fromJSON(x)
   }
-  m <- gregexpr(pat, x, perl = perl)
-  if (!identical(m[[1]], -1)) {
-    x <- regmatches(x, m)[[1]]
-  }
-  safely_fromJSON(x)
+  x[lengths(x) > 0]
 }
 
 safely_fromJSON <- function(x) {
@@ -149,3 +161,4 @@ safely_fromJSON <- function(x) {
   }
   x
 }
+

@@ -1,4 +1,3 @@
-rurl <- "https://www.alfredapp.com"
 
 #' scrape URL links from a webpage
 #'
