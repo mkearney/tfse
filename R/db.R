@@ -7,6 +7,9 @@
 #' @return Saves x as rds file in specified dropbox folder
 #' @export
 db_saveRDS <- function(x, file) {
+  if (!requireNamespace("rdrop2", quietly = TRUE)) {
+    stop("must install rdrop2 pkg to use this function")
+  }
   db_load_token()
   tmp <- file.path(tempdir(), file)
   saveRDS(x, tmp)
@@ -20,6 +23,9 @@ db_saveRDS <- function(x, file) {
 #' @return Saves x as CSV file in specified dropbox folder
 #' @export
 db_write_csv <- function(x, file) {
+  if (!requireNamespace("rdrop2", quietly = TRUE)) {
+    stop("must install rdrop2 pkg to use this function")
+  }
   db_load_token()
   tmp <- file.path(tempdir(), file)
   readr::write_csv(x, tmp)
@@ -30,6 +36,9 @@ db_write_csv <- function(x, file) {
 #'
 #' @export
 db_load_token <- function() {
+  if (!requireNamespace("rdrop2", quietly = TRUE)) {
+    stop("must install rdrop2 pkg to use this function")
+  }
   if (exists("token", envir = rdrop2:::.dstate)) return(invisible())
   ## load and auto-insert dropbox token
   token <- readRDS("~/Dropbox/.r2drop.rds")

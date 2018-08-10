@@ -10,12 +10,12 @@
 #'   default (NULL) omits alpha columns from the returned hexidecimal
 #'   characters.
 #' @return Hexidicimal color codes
-#' @importFrom grDevices col2rgb
 #' @export
 col2hex <- function(color, alpha = NULL) UseMethod("col2hex")
 
 
 #' @export
+#' @importFrom grDevices col2rgb
 col2hex.character <- function(color, alpha = NULL) {
   color <- grDevices::col2rgb(color)
   col2hex(color, alpha)
@@ -23,27 +23,32 @@ col2hex.character <- function(color, alpha = NULL) {
 
 #' @export
 col2hex.numeric <- function(color, alpha = NULL) {
-  color <- matrix(color, 3)
-  if (any(unlist(lapply(col2rgb(color), unlist)) > 1.0)) {
-    maxColorValue <- 255
-  } else {
-    maxColorValue <- 1
-  }
-  color <- grDevices::rgb(
-    color[1, ], color[2, ], color[3, ], maxColorValue = maxColorValue)
+  stopifnot(length(color) == 3L)
+  color <- col2hex_dbl(color, alpha)
   col2hex(color, alpha)
 }
 
-#' @export
-col2hex.integer <- function(color, alpha = NULL) {
-  color <- matrix(color, 3)
-  if (any(unlist(lapply(col2rgb(color), unlist)) > 1.0)) {
+col2hex_dbl <- function(color, alpha = NULL) {
+  color <- c(color, alpha)
+  stopifnot(length(color) %in% c(3, 4))
+  if (any(color > 1.0) || (sum(color[1:3] %% 1) > 0)) {
     maxColorValue <- 255
   } else {
     maxColorValue <- 1
   }
-  color <- grDevices::rgb(
-    color[1, ], color[2, ], color[3, ], maxColorValue = maxColorValue)
+  if (length(color) == 4) {
+    color[4] <- color[4] * maxColorValue
+  } else {
+    color[4] <- 1
+  }
+  grDevices::rgb(
+    color[1], color[2], color[3], color[4], maxColorValue = maxColorValue)
+}
+
+
+#' @export
+col2hex.integer <- function(color, alpha = NULL) {
+  color <- as.numeric(color)
   col2hex(color, alpha)
 }
 

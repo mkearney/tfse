@@ -1,27 +1,4 @@
-#' Installs packages to my liking for new systems
-#'
-#' Installs a group of packages I like to setup my systems with.
-#'
-#' @export
-setup_system <- function() {
-  if (.Platform$OS.type == "unix") {
-    warning("Make sure to install xml, curl, openssl, etc.")
-  }
-  ## install from CRAN
-  install_if(c("tidyverse", "devtools", "rockchalk", "gbm",
-    "rvest", "rtweet", "textfeatures", "roxygen2", "lavaan"))
-  ## install from github
-  devtools::install_github("mkearney/rtweet")
-  devtools::install_github("mkearney/tfse")
-  devtools::install_github("mkearney/textfeatures")
-  devtools::install_github("mkearney/botrnot")
-  devtools::install_github("klutometis/roxygen")
-  devtools::install_github("yihui/xaringan")
-  devtools::install_github("r-lib/usethis")
-  devtools::install_github("r-lib/pkgdown")
-  devtools::install_github("quanteda/quanteda")
-  devtools::install_github("juliasilge/tidytext")
-}
+
 
 install_if_ <- function(x) {
   i <- !requireNamespace(x, quietly = TRUE)

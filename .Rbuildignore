@@ -1,10 +1,6 @@
+^docs$
+^\.DS_Store$
+^README\.Rmd$
+^LICENSE\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.httr-oauth$
-^docs/*
-^make$
-^make\.R$
-^logo\.R$
-^tfse\.sublime-workspace$
-^tfse\.sublime-project$
-^\.DS_Store$

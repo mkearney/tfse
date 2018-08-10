@@ -38,6 +38,7 @@ tbl_frame <- tibble::data_frame
 
 #' @inheritParams as_tbl
 #' @rdname as_tbl
+#' @importFrom purrr map
 #' @export
 as_tbl_smart <- function(x) {
   if (length(x) == 1 && inherits(rlang::eval_tidy(x[[1]]), "table")) {
