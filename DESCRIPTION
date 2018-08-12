@@ -1,7 +1,7 @@
 Package: tfse
 Version: 0.3.12
 Title: The First Scriptorium Emporium
-Description: Various useful functions I've written over time.
+Description: Useful functions for data wrangling and writing functions.
 Authors@R: person("Michael W.", "Kearney", ,
       "kearneymw@missouri.edu", role = c("aut", "cre"),
       comment = c(ORCID = "0000-0002-0730-4694"))
@@ -21,8 +21,7 @@ Suggests:
     ggplot2,
     knitr,
     readr,
-    rdrop2,
     rmarkdown,
     testthat
-URL: https://github.com/mkearney/tfse/
+URL: https://mkearney.github.io/tfse/
 BugReports: https://github.com/mkearney/tfse/issues
