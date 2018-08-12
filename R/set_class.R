@@ -8,3 +8,13 @@
 #' @export
 set_class <- function(x, value) `class<-`(x, value)
 
+#' add class
+#'
+#' Add class with a parenthetical function.
+#'
+#' @inheritParams set_class
+#' @export
+#' @rdname set_class
+add_class <- function(x, value) {
+  set_class(x, unique(c(value, class(x))))
+}

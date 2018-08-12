@@ -2,9 +2,12 @@
 % Please edit documentation in R/set_class.R
 \name{set_class}
 \alias{set_class}
+\alias{add_class}
 \title{set class}
 \usage{
 set_class(x, value)
+
+add_class(x, value)
 }
 \arguments{
 \item{x}{Object to assign new class to.}
@@ -16,4 +19,6 @@ Object x as class value.
 }
 \description{
 Set class with a parenthetical function.
+
+Add class with a parenthetical function.
 }
