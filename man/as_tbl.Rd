@@ -2,15 +2,9 @@
 % Please edit documentation in R/tbl.R
 \name{as_tbl}
 \alias{as_tbl}
-\alias{tbl_frame}
-\alias{tblframe}
 \title{as_tbl}
 \usage{
 as_tbl(x, row.names = FALSE)
-
-tbl_frame(...)
-
-tblframe(x)
 }
 \arguments{
 \item{x}{Data}

@@ -4,6 +4,8 @@
 #' Returns a sorted (descending) frequence tbl
 #'
 #' @param data Data
+#' @param ... Unquoted column names of variables to include in table. Default
+#'   is to use all columns.
 #' @param prop Logical indicating whether to include a proportion of total
 #'   obs column.
 #' @param na_omit Logical indicating whether to exclude missing. If all

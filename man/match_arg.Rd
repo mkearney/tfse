@@ -11,6 +11,8 @@ match_arg(arg, choices, multiple = FALSE, ignore_case = TRUE,
 \item{arg}{a character vector (of length one unless several.ok is TRUE) or
 NULL}
 
+\item{choices}{a character vector of candidate values}
+
 \item{multiple}{logical specifying if arg should be allowed to have more than
 one element. Defaults to FALSE}
 
@@ -19,8 +21,6 @@ Defaults to TRUE}
 
 \item{trim_ws}{logical indicating whether to trim surrounding white space.
 Defaults to TRUE}
-
-\item{choice}{a character vector of candidate values}
 }
 \value{
 Value(s) matched via partial matching.

@@ -20,31 +20,17 @@ as_tbl <- function(x, row.names = FALSE) {
   #x[isdf] <- lapply(x[isdf], list)
   if (row.names && !identical(as.character(seq_len(nrow(x))), row.names(x))) {
     x$row_names <- row.names(x)
-    repos_front(x, row_names)
+    x[c(ncol(x), 1:(ncol(x) - 1))]
   } else {
     tibble::as_tibble(x, validate = FALSE)
   }
 }
 
 
-
-#' as_tbl_frame
-#'
-#' @rdname as_tbl
-#' @export
-#' @importFrom tibble data_frame
-tbl_frame <- tibble::data_frame
-
-#' @export
-#' @rdname as_tbl
-#' @inheritParams as_tbl
-tblframe <- function(x) as_tbl_frame(!!rlang::quo_text(rlang::enquo(x)) := x)
-
 #' move vars to front
 #'
 #' @param data data frame
 #' @param ... columns to move to front
-#' @rdname repos
 #' @export
 repos_front <- function(data, ...) {
   re <- rlang::with_env(data, tidyselector(data, ...))
@@ -55,7 +41,6 @@ repos_front <- function(data, ...) {
 #'
 #' @param data data frame
 #' @param ... columns to move to front
-#' @rdname repos
 #' @export
 repos_back <- function(data, ...) {
   re <- rlang::with_env(data, tidyselector(data, ...))

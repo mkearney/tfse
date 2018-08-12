@@ -12,6 +12,9 @@ ntbl(data, ...)
 \arguments{
 \item{data}{Data}
 
+\item{...}{Unquoted column names of variables to include in table. Default
+is to use all columns.}
+
 \item{prop}{Logical indicating whether to include a proportion of total
 obs column.}
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>boxcode — boxcode • tfse</title>
+<title>move vars to front — repos_back • tfse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,9 @@
 
 
 
-<meta property="og:title" content="boxcode — boxcode" />
+<meta property="og:title" content="move vars to front — repos_back" />
 
-<meta property="og:description" content="Load clipboard with code chunk square. Paste to insert square into R script
-  file at cursor location." />
+<meta property="og:description" content="move vars to front" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -100,38 +99,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>boxcode</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mkearney/tfse//blob/master/R/box_code.R'><code>R/box_code.R</code></a></small>
-    <div class="hidden name"><code>boxcode.Rd</code></div>
+    <h1>move vars to front</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mkearney/tfse//blob/master/R/tbl.R'><code>R/tbl.R</code></a></small>
+    <div class="hidden name"><code>repos_back.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Load clipboard with code chunk square. Paste to insert square into R script
-  file at cursor location.</p>
+    <p>move vars to front</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>boxcode</span>(<span class='no'>...</span>)
-
-<span class='fu'>codebox</span>(<span class='no'>...</span>)
-
-<span class='fu'>box_code</span>(<span class='no'>...</span>)
-
-<span class='fu'>code_box</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>repos_back</span>(<span class='no'>data</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>data</th>
+      <td><p>data frame</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Name of section/block</p></td>
+      <td><p>columns to move to front</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Text for code box saved into clipboard. Paste to use at cursor.</p>
     
 
   </div>
@@ -139,9 +131,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

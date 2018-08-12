@@ -2,9 +2,12 @@
 % Please edit documentation in R/regmatches_.R
 \name{gregexpr_}
 \alias{gregexpr_}
+\alias{regexpr_}
 \title{smart gregexpr wrapper}
 \usage{
 gregexpr_(x, pat, ...)
+
+regexpr_(x, pat, ...)
 }
 \arguments{
 \item{x}{Input text}

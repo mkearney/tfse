@@ -6,7 +6,7 @@
 #'
 #' @param arg a character vector (of length one unless several.ok is TRUE) or
 #'   NULL
-#' @param choice a character vector of candidate values
+#' @param choices a character vector of candidate values
 #' @param multiple logical specifying if arg should be allowed to have more than
 #'   one element. Defaults to FALSE
 #' @param ignore_case logical indicating whether to ignore capitalization.

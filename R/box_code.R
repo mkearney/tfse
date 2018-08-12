@@ -4,12 +4,12 @@
 #' Load clipboard with code chunk square. Paste to insert square into R script
 #'   file at cursor location.
 #'
-#' @param label Name of section/block
+#' @param ... Name of section/block
 #' @return Text for code box saved into clipboard. Paste to use at cursor.
 #'
 #' @export
 boxcode <- function(...) {
-  txt <- paste0(paste(purrr::map_chr(c(...), boxcode_), collapse = "\n\n"), "\n")
+  txt <- paste0(paste(vapply(c(...), boxcode_, FUN.VALUE = character(1)), collapse = "\n\n"), "\n")
   pbcopy(txt)
 }
 

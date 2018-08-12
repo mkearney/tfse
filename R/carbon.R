@@ -16,9 +16,9 @@ carbon.sh <- function(x) {
     }
     x <- gsub("[ ]{4}", "  ", x)
   }
-  Rcode <- URLencode(x, reserved = TRUE)
+  Rcode <- utils::URLencode(x, reserved = TRUE)
   url <- glue::glue("https://carbon.now.sh/?bg=rgba(171,%20184,%20195,%201)&t=material&wt=none&l=r&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=48px&ph=32px&ln=false&fm=Hack&fs=14px&lh=133%25&si=false&code={Rcode}&es=2x&wm=false")
-  browseURL(url)
+  utils::browseURL(url)
 }
 
 

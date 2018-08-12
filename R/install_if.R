@@ -20,3 +20,33 @@ install_if <- function(pkg) {
   data.frame(pkg = names(x), required_install = x,
     row.names = NULL)
 }
+
+
+
+task_progress_bar <- function(task, msg) {
+  w <- getOption("width", 100)
+  ## b/c only monsters set width > 100
+  if (w > 100)
+    w <- 100
+  r <- (w - nchar(msg) - 7) %/% 2
+  cat(paste0(msg, " +"))
+  for (j in seq_len(r)) {
+    Sys.sleep(.025)
+    cat("+")
+  }
+  rlang::eval_tidy(task)
+  for (k in seq_len(r)) {
+    Sys.sleep(.025)
+    if (k == r) {
+      cat(" 100%", fill = TRUE)
+    } else {
+      cat("+")
+    }
+  }
+  invisible(TRUE)
+}
+
+install_pkg_verbose <- function(pkg) {
+  sh <- install.packages(pkg, quiet = TRUE)
+  task_progress_bar(rlang::quo(invisible()), sprintf("Installing %s", pkg))
+}

@@ -23,7 +23,7 @@ print_tbl <- function(x, ..., title = TRUE) {
   } else {
     width <- getOption("width")
   }
-  p <- capture.output(print(x, ...))
+  p <- utils::capture.output(print(x, ...))
   overfill <- grep("# \\.\\.\\. with", p)
   if (length(overfill) > 0 && length(p) > overfill) {
     p[overfill] <- gsub(" <\\S+>\\,?", "", p[overfill])

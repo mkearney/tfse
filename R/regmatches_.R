@@ -137,6 +137,7 @@ regmatches_first.list <- function(x, pat, drop = FALSE, ...) {
 }
 
 #' @inheritParams gregexpr_
+#' @rdname gregexpr_
 #' @export
 regexpr_ <- function(x, pat, ...) {
   args <- list(pattern = pat, text = x, ...)

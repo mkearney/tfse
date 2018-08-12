@@ -16,7 +16,7 @@ box_code(...)
 code_box(...)
 }
 \arguments{
-\item{label}{Name of section/block}
+\item{...}{Name of section/block}
 }
 \value{
 Text for code box saved into clipboard. Paste to use at cursor.

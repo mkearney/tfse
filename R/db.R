@@ -28,7 +28,11 @@ db_write_csv <- function(x, file) {
   }
   db_load_token()
   tmp <- file.path(tempdir(), file)
-  utils::write.csv(x, tmp, row.names = FALSE, fileEncoding = "UTF-8")
+  if (requireNamespace("readr", quietly = TRUE)) {
+    readr::write_csv(x, tmp)
+  } else {
+    utils::write.csv(x, tmp, row.names = FALSE, fileEncoding = "UTF-8")
+  }
   rdrop2::drop_upload(tmp, dirname(file))
 }
 
@@ -68,5 +72,9 @@ db_read_csv <- function(file, ...) {
   db_load_token()
   tmp <- tempfile()
   rdrop2::drop_download(file, tmp, overwrite = TRUE)
-  utils::read.csv(tmp, ...)
+  if (requireNamespace("readr", quietly = TRUE)) {
+    readr::read_csv(tmp, ...)
+  } else {
+    utils::read.csv(tmp, ...)
+  }
 }
