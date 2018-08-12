@@ -7,7 +7,7 @@
 col2hex(color, alpha = NULL)
 }
 \arguments{
-\item{color}{One or more named colors. Also acccepts hex colors (useful for
+\item{color}{One or more named colors. Also accepts hex colors (useful for
 adding alpha values).}
 
 \item{alpha}{Alpha level ranging form 1.0 (opaque) to 0.0 (transparent). The

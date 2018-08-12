@@ -4,7 +4,7 @@
 #'
 #' Converts named colors to hex (html) codes.
 #'
-#' @param color One or more named colors. Also acccepts hex colors (useful for
+#' @param color One or more named colors. Also accepts hex colors (useful for
 #'   adding alpha values).
 #' @param alpha Alpha level ranging form 1.0 (opaque) to 0.0 (transparent). The
 #'   default (NULL) omits alpha columns from the returned hexidecimal
