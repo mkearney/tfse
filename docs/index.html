@@ -91,14 +91,38 @@
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">## use functions like col2hex</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="reference/col2hex.html">col2hex</a></span>(<span class="st">"greenyellow"</span>)</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; [1] "#ADFF2F"</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; [1] "#ADFF2F"</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">## rescale values</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="op">-</span><span class="dv">10</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">## rescale standard</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw"><a href="reference/rescale.html">rescale_standard</a></span>(x) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/qplot">qplot</a></span>(<span class="dt">binwidth =</span> <span class="fl">.075</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="reference/theme_mwk.html">theme_mwk</a></span>()</a></code></pre></div>
+<p><img src="README-unnamed-chunk-3-1.png" width="288"></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">## rescale normal</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/rescale.html">rescale_normal</a></span>(x) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/qplot">qplot</a></span>(<span class="dt">binwidth =</span> <span class="fl">.25</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/theme_mwk.html">theme_mwk</a></span>()</a></code></pre></div>
+<p><img src="README-unnamed-chunk-3-2.png" width="288"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">## rescale log</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="reference/rescale.html">rescale_log</a></span>(x) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/qplot">qplot</a></span>(<span class="dt">binwidth =</span> <span class="fl">.15</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/theme_mwk.html">theme_mwk</a></span>()</a></code></pre></div>
+<p><img src="README-unnamed-chunk-3-3.png" width="288"></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">## rescale standard</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="reference/rescale.html">rescale_pointscale</a></span>(x, <span class="dv">1</span>, <span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/qplot">qplot</a></span>(<span class="dt">binwidth =</span> <span class="fl">.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/theme_mwk.html">theme_mwk</a></span>()</a></code></pre></div>
+<p><img src="README-unnamed-chunk-3-4.png" width="288"></p>
 </div>
 <div id="help" class="section level2">
 <h2 class="hasAnchor">
 <a href="#help" class="anchor"></a>Help</h2>
 <p>View the help documentation</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">## view R help documentatoin</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">help</span>(<span class="dt">package =</span> <span class="st">"tfse"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">## view R help documentatoin</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">help</span>(<span class="dt">package =</span> <span class="st">"tfse"</span>)</a></code></pre></div>
 </div>
 <div id="about-tfse" class="section level2">
 <h2 class="hasAnchor">
