@@ -37,7 +37,7 @@ rescale_standard(x) %>%
   theme_mwk()
 ```
 
-![](README-unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-3-1.png)<!-- -->
 
 ``` r
 ## rescale normal
@@ -46,7 +46,7 @@ rescale_normal(x) %>%
   theme_mwk()
 ```
 
-![](README-unnamed-chunk-3-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-3-2.png)<!-- -->
 
 ``` r
 ## rescale log
@@ -55,7 +55,7 @@ rescale_log(x) %>%
   theme_mwk()
 ```
 
-![](README-unnamed-chunk-3-3.png)<!-- -->
+![](man/figures/README-unnamed-chunk-3-3.png)<!-- -->
 
 ``` r
 ## rescale standard
@@ -64,7 +64,7 @@ rescale_pointscale(x, 1, 10) %>%
   theme_mwk()
 ```
 
-![](README-unnamed-chunk-3-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-3-4.png)<!-- -->
 
 ## Help
 
