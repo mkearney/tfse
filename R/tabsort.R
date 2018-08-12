@@ -8,6 +8,7 @@
 #'   is to use all columns.
 #' @param prop Logical indicating whether to include a proportion of total
 #'   obs column.
+#' @param sort Logical indicating whether to sort the returned object.
 #' @param na_omit Logical indicating whether to exclude missing. If all
 #'   responses are missing, a missing value is used as the single category.
 #' @return Frequency tbl

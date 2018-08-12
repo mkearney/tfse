@@ -20,7 +20,9 @@ Imports:
 Suggests:
     ggplot2,
     knitr,
+    readr,
     rdrop2,
-    rmarkdown
+    rmarkdown,
+    testthat
 URL: https://github.com/mkearney/tfse/
 BugReports: https://github.com/mkearney/tfse/issues

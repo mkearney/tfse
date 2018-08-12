@@ -20,6 +20,8 @@ obs column.}
 
 \item{na_omit}{Logical indicating whether to exclude missing. If all
 responses are missing, a missing value is used as the single category.}
+
+\item{sort}{Logical indicating whether to sort the returned object.}
 }
 \value{
 Frequency tbl

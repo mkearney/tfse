@@ -14,9 +14,10 @@ knitr::opts_chunk$set(
 
 # tfse <img src="man/figures/logo.png" width="160px" align="right" /> 
 
+[![Travis build status](https://travis-ci.org/mkearney/tfse.svg?branch=master)](https://travis-ci.org/mkearney/tfse)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-tfse = **T**he **F**irst **S**criptorium **E**mporium
+> tfse = **T**he **F**irst **S**criptorium **E**mporium
 
 ## Install
 
@@ -39,24 +40,13 @@ library(tfse)
 col2hex("greenyellow")
 
 ## rescale values
-x <- sample(-10:100, 100)
+x <- sample(-10:100, 20)
 
 ## rescale standard
-rescale_standard(x) %>%
-  ggplot2::qplot(binwidth = .075) + 
-  theme_mwk()
-## rescale normal
-rescale_normal(x) %>%
-  ggplot2::qplot(binwidth = .25) + 
-  theme_mwk()
-## rescale log
-rescale_log(x) %>%
-  ggplot2::qplot(binwidth = .15) + 
-  theme_mwk()
+rescale_standard(x)
+
 ## rescale standard
-rescale_pointscale(x, 1, 10) %>%
-  ggplot2::qplot(binwidth = .5) + 
-  theme_mwk()
+rescale_pointscale(x, 1, 10)
 ```
 
 ## Help
