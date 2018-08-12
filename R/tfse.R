@@ -10,8 +10,5 @@
 #' @seealso \code{rtweet}
 NULL
 
-.onLoad <- function(libname, pkgname) {
-  if (requireNamespace("rdrop2", quietly = TRUE)) {
-    shhh(tryCatch(db_load_token(), error = function(e) return(NULL)))
-  }
-}
+#.onLoad <- function(libname, pkgname) {
+#}
