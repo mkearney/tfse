@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>set class — set_class • tfse</title>
+<title>match arg to choices — match_arg • tfse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="set class — set_class" />
+<meta property="og:title" content="match arg to choices — match_arg" />
 
-<meta property="og:description" content="Set class with a parenthetical function." />
+<meta property="og:description" content="Wrapper around match.arg that defaults to ignoring case and
+  trimming white space" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -99,35 +100,53 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>set class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mkearney/tfse//blob/master/R/set_class.R'><code>R/set_class.R</code></a></small>
-    <div class="hidden name"><code>set_class.Rd</code></div>
+    <h1>match arg to choices</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mkearney/tfse//blob/master/R/match_arg.R'><code>R/match_arg.R</code></a></small>
+    <div class="hidden name"><code>match_arg.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Set class with a parenthetical function.</p>
+    <p>Wrapper around <a href='http://www.rdocumentation.org/packages/base/topics/match.arg'>match.arg</a> that defaults to ignoring case and
+  trimming white space</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>set_class</span>(<span class='no'>x</span>, <span class='no'>value</span>)</pre>
+    <pre class="usage"><span class='fu'>match_arg</span>(<span class='no'>arg</span>, <span class='no'>choices</span>, <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ignore_case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>trim_ws</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Object to assign new class to.</p></td>
+      <th>arg</th>
+      <td><p>a character vector (of length one unless several.ok is TRUE) or
+NULL</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>Class value to assign to x</p></td>
+      <th>multiple</th>
+      <td><p>logical specifying if arg should be allowed to have more than
+one element. Defaults to FALSE</p></td>
+    </tr>
+    <tr>
+      <th>ignore_case</th>
+      <td><p>logical indicating whether to ignore capitalization.
+Defaults to TRUE</p></td>
+    </tr>
+    <tr>
+      <th>trim_ws</th>
+      <td><p>logical indicating whether to trim surrounding white space.
+Defaults to TRUE</p></td>
+    </tr>
+    <tr>
+      <th>choice</th>
+      <td><p>a character vector of candidate values</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Object x as class value.</p>
+    <p>Value(s) matched via partial matching.</p>
     
 
   </div>

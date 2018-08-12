@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Function reference" />
+
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">tfse</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">tfse</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.12</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,6 +86,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -77,430 +94,240 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.2.27</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_names.html">add_names</a></code> </p>
-          </td>
-          <td><p>Adds names to data object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_to_git.html">add_to_git</a></code> </p>
-          </td>
-          <td><p>add_to_git</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_var.html">add_var</a></code> <code><a href="add_var.html">add_vars</a></code> </p>
-          </td>
-          <td><p>Mutates new variable, adding it to data frame</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="any_recursive.html">any_recursive</a></code> </p>
-          </td>
-          <td><p>any_recursive</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="api_call.html">api_call</a></code> </p>
-          </td>
-          <td><p>Build url for HTTP request</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="boxcode.html">boxcode</a></code> </p>
-          </td>
-          <td><p>boxcode</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="break_lines.html">break_lines</a></code> </p>
-          </td>
-          <td><p>break_lines</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="can_num.html">can_num</a></code> <code><a href="can_num.html">can_int</a></code> </p>
-          </td>
-          <td><p>Determines whether vector can be converted to numeric or integer</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cc.html">cc</a></code> </p>
-          </td>
-          <td><p>Combine comma separated strings</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="check_renv.html">check_renv</a></code> </p>
-          </td>
-          <td><p>check_renv</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="col2hex.html">col2hex</a></code> </p>
-          </td>
-          <td><p>col2hex</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="enc2ascii.html">enc2ascii</a></code> </p>
-          </td>
-          <td><p>emc2ascii</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="funs.html">funs</a></code> </p>
-          </td>
-          <td><p>funs</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="go_get_var.html">go_get_var</a></code> </p>
-          </td>
-          <td><p>go_get_var</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="grapes-nin-grapes.html">%&gt;%</a></code> </p>
-          </td>
-          <td><p>not in</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="has_factor_potential.html">has_factor_potential</a></code> </p>
-          </td>
-          <td><p>has_factor_potential</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="has_name_.html">has_name_</a></code> </p>
-          </td>
-          <td><p>has_name_</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="hd.html">hd</a></code> </p>
-          </td>
-          <td><p>Head data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="id2sn.html">id2sn</a></code> </p>
-          </td>
-          <td><p>id2sn</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="lavaan.html">sem_fit</a></code> <code><a href="lavaan.html">par_table</a></code> </p>
-          </td>
-          <td><p>SEM fit statistics</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="lib.html">lib</a></code> </p>
-          </td>
-          <td><p>Silently load R packages</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="location2state.html">location2state</a></code> </p>
-          </td>
-          <td><p>Convert Twitter locations to U.S. state names</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="make_citation.html">make_citation</a></code> </p>
-          </td>
-          <td><p>make_citation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="make_package.html">make_package</a></code> </p>
-          </td>
-          <td><p>make_package</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="map_.html">map_</a></code> <code><a href="map_.html">map_chr_</a></code> <code><a href="map_.html">map_dbl_</a></code> <code><a href="map_.html">map_int_</a></code> <code><a href="map_.html">map_lgl_</a></code> </p>
-          </td>
-          <td><p>map_</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="map.html">map</a></code> <code><a href="map.html">map_if</a></code> <code><a href="map.html">map_lgl</a></code> <code><a href="map.html">map_int</a></code> <code><a href="map.html">map_dbl</a></code> <code><a href="map.html">map_chr</a></code> <code><a href="map.html">map_cpl</a></code> </p>
-          </td>
-          <td><p>Apply a function to each element of a vector</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="menuline.html">menuline</a></code> </p>
-          </td>
-          <td><p>menuline</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MIT_license.html">MIT_license</a></code> </p>
-          </td>
-          <td><p>MIT_license</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="n_uq.html">n_uq</a></code> </p>
-          </td>
-          <td><p>n_uq</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="na_omit.html">na_omit</a></code> </p>
-          </td>
-          <td><p>Omit missing values/rows</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="nin.html">nin</a></code> <code><a href="nin.html">yin</a></code> </p>
-          </td>
-          <td><p>Return lhs values not in rhs values</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="parse_to_secs.html">parse_to_secs</a></code> </p>
-          </td>
-          <td><p>parse_to_secs</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pbcopy.html">pbcopy</a></code> </p>
-          </td>
-          <td><p>pbcopy</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pkg_website.html">pkg_website</a></code> </p>
-          </td>
-          <td><p>Updates pkg website using pkgdown</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pluck.html">pluck</a></code> </p>
-          </td>
-          <td><p>Pluck out a single an element from a vector or environment</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="readline_.html">readline_</a></code> </p>
-          </td>
-          <td><p>readline_</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="readlines.html">readlines</a></code> </p>
-          </td>
-          <td><p>readlines</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_.DS_Store.html">rm_.DS_Store</a></code> </p>
-          </td>
-          <td><p>Remove pesky .DS_Store files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_amp.html">rm_amp</a></code> </p>
-          </td>
-          <td><p>rm_amp</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_linebreaks.html">rm_linebreaks</a></code> </p>
-          </td>
-          <td><p>rm_linebreaks</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_links.html">rm_links</a></code> </p>
-          </td>
-          <td><p>rm_links</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_retweets.html">rm_retweets</a></code> </p>
-          </td>
-          <td><p>rm_retweets</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_stopwords.html">rm_stopwords</a></code> </p>
-          </td>
-          <td><p>rm_stopwords</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="round_time.html">round_time</a></code> </p>
-          </td>
-          <td><p>Round date and time values</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rproj.html">rproj</a></code> </p>
-          </td>
-          <td><p>rproj</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="search_files.html">search_files</a></code> </p>
-          </td>
-          <td><p>search_files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_class.html">set_class</a></code> </p>
-          </td>
-          <td><p>set class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_description_params.html">set_description_params</a></code> </p>
-          </td>
-          <td><p>set_description_params</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_renv.html">set_renv</a></code> </p>
-          </td>
-          <td><p>set_renv</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sn2id.html">sn2id</a></code> </p>
-          </td>
-          <td><p>sn2id</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="stopwords.html">stopwords</a></code> </p>
-          </td>
-          <td><p>stopwords</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="substrev.html">substrev</a></code> </p>
-          </td>
-          <td><p>Sub string reverse</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tabsort.html">tabsort</a></code> </p>
-          </td>
-          <td><p>tabsort</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tbl.html">as_tbl</a></code> </p>
-          </td>
-          <td><p>tbl</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tfse.html">tfse</a></code> </p>
-          </td>
-          <td><p>tfse: The First Scriptorium Emporium</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="theme_mwk.html">theme_mwk</a></code> </p>
-          </td>
-          <td><p>theme_mwk</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tl.html">tl</a></code> </p>
-          </td>
-          <td><p>Tail data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="token_used.html">token_used</a></code> </p>
-          </td>
-          <td><p>Calculate and sort by API use</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="transpose.html">transpose</a></code> </p>
-          </td>
-          <td><p>transpose a list</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="trim_ws.html">trim_ws</a></code> </p>
-          </td>
-          <td><p>trim_ws</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="update_citation.html">update_citation</a></code> </p>
-          </td>
-          <td><p>update_citation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="update_packages.html">update_packages</a></code> </p>
-          </td>
-          <td><p>Update all out of date packages</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="update_tweet_text.html">update_tweet_text</a></code> </p>
-          </td>
-          <td><p>update_tweet_text</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="update_version_number.html">update_version_number</a></code> </p>
-          </td>
-          <td><p>update_version_number</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="version_number.html">version_number</a></code> <code><a href="version_number.html">as_version_number</a></code> <code><a href="version_number.html">paste.version_number</a></code> </p>
-          </td>
-          <td><p>version_number</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="writelines.html">writelines</a></code> </p>
-          </td>
-          <td><p>writelines</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="as_tbl.html">as_tbl()</a></code> <code><a href="as_tbl.html">tbl_frame()</a></code> <code><a href="as_tbl.html">tblframe()</a></code> </p>
+        </td>
+        <td><p>as_tbl</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="boxcode.html">boxcode()</a></code> <code><a href="boxcode.html">codebox()</a></code> <code><a href="boxcode.html">box_code()</a></code> <code><a href="boxcode.html">code_box()</a></code> </p>
+        </td>
+        <td><p>boxcode</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="carbon.sh.html">carbon.sh()</a></code> </p>
+        </td>
+        <td><p>Create carbon.sh image in browser</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cc.html">cc()</a></code> </p>
+        </td>
+        <td><p>Combine comma separated strings</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="col2hex.html">col2hex()</a></code> </p>
+        </td>
+        <td><p>col2hex</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="db_load_token.html">db_load_token()</a></code> </p>
+        </td>
+        <td><p>load/set token for dropbox</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="db_readRDS.html">db_readRDS()</a></code> </p>
+        </td>
+        <td><p>read rds from dropbox</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="db_read_csv.html">db_read_csv()</a></code> </p>
+        </td>
+        <td><p>read CSV from dropbox</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="db_saveRDS.html">db_saveRDS()</a></code> </p>
+        </td>
+        <td><p>write rds to dropbox</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="db_write_csv.html">db_write_csv()</a></code> </p>
+        </td>
+        <td><p>write csv to dropbox</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gregexpr_.html">gregexpr_()</a></code> </p>
+        </td>
+        <td><p>smart gregexpr wrapper</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="install_if.html">install_if()</a></code> </p>
+        </td>
+        <td><p>Install packages if not already</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="match_arg.html">match_arg()</a></code> </p>
+        </td>
+        <td><p>match arg to choices</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="menuline.html">menuline()</a></code> </p>
+        </td>
+        <td><p>menuline</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="na_omit.html">na_omit()</a></code> </p>
+        </td>
+        <td><p>Omit missing values/rows</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nin.html">nin()</a></code> <code><a href="nin.html">yin()</a></code> </p>
+        </td>
+        <td><p>Return lhs values not in rhs values</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pbcopy.html">pbcopy()</a></code> </p>
+        </td>
+        <td><p>pbcopy</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="peel_lists.html">peel_lists()</a></code> </p>
+        </td>
+        <td><p>peel lists</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pmsg.html">pmsg()</a></code> </p>
+        </td>
+        <td><p>Paste collapse input and print as message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print_tbl.html">print_tbl()</a></code> </p>
+        </td>
+        <td><p>print_tbl</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="readline_.html">readline_()</a></code> </p>
+        </td>
+        <td><p>readline_</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="readlines.html">readlines()</a></code> </p>
+        </td>
+        <td><p>readlines</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="regmatches_.html">regmatches_()</a></code> <code><a href="regmatches_.html">regmatches_first()</a></code> </p>
+        </td>
+        <td><p>extract reg expr matches</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="repos.html">repos_front()</a></code> <code><a href="repos.html">repos_back()</a></code> </p>
+        </td>
+        <td><p>move vars to front</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rm_.DS_Store.html">rm_.DS_Store()</a></code> </p>
+        </td>
+        <td><p>Remove pesky .DS_Store files</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="search_files.html">search_files()</a></code> </p>
+        </td>
+        <td><p>search_files</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_class.html">set_class()</a></code> </p>
+        </td>
+        <td><p>set class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="shhh.html">shhh()</a></code> </p>
+        </td>
+        <td><p>execute expression quietly</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="show_connections.html">show_connections()</a></code> </p>
+        </td>
+        <td><p>show connections</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="substrev.html">substrev()</a></code> </p>
+        </td>
+        <td><p>Sub string reverse</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tabsort.html">tabsort()</a></code> <code><a href="tabsort.html">ntbl()</a></code> </p>
+        </td>
+        <td><p>tabsort</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tfse.html">tfse</a></code> </p>
+        </td>
+        <td><p>tfse: The First Scriptorium Emporium</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="theme_mwk.html">theme_mwk()</a></code> </p>
+        </td>
+        <td><p>theme_mwk</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tidyselector.html">tidyselector()</a></code> </p>
+        </td>
+        <td><p>tidyselector</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="trim_ws.html">trim_ws()</a></code> </p>
+        </td>
+        <td><p>trim_ws</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -513,15 +340,18 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Mike Kearney.</p>
+  <p>Developed by Michael W. Kearney.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

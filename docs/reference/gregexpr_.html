@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>set class — set_class • tfse</title>
+<title>smart gregexpr wrapper — gregexpr_ • tfse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="set class — set_class" />
+<meta property="og:title" content="smart gregexpr wrapper — gregexpr_" />
 
-<meta property="og:description" content="Set class with a parenthetical function." />
+<meta property="og:description" content="smart gregexpr wrapper" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -99,35 +99,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>set class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mkearney/tfse//blob/master/R/set_class.R'><code>R/set_class.R</code></a></small>
-    <div class="hidden name"><code>set_class.Rd</code></div>
+    <h1>smart gregexpr wrapper</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mkearney/tfse//blob/master/R/regmatches_.R'><code>R/regmatches_.R</code></a></small>
+    <div class="hidden name"><code>gregexpr_.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Set class with a parenthetical function.</p>
+    <p>smart gregexpr wrapper</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>set_class</span>(<span class='no'>x</span>, <span class='no'>value</span>)</pre>
+    <pre class="usage"><span class='fu'>gregexpr_</span>(<span class='no'>x</span>, <span class='no'>pat</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Object to assign new class to.</p></td>
+      <td><p>Input text</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>Class value to assign to x</p></td>
+      <th>pat</th>
+      <td><p>Reg ex pattern</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other args passed to base (g)regexpr</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Object x as class value.</p>
+    <p>Pattern match positions</p>
     
 
   </div>
