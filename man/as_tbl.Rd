@@ -3,15 +3,12 @@
 \name{as_tbl}
 \alias{as_tbl}
 \alias{tbl_frame}
-\alias{as_tbl_smart}
 \alias{tblframe}
 \title{as_tbl}
 \usage{
 as_tbl(x, row.names = FALSE)
 
 tbl_frame(...)
-
-as_tbl_smart(x)
 
 tblframe(x)
 }

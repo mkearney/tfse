@@ -9,7 +9,7 @@ db_read_csv(file, ...)
 \arguments{
 \item{file}{Path/file name in dropbox folder to read.}
 
-\item{...}{Other args passed to readr::read_csv}
+\item{...}{Other args passed to read.csv}
 }
 \value{
 Reads CSV file from dropbox.

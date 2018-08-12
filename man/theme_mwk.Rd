@@ -5,7 +5,7 @@
 \title{theme_mwk}
 \usage{
 theme_mwk(base_size = 12, base_family = "Roboto Condensed",
-  dark = "#24292e", light = "#f7f7f7", gray = "#eaeaea")
+  dark = "#24292e", light = "#ffffff", gray = "#ededed")
 }
 \arguments{
 \item{base_size}{Base font size}

@@ -5,7 +5,10 @@
 
 #' readlines
 #'
-#' Verbs object
+#' Read lines of file
+#'
+#' Simple wrapper around \link[base]{readLines} that automates opening and
+#'   closing of connection file.
 #'
 #' @param x Input
 #' @param ... Other args passed to \code{readLines}.
@@ -13,9 +16,8 @@
 #' @export
 readlines <- function(x, ...) {
   con <- file(x)
-  x <- readLines(con, warn = FALSE, ...)
-  close(con)
-  x
+  on.exit(close(con))
+  readLines(con, warn = FALSE, ...)
 }
 
 ##----------------------------------------------------------------------------##

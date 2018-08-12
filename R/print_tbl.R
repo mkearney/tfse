@@ -9,6 +9,10 @@
 #' @return Print
 #' @export
 print_tbl <- function(x, ..., title = TRUE) {
+  stopifnot(is.data.frame(x))
+  if (!inherits(x, "tbl_df")) {
+    x <- tibble::as_tibble(x)
+  }
   d <- x
   vars <- names(x)
   if ("width" %in% names(list(...))) {
@@ -39,9 +43,11 @@ print_tbl <- function(x, ..., title = TRUE) {
       wvars <- which(long_names) + length(vars1)
       vars2 <- vars
       vars2[wvars] <- x[long_names]
+    } else {
+      vars2 <- vars
     }
     x <- paste(x, collapse = ", ")
-    x <- strsplit(stringr::str_wrap(x, width), "\n")[[1]]
+    x <- strsplit(strtrim(x, width), "\n")[[1]]
     if (length(x) > 5) {
       x <- x[1:5]
       x[5] <- paste0(sub("\\s{0,}\\,$", "", x[5]), "...")

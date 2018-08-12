@@ -28,7 +28,7 @@ db_write_csv <- function(x, file) {
   }
   db_load_token()
   tmp <- file.path(tempdir(), file)
-  readr::write_csv(x, tmp)
+  utils::write.csv(x, tmp, row.names = FALSE, fileEncoding = "UTF-8")
   rdrop2::drop_upload(tmp, dirname(file))
 }
 
@@ -61,12 +61,12 @@ db_readRDS <- function(file) {
 #' read CSV from dropbox
 #'
 #' @param file Path/file name in dropbox folder to read.
-#' @param ... Other args passed to readr::read_csv
+#' @param ... Other args passed to read.csv
 #' @return Reads CSV file from dropbox.
 #' @export
 db_read_csv <- function(file, ...) {
   db_load_token()
   tmp <- tempfile()
   rdrop2::drop_download(file, tmp, overwrite = TRUE)
-  readr::read_csv(tmp, ...)
+  utils::read.csv(tmp, ...)
 }

@@ -15,5 +15,9 @@ readlines(x, ...)
 Output
 }
 \description{
-Verbs object
+Read lines of file
+}
+\details{
+Simple wrapper around \link[base]{readLines} that automates opening and
+  closing of connection file.
 }

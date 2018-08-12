@@ -30,7 +30,7 @@ tabsort <- function(data, ..., prop = TRUE, na_omit = TRUE, sort = TRUE) {
     x$prop <- x$n / sum(x$n, na.rm = TRUE)
   }
   if (sort) {
-    x <- dplyr::arrange(x, dplyr::desc(n))
+    x <- x[order(x$n, decreasing = TRUE), ]
   }
   x
 }
