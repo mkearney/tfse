@@ -47,6 +47,6 @@ task_progress_bar <- function(task, msg) {
 }
 
 install_pkg_verbose <- function(pkg) {
-  sh <- install.packages(pkg, quiet = TRUE)
+  sh <- utils::install.packages(pkg, quiet = TRUE)
   task_progress_bar(rlang::quo(invisible()), sprintf("Installing %s", pkg))
 }

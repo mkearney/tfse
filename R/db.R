@@ -43,10 +43,10 @@ db_load_token <- function() {
   if (!requireNamespace("rdrop2", quietly = TRUE)) {
     stop("must install rdrop2 pkg to use this function")
   }
-  if (exists("token", envir = rdrop2:::.dstate)) return(invisible())
+  if (exists("token", envir = globalenv())) return(invisible())
   ## load and auto-insert dropbox token
   token <- readRDS("~/Dropbox/.r2drop.rds")
-  assign("token", token, envir = rdrop2:::.dstate)
+  assign("token", token, envir = globalenv())
   invisible()
 }
 
