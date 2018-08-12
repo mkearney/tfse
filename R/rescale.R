@@ -46,6 +46,7 @@ rescale_normal <- function(x, na_omit = TRUE) UseMethod("rescale_normal")
 #' @export
 rescale_normal.default <- function(x, na_omit = TRUE) {
   stopifnot(is.numeric(x))
+  if (length(x) == 1) return(x)
   x <- add_class(x, "normal_scale")
   rescale_scale(x, na_omit = na_omit)
 }
