@@ -14,13 +14,15 @@ psub <- function(x, ...) {
     nms <- names(dots)
   }
   s <- unlist(dots)
+  if (length(nms) == 0) {
+    nms <- rep("", length(s))
+  }
   nms <- paste0("{", nms, "}")
   m <- gregexpr("\\{[^\\}]+}", x)
   p <- regmatches(x, m)[[1]]
   if ("{}" %in% nms) {
     nms[nms == "{}"] <- p[!p %in% nms]
   }
-  c("c", "a", "b")[match(c("a", "b", "c"), c("c", "a", "b"))]
   s <- s[match(p, nms)]
   p <- sub(".{1}$", "\\\\}", sub("^.{1}", "\\\\{", p))
   for (i in seq_along(s)) {
