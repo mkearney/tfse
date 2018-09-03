@@ -1,22 +1,9 @@
 .PHONY: all clean
 all:
-@echo "
----------------------
-## Documenting...
----------------------
-"
-Rscript -e "devtools::document(roclets=c('rd', 'collate', 'namespace'))"
-@echo "
----------------------
-## Installing...
----------------------
-"
-R CMD INSTALL --no-multiarch --with-keep.source .
+	@echo "\n---------------------\n## Documenting...\n---------------------"
+	Rscript -e "devtools::document(roclets=c('rd', 'collate', 'namespace'))"
+	@echo "\n---------------------\n## Installing...\n---------------------"
+	R CMD INSTALL --no-multiarch --with-keep.source .
 clean:
-@echo "
----------------------
-## Cleaning docs...
----------------------
-"
-rm man/*.Rd
-
+	@echo "\n---------------------\n## Cleaning...\n---------------------"
+	rm man/*.Rd

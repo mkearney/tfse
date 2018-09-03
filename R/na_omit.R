@@ -1,4 +1,4 @@
-all_na <- function(x) all(is.na(unlist(x, use.names = FALSE)))
+all_na <- function(x) all(is.na(unlist(x, use.names = FALSE)) | lengths(x) == 0)
 
 #' Omit missing values/rows
 #'

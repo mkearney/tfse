@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Omit missing values/rows — na_omit • tfse</title>
+<title>Add defaults to argument list — add_arg_if • tfse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,11 +32,10 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Omit missing values/rows — na_omit" />
+<meta property="og:title" content="Add defaults to argument list — add_arg_if" />
 
-<meta property="og:description" content="Returns data object with NA values (if atomic vector), all NA
-elements (if list), or all NA rows (if data frame or matrix)
-omitted" />
+<meta property="og:description" content="Adds parameters to argument list if list doesn't alreayd include those
+parameters" />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,79 +102,71 @@ omitted" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Omit missing values/rows</h1>
+    <h1>Add defaults to argument list</h1>
     
-    <div class="hidden name"><code>na_omit.Rd</code></div>
+    <div class="hidden name"><code>add_arg_if.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Returns data object with NA values (if atomic vector), all NA
-elements (if list), or all NA rows (if data frame or matrix)
-omitted</p>
+    <p>Adds parameters to argument list if list doesn't alreayd include those
+parameters</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>na_omit</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>add_arg_if</span>(<span class='no'>args</span>, <span class='no'>...</span>, <span class='kw'>override</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Data object</p></td>
+      <th>args</th>
+      <td><p>Argument list</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other named arguments are added (depending on override) and
+returned with args</p></td>
+    </tr>
+    <tr>
+      <th>override</th>
+      <td><p>Logical indicating whether to override existing values in
+args with the valuges provided as a named argument here.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Data with NA values (if atomic vector), all NA elements (if
-  list), or all NA rows (if data frame or matrix) omitted.</p>
+    <p>Argument list with updated values.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## generate data</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'>I</span>(<span class='fu'>list</span>(<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fu'>c</span>(<span class='fl'>NA_integer_</span>, <span class='fl'>NA_integer_</span>), <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>))),
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='fl'>NA_character_</span>, <span class='st'>"c"</span>),
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1.1243</span>, <span class='fl'>NA_real_</span>, -<span class='fl'>1.234134</span>)
-)
+    <pre class="examples"><div class='input'><span class='co'>## arg list</span>
+<span class='no'>args</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='co'>## data frame</span>
-<span class='fu'>na_omit</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt;      a b         c
-#&gt; 1 1, 2 a  1.124300
-#&gt; 3 1, 2 c -1.234134</div><div class='input'>
-<span class='co'>## matrix</span>
-<span class='fu'>na_omit</span>(<span class='fu'>as.matrix</span>(<span class='no'>df</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt;      a         b   c        
-#&gt; [1,] Numeric,2 "a" 1.1243   
-#&gt; [2,] Numeric,2 "c" -1.234134</div><div class='input'>
-<span class='co'>## list</span>
-<span class='fu'>na_omit</span>(<span class='fu'>apply</span>(<span class='no'>df</span>, <span class='fl'>1</span>, <span class='no'>c</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; [[1]]
-#&gt; [[1]]$a
-#&gt; [1] 1 2
+<span class='co'>## add arg defaults</span>
+<span class='fu'>add_arg_if</span>(<span class='no'>args</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; $x
+#&gt; [1] 5
 #&gt; 
-#&gt; [[1]]$b
-#&gt; [1] "a"
+#&gt; $y
+#&gt; [1] TRUE
 #&gt; 
-#&gt; [[1]]$c
-#&gt; [1] 1.1243
+#&gt; $z
+#&gt; [1] FALSE
 #&gt; 
-#&gt; 
-#&gt; [[2]]
-#&gt; [[2]]$a
-#&gt; [1] 1 2
-#&gt; 
-#&gt; [[2]]$b
-#&gt; [1] "c"
-#&gt; 
-#&gt; [[2]]$c
-#&gt; [1] -1.234134
-#&gt; 
+#&gt; $w
+#&gt; [1] TRUE
 #&gt; </div><div class='input'>
-<span class='co'>## atomic vector</span>
-<span class='fu'>na_omit</span>(<span class='no'>df</span>$<span class='no'>b</span>)</div><div class='output co'>#&gt; [1] a c
-#&gt; Levels: a c</div><div class='input'>
+<span class='co'>## add arg defaults, overriding any previous values</span>
+<span class='fu'>add_arg_if</span>(<span class='no'>args</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>override</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; $x
+#&gt; [1] 10
+#&gt; 
+#&gt; $y
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $z
+#&gt; [1] TRUE
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

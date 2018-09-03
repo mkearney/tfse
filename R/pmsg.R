@@ -11,8 +11,6 @@ pmsg <- function(..., print = TRUE) {
 
 pmsg_ <- function(dots, print = TRUE) {
   dots <- paste(dots, collapse = "")
-  msg <- gsub("\\s{2,}", " ", dots)
-  msg <- trim_ws(msg)
   if (print) {
     message(msg)
   }

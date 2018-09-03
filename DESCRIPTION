@@ -1,6 +1,6 @@
 Package: tfse
 Version: 0.3.12
-Title: The First Scriptorium Emporium
+Title: Various Useful Functions
 Description: Useful functions for data wrangling and writing functions.
 Authors@R: person("Michael W.", "Kearney", ,
       "kearneymw@missouri.edu", role = c("aut", "cre"),
@@ -10,7 +10,6 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0.9000
 Imports: 
-    glue,
     grDevices,
     magrittr,
     rlang,

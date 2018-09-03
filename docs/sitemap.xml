@@ -4,13 +4,13 @@
     <loc>https://tfse.mikewk.com//index.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/add_arg_if.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/as_tbl.html</loc>
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/boxcode.html</loc>
-  </url>
-  <url>
-    <loc>https://tfse.mikewk.com//reference/carbon.sh.html</loc>
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/cc.html</loc>
@@ -50,9 +50,6 @@
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/pmsg.html</loc>
-  </url>
-  <url>
-    <loc>https://tfse.mikewk.com//reference/print_tbl.html</loc>
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/psub.html</loc>

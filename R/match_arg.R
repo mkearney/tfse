@@ -52,3 +52,42 @@ match_arg <- function(arg, choices,
     stop("there is more than one match in 'match.arg'")
   choices[i]
 }
+
+
+
+#' Add defaults to argument list
+#'
+#' Adds parameters to argument list if list doesn't alreayd include those
+#' parameters
+#'
+#' @param args Argument list
+#' @param ... Other named arguments are added (depending on override) and
+#'   returned with args
+#' @param override Logical indicating whether to override existing values in
+#'   args with the valuges provided as a named argument here.
+#' @return Argument list with updated values.
+#' @examples
+#' ## arg list
+#' args <- list(x = 5, y = TRUE, z = FALSE)
+#'
+#' ## add arg defaults
+#' add_arg_if(args, w = TRUE, z = TRUE)
+#'
+#' ## add arg defaults, overriding any previous values
+#' add_arg_if(args, x = 10, z = TRUE, override = TRUE)
+#'
+#' @export
+add_arg_if <- function(args, ..., override = FALSE) {
+  dots <- list(...)
+  if (length(dots) == 0) return(args)
+  if (length(args) == 0) return(dots)
+  ## if already specified, don't update that arg
+  if (!override) {
+    dots <- dots[!names(dots) %in% names(args)]
+  }
+  if (length(dots) == 0) return(args)
+  for (i in names(dots)) {
+    args[[i]] <- dots[[i]]
+  }
+  args
+}

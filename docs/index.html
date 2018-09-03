@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The First Scriptorium Emporium • tfse</title>
+<title>Various Useful Functions • tfse</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<meta property="og:title" content="The First Scriptorium Emporium">
+<meta property="og:title" content="Various Useful Functions">
 <meta property="og:description" content="Useful functions for data wrangling and writing functions.">
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png">
 <meta name="twitter:card" content="summary">
@@ -101,16 +101,16 @@
 <a class="sourceLine" id="cb2-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">## rescale standard</span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw"><a href="reference/rescale.html">rescale_standard</a></span>(x)</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  [1] 0.95049505 0.26732673 0.75247525 0.60396040 0.57425743 1.00000000</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  [7] 0.46534653 0.23762376 0.73267327 0.69306931 0.28712871 0.74257426</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; [13] 0.00000000 0.36633663 0.04950495 0.59405941 0.11881188 0.00990099</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; [19] 0.40594059 0.90099010</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  [1] 0.62727273 0.04545455 0.74545455 0.22727273 0.96363636 0.29090909</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  [7] 0.38181818 0.14545455 1.00000000 0.41818182 0.76363636 0.05454545</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; [13] 0.16363636 0.70909091 0.55454545 0.45454545 0.00000000 0.43636364</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; [19] 0.39090909 0.08181818</span></a>
 <a class="sourceLine" id="cb2-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">## rescale standard</span></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="kw"><a href="reference/rescale.html">rescale_pointscale</a></span>(x, <span class="dv">1</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  [1]  9.554455  3.405941  7.772277  6.435644  6.168317 10.000000  5.188119</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  [8]  3.138614  7.594059  7.237624  3.584158  7.683168  1.000000  4.297030</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; [15]  1.445545  6.346535  2.069307  1.089109  4.653465  9.108911</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  [1]  6.645455  1.409091  7.709091  3.045455  9.672727  3.618182  4.436364</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  [8]  2.309091 10.000000  4.763636  7.872727  1.490909  2.472727  7.381818</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; [15]  5.990909  5.090909  1.000000  4.927273  4.518182  1.736364</span></a></code></pre></div>
 </div>
 <div id="help" class="section level2">
 <h2 class="hasAnchor">
