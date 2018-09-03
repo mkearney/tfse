@@ -22,7 +22,7 @@ as_tbl <- function(x, row.names = FALSE) {
     x$row_names <- row.names(x)
     x[c(ncol(x), 1:(ncol(x) - 1))]
   } else {
-    tibble::as_tibble(x, validate = FALSE)
+    tibble::as_tibble(x)
   }
 }
 
