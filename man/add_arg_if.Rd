@@ -13,13 +13,13 @@ add_arg_if(args, ..., override = FALSE)
 returned with args}
 
 \item{override}{Logical indicating whether to override existing values in
-args with the valuges provided as a named argument here.}
+args with the values provided as a named argument here.}
 }
 \value{
 Argument list with updated values.
 }
 \description{
-Adds parameters to argument list if list doesn't alreayd include those
+Adds parameters to argument list if list does not already include those
 parameters
 }
 \examples{

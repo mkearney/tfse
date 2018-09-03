@@ -57,14 +57,14 @@ match_arg <- function(arg, choices,
 
 #' Add defaults to argument list
 #'
-#' Adds parameters to argument list if list doesn't alreayd include those
+#' Adds parameters to argument list if list does not already include those
 #' parameters
 #'
 #' @param args Argument list
 #' @param ... Other named arguments are added (depending on override) and
 #'   returned with args
 #' @param override Logical indicating whether to override existing values in
-#'   args with the valuges provided as a named argument here.
+#'   args with the values provided as a named argument here.
 #' @return Argument list with updated values.
 #' @examples
 #' ## arg list
