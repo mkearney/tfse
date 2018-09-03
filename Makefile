@@ -6,4 +6,4 @@ all:
 	R CMD INSTALL --no-multiarch --with-keep.source .
 clean:
 	@echo "\n---------------------\n## Cleaning...\n---------------------"
-	rm man/*.Rd
+	rm man/*.Rd docs/*.html docs/reference/*.html

@@ -10,7 +10,7 @@ pmsg <- function(..., print = TRUE) {
 
 
 pmsg_ <- function(dots, print = TRUE) {
-  dots <- paste(dots, collapse = "")
+  msg <- paste(dots, collapse = "")
   if (print) {
     message(msg)
   }
