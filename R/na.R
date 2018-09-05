@@ -37,20 +37,16 @@ max_na.matrix <- function(x, max = .05) {
 }
 
 
-
-
-is_max_na <- function(x, max = .05) UseMethod("is_max_na")
-
-is_max_na.default <- function(x, max = .05) {
-  stopifnot(is.atomic(x), length(x) > 0)
-  p <- sum(is.na(x)) / length(x)
-  p <= max
-}
-
-is_max_na.list <- function(x, max = .05) {
-  x <- vapply(x, function(.x) all(is.na(unlist(.x))), logical(1))
-  p <- sum(x) / length(x)
-  p <= max
+is_max_na <- function(x, max = .05) {
+  if (is.list(x)) {
+    x <- vapply(x, function(.x) all(is.na(unlist(.x))), logical(1))
+    p <- sum(x) / length(x)
+    p <= max
+  } else {
+    stopifnot(is.atomic(x), length(x) > 0)
+    p <- sum(is.na(x)) / length(x)
+    p <= max
+  }
 }
 
 
