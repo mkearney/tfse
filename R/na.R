@@ -25,14 +25,14 @@ max_na.default <- function(x, max = .05) {
 #' @export
 max_na.data.frame <- function(x, max = .05) {
   stopifnot(length(max) == 1, is.numeric(max), max >= 0, max <= 1)
-  kp <- vapply(x, ix_max_na, max, FUN.VALUE = logical(1), USE.NAMES = FALSE)
+  kp <- vapply(x, is_max_na, max, FUN.VALUE = logical(1), USE.NAMES = FALSE)
   x[kp]
 }
 
 #' @export
 max_na.matrix <- function(x, max = .05) {
   stopifnot(length(max) == 1, is.numeric(max), max >= 0, max <= 1)
-  kp <- vapply(x, ix_max_na, max, FUN.VALUE = logical(1), USE.NAMES = FALSE)
+  kp <- vapply(x, is_max_na, max, FUN.VALUE = logical(1), USE.NAMES = FALSE)
   x[, kp]
 }
 
