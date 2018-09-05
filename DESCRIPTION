@@ -1,5 +1,5 @@
 Package: tfse
-Version: 0.3.12
+Version: 0.4.0
 Title: Various Useful Functions
 Description: Useful functions for data wrangling and writing functions.
 Authors@R: person("Michael W.", "Kearney", ,
