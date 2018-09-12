@@ -13,20 +13,28 @@ psub <- function(x, ...) {
   } else {
     nms <- names(dots)
   }
-  s <- unlist(dots)
-  if (length(nms) == 0) {
-    nms <- rep("", length(s))
-  }
-  nms <- paste0("{", nms, "}")
-  m <- gregexpr("\\{[^\\}]+}", x)
+  m <- gregexpr("\\{[^\\}\\{]+\\}", x)
   p <- regmatches(x, m)[[1]]
-  if ("{}" %in% nms) {
-    nms[nms == "{}"] <- p[!p %in% nms]
+  p <- grep("\\s", p, invert = TRUE, value = TRUE)
+  p <- gsub("^\\{|\\}$", "", p)
+  if (!"" %in% nms) {
+    nms <- nms[match(p, nms)]
+    if (length(nms) != length(p)) {
+      stop("tfse::psub - number of {params} doesn't match number of replacement values", call. = FALSE)
+    }
+  } else if (length(nms) != length(p)) {
+    stop("tfse::psub - number of {params} doesn't match number of replacement values", call. = FALSE)
+  } else {
+    nms[nms == ""] <- p[nms == ""]
   }
-  s <- s[match(p, nms)]
+  dots <- unlist(dots)
+  dots <- dots[match(p, names(dots))]
+  p <- paste0("{", p, "}")
   p <- sub(".{1}$", "\\\\}", sub("^.{1}", "\\\\{", p))
-  for (i in seq_along(s)) {
-    x <- gsub(p[i], s[i], x)
+  nms <- paste0("{", nms, "}")
+  for (i in seq_along(nms)) {
+    x <- sub(p[i], dots[i], x)
   }
   x
 }
+
