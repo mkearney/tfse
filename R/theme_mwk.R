@@ -14,9 +14,17 @@ theme_mwk <- function(base_size = 12,
                       base_family = "Roboto Condensed",
                       dark = "#24292e",
                       light = "#ffffff",
-                      gray = "#ededed") {
+                      gray = "#ededed",
+                      caption = TRUE) {
   if (!requireNamespace("ggplot2", quietly = FALSE)) {
     stop("must install ggplot2 pkg", call. = FALSE)
+  }
+  if (caption) {
+    caption <- ggplot2::element_text(
+      size = rel(.6), color = "#808c9f", family = "Font Awesome 5 Brands")
+  } else {
+    caption <- ggplot2::element_text(
+      face = "italic", size = ggplot2::rel(.75))
   }
   ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
@@ -28,8 +36,7 @@ theme_mwk <- function(base_size = 12,
         colour = dark, size = ggplot2::rel(.75)),
       plot.background = ggplot2::element_rect(
         fill = light, colour = light),
-      plot.caption = ggplot2::element_text(
-        face = "italic", size = ggplot2::rel(.75)),
+      plot.caption = caption,
       panel.background = ggplot2::element_rect(
         fill = light, colour = light),
       panel.border = ggplot2::element_blank(),
@@ -50,5 +57,13 @@ theme_mwk <- function(base_size = 12,
         color = "#111111", size = ggplot2::rel(.020)),
       axis.ticks = ggplot2::element_blank()
     )
+}
+
+#' @export
+#' @param caption Text to use as source caption.
+#' @rdname theme_mwk
+#' @export
+theme_mwk_caption_text <- function() {
+  paste0("\nrstats dataviz ", substr(Sys.Date(), 1, 4), "\nmkearney kearneymw")
 }
 

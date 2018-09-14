@@ -2,10 +2,14 @@
 % Please edit documentation in R/theme_mwk.R
 \name{theme_mwk}
 \alias{theme_mwk}
+\alias{theme_mwk_caption_text}
 \title{theme_mwk}
 \usage{
 theme_mwk(base_size = 12, base_family = "Roboto Condensed",
-  dark = "#24292e", light = "#ffffff", gray = "#ededed")
+  dark = "#24292e", light = "#ffffff", gray = "#ededed",
+  caption = TRUE)
+
+theme_mwk_caption_text()
 }
 \arguments{
 \item{base_size}{Base font size}
@@ -17,6 +21,8 @@ theme_mwk(base_size = 12, base_family = "Roboto Condensed",
 \item{light}{Primary background color.}
 
 \item{gray}{Gray color.}
+
+\item{caption}{Text to use as source caption.}
 }
 \value{
 My ggplot2 theme (similar to theme_minimal/theme_bw)
