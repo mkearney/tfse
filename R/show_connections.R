@@ -33,6 +33,6 @@ show_connections <- function() {
   }
 
   ## print conns tbl_df
-  print_tbl(conns)
+  tibble::as_tibble(conns)
 }
 
