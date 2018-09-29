@@ -11,6 +11,7 @@
 #'
 #' @export
 rm_.DS_Store <- function() {
-  sh <- system("find . -name '.DS_Store' -delete", intern = TRUE)
+  ds <- list.files(pattern = "\\.DS_Store$", recursive = TRUE)
+  unlink(ds)
   invisible()
 }
