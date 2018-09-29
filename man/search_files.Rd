@@ -5,7 +5,7 @@
 \title{search_files}
 \usage{
 search_files(x, path = ".", recursive = TRUE, invert = FALSE,
-  file_names = FALSE, all.files = FALSE, intern = FALSE)
+  file_names = FALSE, all.files = FALSE)
 }
 \arguments{
 \item{x}{Pattern.}
@@ -20,8 +20,6 @@ directory.}
 \item{file_names}{only show matching file names}
 
 \item{all.files}{default false excludes dot files}
-
-\item{intern}{logical}
 }
 \value{
 Output from terminal - file name, line number, and preview of
