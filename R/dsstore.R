@@ -11,7 +11,7 @@
 #'
 #' @export
 rm_.DS_Store <- function() {
-  ds <- list.files(pattern = "\\.DS_Store$", recursive = TRUE)
+  ds <- list.files(pattern = "\\.DS_Store$", recursive = TRUE, all.files = TRUE)
   unlink(ds)
   invisible()
 }
