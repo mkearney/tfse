@@ -15,6 +15,7 @@
 #' @export
 search_files <- function(x, path = ".", recursive = TRUE, invert = FALSE,
                          file_names = FALSE, all.files = FALSE) {
+  ignore.case <- TRUE
   args <- "-n"
   if (recursive) {
     args <- paste0(args, "r")
@@ -34,7 +35,7 @@ search_files <- function(x, path = ".", recursive = TRUE, invert = FALSE,
   #cmd <- paste0("grep ", args, " ", shQuote(x), " ", path, " -s")
   #o <- tryCatch(system(cmd, intern = intern), error = function(e) "search_files-error")
   #if (identical(o, "search_files-error")) {
-  f <- list.files(all.files = all.files, full.names = TRUE, recursive = recursive)
+  f <- list.files(path, all.files = all.files, full.names = TRUE, recursive = recursive)
   i <- file.info(f)
   i <- i[i$size < 25000, ]
   f <- row.names(i)
