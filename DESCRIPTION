@@ -23,5 +23,5 @@ Suggests:
     rmarkdown,
     testthat,
     covr
-URL: https://mkearney.github.io/tfse/
+URL: https://tfse.mikewk.com
 BugReports: https://github.com/mkearney/tfse/issues
