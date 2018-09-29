@@ -1,7 +1,7 @@
 Package: tfse
-Version: 0.4.0
+Version: 0.4.1
 Title: Various Useful Functions
-Description: Useful functions for data wrangling and writing functions.
+Description: Useful functions for working with data and writing functions.
 Authors@R: person("Michael W.", "Kearney", ,
       "kearneymw@missouri.edu", role = c("aut", "cre"),
       comment = c(ORCID = "0000-0002-0730-4694"))
@@ -9,7 +9,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0.9000
+Depends: R (>= 2.10)
 Imports: 
+    ggplot2,
     grDevices,
     magrittr,
     rlang,
@@ -17,9 +19,7 @@ Imports:
     tidyselect,
     utils
 Suggests:
-    ggplot2,
     knitr,
-    readr,
     rmarkdown,
     testthat
 URL: https://mkearney.github.io/tfse/

@@ -9,7 +9,7 @@ show_connections <- function() {
   ## get connections
   conns <- showConnections(all = TRUE)
 
-  ## convert to tbl_df
+  ## convert to data frame
   conns <- data.frame(description = as.character(conns[, 1]),
     class = as.character(conns[, 2]),
     mode = as.character(conns[, 3]),
@@ -32,7 +32,8 @@ show_connections <- function() {
     conns <- conns[c(4:nrow(conns), 1:3), ]
   }
 
-  ## print conns tbl_df
-  tibble::as_tibble(conns)
+  ## reset row names and return data
+  row.names(conns) <- NULL
+  conns
 }
 

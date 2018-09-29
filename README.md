@@ -7,7 +7,7 @@
 status](https://travis-ci.org/mkearney/tfse.svg?branch=master)](https://travis-ci.org/mkearney/tfse)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-> tfse = **T**he **F**irst **S**criptorium **E**mporium
+> Various useful functions for working with data and writing functions
 
 ## Install
 
@@ -15,7 +15,7 @@ To install the package
 
 ``` r
 ## install from github
-devtools::install_github("mkearney/tfse")
+remotes::install_github("mkearney/tfse")
 ```
 
 ## Usage
@@ -35,15 +35,15 @@ x <- sample(-10:100, 20)
 
 ## rescale standard
 rescale_standard(x)
-#>  [1] 0.3932584 0.0112360 0.0000000 0.7752809 0.6292135 0.6741573 0.8089888
-#>  [8] 1.0000000 0.1460674 0.9101124 0.2808989 0.6067416 0.1685393 0.7078652
-#> [15] 0.9213483 0.0898876 0.8651685 0.8426966 0.7528090 0.6179775
+#>  [1] 0.0000000 0.8130841 0.8037383 0.7850467 0.9252336 0.1121495 0.4112150
+#>  [8] 1.0000000 0.1682243 0.2523364 0.9906542 0.2616822 0.5233645 0.3271028
+#> [15] 0.9065421 0.0934579 0.1588785 0.7009346 0.0280374 0.3177570
 
 ## rescale standard
 rescale_pointscale(x, 1, 10)
-#>  [1]  4.53933  1.10112  1.00000  7.97753  6.66292  7.06742  8.28090
-#>  [8] 10.00000  2.31461  9.19101  3.52809  6.46067  2.51685  7.37079
-#> [15]  9.29213  1.80899  8.78652  8.58427  7.77528  6.56180
+#>  [1]  1.00000  8.31776  8.23364  8.06542  9.32710  2.00935  4.70093
+#>  [8] 10.00000  2.51402  3.27103  9.91589  3.35514  5.71028  3.94393
+#> [15]  9.15888  1.84112  2.42991  7.30841  1.25234  3.85981
 ```
 
 ## Help

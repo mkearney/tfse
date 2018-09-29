@@ -11,7 +11,8 @@
 #' @importFrom tibble as_tibble
 #' @export
 as_tbl <- function(x, row.names = FALSE) {
-  isdf <- which(vapply(x, is.data.frame, FUN.VALUE = logical(1), USE.NAMES = FALSE))
+  isdf <- which(vapply(x, is.data.frame, FUN.VALUE = logical(1),
+    USE.NAMES = FALSE))
   if (length(isdf) > 0) {
     for (i in isdf) {
       x[[i]] <- x[[i]]

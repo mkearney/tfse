@@ -27,5 +27,5 @@ responses are missing, a missing value is used as the single category.}
 Frequency tbl
 }
 \description{
-Returns a sorted (descending) frequence tbl
+Returns a sorted (descending) frequency tbl
 }

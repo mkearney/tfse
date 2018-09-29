@@ -11,7 +11,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Various Useful Functions">
-<meta property="og:description" content="Useful functions for data wrangling and writing functions.">
+<meta property="og:description" content="Useful functions for working with data and writing functions.">
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tfse</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.12</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1</span>
       </span>
     </div>
 
@@ -76,14 +76,14 @@
 </h1></div>
 
 <blockquote>
-<p>tfse = <strong>T</strong>he <strong>F</strong>irst <strong>S</strong>criptorium <strong>E</strong>mporium</p>
+<p>Various useful functions for working with data and writing functions</p>
 </blockquote>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
 <p>To install the package</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">## install from github</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"mkearney/tfse"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"mkearney/tfse"</span>)</a></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -101,16 +101,16 @@
 <a class="sourceLine" id="cb2-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">## rescale standard</span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw"><a href="reference/rescale.html">rescale_standard</a></span>(x)</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  [1] 0.519607843 0.676470588 0.647058824 0.137254902 0.715686275</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  [6] 0.049019608 0.019607843 0.784313725 0.843137255 0.303921569</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; [11] 0.176470588 0.009803922 1.000000000 0.284313725 0.480392157</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; [16] 0.000000000 0.029411765 0.950980392 0.235294118 0.333333333</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  [1] 0.79411765 0.06862745 1.00000000 0.52941176 0.15686275 0.03921569</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  [7] 0.54901961 0.26470588 0.75490196 0.18627451 0.82352941 0.90196078</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; [13] 0.35294118 0.88235294 0.21568627 0.99019608 0.50000000 0.16666667</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; [19] 0.00000000 0.27450980</span></a>
 <a class="sourceLine" id="cb2-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">## rescale standard</span></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="kw"><a href="reference/rescale.html">rescale_pointscale</a></span>(x, <span class="dv">1</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  [1]  5.676471  7.088235  6.823529  2.235294  7.441176  1.441176  1.176471</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  [8]  8.058824  8.588235  3.735294  2.588235  1.088235 10.000000  3.558824</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; [15]  5.323529  1.000000  1.264706  9.558824  3.117647  4.000000</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  [1]  8.147059  1.617647 10.000000  5.764706  2.411765  1.352941  5.941176</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  [8]  3.382353  7.794118  2.676471  8.411765  9.117647  4.176471  8.941176</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; [15]  2.941176  9.911765  5.500000  2.500000  1.000000  3.470588</span></a></code></pre></div>
 </div>
 <div id="help" class="section level2">
 <h2 class="hasAnchor">

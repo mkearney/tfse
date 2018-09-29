@@ -37,7 +37,7 @@ match_arg <- function(arg, choices,
   else if (length(arg) == 0L)
     stop("'arg' must be of length >= 1")
   if (trim_ws) {
-    arg <- tfse::trim_ws(arg)
+    arg <- trim_ws(arg)
   }
   if (ignore_case) {
     arg <- tolower(arg)

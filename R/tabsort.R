@@ -1,7 +1,7 @@
 
 #' tabsort
 #'
-#' Returns a sorted (descending) frequence tbl
+#' Returns a sorted (descending) frequency tbl
 #'
 #' @param data Data
 #' @param ... Unquoted column names of variables to include in table. Default

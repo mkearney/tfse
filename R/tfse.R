@@ -1,4 +1,4 @@
-#' @title tfse: The First Scriptorium Emporium
+#' @title tfse: Various Useful Functions
 #'
 #' @description Collection of useful functions.
 #'
@@ -7,8 +7,4 @@
 #' @name tfse
 #' @aliases tfse
 #' @keywords package tfse-package
-#' @seealso \code{rtweet}
 NULL
-
-#.onLoad <- function(libname, pkgname) {
-#}

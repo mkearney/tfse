@@ -4,12 +4,9 @@
 \name{tfse}
 \alias{tfse}
 \alias{tfse-package}
-\title{tfse: The First Scriptorium Emporium}
+\title{tfse: Various Useful Functions}
 \description{
 Collection of useful functions.
-}
-\seealso{
-\code{rtweet}
 }
 \author{
 Michael W. Kearney

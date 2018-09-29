@@ -16,12 +16,9 @@ theme_mwk <- function(base_size = 12,
                       light = "#ffffff",
                       gray = "#ededed",
                       caption = TRUE) {
-  if (!requireNamespace("ggplot2", quietly = FALSE)) {
-    stop("must install ggplot2 pkg", call. = FALSE)
-  }
   if (caption) {
     caption <- ggplot2::element_text(
-      size = rel(.6), color = "#808c9f", family = "Font Awesome 5 Brands")
+      size = ggplot2::rel(.6), color = "#808c9f", family = "Font Awesome 5 Brands")
   } else {
     caption <- ggplot2::element_text(
       face = "italic", size = ggplot2::rel(.75))
@@ -64,6 +61,6 @@ theme_mwk <- function(base_size = 12,
 #' @rdname theme_mwk
 #' @export
 theme_mwk_caption_text <- function() {
-  paste0("\nrstats dataviz ", substr(Sys.Date(), 1, 4), "\nmkearney kearneymw")
+  paste0(captext$rstats_dataviz, substr(Sys.Date(), 1, 4),
+    captext$mkearney_kearneymw)
 }
-

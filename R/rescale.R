@@ -114,14 +114,14 @@ rescale_scale.standard_scale <- function(x, na_omit = TRUE) {
 
 rescale_scale.normal_scale <- function(x, na_omit = TRUE) {
   if (na_omit)
-    x <- tfse::na_omit(x)
+    x <- na_omit(x)
   x <- as.numeric(x)
   scale(x)[, 1]
 }
 
 rescale_scale.log_scale <- function(x, na_omit = TRUE) {
   if (na_omit)
-    x <- tfse::na_omit(x)
+    x <- na_omit(x)
   x <- as.numeric(x)
   ## set min to at least 1
   if (min(x) < 1)
@@ -133,7 +133,7 @@ rescale_scale.pointscale_scale <- function(x, lower = 0, upper = 1,
                                            lower0 = NULL, upper0 = NULL,
                                            na_omit = TRUE) {
   if (na_omit)
-    x <- tfse::na_omit(x)
+    x <- na_omit(x)
   ## set min to 0
   l <- min(c(lower0, x))
   x <- x - (l - 0)
