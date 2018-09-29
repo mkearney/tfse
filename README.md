@@ -6,6 +6,8 @@
 [![Travis build
 status](https://travis-ci.org/mkearney/tfse.svg?branch=master)](https://travis-ci.org/mkearney/tfse)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Coverage
+status](https://codecov.io/gh/mkearney/tfse/branch/master/graph/badge.svg)](https://codecov.io/github/mkearney/tfse?branch=master)
 
 > Various useful functions for working with data and writing functions
 
@@ -35,15 +37,15 @@ x <- sample(-10:100, 20)
 
 ## rescale standard
 rescale_standard(x)
-#>  [1] 0.0000000 0.8130841 0.8037383 0.7850467 0.9252336 0.1121495 0.4112150
-#>  [8] 1.0000000 0.1682243 0.2523364 0.9906542 0.2616822 0.5233645 0.3271028
-#> [15] 0.9065421 0.0934579 0.1588785 0.7009346 0.0280374 0.3177570
+#>  [1] 0.7809524 0.3809524 0.1523810 0.2952381 0.3523810 0.2000000 0.3333333
+#>  [8] 0.0952381 0.4476190 0.5619048 0.4190476 0.6380952 0.0000000 0.4000000
+#> [15] 0.9714286 0.1047619 0.2666667 1.0000000 0.5904762 0.6285714
 
 ## rescale standard
 rescale_pointscale(x, 1, 10)
-#>  [1]  1.00000  8.31776  8.23364  8.06542  9.32710  2.00935  4.70093
-#>  [8] 10.00000  2.51402  3.27103  9.91589  3.35514  5.71028  3.94393
-#> [15]  9.15888  1.84112  2.42991  7.30841  1.25234  3.85981
+#>  [1]  8.02857  4.42857  2.37143  3.65714  4.17143  2.80000  4.00000
+#>  [8]  1.85714  5.02857  6.05714  4.77143  6.74286  1.00000  4.60000
+#> [15]  9.74286  1.94286  3.40000 10.00000  6.31429  6.65714
 ```
 
 ## Help

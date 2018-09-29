@@ -21,6 +21,7 @@ Imports:
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    covr
 URL: https://mkearney.github.io/tfse/
 BugReports: https://github.com/mkearney/tfse/issues

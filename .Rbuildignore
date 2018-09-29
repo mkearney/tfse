@@ -1,3 +1,4 @@
+^codecov\.yml$
 ^pkgdown$
 ^cran-comments\.md$
 ^\.travis\.yml$
