@@ -6,6 +6,7 @@ output: github_document
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1234)
 ```
 
 # tfse <img src="man/figures/logo.png" width="160px" align="right" /> 
