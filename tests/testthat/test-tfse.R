@@ -69,9 +69,13 @@ test_that("lines", {
 })
 
 test_that("dsstore", {
+  dir <- tempdir()
+  owd <- getwd()
+  setwd(dir)
   cat("asdf", file = ".DS_Store", fill = TRUE)
   rm_.DS_Store()
   f <- list.files(all.files = TRUE)
+  setwd(owd)
   expect_true(!".DS_Store" %in% f)
 })
 
