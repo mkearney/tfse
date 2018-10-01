@@ -5,11 +5,12 @@
 
 [![Travis build
 status](https://travis-ci.org/mkearney/tfse.svg?branch=master)](https://travis-ci.org/mkearney/tfse)
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Coverage
 status](https://codecov.io/gh/mkearney/tfse/branch/master/graph/badge.svg)](https://codecov.io/github/mkearney/tfse?branch=master)
 
-> Various useful functions for working with data and writing functions
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+Various useful functions for working with data and writing functions
 
 ## Install
 
