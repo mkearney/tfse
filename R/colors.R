@@ -9,7 +9,7 @@
 #' @param alpha Alpha level ranging form 1.0 (opaque) to 0.0 (transparent). The
 #'   default (NULL) omits alpha columns from the returned hexidecimal
 #'   characters.
-#' @return Hexidicimal color codes
+#' @return Hexidecimal color codes
 #' @export
 col2hex <- function(color, alpha = NULL) UseMethod("col2hex")
 

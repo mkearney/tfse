@@ -1,6 +1,6 @@
 #' Paste sub
 #'
-#' Glue-like sub paster
+#' Glue-like sub pasting of strings
 #'
 #' @param x Input string
 #' @param ... Named strings with names being the values to replace and the strings

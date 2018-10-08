@@ -15,7 +15,7 @@ default (NULL) omits alpha columns from the returned hexidecimal
 characters.}
 }
 \value{
-Hexidicimal color codes
+Hexidecimal color codes
 }
 \description{
 Converts named colors to hex (html) codes.
