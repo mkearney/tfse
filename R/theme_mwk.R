@@ -16,6 +16,9 @@ theme_mwk <- function(base_size = 12,
                       light = "#ffffff",
                       gray = "#ededed",
                       caption = TRUE) {
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("must have ggplot2 installed to use theme_mwk")
+  }
   if (caption) {
     caption <- ggplot2::element_text(
       size = ggplot2::rel(.6), color = "#808c9f", family = "Font Awesome 5 Brands")
