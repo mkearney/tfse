@@ -7,7 +7,7 @@
 show_connections()
 }
 \value{
-Prints and invisibly returns tibble
+Prints and invisibly returns data frame.
 }
 \description{
 Displays active connections as a tidy tibble

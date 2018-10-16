@@ -1,29 +1,13 @@
 context("test-tfse")
 
-test_that("as_tbl, tabsort, ntbl", {
-  d <- data.frame(abc = sample(letters[1:3], 100, replace = TRUE),
-    xyz = sample(letters[24:26], 100, replace = TRUE),
-    stringsAsFactors = FALSE)
-  expect_true(inherits(as_tbl(d), "tbl_df"))
-  d <- tabsort(d)
-  expect_equal(ncol(d), 4)
-  expect_true(inherits(d, "tbl_df"))
-  expect_true(inherits(as_tbl(d), "tbl_df"))
-  expect_true(is.data.frame((ntbl(d, n))))
-  expect_equal(ncol(ntbl(d, n)), 2)
-})
-
 test_that("col2hex", {
   blue <- col2hex("blue")
   expect_identical(blue, "#0000FF")
 })
 
-
-
 test_that("pmsg", {
   expect_message(pmsg("this ", "is ", "a", " test"))
 })
-
 
 test_that("rescale", {
   expect_true(is.numeric(rescale_log(1:10)))
@@ -86,6 +70,29 @@ test_that("in", {
   expect_identical(c("a", "b"), n)
 })
 
+test_that("gitrename", {
+  expect_identical("git remote set-url origin {new_url}", rename_git_repo())
+})
+
+test_that("trim_ws", {
+  expect_identical("this", trim_ws(" this "))
+})
+
+test_that("shhh", {
+  o <- capture.output(shhh(rnorm(10)))
+  expect_true(length(o) == 0)
+})
+
+test_that("psub", {
+  expect_identical("testing psub function",
+    psub("testing {this} function", this = "psub"))
+})
 
 
+test_that("regmatches_", {
+  m <- gregexpr_(letters, "a")
+  expect_equal(sum(sapply(m, function(.x) .x > 0)), 1)
+  o <- regmatches_(letters, "a")
+  expect_identical(c("a", rep("", 25)), o)
+})
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter based on proportion of missing data — max_na • tfse</title>
+<title>Rename git repo code — rename_git_repo • tfse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Filter based on proportion of missing data — max_na" />
+<meta property="og:title" content="Rename git repo code — rename_git_repo" />
 
-<meta property="og:description" content="Returns columns that have less than or equal to a specified amount of missingness." />
+<meta property="og:description" content="Command line (bash) syntax for renaming a git repo" />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -101,39 +101,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter based on proportion of missing data</h1>
+    <h1>Rename git repo code</h1>
     
-    <div class="hidden name"><code>max_na.Rd</code></div>
+    <div class="hidden name"><code>rename_git_repo.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Returns columns that have less than or equal to a specified amount of missingness.</p>
+    <p>Command line (bash) syntax for renaming a git repo</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>max_na</span>(<span class='no'>x</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</pre>
+    <pre class="usage"><span class='fu'>rename_git_repo</span>(<span class='kw'>new_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Input data frame or matrix.</p></td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td><p>Maximum proportion of missingnesses allowed. Columns with higher
-proportions of missingness compared to this value will be dropped. Columns
-will only be returned if they have 1 - max proportion non-missing. This
-value must be between 0-1. It defaults to .05.</p></td>
+      <th>new_url</th>
+      <td><p>Optional, URL pointing to correct (renamed) repo. If NULL
+(default), "new_url" is printed in brackets.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Data frame or matrix with columns with less than or equal to the
-  max allowed proportion of missingness.</p>
+    <p>text of git command to rename git repo</p>
     
 
   </div>

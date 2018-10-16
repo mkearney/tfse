@@ -3,7 +3,7 @@
 #'
 #' Displays active connections as a tidy tibble
 #'
-#' @return Prints and invisibly returns tibble
+#' @return Prints and invisibly returns data frame.
 #' @export
 show_connections <- function() {
   ## get connections

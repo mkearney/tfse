@@ -34,7 +34,7 @@ task_progress_bar <- function(task, msg) {
     Sys.sleep(.025)
     cat("+")
   }
-  rlang::eval_tidy(task)
+  eval(task)
   for (k in seq_len(r)) {
     Sys.sleep(.025)
     if (k == r) {
@@ -48,5 +48,5 @@ task_progress_bar <- function(task, msg) {
 
 install_pkg_verbose <- function(pkg) {
   sh <- utils::install.packages(pkg, quiet = TRUE)
-  task_progress_bar(rlang::quo(invisible()), sprintf("Installing %s", pkg))
+  task_progress_bar(invisible(), sprintf("Installing %s", pkg))
 }

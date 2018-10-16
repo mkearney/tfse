@@ -11,11 +11,11 @@ col2hex(color, alpha = NULL)
 adding alpha values).}
 
 \item{alpha}{Alpha level ranging form 1.0 (opaque) to 0.0 (transparent). The
-default (NULL) omits alpha columns from the returned hexidecimal
+default (NULL) omits alpha columns from the returned hexadecimal
 characters.}
 }
 \value{
-Hexidicimal color codes
+Hexadecimal color codes
 }
 \description{
 Converts named colors to hex (html) codes.

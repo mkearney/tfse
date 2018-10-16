@@ -1,7 +1,15 @@
 Package: tfse
-Version: 0.4.1
-Title: Various Useful Functions
-Description: Useful functions for working with data and writing functions.
+Version: 0.4.2
+Title: Tools for Script Editing
+Description: A collection of useful tools for programming and writing-scripts. 
+    Several functions are simple wrappers around base R functions that extend 
+    their functionality while also providing some convenient properties–regular
+    expression functions that automatically detect look-ahead and look-behind 
+    statements, a read-line function that suppresses incomplete-final-line 
+    warnings and automatically opens and closes connections, a version of 
+    substrings that starts from the end of strings, etc. Other functions are 
+    useful for working with hexadecimal colors, installing packages, omitting 
+    missing data, and showing in-use connections.
 Authors@R: person("Michael W.", "Kearney", ,
       "kearneymw@missouri.edu", role = c("aut", "cre"),
       comment = c(ORCID = "0000-0002-0730-4694"))
@@ -11,14 +19,10 @@ LazyData: true
 RoxygenNote: 6.1.0.9000
 Depends: R (>= 2.10)
 Imports: 
-    ggplot2,
     grDevices,
-    magrittr,
-    rlang,
-    tibble,
-    tidyselect,
     utils
 Suggests:
+    ggplot2,
     knitr,
     rmarkdown,
     testthat,

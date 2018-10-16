@@ -13,5 +13,5 @@ psub(x, ...)
 being the desired new value.}
 }
 \description{
-Glue-like sub paster
+Glue-like sub pasting of strings
 }
