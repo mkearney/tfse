@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>boxcode — boxcode • tfse</title>
+<title>Description variables — desc_get_var • tfse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,10 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="boxcode — boxcode" />
+<meta property="og:title" content="Description variables — desc_get_var" />
 
-<meta property="og:description" content="Load clipboard with code chunk square. Paste to insert square into R script
-  file at cursor location." />
+<meta property="og:description" content="Get values from package DESCRIPTION" />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -102,38 +101,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>boxcode</h1>
+    <h1>Description variables</h1>
     
-    <div class="hidden name"><code>boxcode.Rd</code></div>
+    <div class="hidden name"><code>desc_get_var.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Load clipboard with code chunk square. Paste to insert square into R script
-  file at cursor location.</p>
+    <p>Get values from package DESCRIPTION</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>boxcode</span>(<span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>desc_get_var</span>(<span class='no'>pkg</span>, <span class='kw'>field</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>codebox</span>(<span class='no'>...</span>)
+<span class='fu'>desc_get_url</span>(<span class='no'>pkg</span>)
 
-<span class='fu'>box_code</span>(<span class='no'>...</span>)
-
-<span class='fu'>code_box</span>(<span class='no'>...</span>)</pre>
+<span class='fu'>desc_gh_repo</span>(<span class='no'>pkg</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Name of section/block</p></td>
+      <th>pkg</th>
+      <td><p>Character string, name of package</p></td>
+    </tr>
+    <tr>
+      <th>field</th>
+      <td><p>Character string, name of field/key</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Text for code box saved into clipboard. Paste to use at cursor.</p>
+    <p>Data frame</p>
     
 
   </div>
