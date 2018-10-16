@@ -19,6 +19,7 @@ regmatches_first <- function(x, pat, drop = FALSE, ...) UseMethod("regmatches_fi
 
 #' @export
 regmatches_.default <- function(x, pat, ...) {
+  if (length(x) == 0) return(NULL)
   stop("input must be character or list of character vectors", call. = FALSE)
 }
 

@@ -41,6 +41,8 @@ match_arg <- function(arg, choices,
   }
   if (ignore_case) {
     arg <- tolower(arg)
+    choices_ <- choices
+    choices <- tolower(choices)
   }
   i <- pmatch(arg, choices, nomatch = 0L, duplicates.ok = TRUE)
   if (all(i == 0L))
@@ -50,6 +52,9 @@ match_arg <- function(arg, choices,
   i <- i[i > 0L]
   if (!multiple && length(i) > 1)
     stop("there is more than one match in 'match.arg'")
+  if (ignore_case) {
+    choices <- choices_
+  }
   choices[i]
 }
 
