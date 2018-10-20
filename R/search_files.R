@@ -27,8 +27,8 @@ search_files <- function(x, path = ".", recursive = TRUE, all.files = FALSE) {
   s <- lapply(s, paste, collapse = "\n")
   for (i in seq_along(s)) {
     cat("\n# File:", nms[i], fill = TRUE)
-    txt <- paste0("  ", s[[i]])
-    txt <- gsub("\n", "\n  ", txt)
+    txt <- s[[i]]
+    txt <- gsub("\n", "\n", txt)
     cat(txt, fill = TRUE)
   }
 }
@@ -39,20 +39,35 @@ extra_text_search <- function(file, pat) {
     error = function(e) NULL,
     warning = function(w) NULL)
   if (is.null(x)) return(invisible())
+  x <- sub("^  ", "", x)
   term <- pat
   pat <- paste0("\\b.{0,32}", pat, ".{0,32}\\b")
   if (!any(grepl(pat, x, ignore.case = TRUE))) {
     return(invisible())
   }
+  l <- gregexpr_(x, pat, ignore.case = TRUE)
+  l <- which(sapply(l, function(.x) .x[1] > 0))
+  spaces <- max(nchar(l))
+  spaces <- spaces - nchar(l)
+  ss <- character(length(spaces))
+  for (i in seq_along(spaces)) {
+    if (spaces[i] > 0) {
+      ss[i] <- paste0(rep(" ", spaces[i]), collapse = "")
+    } else {
+      ss[i] <- ""
+    }
+  }
+  l <- paste0(ss, l)
   m <- regmatches_(x, pat, drop = TRUE, ignore.case = TRUE)
-  m <- paste0(#"# ", seq_along(m), ". ",
-    m, collapse = "\n")
+  m <- paste0(paste0("[", l, "] "), m)
+  m <- paste0(m, collapse = "\n")
   m <- gsub("( \\{\\{\\{(?!\\{))|((?<!\\})\\}\\}\\} )", "",
     m, perl = TRUE)
-  m <- gsub(term, paste0("\033[39m", term, "\033[38;5;242m"),
-    m, ignore.case = TRUE)
+  term <- regmatches_(m, term, drop = TRUE, ignore.case = TRUE)
   m <- paste0("\033[38;5;242m", m, "\033[39m")
-  m <- gsub(term, paste0("\033[31m", term, "\033[39m"), m)
-  m
+  for (.x in term) {
+    m <- gsub(.x, paste0("\033[31m", .x, "\033[38;5;242m"),
+      m, ignore.case = TRUE)
+  }
+  paste0("\033[38;5;242m", m, "\033[39m")
 }
-
