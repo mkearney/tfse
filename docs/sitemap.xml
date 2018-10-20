@@ -79,6 +79,9 @@
     <loc>https://tfse.mikewk.com//reference/search_files.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/search_function.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/set_class.html</loc>
   </url>
   <url>
@@ -98,5 +101,8 @@
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/trim_ws.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/un_zip.html</loc>
   </url>
 </urlset>
