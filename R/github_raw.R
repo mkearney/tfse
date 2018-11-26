@@ -19,6 +19,7 @@ owner_repo <- function(x) {
 #'   information is provided in the value supplied to \code{file} then leave
 #'   this as NULL (the default)
 #' @return Returns the URL path to the raw version of the file.
+#' @export
 github_raw <- function(file, repo = NULL) {
 
   ## remove scheme and domain
