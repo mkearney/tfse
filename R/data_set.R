@@ -1,6 +1,4 @@
-u <- function(pkg) {
-  ?.Platform
-}
+
 
 #' Number of unique elements
 #'

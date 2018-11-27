@@ -20,7 +20,7 @@ desc_get_url <- function(pkg) {
 }
 
 desc_get_pkg <- function(pkg, field = NULL) {
-  d <- set_class(packageDescription(pkg), "list")
+  d <- set_class(utils::packageDescription(pkg), "list")
   d <- as.data.frame(d, stringsAsFactors = FALSE)
   if (!is.null(field)) {
     choices <- tolower(names(d))

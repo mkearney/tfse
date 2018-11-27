@@ -10,5 +10,5 @@ un_zip <- function(path) {
   out <- sub("\\.zip$", "", path)
   stopifnot(!dir.exists(out))
   dir.create(out)
-  unzip(path, exdir = out)
+  utils::unzip(path, exdir = out)
 }
