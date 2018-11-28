@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Standard: Rescale values to a standard normal scale — rescale • tfse</title>
+<title>Print message about starting a task — print_start • tfse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,12 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Standard: Rescale values to a standard normal scale — rescale" />
+<meta property="og:title" content="Print message about starting a task — print_start" />
 
-<meta property="og:description" content="Standard: Rescale values to a standard normal scale
-Normal: Rescale values to a standard (0-1) scale
-Log: Rescale values to a natural log scale
-Point-scale: Rescale values to a new point scale" />
+<meta property="og:description" content="Prints a next-arrow bulleted message presumably about task completion" />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -104,85 +101,35 @@ Point-scale: Rescale values to a new point scale" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Standard: Rescale values to a standard normal scale</h1>
+    <h1>Print message about starting a task</h1>
     
-    <div class="hidden name"><code>rescale.Rd</code></div>
+    <div class="hidden name"><code>print_start.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Standard: Rescale values to a standard normal scale</p>
-<p>Normal: Rescale values to a standard (0-1) scale</p>
-<p>Log: Rescale values to a natural log scale</p>
-<p>Point-scale: Rescale values to a new point scale</p>
+    <p>Prints a next-arrow bulleted message presumably about task completion</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rescale_standard</span>(<span class='no'>x</span>, <span class='kw'>na_omit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>rescale_normal</span>(<span class='no'>x</span>, <span class='kw'>na_omit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>rescale_log</span>(<span class='no'>x</span>, <span class='kw'>na_omit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>rescale_pointscale</span>(<span class='no'>x</span>, <span class='no'>lower</span>, <span class='no'>upper</span>, <span class='kw'>lower0</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>upper0</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>na_omit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>print_start</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Input vector</p></td>
-    </tr>
-    <tr>
-      <th>na_omit</th>
-      <td><p>Logical indicating whether to drop missing (NA) values.
-Default is TRUE.</p></td>
-    </tr>
-    <tr>
-      <th>lower</th>
-      <td><p>Min value of new scale.
-Only applicable for pointscales.</p></td>
-    </tr>
-    <tr>
-      <th>upper</th>
-      <td><p>Max value of new scale.
-Only applicable for pointscales.</p></td>
-    </tr>
-    <tr>
-      <th>lower0</th>
-      <td><p>Min value of old scale. If NULL, defaults to min of input.
-Only applicable for pointscales.</p></td>
-    </tr>
-    <tr>
-      <th>upper0</th>
-      <td><p>Max value of old scale. If NULL, defaults to max of input
-Only applicable for pointscales.</p></td>
+      <th>...</th>
+      <td><p>Strings collapsed (with no additional space added) into gray
+message prefixed with a next-arrow emoji (color and emoji print may
+appear differently depending on your system/UI configuration)</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Rescaled vector</p>
+    <p>A printed message</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## randomly sample 10 values ranging from -10 to 100</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(-<span class='fl'>10</span>:<span class='fl'>100</span>, <span class='fl'>10</span>)
-
-<span class='co'>## rescale to 0-1 scale</span>
-<span class='fu'>rescale_standard</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1] 0.08791209 1.00000000 0.71428571 0.17582418 0.00000000 0.53846154
-#&gt;  [7] 0.57142857 0.32967033 0.82417582 0.85714286</div><div class='input'>
-<span class='co'>## rescale to normal distribution (z-scores)</span>
-<span class='fu'>rescale_normal</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1] -1.21361362  1.40956166  0.58784410 -0.96077745 -1.46644980  0.08217176
-#&gt;  [7]  0.17698532 -0.51831415  0.90388931  0.99870288</div><div class='input'>
-<span class='co'>## rescale to logged distribution (natural log)</span>
-<span class='fu'>rescale_log</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1] 0.9542425 1.9637878 1.8195439 1.2304489 0.0000000 1.6989700 1.7242759
-#&gt;  [8] 1.4913617 1.8808136 1.8976271</div><div class='input'>
-<span class='co'>## rescale to new point scale</span>
-<span class='fu'>rescale_pointscale</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>7</span>, <span class='kw'>lower0</span> <span class='kw'>=</span> -<span class='fl'>10</span>, <span class='kw'>upper0</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt;  [1] 1.436364 5.963636 4.545455 1.872727 1.000000 3.672727 3.836364 2.636364
-#&gt;  [9] 5.090909 5.254545</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -190,9 +137,7 @@ Only applicable for pointscales.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

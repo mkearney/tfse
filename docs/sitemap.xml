@@ -19,10 +19,19 @@
     <loc>https://tfse.mikewk.com//reference/count_na.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/data_set.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/desc_get_var.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/emj.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/gg_cols.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/github_raw.html</loc>
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/gregexpr_.html</loc>
@@ -40,6 +49,9 @@
     <loc>https://tfse.mikewk.com//reference/menuline.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/n_uq.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/na_omit.html</loc>
   </url>
   <url>
@@ -53,6 +65,15 @@
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/pmsg.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/print_as_col.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/print_complete.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/print_start.html</loc>
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/psub.html</loc>
