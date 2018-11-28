@@ -75,11 +75,13 @@ readline_ <- function(...) {
 #' ## paste e.g., C-v
 #' @export
 pbcopy <- function(x) {
-  if (.Platform$OS.type == "unix") {
+  if (.Platform$OS.type == "unix" &&
+    !identical(Sys.which("pbcopy"), "")) {
     con <- pipe("pbcopy", "w")
-  } else {
+  } else if (.Platform$OS.type == "windows") {
     con <- file("clipboard", "w")
+  } else {
+    stop("Please install 'pbcopy'", call. = FALSE)
   }
-  cat(x, file = con)
   close(con)
 }
