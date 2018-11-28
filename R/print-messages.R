@@ -11,7 +11,7 @@
 print_start <- function(...) {
   x <- paste(c(...), collapse = "")
   gray <- crayon::make_style("#888888")
-  x <- gray(paste0(emj$arrow_next, " ", x))
+  x <- gray(paste0("\U21AA", " ", x))
   cat(x, fill = TRUE)
 }
 
@@ -26,7 +26,7 @@ print_start <- function(...) {
 #' @export
 print_complete <- function(...) {
   x <- paste(c(...), collapse = "")
-  x <- crayon::black(paste0(emj$check_big, " ", x))
+  x <- crayon::black(paste0("\U2714", " ", x))
   cat(crayon::bold(crayon::black(x)), fill = TRUE)
 }
 
