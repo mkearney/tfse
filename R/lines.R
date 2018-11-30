@@ -83,5 +83,6 @@ pbcopy <- function(x) {
   } else {
     stop("Please install 'pbcopy'", call. = FALSE)
   }
+  cat(x, file = con, fill = TRUE)
   close(con)
 }
