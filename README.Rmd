@@ -7,6 +7,8 @@ output: github_document
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 set.seed(1234)
+## load pkg
+library(tfse)
 ```
 
 # tfse <img src="man/figures/logo.png" width="160px" align="right" /> 
@@ -29,24 +31,94 @@ remotes::install_github("mkearney/tfse")
 
 ## Usage
 
-Load the package and go
+### Colors
+
+Convert named colors to their hex equivalents
 
 ```{r fig.height=2, fig.width=3}
-## load pkg
-library(tfse)
-
 ## use functions like col2hex
-col2hex("greenyellow")
-
-## rescale values
-x <- sample(-10:100, 20)
-
-## rescale standard
-rescale_standard(x)
-
-## rescale standard
-rescale_pointscale(x, 1, 10)
+col2hex(c("greenyellow", "orange"))
 ```
+
+### Scales
+
+Rescale to standard (0-1) scale
+
+```{r}
+## 0-1 scale
+rescale_standard(-2:2)
+```
+
+Rescale to normal (mean = 0; sd = 1) scale
+
+```{r}
+## z scores
+rescale_normal(-2:2)
+```
+
+Rescale to arbitrary lower/upper bounds
+
+```{r}
+## specify new scale bounds
+rescale_pointscale(-2:2, 1, 10)
+```
+
+### Citations
+
+Print out the APA-formatted citation for R packages.
+
+```{r}
+## print out APA citation for {rtweet}
+apa_citation("rtweet")
+```
+
+### Annotate script files
+
+Use `box_code()` to add a header-like chunk to your clipboard–paste in script as desired.
+
+```{r}
+## store text in clipboard
+box_code("EXAMPLE #1")
+
+## the pasted output:
+##----------------------------------------------------------------------------##
+##                                 EXAMPLE #1                                 ##
+##----------------------------------------------------------------------------##
+```
+
+
+### Regular expressions
+
+Get all regular expression matches (using easier looka-heads/look-behinds)
+
+```{r}
+## some text
+x <- c("This *is* a test", 
+  "#this *was* a test", 
+  "This *will* be a test!",
+  "This *has been* a test; it *is* great.")
+
+## return text between asterisks, return as atomic vector
+regmatches_(x, "(?<=\\*)\\S[^*]+(?=\\*)", drop = TRUE)
+```
+
+### Github
+
+Figure out the name of a Github repo for a given package
+
+```{r}
+## repo name of devtools
+desc_gh_repo("devtools")
+```
+
+Convert a Github link to the raw URL version
+
+```{r}
+## path to raw version of Github file
+github_raw("https://github.com/mkearney/driven-snow/blob/master/theme/driven-snow.rstheme")
+```
+
+
 
 ## Help
 

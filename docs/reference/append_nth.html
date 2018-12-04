@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Standard: Rescale values to a standard normal scale — rescale • tfse</title>
+<title>Append integers with appopriate suffix — append_nth • tfse</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,12 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Standard: Rescale values to a standard normal scale — rescale" />
+<meta property="og:title" content="Append integers with appopriate suffix — append_nth" />
 
-<meta property="og:description" content="Standard: Rescale values to a standard normal scale
-Normal: Rescale values to a standard (0-1) scale
-Log: Rescale values to a natural log scale
-Point-scale: Rescale values to a new point scale" />
+<meta property="og:description" content="Adds &quot;st&quot;, &quot;nd&quot;, &quot;rd&quot;, or &quot;th&quot; suffix to integers" />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -106,84 +103,37 @@ Point-scale: Rescale values to a new point scale" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Standard: Rescale values to a standard normal scale</h1>
+    <h1>Append integers with appopriate suffix</h1>
     
-    <div class="hidden name"><code>rescale.Rd</code></div>
+    <div class="hidden name"><code>append_nth.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Standard: Rescale values to a standard normal scale</p>
-<p>Normal: Rescale values to a standard (0-1) scale</p>
-<p>Log: Rescale values to a natural log scale</p>
-<p>Point-scale: Rescale values to a new point scale</p>
+    <p>Adds "st", "nd", "rd", or "th" suffix to integers</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rescale_standard</span>(<span class='no'>x</span>, <span class='kw'>na_omit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>rescale_normal</span>(<span class='no'>x</span>, <span class='kw'>na_omit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>rescale_log</span>(<span class='no'>x</span>, <span class='kw'>na_omit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>rescale_pointscale</span>(<span class='no'>x</span>, <span class='no'>lower</span>, <span class='no'>upper</span>, <span class='kw'>lower0</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>upper0</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>na_omit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>append_nth</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Input vector</p></td>
-    </tr>
-    <tr>
-      <th>na_omit</th>
-      <td><p>Logical indicating whether to drop missing (NA) values.
-Default is TRUE.</p></td>
-    </tr>
-    <tr>
-      <th>lower</th>
-      <td><p>Min value of new scale.
-Only applicable for pointscales.</p></td>
-    </tr>
-    <tr>
-      <th>upper</th>
-      <td><p>Max value of new scale.
-Only applicable for pointscales.</p></td>
-    </tr>
-    <tr>
-      <th>lower0</th>
-      <td><p>Min value of old scale. If NULL, defaults to min of input.
-Only applicable for pointscales.</p></td>
-    </tr>
-    <tr>
-      <th>upper0</th>
-      <td><p>Max value of old scale. If NULL, defaults to max of input
-Only applicable for pointscales.</p></td>
+      <td><p>Integer or integerish vector.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Rescaled vector</p>
+    <p>A character vector with integers converted to "th"</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## randomly sample 10 values ranging from -10 to 100</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sample'>sample</a></span>(-<span class='fl'>10</span>:<span class='fl'>100</span>, <span class='fl'>10</span>)
-
-<span class='co'>## rescale to 0-1 scale</span>
-<span class='fu'>rescale_standard</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1] 0.9791667 0.1666667 0.0000000 0.3229167 0.4166667 0.1770833 0.4062500
-#&gt;  [8] 0.0312500 0.3854167 1.0000000</div><div class='input'>
-<span class='co'>## rescale to normal distribution (z-scores)</span>
-<span class='fu'>rescale_normal</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1]  1.688875178 -0.634445173 -1.111023706 -0.187652798  0.080422628
-#&gt;  [6] -0.604659014  0.050636469 -1.021665231 -0.008935848  1.748447494</div><div class='input'>
-<span class='co'>## rescale to logged distribution (natural log)</span>
-<span class='fu'>rescale_log</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1] 1.977724 1.230449 0.000000 1.505150 1.612784 1.255273 1.602060 0.602060
-#&gt;  [9] 1.579784 1.986772</div><div class='input'>
-<span class='co'>## rescale to new point scale</span>
-<span class='fu'>rescale_pointscale</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>7</span>, <span class='kw'>lower0</span> <span class='kw'>=</span> -<span class='fl'>10</span>, <span class='kw'>upper0</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt;  [1] 6.290909 2.036364 1.163636 2.854545 3.345455 2.090909 3.290909 1.327273
-#&gt;  [9] 3.181818 6.400000</div><div class='input'>
+    <pre class="examples"><div class='input'>
+<span class='co'>## randomly sample ten values from 1:100 and add suffix</span>
+<span class='fu'>append_nth</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sample'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>100</span>, <span class='fl'>10</span>))</div><div class='output co'>#&gt;  [1] "9th"  "83rd" "59th" "16th" "1st"  "45th" "47th" "27th" "68th" "71st"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
