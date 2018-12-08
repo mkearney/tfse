@@ -173,17 +173,17 @@ Only applicable for pointscales.</p></td>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sample'>sample</a></span>(-<span class='fl'>10</span>:<span class='fl'>100</span>, <span class='fl'>10</span>)
 
 <span class='co'>## rescale to 0-1 scale</span>
-<span class='fu'>rescale_standard</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1] 0.9791667 0.1666667 0.0000000 0.3229167 0.4166667 0.1770833 0.4062500
-#&gt;  [8] 0.0312500 0.3854167 1.0000000</div><div class='input'>
+<span class='fu'>rescale_standard</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1] 0.89795918 0.93877551 0.61224490 0.44897959 1.00000000 0.87755102
+#&gt;  [7] 0.18367347 0.79591837 0.07142857 0.00000000</div><div class='input'>
 <span class='co'>## rescale to normal distribution (z-scores)</span>
-<span class='fu'>rescale_normal</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1]  1.688875178 -0.634445173 -1.111023706 -0.187652798  0.080422628
-#&gt;  [6] -0.604659014  0.050636469 -1.021665231 -0.008935848  1.748447494</div><div class='input'>
+<span class='fu'>rescale_normal</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1]  0.8259388  0.9328565  0.0775153 -0.3501553  1.0932330  0.7724800
+#&gt;  [7] -1.0451200  0.5586447 -1.3391436 -1.5262495</div><div class='input'>
 <span class='co'>## rescale to logged distribution (natural log)</span>
-<span class='fu'>rescale_log</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1] 1.977724 1.230449 0.000000 1.505150 1.612784 1.255273 1.602060 0.602060
-#&gt;  [9] 1.579784 1.986772</div><div class='input'>
+<span class='fu'>rescale_log</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;  [1] 1.949390 1.968483 1.785330 1.653213 1.995635 1.939519 1.278754 1.897627
+#&gt;  [9] 0.903090 0.000000</div><div class='input'>
 <span class='co'>## rescale to new point scale</span>
-<span class='fu'>rescale_pointscale</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>7</span>, <span class='kw'>lower0</span> <span class='kw'>=</span> -<span class='fl'>10</span>, <span class='kw'>upper0</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt;  [1] 6.290909 2.036364 1.163636 2.854545 3.345455 2.090909 3.290909 1.327273
-#&gt;  [9] 3.181818 6.400000</div><div class='input'>
+<span class='fu'>rescale_pointscale</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>7</span>, <span class='kw'>lower0</span> <span class='kw'>=</span> -<span class='fl'>10</span>, <span class='kw'>upper0</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt;  [1] 6.018182 6.236364 4.490909 3.618182 6.563636 5.909091 2.200000 5.472727
+#&gt;  [9] 1.600000 1.218182</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
