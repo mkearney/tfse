@@ -21,7 +21,10 @@ Depends: R (>= 2.10)
 Imports: 
     grDevices,
     utils,
-    crayon
+    crayon,
+    remotes,
+    pkgload,
+    callr
 Suggests:
     ggplot2,
     knitr,
