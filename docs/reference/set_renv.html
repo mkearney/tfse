@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>search_files — search_files • tfse</title>
+<title>Set R environment variable — set_renv • tfse</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="search_files — search_files" />
+<meta property="og:title" content="Set R environment variable — set_renv" />
 
-<meta property="og:description" content="Returns matching files and line numbers of given string pattern." />
+<meta property="og:description" content="Sets R environment variable and adds it to user's home .Renviron file" />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,45 +103,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>search_files</h1>
+    <h1>Set R environment variable</h1>
     
-    <div class="hidden name"><code>search_files.Rd</code></div>
+    <div class="hidden name"><code>set_renv.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Returns matching files and line numbers of given string pattern.</p>
+    <p>Sets R environment variable and adds it to user's home .Renviron file</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>search_files</span>(<span class='no'>x</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>all.files</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>set_renv</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Pattern.</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>Path on which to restrict search. Defaults to current working
-directory.</p></td>
-    </tr>
-    <tr>
-      <th>recursive</th>
-      <td><p>logical</p></td>
-    </tr>
-    <tr>
-      <th>all.files</th>
-      <td><p>default false excludes dot files</p></td>
+      <th>...</th>
+      <td><p>Named environment variables/values</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Output from terminal - file name, line number, and preview of
-  matching text</p>
+    <p>Appends environment variable entry to ~/.Renviron file</p>
     
 
   </div>

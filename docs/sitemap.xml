@@ -22,6 +22,9 @@
     <loc>https://tfse.mikewk.com//reference/col2hex.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/copy_function.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/count_na.html</loc>
   </url>
   <url>
@@ -31,7 +34,13 @@
     <loc>https://tfse.mikewk.com//reference/desc_get_var.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/dot-Renviron.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/emj.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/file_edit.html</loc>
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/gg_cols.html</loc>
@@ -43,7 +52,13 @@
     <loc>https://tfse.mikewk.com//reference/gregexpr_.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/home.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/install_if.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/install_pkg.html</loc>
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/match_arg.html</loc>
@@ -71,6 +86,9 @@
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/peel_lists.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/pipe.html</loc>
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/pmsg.html</loc>
@@ -115,6 +133,9 @@
     <loc>https://tfse.mikewk.com//reference/set_class.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/set_renv.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/shhh.html</loc>
   </url>
   <url>
@@ -134,5 +155,8 @@
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/un_zip.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/write_function.html</loc>
   </url>
 </urlset>

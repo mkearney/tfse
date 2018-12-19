@@ -2,20 +2,110 @@ paste_lines <- function(...) {
   paste0(unlist(list(...)), collapse = "\n")
 }
 
+capture_dots <- function(...) {
+  eval(substitute(alist(...)), envir = parent.frame())
+}
+
+expr_names <- function(args) {
+  vapply(
+    args,
+    deparse,
+    USE.NAMES = FALSE,
+    FUN.VALUE = character(1)
+  )
+}
+
+pretty_dots <- function(...) {
+  ## capture dots as arg list
+  dots <- capture_dots(...)
+
+  ## if none provided, return NULL
+  if (length(dots) == 0) {
+    return(NULL)
+  }
+
+  ## if no names, inherit expression text
+  if (is.null(names(dots))) {
+    names(dots) <- expr_names(dots)
+  }
+
+  ## dots names
+  nms <- names(dots)
+
+  ## if any names missing, assign expression text
+  if ("" %in% nms) {
+    names(dots)[nms == ""] <- expr_names(dots[nms == ""])
+  }
+
+  ## return dots
+  lapply(dots, eval, envir = parent.frame())
+}
+
+
 #' Write function to file
 #'
 #' Write the function code to a file and open the file
 #'
-#' @param f Function
+#' @param ... Functions to write to file. It's best to name these.
 #' @return Writes to temporary file and opens that file.
 #' @export
-write_function <- function(f) {
+write_function <- function(...) {
+  ## capture
+  f <- pretty_dots(...)
+
+  ## text of functions
+  x <- mmap(text_of_function, f, names(f))
+
+  ## collapse into single text string
+  x <- paste_lines(paste0(x, "\n"))
+
+  ## save to temporary .R file
+  tmp <- tempfile(fileext = ".R")
+
+  ## write/save file
+  cat(
+    x,
+    file = tmp,
+    fill = TRUE
+  )
+
+  ## open file for editing
+  file_edit(tmp)
+}
+
+
+#' Copy function to clipboard
+#'
+#' Copy the function code to clipboard (ready to paste)
+#'
+#' @param ... Functions to write to clipboard. It's best to name these.
+#' @return Writes to clipboard (ready to paste)
+#' @export
+copy_function <- function(...) {
+  ## capture
+  f <- pretty_dots(...)
+
+  ## text of functions
+  x <- mmap(text_of_function, f, names(f))
+
+  ## collapse into single text string
+  x <- paste_lines(paste0(x, "\n"))
+
+  ## save to temporary .R file
+  pbcopy(x)
+}
+
+mmap <- function(f, ...) {
+  f <- match.fun(f)
+  mapply(FUN = f, ..., SIMPLIFY = FALSE, USE.NAMES = FALSE)
+}
+
+text_of_function <- function(f, name) {
   ## name of function
   fun_name <- paste0(
-    as.character(deparse(substitute(f))),
+    sub(".*\\:\\:", "", name),
     " <- "
   )
-  fun_name <- sub(".*\\:\\:", "", fun_name)
 
   ## function body text
   x <- deparse(f)
@@ -49,28 +139,13 @@ write_function <- function(f) {
   ## combine name and body
   x <- paste0(fun_name, x)
 
-  ## save to temporary .R file
-  tmp <- tempfile(fileext = ".R")
-
   ## style code
   x <- as.character(styler::style_text(x))
   x <- x[!(x == "" & c(FALSE, x[-length(x)] == ""))]
   x <- paste_lines(x)
-  x <- sub("\\{\n", "{\n\n", x)
-
-  ## write/save file
-  cat(
-    x,
-    file = tmp,
-    fill = TRUE
-  )
-
-  ## style via tidyverse code style
-  #styler::style_file(tmp)
-
-  ## open file for editing
-  file_edit(tmp)
+  sub("\\{\n", "{\n\n", x)
 }
+
 
 #' Open file in text editor
 #'

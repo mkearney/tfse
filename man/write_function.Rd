@@ -4,10 +4,10 @@
 \alias{write_function}
 \title{Write function to file}
 \usage{
-write_function(f)
+write_function(...)
 }
 \arguments{
-\item{f}{Function}
+\item{...}{Functions to write to file. It's best to name these.}
 }
 \value{
 Writes to temporary file and opens that file.

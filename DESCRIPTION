@@ -24,7 +24,11 @@ Imports:
     crayon,
     remotes,
     pkgload,
-    callr
+    callr,
+    magrittr,
+    roxygen2,
+    rstudioapi,
+    pkgbuild
 Suggests:
     ggplot2,
     knitr,
