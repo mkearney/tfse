@@ -14,9 +14,9 @@ read_RDS <- function(path) {
   .Internal(unserialize(con, NULL))
 }
 
-#' Read RDS
+#' Save RDS
 #'
-#' Read serialized R data file
+#' Save serialized R data file
 #'
 #' @param x Data object to be saved
 #' @param path Name of the file to be saved
@@ -25,7 +25,7 @@ read_RDS <- function(path) {
 #' @return Invisible data object
 #' @export
 #' @family readsave
-write_RDS <- function(x, path, compress = FALSE) {
+save_RDS <- function(x, path, compress = FALSE) {
   if (compress) {
     con <- gzfile(path, "wb", encoding = "UTF-8")
   } else {

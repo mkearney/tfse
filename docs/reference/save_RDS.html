@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read RDS — read_RDS • tfse</title>
+<title>Save RDS — save_RDS • tfse</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Read RDS — read_RDS" />
+<meta property="og:title" content="Save RDS — save_RDS" />
 
-<meta property="og:description" content="Read serialized R data file" />
+<meta property="og:description" content="Save serialized R data file" />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,35 +103,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read RDS</h1>
+    <h1>Save RDS</h1>
     
-    <div class="hidden name"><code>read_RDS.Rd</code></div>
+    <div class="hidden name"><code>save_RDS.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Read serialized R data file</p>
+    <p>Save serialized R data file</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>read_RDS</span>(<span class='no'>path</span>)</pre>
+    <pre class="usage"><span class='fu'>save_RDS</span>(<span class='no'>x</span>, <span class='no'>path</span>, <span class='kw'>compress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>x</th>
+      <td><p>Data object to be saved</p></td>
+    </tr>
+    <tr>
       <th>path</th>
-      <td><p>Name of .rds file</p></td>
+      <td><p>Name of the file to be saved</p></td>
+    </tr>
+    <tr>
+      <th>compress</th>
+      <td><p>Logical indicating whether to compress data–it will take up
+less space but it will be slower. Defaults to FALSE.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data object</p>
+    <p>Invisible data object</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other readsave: <code><a href='save_RDS.html'>save_RDS</a></code></p></div>
+    <div class='dont-index'><p>Other readsave: <code><a href='read_RDS.html'>read_RDS</a></code></p></div>
     
 
   </div>

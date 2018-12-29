@@ -16,6 +16,6 @@ A data object
 Read serialized R data file
 }
 \seealso{
-Other readsave: \code{\link{write_RDS}}
+Other readsave: \code{\link{save_RDS}}
 }
 \concept{readsave}
