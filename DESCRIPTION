@@ -28,7 +28,10 @@ Imports:
     magrittr,
     roxygen2,
     rstudioapi,
-    pkgbuild
+    pkgbuild,
+    dapr,
+    rlang,
+    stats
 Suggests:
     ggplot2,
     knitr,
