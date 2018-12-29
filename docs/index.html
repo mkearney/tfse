@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tfse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.6</span>
       </span>
     </div>
 
@@ -90,8 +90,8 @@
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
 <p>To install the package</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">## install from github</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"mkearney/tfse"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co">## install from github</span></a>
+<a class="sourceLine" id="cb1-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"mkearney/tfse"</span>)</a></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -100,84 +100,84 @@
 <h3 class="hasAnchor">
 <a href="#colors" class="anchor"></a>Colors</h3>
 <p>Convert named colors to their hex equivalents</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">## use functions like col2hex</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="reference/col2hex.html">col2hex</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"greenyellow"</span>, <span class="st">"orange"</span>))</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; [1] "#ADFF2F" "#FFA500"</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co">## use functions like col2hex</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="reference/col2hex.html">col2hex</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"greenyellow"</span>, <span class="st">"orange"</span>))</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; [1] "#ADFF2F" "#FFA500"</span></a></code></pre></div>
 </div>
 <div id="scales" class="section level3">
 <h3 class="hasAnchor">
 <a href="#scales" class="anchor"></a>Scales</h3>
 <p>Rescale to standard (0-1) scale</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">## 0-1 scale</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/rescale.html">rescale_standard</a></span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; [1] 0.00 0.25 0.50 0.75 1.00</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co">## 0-1 scale</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="reference/rescale.html">rescale_standard</a></span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; [1] 0.00 0.25 0.50 0.75 1.00</span></a></code></pre></div>
 <p>Rescale to normal (mean = 0; sd = 1) scale</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">## z scores</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="reference/rescale.html">rescale_normal</a></span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; [1] -1.2649111 -0.6324555  0.0000000  0.6324555  1.2649111</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co">## z scores</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="reference/rescale.html">rescale_normal</a></span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt; [1] -1.2649111 -0.6324555  0.0000000  0.6324555  1.2649111</span></a></code></pre></div>
 <p>Rescale to arbitrary lower/upper bounds</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">## specify new scale bounds</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="reference/rescale.html">rescale_pointscale</a></span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; [1]  1.00  3.25  5.50  7.75 10.00</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">## specify new scale bounds</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="reference/rescale.html">rescale_pointscale</a></span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; [1]  1.00  3.25  5.50  7.75 10.00</span></a></code></pre></div>
 </div>
 <div id="citations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#citations" class="anchor"></a>Citations</h3>
 <p>Print out the APA-formatted citation for R packages.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">## print out APA citation for {rtweet}</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="reference/apa_citation.html">apa_citation</a></span>(<span class="st">"rtweet"</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; ↪ Adding APA citation of {rtweet} to clipboard!</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; ✔ Ready to paste!</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; Kearney, M. W. (2018). rtweet: Collecting twitter data (R package version</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;     0.6.7) [Computer software]. The Comprehensive R Archive Network. Available</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt;     from https://cran.r-project.org/package=rtweet</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">## print out APA citation for {rtweet}</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw"><a href="reference/apa_citation.html">apa_citation</a></span>(<span class="st">"rtweet"</span>)</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; ↪ Adding APA citation of {rtweet} to clipboard!</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt; ✔ Ready to paste!</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; Kearney, M. W. (2018). rtweet: Collecting twitter data (R package version</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;     0.6.7) [Computer software]. The Comprehensive R Archive Network. Available</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt;     from https://cran.r-project.org/package=rtweet</span></a></code></pre></div>
 </div>
 <div id="annotate-script-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#annotate-script-files" class="anchor"></a>Annotate script files</h3>
 <p>Use <code><a href="reference/boxcode.html">box_code()</a></code> to add a header-like chunk to your clipboard–paste in script as desired.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co">## store text in clipboard</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="reference/boxcode.html">box_code</a></span>(<span class="st">"EXAMPLE #1"</span>)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">## the pasted output:</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">##----------------------------------------------------------------------------##</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">##                                 EXAMPLE #1                                 ##</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">##----------------------------------------------------------------------------##</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co">## store text in clipboard</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="reference/boxcode.html">box_code</a></span>(<span class="st">"EXAMPLE #1"</span>)</a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">## the pasted output:</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co">##----------------------------------------------------------------------------##</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">##                                 EXAMPLE #1                                 ##</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">##----------------------------------------------------------------------------##</span></a></code></pre></div>
 </div>
 <div id="regular-expressions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#regular-expressions" class="anchor"></a>Regular expressions</h3>
 <p>Get all regular expression matches (using easier looka-heads/look-behinds)</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">## some text</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"This *is* a test"</span>, </a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="st">"#this *was* a test"</span>, </a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="st">"This *will* be a test!"</span>,</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">  <span class="st">"This *has been* a test; it *is* great."</span>)</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">## return text between asterisks, return as atomic vector</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw"><a href="reference/regmatches_.html">regmatches_</a></span>(x, <span class="st">"(?&lt;=</span><span class="ch">\\</span><span class="st">*)</span><span class="ch">\\</span><span class="st">S[^*]+(?=</span><span class="ch">\\</span><span class="st">*)"</span>, <span class="dt">drop =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; [1] "is"       "was"      "will"     "has been" "is"</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co">## some text</span></a>
+<a class="sourceLine" id="cb8-2" title="2">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"This *is* a test"</span>, </a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="st">"#this *was* a test"</span>, </a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="st">"This *will* be a test!"</span>,</a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="st">"This *has been* a test; it *is* great."</span>)</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">## return text between asterisks, return as atomic vector</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="kw"><a href="reference/regmatches_.html">regmatches_</a></span>(x, <span class="st">"(?&lt;=</span><span class="ch">\\</span><span class="st">*)</span><span class="ch">\\</span><span class="st">S[^*]+(?=</span><span class="ch">\\</span><span class="st">*)"</span>, <span class="dt">drop =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; [1] "is"       "was"      "will"     "has been" "is"</span></a></code></pre></div>
 </div>
 <div id="github" class="section level3">
 <h3 class="hasAnchor">
 <a href="#github" class="anchor"></a>Github</h3>
 <p>Figure out the name of a Github repo for a given package</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">## repo name of devtools</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="reference/desc_get_var.html">desc_gh_repo</a></span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; [1] "r-lib/devtools"</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co">## repo name of devtools</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="reference/desc_get_var.html">desc_gh_repo</a></span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; [1] "r-lib/devtools"</span></a></code></pre></div>
 <p>Convert a Github link to the raw URL version</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">## path to raw version of Github file</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="reference/github_raw.html">github_raw</a></span>(<span class="st">"https://github.com/mkearney/driven-snow/blob/master/theme/driven-snow.rstheme"</span>)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; [1] "https://raw.githubusercontent.com/mkearney/driven-snow/master/theme/driven-snow.rstheme"</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co">## path to raw version of Github file</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw"><a href="reference/github_raw.html">github_raw</a></span>(<span class="st">"https://github.com/mkearney/driven-snow/blob/master/theme/driven-snow.rstheme"</span>)</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt; [1] "https://raw.githubusercontent.com/mkearney/driven-snow/master/theme/driven-snow.rstheme"</span></a></code></pre></div>
 </div>
 </div>
 <div id="help" class="section level2">
 <h2 class="hasAnchor">
 <a href="#help" class="anchor"></a>Help</h2>
 <p>View the help documentation</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co">## view R help documentatoin</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/help">help</a></span>(<span class="dt">package =</span> <span class="st">"tfse"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co">## view R help documentatoin</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/help">help</a></span>(<span class="dt">package =</span> <span class="st">"tfse"</span>)</a></code></pre></div>
 </div>
 <div id="about-tfse" class="section level2">
 <h2 class="hasAnchor">

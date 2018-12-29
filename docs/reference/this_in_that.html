@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>search functions — search_function • tfse</title>
+<title>Where is this in that? — this_in_that • tfse</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="search functions — search_function" />
+<meta property="og:title" content="Where is this in that? — this_in_that" />
 
-<meta property="og:description" content="Like search_files but for functions" />
+<meta property="og:description" content="Looks up (matches) the position of this in that (table)" />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,29 +103,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>search functions</h1>
+    <h1>Where is this in that?</h1>
     
-    <div class="hidden name"><code>search_function.Rd</code></div>
+    <div class="hidden name"><code>this_in_that.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Like search_files but for functions</p>
+    <p>Looks up (matches) the position of <code>this</code> in <code>that</code> (table)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>search_function</span>(<span class='no'>pat</span>, <span class='no'>fun</span>)</pre>
+    <pre class="usage"><span class='fu'>this_in_that</span>(<span class='no'>this</span>, <span class='no'>that</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pat</th>
-      <td><p>Pattern to match</p></td>
+      <th>this</th>
+      <td><p>Values to look up in that</p></td>
     </tr>
     <tr>
-      <th>fun</th>
-      <td><p>Function to inspect</p></td>
+      <th>that</th>
+      <td><p>Value positions matched to this</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>Optional, values to be returned rather than the default, which
+returns positions (integers)</p></td>
     </tr>
     </table>
     

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>search functions — search_function • tfse</title>
+<title>Capitalize labels — capitalize_labels • tfse</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="search functions — search_function" />
+<meta property="og:title" content="Capitalize labels — capitalize_labels" />
 
-<meta property="og:description" content="Like search_files but for functions" />
+<meta property="og:description" content="Convert text into title case (first word only)" />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,31 +103,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>search functions</h1>
+    <h1>Capitalize labels</h1>
     
-    <div class="hidden name"><code>search_function.Rd</code></div>
+    <div class="hidden name"><code>capitalize_labels.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Like search_files but for functions</p>
+    <p>Convert text into title case (first word only)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>search_function</span>(<span class='no'>pat</span>, <span class='no'>fun</span>)</pre>
+    <pre class="usage"><span class='fu'>capitalize_labels</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pat</th>
-      <td><p>Pattern to match</p></td>
-    </tr>
-    <tr>
-      <th>fun</th>
-      <td><p>Function to inspect</p></td>
+      <th>x</th>
+      <td><p>Input object, character, data frame, list, ggplot, etc.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns the same class as input</p>
     
 
   </div>
@@ -135,7 +135,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
