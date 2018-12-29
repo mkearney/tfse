@@ -109,6 +109,9 @@
     <loc>https://tfse.mikewk.com//reference/psub.html</loc>
   </url>
   <url>
+    <loc>https://tfse.mikewk.com//reference/read_RDS.html</loc>
+  </url>
+  <url>
     <loc>https://tfse.mikewk.com//reference/readline_.html</loc>
   </url>
   <url>
@@ -161,6 +164,9 @@
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/un_zip.html</loc>
+  </url>
+  <url>
+    <loc>https://tfse.mikewk.com//reference/write_RDS.html</loc>
   </url>
   <url>
     <loc>https://tfse.mikewk.com//reference/write_function.html</loc>
