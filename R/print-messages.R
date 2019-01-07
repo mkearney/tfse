@@ -10,8 +10,10 @@
 #' @export
 print_start <- function(...) {
   x <- paste(c(...), collapse = "")
-  gray <- crayon::make_style("#888888")
-  x <- gray(paste0("\U21AA", " ", x))
+  graycol <- function(x) {
+    sprintf("\033[38;5;244m%s\033[39m", as.character(x))
+  }
+  x <- paste0(green_col("\U21AA"), " ", graycol(x))
   cat(x, fill = TRUE)
 }
 
@@ -26,7 +28,14 @@ print_start <- function(...) {
 #' @export
 print_complete <- function(...) {
   x <- paste(c(...), collapse = "")
-  x <- crayon::black(paste0("\U2714", " ", x))
-  cat(crayon::bold(crayon::black(x)), fill = TRUE)
+  x <- paste0(green_col("\U2714"), " ", x)
+  cat(bold_txt(x), fill = TRUE)
 }
 
+bold_txt <- function(x) {
+  sprintf("\033[1m%s\033[22m", as.character(x))
+}
+
+green_col <- function(x) {
+  sprintf("\033[32m%s\033[39m", as.character(x))
+}

@@ -1,3 +1,15 @@
+#' Paste collapse
+#'
+#' Paste with sep and collapse set to empty.
+#'
+#' @param ... One or more character strings to paste together with paste0 and
+#'   collapse equal to ""
+#' @return A single string collapsed and separated with empty spaces
+#' @export
+paste_collapse <- function(...) {
+  paste0(c(...), collapse = "")
+}
+
 paste_lines <- function(...) {
   paste0(unlist(list(...)), collapse = "\n")
 }
@@ -140,7 +152,6 @@ text_of_function <- function(f, name) {
   x <- paste0(fun_name, x)
 
   ## style code
-  x <- as.character(styler::style_text(x))
   x <- x[!(x == "" & c(FALSE, x[-length(x)] == ""))]
   x <- paste_lines(x)
   sub("\\{\n", "{\n\n", x)
@@ -156,6 +167,6 @@ text_of_function <- function(f, name) {
 #' @return Opens file and returns invisible file name.
 #' @export
 file_edit <- function(file) {
-  utils::file.edit(file, title = file, editor = "rstudio", fileEncoding = "UTF-8")
+  utils::file.edit(file, title = file, fileEncoding = "UTF-8")
   invisible(file)
 }

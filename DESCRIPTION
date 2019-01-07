@@ -21,20 +21,18 @@ Depends: R (>= 2.10)
 Imports: 
     grDevices,
     utils,
-    crayon,
-    remotes,
-    pkgload,
-    callr,
     magrittr,
+    dapr,
+    stats
+Suggests:
+    ggplot2,
     roxygen2,
     rstudioapi,
     pkgbuild,
-    dapr,
     rlang,
-    stats,
-    styler
-Suggests:
-    ggplot2,
+    remotes,
+    pkgload,
+    callr,
     knitr,
     rmarkdown,
     testthat,

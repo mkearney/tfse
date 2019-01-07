@@ -8,6 +8,8 @@
 #' @return Installs locally
 #' @export
 install_pkg <- function(pkg = ".", ...) {
+  ## check required packages
+  is_installed(c("pkgload", "callr", "pkgbuild", "remotes"), stop = TRUE)
 
   ## check package
   pkg <- as_package(pkg)
@@ -59,6 +61,18 @@ install_pkg <- function(pkg = ".", ...) {
   invisible(TRUE)
 }
 
+is_installed <- function(x, stop = FALSE) {
+  yn <- vapply(x, requireNamespace, quietly = TRUE, FUN.VALUE = logical(1))
+  if (any(!yn) && stop) {
+    msg <- pmsg(
+      "This function requires the following packages: ",
+      paste(x[!yn], collapse = ", "),
+      print = FALSE
+    )
+    stop(msg, call. = FALSE)
+  }
+  invisible(yn)
+}
 
 
 strip_slashes <- function(x) sub("/*$", "", x)
@@ -128,6 +142,7 @@ load_pkg_description <- function(path) {
 }
 
 save_all <- function() {
+  is_installed("rstudioapi", stop = TRUE)
   if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
@@ -156,7 +171,7 @@ with_envvar <- function(new, code, action = "replace") {
 }
 
 document_pkg <- function(pkg = ".", roclets = NULL) {
-  #check_suggested("roxygen2")
+  x <- c("roxygen2", "pkgload")
   pkg <- as_package(pkg)
   save_all()
   sh <- utils::capture.output(with_envvar(
@@ -169,6 +184,7 @@ document_pkg <- function(pkg = ".", roclets = NULL) {
 }
 
 check_suggested <- function(package) {
+  is_installed("pkgload", stop = TRUE)
   pkgload::check_suggested(
     package = package,
     version = NULL,

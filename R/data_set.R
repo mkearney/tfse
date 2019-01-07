@@ -68,10 +68,12 @@ print_as_col <- function(x) {
   x[[1]] <- paste0("#", x[[1]])
   x[[1]][1] <- ""
   x <- lapply(x, format_col)
-  x[[1]] <- crayon::make_style("#aaaaaa")(x[[1]])
+  graycol <- function(x) {
+    sprintf("\033[38;5;247m%s\033[39m", as.character(x))
+  }
+  x[[1]] <- graycol(x[[1]])
   for (i in seq_len(length(x[[1]]))) {
     l <- lapply(x, function(j) j[i])
-    #l <- lapply(l, function(x) paste(x, collapse = " "))
     l <- paste(l, collapse = " ")
     cat(l, fill = TRUE)
   }
