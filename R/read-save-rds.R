@@ -9,9 +9,9 @@
 #' @export
 #' @family readsave
 read_RDS <- function(path) {
-  con <- gzfile(path, "rb", encoding = "UTF-8")
+  con <- file(path, "rb", encoding = "UTF-8")
   on.exit(close(con))
-  .Internal(unserialize(con, NULL))
+  readRDS(con)
 }
 
 #' Save RDS
@@ -32,6 +32,6 @@ save_RDS <- function(x, path, compress = FALSE) {
     con <- file(path, "wb", encoding = "UTF-8")
   }
   on.exit(close(con), add = TRUE)
-  .Internal(serializeToConn(x, con, FALSE, NULL, NULL))
+  saveRDS(x, con)
   invisible(x)
 }

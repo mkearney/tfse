@@ -159,7 +159,7 @@ document_pkg <- function(pkg = ".", roclets = NULL) {
   #check_suggested("roxygen2")
   pkg <- as_package(pkg)
   save_all()
-  sh <- capture.output(with_envvar(
+  sh <- utils::capture.output(with_envvar(
     r_env_vars(),
     roxygen2::roxygenise(pkg$path, roclets)
   ))

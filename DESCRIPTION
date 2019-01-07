@@ -31,7 +31,8 @@ Imports:
     pkgbuild,
     dapr,
     rlang,
-    stats
+    stats,
+    styler
 Suggests:
     ggplot2,
     knitr,

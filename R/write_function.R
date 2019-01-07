@@ -156,6 +156,6 @@ text_of_function <- function(f, name) {
 #' @return Opens file and returns invisible file name.
 #' @export
 file_edit <- function(file) {
-  file.edit(file, title = file, editor = "rstudio", fileEncoding = "UTF-8")
+  utils::file.edit(file, title = file, editor = "rstudio", fileEncoding = "UTF-8")
   invisible(file)
 }
