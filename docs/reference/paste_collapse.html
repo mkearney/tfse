@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sub string reverse — substrev • tfse</title>
+<title>Paste collapse — paste_collapse • tfse</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Sub string reverse — substrev" />
+<meta property="og:title" content="Paste collapse — paste_collapse" />
 
-<meta property="og:description" content="Returns portion of string starting from end of string (otherwise just like substr)" />
+<meta property="og:description" content="Paste with sep and collapse set to empty." />
 
 <meta property="og:image" content="https://tfse.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,41 +103,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sub string reverse</h1>
+    <h1>Paste collapse</h1>
     
-    <div class="hidden name"><code>substrev.Rd</code></div>
+    <div class="hidden name"><code>paste_collapse.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Returns portion of string starting from end of string (otherwise just like substr)</p>
+    <p>Paste with sep and collapse set to empty.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>substrev</span>(<span class='no'>x</span>, <span class='no'>start</span>, <span class='kw'>stop</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>paste_collapse</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Character vector</p></td>
-    </tr>
-    <tr>
-      <th>start</th>
-      <td><p>Number of characters to include relative to the last
-character position.</p></td>
-    </tr>
-    <tr>
-      <th>stop</th>
-      <td><p>Specify the number of characters from the final
-character to set as the last character position.</p></td>
+      <th>...</th>
+      <td><p>One or more character strings to paste together with paste0 and
+collapse equal to ""</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Sub string with last i characters.</p>
+    <p>A single string collapsed and separated with empty spaces</p>
     
 
   </div>

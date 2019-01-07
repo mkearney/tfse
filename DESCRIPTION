@@ -24,6 +24,7 @@ Imports:
     magrittr,
     dapr,
     stats
+Remotes: mkearney/dapr
 Suggests:
     ggplot2,
     roxygen2,
