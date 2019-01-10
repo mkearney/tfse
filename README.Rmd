@@ -31,15 +31,6 @@ remotes::install_github("mkearney/tfse")
 
 ## Usage
 
-### Colors
-
-Convert named colors to their hex equivalents
-
-```{r fig.height=2, fig.width=3}
-## use functions like col2hex
-col2hex(c("greenyellow", "orange"))
-```
-
 ### Scales
 
 Rescale to standard (0-1) scale

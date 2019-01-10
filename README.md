@@ -23,16 +23,6 @@ remotes::install_github("mkearney/tfse")
 
 ## Usage
 
-### Colors
-
-Convert named colors to their hex equivalents
-
-``` r
-## use functions like col2hex
-col2hex(c("greenyellow", "orange"))
-#> [1] "#ADFF2F" "#FFA500"
-```
-
 ### Scales
 
 Rescale to standard (0-1) scale
@@ -48,7 +38,7 @@ Rescale to normal (mean = 0; sd = 1) scale
 ``` r
 ## z scores
 rescale_normal(-2:2)
-#> [1] -1.264911 -0.632456  0.000000  0.632456  1.264911
+#> [1] -1.2649111 -0.6324555  0.0000000  0.6324555  1.2649111
 ```
 
 Rescale to arbitrary lower/upper bounds
@@ -66,8 +56,8 @@ Print out the APA-formatted citation for R packages.
 ``` r
 ## print out APA citation for {rtweet}
 apa_citation("rtweet")
-#> ↪ Adding APA citation of {rtweet} to clipboard!
-#> ✔ Ready to paste!
+#> [32m↪[39m [38;5;244mAdding APA citation of {rtweet} to clipboard![39m
+#> [1m[32m✔[39m Ready to paste![22m
 #> 
 #> Kearney, M. W. (2018). rtweet: Collecting twitter data (R package version
 #>     0.6.7) [Computer software]. The Comprehensive R Archive Network. Available

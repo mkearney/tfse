@@ -1,10 +1,5 @@
 context("test-tfse")
 
-test_that("col2hex", {
-  blue <- col2hex("blue")
-  expect_identical(blue, "#0000FF")
-})
-
 test_that("pmsg", {
   expect_message(pmsg("this ", "is ", "a", " test"))
 })
