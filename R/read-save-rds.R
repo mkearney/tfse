@@ -9,7 +9,7 @@
 #' @export
 #' @family readsave
 read_RDS <- function(path) {
-  con <- file(path, "rb", encoding = "UTF-8")
+  con <- gzfile(path, "rb", encoding = "UTF-8")
   on.exit(close(con))
   readRDS(con)
 }
