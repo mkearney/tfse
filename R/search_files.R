@@ -33,6 +33,27 @@ search_files <- function(x, path = ".", recursive = TRUE, all.files = FALSE) {
   }
 }
 
+#' Search these files
+#'
+#' Look for text in a group of files
+#'
+#' @param x Regex pat
+#' @param f Vector of files
+#' @return Prints matches
+#' @export
+search_these_files <- function(x, f) {
+  s <- lapply(f, extra_text_search, pat = x)
+  names(s) <- f
+  s <- s[lengths(s) > 0]
+  nms <- names(s)
+  s <- lapply(s, paste, collapse = "\n")
+  for (i in seq_along(s)) {
+    cat("\n# File:", nms[i], fill = TRUE)
+    txt <- s[[i]]
+    txt <- gsub("\n", "\n", txt)
+    cat(txt, fill = TRUE)
+  }
+}
 
 extra_text_search <- function(file, pat) {
   x <- tryCatch(readlines(file),
