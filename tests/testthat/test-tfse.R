@@ -88,6 +88,103 @@ test_that("regmatches_", {
   m <- gregexpr_(letters, "a")
   expect_equal(sum(sapply(m, function(.x) .x > 0)), 1)
   o <- regmatches_(letters, "a")
-  expect_identical(c("a", rep("", 25)), o)
+  expect_identical(as.list(c("a", rep("", 25))), o)
+  o <- regmatches_(letters, "a", drop = TRUE)
+  expect_identical(o, "a")
+  o <- regmatches_(as.list(letters), "a", drop = TRUE)
+  expect_identical(o, as.list(c("a", rep(list(character()), 25))))
+  o <- regmatches_(as.list(letters), "a", drop = FALSE)
+  expect_identical(o, as.list(c(list(list("a")), rep(list(list("")), 25))))
 })
 
+
+test_that("install_pkg", {
+
+  x <- install_if("dapr")
+  expect_false(x$required_install)
+  message(cat(paste0("\n\n       getwd(): ", getwd()), fill = TRUE))
+  message(cat(paste0(".libPaths()[1]: ", .libPaths()[1]), fill = TRUE))
+  message(cat(paste0("        ../../: ", normalizePath("../.."), "\n\n"), fill = TRUE))
+  #install_pkg("../..")
+  expect_error(install_pkg("~"))
+  expect_error(tfse:::check_suggested("lavaan"))
+  #expect_true(is.list(tfse:::load_pkg_description("../..")))
+  expect_true(is.character(capture.output(tfse:::save_all())))
+  x <- tfse:::with_envvar(
+      tfse:::r_env_vars(),
+      rnorm(10)
+  )
+  expect_true(is.numeric(x))
+})
+
+
+test_that("desc", {
+  x <- desc_get_var("base", "license")
+  expect_named(x)
+  expect_equal(names(x[[1]]), "license")
+  expect_null(desc_gh_repo("stats"))
+  expect_equal("mkearney/tfse", desc_gh_repo("tfse"))
+})
+
+
+
+
+test_that("write_function", {
+  x <- write_function(base::abbreviate)
+  expect_true(file.exists(x))
+})
+
+
+
+test_that("search_files", {
+  o <- capture.output(search_files("DESCRIPTION", path = "../.."))
+  expect_true(is.character(o))
+  expect_gt(length(o), 1)
+})
+
+test_that("renv", {
+  expect_true(is.character(.Renviron()))
+  expect_true(is.character(home()))
+  set_renv(tfse_test_var = "asdf")
+  expect_equal("asdf", Sys.getenv("tfse_test_var"))
+})
+
+
+test_that("apa_citation", {
+  expect_true(is.character(apa_citation("base")))
+})
+
+
+
+test_that("r_dir", {
+  expect_true(is.character(r_dir()))
+})
+
+test_that("r_dir", {
+  expect_true(is.character(github_raw("https://github.com/mkearney/rtweet")))
+})
+
+
+
+test_that("na", {
+  expect_equal(length(count_na(mtcars)), ncol(mtcars))
+  expect_equal(ncol(min_var(mtcars, 1)), 6)
+})
+
+
+
+test_that("rescale", {
+  x <- rnorm(100, 100, 1)
+  expect_lt(max(rescale_normal(x)), 10)
+  expect_lt(max(rescale_log(x)), 5)
+  expect_lt(max(rescale_pointscale(x, -15, 15)), 16)
+  expect_gt(min(rescale_pointscale(x, -15, 15)), -16)
+})
+
+
+
+test_that("regmatches lists", {
+  x <- lapply(as.list(letters), factor)
+  expect_true(is.list(regmatches_(x, "a")))
+  expect_true(is.list(regmatches_first(x, "a")))
+})
