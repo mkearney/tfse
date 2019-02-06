@@ -82,7 +82,11 @@ write_function <- function(...) {
   )
 
   ## open file for editing
-  file_edit(tmp)
+  if (interactive()) {
+    file_edit(tmp)
+  } else {
+    tmp
+  }
 }
 
 
