@@ -24,7 +24,8 @@ desc_get_pkg <- function(pkg, field = NULL) {
   d <- as.data.frame(d, stringsAsFactors = FALSE)
   if (!is.null(field)) {
     choices <- tolower(names(d))
-    if (!any(grepl("url", choices, ignore.case = TRUE))) {
+    if (identical(tolower(field), "url") &&
+        !any(grepl("url", choices, ignore.case = TRUE))) {
       return(NULL)
     }
     kp <- which(choices == tolower(field))[1]
