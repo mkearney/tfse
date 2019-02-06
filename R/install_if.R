@@ -46,7 +46,12 @@ task_progress_bar <- function(task, msg) {
   invisible(TRUE)
 }
 
-install_pkg_verbose <- function(pkg) {
-  sh <- utils::install.packages(pkg, quiet = TRUE)
+install_pkg_verbose <- function(pkg, lib = NULL, repos = NULL) {
+  if (is.null(repos)) {
+    repos <- "https://cran.rstudio.com/"
+  }
+  sh <- utils::install.packages(pkg, quiet = TRUE, lib = lib, repos = repos,
+    verbose = FALSE, contriburl = NULL)
+  cat("\n")
   task_progress_bar(invisible(), sprintf("Installing %s", pkg))
 }
