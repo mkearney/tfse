@@ -26,21 +26,18 @@ regmatches_.default <- function(x, pat, ...) {
 #' @export
 regmatches_.factor <- function(x, pat, drop = FALSE, ...) {
   x <- as.character(x)
-  regmatches_(x, pat)
+  regmatches_(x, pat, drop, ...)
 }
 
 #' @export
 regmatches_.character <- function(x, pat, drop = FALSE, ...) {
   m <- gregexpr_(x, pat, ...)
   args <- list(x = x, m = m)
-  x <- do.call("regmatches", args)
+  x <- do.call(base::regmatches, args)
   if (drop) {
     x <- unlist(x[lengths(x) > 0], use.names = FALSE)
   } else {
     x[lengths(x) == 0] <- ""
-    if (sum(lengths(x) > 1) == 0L) {
-      x <- unlist(x)
-    }
   }
   x
 }
@@ -53,14 +50,9 @@ regmatches_.list <- function(x, pat, drop = FALSE, ...) {
     FUN.VALUE = logical(1), USE.NAMES = FALSE))) {
     stop("input must be character or list of character vectors", call. = FALSE)
   }
-  m <- gregexpr_(x, pat, ...)
-  args <- list(x = x, m = m)
-  x <- do.call("regmatches", args)
+  x <- lapply(x, regmatches_, pat = pat, drop = drop, ...)
   if (drop) {
-    x <- x[lengths(x) > 0]
-    if (sum(lengths(x) > 1) == 0L) {
-      x <- unlist(x)
-    }
+    x[lengths(x) == 0] <- list(character())
   } else {
     x[lengths(x) == 0] <- ""
   }
@@ -85,7 +77,7 @@ gregexpr_ <- function(x, pat, ...) {
       args$perl <- FALSE
     }
   }
-  do.call("gregexpr", args)
+  do.call(base::gregexpr, args)
 }
 
 #' @export
@@ -96,21 +88,18 @@ regmatches_first.default <- function(x, pat, ...) {
 #' @export
 regmatches_first.factor <- function(x, pat, drop = FALSE, ...) {
   x <- as.character(x)
-  regmatches_first(x, pat)
+  regmatches_first(x, pat, drop, ...)
 }
 
 #' @export
 regmatches_first.character <- function(x, pat, drop = FALSE, ...) {
   m <- regexpr_(x, pat, ...)
   args <- list(x = x, m = m)
-  x <- do.call("regmatches", args)
+  x[m > 0 & !is.na(m)] <- do.call(base::regmatches, args)
   if (drop) {
-    x <- unlist(x[lengths(x) > 0], use.names = FALSE)
+    x <- x[m > 0 & !is.na(m)]
   } else {
-    x[lengths(x) == 0] <- ""
-    if (sum(lengths(x) > 1) == 0L) {
-      x <- unlist(x)
-    }
+    x[m < 0 | is.na(m)] <- ""
   }
   x
 }
@@ -123,14 +112,9 @@ regmatches_first.list <- function(x, pat, drop = FALSE, ...) {
     FUN.VALUE = logical(1), USE.NAMES = FALSE))) {
     stop("input must be character or list of character vectors", call. = FALSE)
   }
-  m <- regexpr_(x, pat, ...)
-  args <- list(x = x, m = m)
-  x <- do.call("regmatches", args)
+  x <- lapply(x, regmatches_first, pat = pat, drop = drop, ...)
   if (drop) {
-    x <- x[lengths(x) > 0]
-    if (sum(lengths(x) > 1) == 0L) {
-      x <- unlist(x)
-    }
+    x[lengths(x) == 0] <- list(character())
   } else {
     x[lengths(x) == 0] <- ""
   }
@@ -151,7 +135,7 @@ regexpr_ <- function(x, pat, ...) {
       args$perl <- FALSE
     }
   }
-  do.call("regexpr", args)
+  do.call(base::regexpr, args)
 }
 
 
