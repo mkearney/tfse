@@ -29,7 +29,7 @@ print_start <- function(...) {
 print_complete <- function(...) {
   x <- paste(c(...), collapse = "")
   x <- paste0(green_col("\U2714"), " ", x)
-  cat(bold_txt(x), fill = TRUE)
+  cat(x, fill = TRUE)
 }
 
 bold_txt <- function(x) {
