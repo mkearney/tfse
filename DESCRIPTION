@@ -1,5 +1,5 @@
 Package: tfse
-Version: 0.4.7
+Version: 0.5.0
 Title: Tools for Script Editing
 Description: A collection of useful tools for programming and writing-scripts. 
     Several functions are simple wrappers around base R functions that extend 
