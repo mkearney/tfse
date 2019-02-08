@@ -1,3 +1,4 @@
+^revdep$
 ^data-raw$
 ^CRAN-RELEASE$
 ^codecov\.yml$
