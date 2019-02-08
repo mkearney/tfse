@@ -8,7 +8,7 @@ Description: A collection of useful tools for programming and writing-scripts.
     statements, a read-line function that suppresses incomplete-final-line 
     warnings and automatically opens and closes connections, a version of 
     substrings that starts from the end of strings, etc. Other functions are 
-    useful for working with hexadecimal colors, installing packages, omitting 
+    useful for checking whether packages are installed, omitting 
     missing data, and showing in-use connections.
 Authors@R: person("Michael W.", "Kearney", ,
       "kearneymw@missouri.edu", role = c("aut", "cre"),
@@ -23,15 +23,7 @@ Imports:
     magrittr,
     dapr,
     stats
-Remotes: mkearney/dapr
 Suggests:
-    roxygen2,
-    rstudioapi,
-    pkgbuild,
-    rlang,
-    remotes,
-    pkgload,
-    callr,
     knitr,
     rmarkdown,
     testthat,

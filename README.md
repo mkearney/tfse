@@ -14,10 +14,17 @@ Various useful functions for working with data and writing functions
 
 ## Install
 
-To install the package
+Install from CRAN
 
 ``` r
-## install from github
+## from CRAN repo
+install.packages("tfse")
+```
+
+Install dev version from Github
+
+``` r
+## from github
 remotes::install_github("mkearney/tfse")
 ```
 

@@ -98,23 +98,10 @@ test_that("regmatches_", {
 })
 
 
-test_that("install_pkg", {
-
-  x <- install_if("dapr")
-  expect_false(x$required_install)
-  message(cat(paste0("\n\n       getwd(): ", getwd()), fill = TRUE))
-  message(cat(paste0(".libPaths()[1]: ", .libPaths()[1]), fill = TRUE))
-  message(cat(paste0("        ../../: ", normalizePath("../.."), "\n\n"), fill = TRUE))
-  #install_pkg("../..")
-  expect_error(install_pkg("~"))
-  expect_error(tfse:::check_suggested("lavaan"))
-  #expect_true(is.list(tfse:::load_pkg_description("../..")))
-  expect_true(is.character(capture.output(tfse:::save_all())))
-  x <- tfse:::with_envvar(
-      tfse:::r_env_vars(),
-      rnorm(10)
-  )
-  expect_true(is.numeric(x))
+test_that("is_installed", {
+  expect_false(tfse:::is_installed("asdf"))
+  expect_equal(tfse:::is_installed("asdf", "stats"), c(asdf = FALSE, stats = TRUE))
+  expect_error(tfse:::is_installed("asdf", .stop = TRUE))
 })
 
 

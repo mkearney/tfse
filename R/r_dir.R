@@ -5,25 +5,7 @@ includes_username <- function(x) {
 r_dir <- function() {
   home_dir <- normalizePath("~")
   meta <- list()
-  # meta[[length(meta) + 1L]] <- count_r_pkgs(home_dir)
-  # if (dir.exists(file.path(home_dir, "R"))) {
-  #   meta[[length(meta) + 1L]] <- count_r_pkgs(file.path(home_dir, "R"))
-  # }
-  # if (dir.exists(file.path(home_dir, "rstats"))) {
-  #   meta[[length(meta) + 1L]] <- count_r_pkgs(file.path(home_dir, "rstats"))
-  # }
-  # if (dir.exists(file.path(home_dir, "Documents"))) {
-  #   meta[[length(meta) + 1L]] <- count_r_pkgs(file.path(home_dir, "Documents"))
-  # }
-  # ## other possible R directories
-  # r_dir <- grep(
-  #   "^r\\S+",
-  #   list.dirs(home_dir, recursive = FALSE, full.names = TRUE),
-  #   ignore.case = TRUE,
-  #   value = TRUE
-  # )
   r_dir <- list_dirs(home_dir)
-  #r_dir <- grep("\\/R$|\\/rstats$|\\/Documents$", r_dir %in% c("R", "Documents", "rstats")]
   for (i in seq_along(r_dir)) {
     meta[[length(meta) + 1L]] <-  count_r_pkgs(r_dir[i])
   }

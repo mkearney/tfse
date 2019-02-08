@@ -4,7 +4,7 @@
 #' @return Output from evaluated expression.
 #' @export
 shhh <- function(expr) {
-  utils::capture.output(x <- suppressPackageStartupMessages(
+  sh <- utils::capture.output(x <- suppressPackageStartupMessages(
     suppressMessages(suppressWarnings(expr))))
   invisible(x)
 }
