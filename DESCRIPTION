@@ -25,8 +25,6 @@ Imports:
     dapr,
     stats
 Suggests:
-    knitr,
-    rmarkdown,
     testthat,
     covr
 URL: https://tfse.mikewk.com
