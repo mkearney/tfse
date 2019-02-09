@@ -132,8 +132,10 @@ test_that("search_files", {
 test_that("renv", {
   expect_true(is.character(.Renviron()))
   expect_true(is.character(home()))
+  cat("", file = ".Renviron")
   set_renv(tfse_test_var = "asdf")
   expect_equal("asdf", Sys.getenv("tfse_test_var"))
+  unlink(".Renviron")
 })
 
 
@@ -142,6 +144,15 @@ test_that("apa_citation", {
 })
 
 
+
+test_that("box_code", {
+  expect_true(is.character(box_code("TEST")))
+})
+
+
+test_that("show_connections", {
+  expect_true(is.data.frame(show_connections()))
+})
 
 test_that("r_dir", {
   expect_true(is.character(r_dir()))

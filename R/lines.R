@@ -76,7 +76,8 @@ readline_ <- function(...) {
 #' @export
 pbcopy <- function(x) {
   if (.Platform$OS.type == "unix" &&
-    !identical(Sys.which("pbcopy"), "")) {
+      grepl("^darwin", R.version$os) &&
+    !identical(sys_which("pbcopy"), "")) {
     con <- pipe("pbcopy", "w")
   } else if (.Platform$OS.type == "windows") {
     con <- file("clipboard", "w")
@@ -85,4 +86,10 @@ pbcopy <- function(x) {
   }
   cat(x, file = con, fill = TRUE)
   close(con)
+}
+
+
+sys_which <- function(x) {
+  tryCatch(Sys.which(x),
+    error = function(e) "")
 }

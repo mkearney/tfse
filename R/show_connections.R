@@ -6,6 +6,11 @@
 #' @return Prints and invisibly returns data frame.
 #' @export
 show_connections <- function() {
+  tryCatch(show_connections_(),
+    error = function(e) data.frame())
+}
+
+show_connections_ <- function() {
   ## get connections
   cons <- showConnections(all = TRUE)
 

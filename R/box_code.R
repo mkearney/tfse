@@ -9,8 +9,16 @@
 #'
 #' @export
 boxcode <- function(...) {
-  txt <- paste0(paste(vapply(c(...), boxcode_, FUN.VALUE = character(1)), collapse = "\n\n"), "\n")
-  pbcopy(txt)
+  txt <- paste0(paste(vapply(c(...), boxcode_, FUN.VALUE = character(1)),
+    collapse = "\n\n"), "\n")
+  if (interactive() && .Platform$OS.type == "unix" &&
+      grepl("^darwin", R.version$os) &&
+      !identical(sys_which("pbcopy"), "")) {
+    message("Copied to clipboard:")
+    pbcopy(txt)
+  }
+  cat(txt, fill = TRUE)
+  invisible(txt)
 }
 
 boxcode_ <- function(label = "") {
@@ -29,10 +37,6 @@ boxcode_ <- function(label = "") {
     label, sep = "\n",
     "##----------------------------------------------------------------------------##"
   )
-
-  #con <- pipe("pbcopy", "w")
-  #cat(txt, file = con)
-  #close(con)
 }
 
 #' @export
