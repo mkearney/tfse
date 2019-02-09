@@ -70,9 +70,11 @@ readline_ <- function(...) {
 #' @param x Input passed to cat function.
 #' @return Prints x to clipboard.
 #' @examples
+#' \dontrun{
 #' ## alphabet as string
 #' pbcopy(paste(letters, collapse = ""))
 #' ## paste e.g., C-v
+#' }
 #' @export
 pbcopy <- function(x) {
   if (.Platform$OS.type == "unix" &&
