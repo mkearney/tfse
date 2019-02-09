@@ -16,7 +16,9 @@ Prints x to clipboard.
 Adds input to clipboard for pasting
 }
 \examples{
+\dontrun{
 ## alphabet as string
 pbcopy(paste(letters, collapse = ""))
 ## paste e.g., C-v
+}
 }
