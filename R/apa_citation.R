@@ -43,13 +43,17 @@ apa_citation <- function(pkg) {
   if (width > 80) width <- 80
   x <- strwrap(x, width)
   x[1] <- paste0("\n", x[1])
-  print_start("Adding APA citation of {", pkg, "} to clipboard!")
-  print_complete("Ready to paste!")
   x <- paste(x, collapse = "\n    ")
   x <- paste0(x, "\n")
-  p <- gsub("\n", " ", x)
-  p <- gsub("[ ]{2,}", " ", p)
-  pbcopy(p)
+  if (interactive() && .Platform$OS.type == "unix" &&
+      grepl("^darwin", R.version$os) &&
+      !identical(sys_which("pbcopy"), "")) {
+    print_start("Adding APA citation of {", pkg, "} to clipboard!")
+    p <- gsub("\n", " ", x)
+    p <- gsub("[ ]{2,}", " ", p)
+    pbcopy(p)
+    print_complete("Ready to paste!")
+  }
   cat(x, fill = TRUE)
   invisible(x)
 }
