@@ -29,6 +29,7 @@ Imports:
     stats
 Suggests:
     testthat,
-    covr
+    covr,
+    usethis
 URL: https://tfse.mikewk.com
 BugReports: https://github.com/mkearney/tfse/issues
