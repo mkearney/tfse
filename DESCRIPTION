@@ -30,6 +30,7 @@ Imports:
 Suggests:
     testthat (>= 2.1.0),
     covr,
-    usethis
+    usethis,
+    readr
 URL: https://tfse.mikewk.com
 BugReports: https://github.com/mkearney/tfse/issues
