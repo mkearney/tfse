@@ -14,6 +14,9 @@ use_P <- function () {
   }
   usethis:::use_dependency("tfse", "Imports")
   new <- usethis:::use_template("P.R", "R/utils-P.R", package = "tfse")
-  usethis:::todo("Run 'devtools::document()'")
+  todo <- function(x) {
+    paste0("* [ ] ", x)
+  }
+  todo("Run 'devtools::document()'")
   invisible(new)
 }
